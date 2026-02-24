@@ -4,7 +4,7 @@ A full-stack e-commerce application built with MCP-UI, React, TypeScript, and in
 
 ## Architecture
 
-```
+```text
 /mcp-server       - MCP Server with tools for product search, filter, and cart
 /web-client       - React application with @mcp-ui/client integration
 ```
@@ -35,45 +35,52 @@ A full-stack e-commerce application built with MCP-UI, React, TypeScript, and in
 ### Installation
 
 1. **Install root dependencies:**
+
    ```bash
    npm install
-   ```
+    ```
 
 2. **Install server dependencies:**
+
    ```bash
    cd mcp-server
    npm install
    cd ..
-   ```
+    ```
 
 3. **Install client dependencies:**
+
    ```bash
    cd web-client
    npm install
    cd ..
-   ```
+    ```
 
 ### Running the Application
 
-**Option 1: Run both servers (recommended)**
+#### Option 1: Run both servers (recommended)
+
 ```bash
 npm run dev
 ```
 
 This will start:
-- MCP Server on stdio
-- Web Client at http://localhost:5173
-- OpenRouter proxy at http://localhost:8787
 
-**Option 2: Run separately**
+- MCP Server on stdio
+- Web Client at <http://localhost:5173>
+- OpenRouter proxy at <http://localhost:8787>
+
+#### Option 2: Run separately
 
 Terminal 1 - MCP Server:
+
 ```bash
 cd mcp-server
 npm run dev
 ```
 
 Terminal 2 - Web Client:
+
 ```bash
 cd web-client
 npm run dev
@@ -83,13 +90,15 @@ npm run dev
 
 To use the AI assistant with OpenRouter:
 
-1. Get an API key from https://openrouter.ai/
+1. Get an API key from <https://openrouter.ai/>.
 2. Create `mcp-server/.env` from [mcp-server/.env.example](mcp-server/.env.example) and set:
+
    ```bash
    OPENROUTER_API_KEY=your-actual-api-key
    OPENROUTER_MODEL=arcee-ai/trinity-large-preview:free
    API_PORT=8787
-   ```
+    ```
+
 3. (Optional) Create `web-client/.env` from [web-client/.env.example](web-client/.env.example) if you need to override the proxy base URL.
 
 The application still works in demo mode without an API key, using fallback responses.
@@ -99,7 +108,7 @@ The application still works in demo mode without an API key, using fallback resp
 The server provides the following tools:
 
 | Tool | Description |
-|------|-------------|
+| --- | --- |
 | `search_products` | Search products by name/keyword |
 | `filter_products` | Filter by category |
 | `add_to_cart` | Add product to cart |
@@ -111,7 +120,7 @@ The server provides the following tools:
 ## Mock Products
 
 | ID | Name | Category | Price |
-|----|------|----------|-------|
+| --- | --- | --- | --- |
 | 1 | Nike Shoes | Footwear | ₹4,999 |
 | 2 | Adidas T-Shirt | Clothing | ₹1,999 |
 | 3 | Puma Cap | Accessories | ₹999 |
@@ -132,6 +141,7 @@ The server provides the following tools:
 ## UI Resources
 
 The MCP server returns HTML resources for:
+
 - Product lists (`ecommerce://products/list`)
 - Cart view (`ecommerce://cart/view`)
 
@@ -139,7 +149,7 @@ These are rendered inside the chat interface for a seamless experience.
 
 ## Project Structure
 
-```
+```text
 .
 ├── docs/
 │   └── decision-log.md        # Architecture and implementation decisions
@@ -160,9 +170,9 @@ These are rendered inside the chat interface for a seamless experience.
         └── vite-env.d.ts
 ```
 
-   ## Documentation
+## Documentation
 
-   - Decision log: [docs/decision-log.md](docs/decision-log.md)
+- Decision log: [docs/decision-log.md](docs/decision-log.md)
 
 ## License
 

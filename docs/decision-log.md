@@ -3,12 +3,14 @@
 Tracks architecture and implementation decisions so changes remain reversible, auditable, and easier to reason about.
 
 ## How to use
+
 - Add one entry per meaningful decision.
 - Keep entries short and factual.
 - Include rationale and rollback notes.
 - Prefer newest entries at the top.
 
 ## Decision Update Checklist
+
 - Capture the decision on the same day it is made.
 - Mark status (`Proposed`, `Accepted`, or `Reverted`).
 - Record why alternatives were not chosen (1-2 lines max).
@@ -32,6 +34,7 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 ---
 
 ## [2026-02-24] Route OpenRouter through local server proxy
+
 - Status: Accepted
 - Context: Client-side API key usage exposed secrets in browser builds.
 - Decision: Added a backend proxy endpoint for OpenRouter calls.
@@ -41,6 +44,7 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 - Related: `mcp-server/src/openrouterProxy.js`, `mcp-server/src/index.js`, `web-client/src/App.tsx`
 
 ## [2026-02-24] Centralize product catalog into shared module
+
 - Status: Accepted
 - Context: Product/catalog data was duplicated across server and client.
 - Decision: Introduced shared catalog source and imported it from both apps.
@@ -50,6 +54,7 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 - Related: `shared/catalog.js`, `mcp-server/src/index.js`, `web-client/src/App.tsx`
 
 ## [2026-02-24] Track env setup via examples and docs
+
 - Status: Accepted
 - Context: Setup was implicit and mixed with client-side secret handling.
 - Decision: Added `.env.example` files and updated setup docs.
