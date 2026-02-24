@@ -63,6 +63,7 @@ npm run dev
 This will start:
 - MCP Server on stdio
 - Web Client at http://localhost:5173
+- OpenRouter proxy at http://localhost:8787
 
 **Option 2: Run separately**
 
@@ -83,12 +84,15 @@ npm run dev
 To use the AI assistant with OpenRouter:
 
 1. Get an API key from https://openrouter.ai/
-2. Replace `sk-or-v1-dummy-key` in `web-client/src/App.tsx` with your actual API key:
-   ```typescript
-   const OPENROUTER_API_KEY = 'your-actual-api-key';
+2. Create `mcp-server/.env` from [mcp-server/.env.example](mcp-server/.env.example) and set:
+   ```bash
+   OPENROUTER_API_KEY=your-actual-api-key
+   OPENROUTER_MODEL=arcee-ai/trinity-large-preview:free
+   API_PORT=8787
    ```
+3. (Optional) Create `web-client/.env` from [web-client/.env.example](web-client/.env.example) if you need to override the proxy base URL.
 
-The application works in demo mode without an API key, using fallback responses.
+The application still works in demo mode without an API key, using fallback responses.
 
 ## MCP Tools
 
