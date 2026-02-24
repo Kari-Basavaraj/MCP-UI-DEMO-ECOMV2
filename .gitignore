@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+dist/
+web-client/node_modules/
+web-client/dist/
+mcp-server/node_modules/
+
+# Env files
+.env
+.env.*
