@@ -4,6 +4,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import { startOpenRouterProxy } from "./openrouterProxy.js";
 
 // Mock product database
 const products = [
@@ -410,6 +411,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 });
 
 // Start the server
+const apiPort = Number(process.env.API_PORT || process.env.PORT || 8787);
+startOpenRouterProxy({ port: apiPort });
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
