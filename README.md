@@ -141,6 +141,8 @@ These are rendered inside the chat interface for a seamless experience.
 
 ```
 .
+├── docs/
+│   └── decision-log.md        # Architecture and implementation decisions
 ├── package.json              # Root package.json
 ├── mcp-server/
 │   ├── package.json
@@ -157,6 +159,10 @@ These are rendered inside the chat interface for a seamless experience.
         ├── index.css         # Styles
         └── vite-env.d.ts
 ```
+
+   ## Documentation
+
+   - Decision log: [docs/decision-log.md](docs/decision-log.md)
 
 ## License
 
