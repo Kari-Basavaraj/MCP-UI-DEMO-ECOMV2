@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { UIResourceRenderer, type UIActionResult } from '@mcp-ui/client';
+import { type UIActionResult } from '@mcp-ui/client';
+import { products as catalogProducts, categories as catalogCategories } from '../../shared/catalog.js';
 
 // Types
 interface Product {
@@ -26,12 +27,123 @@ interface Message {
   }>;
 }
 
-// OpenRouter API configuration
-const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
-const OPENROUTER_MODEL = import.meta.env.VITE_OPENROUTER_MODEL || 'arcee-ai/trinity-large-preview:free';
+// OpenRouter proxy configuration
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8787';
+const CATALOG_PRODUCTS = catalogProducts as Product[];
+const CATALOG_CATEGORIES = catalogCategories as string[];
 
-// Categories
-const CATEGORIES = ['All', 'Footwear', 'Clothing', 'Accessories'];
+const formatCatalogList = (items: Product[]) =>
+  items
+    .map((product) => `- ${product.name} (${product.category}, ₹${product.price})`)
+    .join('\n');
+
+const SYSTEM_PROMPT = `You are an e-commerce shopping assistant. You have access to the following tools:
+
+1. search_products - Search for products by name or keyword
+2. filter_products - Filter products by category (Footwear, Clothing, Accessories, All)
+3. add_to_cart - Add a product to the shopping cart by product ID
+4. remove_from_cart - Remove a product from the cart by product ID
+5. get_cart - Get the current shopping cart contents
+6. get_products - Get all available products
+7. get_categories - Get all available categories
+
+Available products:
+${formatCatalogList(CATALOG_PRODUCTS)}
+
+When the user asks to search, filter, or manage cart, use the appropriate tool.
+After calling a tool, present the results in a friendly way.`;
+
+const TOOL_DEFS = [
+  {
+    type: 'function',
+    function: {
+      name: 'search_products',
+      description: 'Search for products by name or keyword',
+      parameters: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: 'Search query for product name' },
+        },
+        required: ['query'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'filter_products',
+      description: 'Filter products by category',
+      parameters: {
+        type: 'object',
+        properties: {
+          category: { type: 'string', description: 'Category to filter by', enum: CATALOG_CATEGORIES },
+        },
+        required: ['category'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'add_to_cart',
+      description: 'Add a product to the shopping cart',
+      parameters: {
+        type: 'object',
+        properties: {
+          productId: { type: 'number', description: 'ID of the product to add' },
+        },
+        required: ['productId'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'remove_from_cart',
+      description: 'Remove a product from the shopping cart',
+      parameters: {
+        type: 'object',
+        properties: {
+          productId: { type: 'number', description: 'ID of the product to remove' },
+        },
+        required: ['productId'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_cart',
+      description: 'Get the current shopping cart contents',
+      parameters: {
+        type: 'object',
+        properties: {},
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_products',
+      description: 'Get all available products',
+      parameters: {
+        type: 'object',
+        properties: {},
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_categories',
+      description: 'Get all available product categories',
+      parameters: {
+        type: 'object',
+        properties: {},
+      },
+    },
+  },
+];
 
 function App() {
   // State
@@ -43,8 +155,6 @@ function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  // Log UIResourceRenderer for debugging (used for MCP-UI resources)
-  console.log('MCP-UI UIResourceRenderer available:', UIResourceRenderer);
   
   // Store last rendered resource HTML (used by MCP-UI postMessage)
   const [lastResourceHtml, setLastResourceHtml] = useState<string>('');
@@ -87,42 +197,17 @@ function App() {
     setIsLoading(true);
 
     try {
-      // Call OpenRouter API with MCP tool support
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      // Call OpenRouter via local proxy with MCP tool support
+      const response = await fetch(`${API_BASE_URL}/api/openrouter/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-          'HTTP-Referer': window.location.origin,
-          'X-Title': 'MCP E-Commerce',
         },
         body: JSON.stringify({
-          model: OPENROUTER_MODEL,
           messages: [
             {
               role: 'system',
-              content: `You are an e-commerce shopping assistant. You have access to the following tools:
-
-1. search_products - Search for products by name or keyword
-2. filter_products - Filter products by category (Footwear, Clothing, Accessories, All)
-3. add_to_cart - Add a product to the shopping cart by product ID
-4. remove_from_cart - Remove a product from the cart by product ID
-5. get_cart - Get the current shopping cart contents
-6. get_products - Get all available products
-7. get_categories - Get all available categories
-
-Available products:
-- Nike Shoes (Footwear, ₹4999)
-- Adidas T-Shirt (Clothing, ₹1999)
-- Puma Cap (Accessories, ₹999)
-- Nike Jacket (Clothing, ₹3999)
-- Adidas Sneakers (Footwear, ₹5999)
-- Puma Watch (Accessories, ₹2999)
-- Nike Bag (Accessories, ₹1999)
-- Adidas Shorts (Clothing, ₹1499)
-
-When the user asks to search, filter, or manage cart, use the appropriate tool.
-After calling a tool, present the results in a friendly way.`
+              content: SYSTEM_PROMPT,
             },
             ...messages.map(m => ({
               role: m.role,
@@ -133,97 +218,7 @@ After calling a tool, present the results in a friendly way.`
               content: input,
             },
           ],
-          tools: [
-            {
-              type: 'function',
-              function: {
-                name: 'search_products',
-                description: 'Search for products by name or keyword',
-                parameters: {
-                  type: 'object',
-                  properties: {
-                    query: { type: 'string', description: 'Search query for product name' },
-                  },
-                  required: ['query'],
-                },
-              },
-            },
-            {
-              type: 'function',
-              function: {
-                name: 'filter_products',
-                description: 'Filter products by category',
-                parameters: {
-                  type: 'object',
-                  properties: {
-                    category: { type: 'string', description: 'Category to filter by' },
-                  },
-                  required: ['category'],
-                },
-              },
-            },
-            {
-              type: 'function',
-              function: {
-                name: 'add_to_cart',
-                description: 'Add a product to the shopping cart',
-                parameters: {
-                  type: 'object',
-                  properties: {
-                    productId: { type: 'number', description: 'ID of the product to add' },
-                  },
-                  required: ['productId'],
-                },
-              },
-            },
-            {
-              type: 'function',
-              function: {
-                name: 'remove_from_cart',
-                description: 'Remove a product from the shopping cart',
-                parameters: {
-                  type: 'object',
-                  properties: {
-                    productId: { type: 'number', description: 'ID of the product to remove' },
-                  },
-                  required: ['productId'],
-                },
-              },
-            },
-            {
-              type: 'function',
-              function: {
-                name: 'get_cart',
-                description: 'Get the current shopping cart contents',
-                parameters: {
-                  type: 'object',
-                  properties: {},
-                },
-              },
-            },
-            {
-              type: 'function',
-              function: {
-                name: 'get_products',
-                description: 'Get all available products',
-                parameters: {
-                  type: 'object',
-                  properties: {},
-                },
-              },
-            },
-            {
-              type: 'function',
-              function: {
-                name: 'get_categories',
-                description: 'Get all available product categories',
-                parameters: {
-                  type: 'object',
-                  properties: {},
-                },
-              },
-            },
-          ],
+          tools: TOOL_DEFS,
           tool_choice: 'auto',
         }),
       });
@@ -295,25 +290,13 @@ After calling a tool, present the results in a friendly way.`
 
   // Execute MCP tool (simulated for demo)
   const executeMCPTool = async (toolName: string, args: any): Promise<any> => {
-    // Mock product database
-    const mockProducts: Product[] = [
-      { id: 1, name: "Nike Shoes", category: "Footwear", price: 4999, image: "👟" },
-      { id: 2, name: "Adidas T-Shirt", category: "Clothing", price: 1999, image: "👕" },
-      { id: 3, name: "Puma Cap", category: "Accessories", price: 999, image: "🧢" },
-      { id: 4, name: "Nike Jacket", category: "Clothing", price: 3999, image: "🧥" },
-      { id: 5, name: "Adidas Sneakers", category: "Footwear", price: 5999, image: "👟" },
-      { id: 6, name: "Puma Watch", category: "Accessories", price: 2999, image: "⌚" },
-      { id: 7, name: "Nike Bag", category: "Accessories", price: 1999, image: "👜" },
-      { id: 8, name: "Adidas Shorts", category: "Clothing", price: 1499, image: "🩳" },
-    ];
-
     let result: any = { message: '' };
     let resources: any[] = [];
 
     switch (toolName) {
       case 'search_products': {
         const query = args.query.toLowerCase();
-        const filtered = mockProducts.filter(p => 
+        const filtered = CATALOG_PRODUCTS.filter(p => 
           p.name.toLowerCase().includes(query) || 
           p.category.toLowerCase().includes(query)
         );
@@ -334,8 +317,8 @@ After calling a tool, present the results in a friendly way.`
       case 'filter_products': {
         const category = args.category;
         const filtered = category === 'All' 
-          ? mockProducts 
-          : mockProducts.filter(p => p.category === category);
+          ? CATALOG_PRODUCTS 
+          : CATALOG_PRODUCTS.filter(p => p.category === category);
         result = { 
           message: `Found ${filtered.length} product(s) in ${category}`,
           products: filtered 
@@ -351,13 +334,14 @@ After calling a tool, present the results in a friendly way.`
         break;
       }
       case 'add_to_cart': {
-        const product = mockProducts.find(p => p.id === args.productId);
+        const product = CATALOG_PRODUCTS.find(p => p.id === args.productId);
         if (product) {
           const newItem: CartItem = { ...product, cartId: Date.now() };
-          setCart(prev => [...prev, newItem]);
+          const nextCart = [...cart, newItem];
+          setCart(nextCart);
           result = { 
             message: `Added "${product.name}" to cart`,
-            cart: [...cart, newItem]
+            cart: nextCart
           };
         }
         break;
@@ -394,23 +378,23 @@ After calling a tool, present the results in a friendly way.`
       case 'get_products': {
         result = { 
           message: `Here are all available products`,
-          products: mockProducts,
-          categories: CATEGORIES
+          products: CATALOG_PRODUCTS,
+          categories: CATALOG_CATEGORIES
         };
-        setProducts(mockProducts);
+        setProducts(CATALOG_PRODUCTS);
         resources.push({
           uri: 'ecommerce://products/list',
           mimeType: 'text/html',
-          content: generateProductListHtml(mockProducts),
+          content: generateProductListHtml(CATALOG_PRODUCTS),
         });
-        setLastResourceHtml(generateProductListHtml(mockProducts));
+        setLastResourceHtml(generateProductListHtml(CATALOG_PRODUCTS));
         setActiveView('products');
         break;
       }
       case 'get_categories': {
         result = { 
-          message: `Categories: ${CATEGORIES.join(', ')}`,
-          categories: CATEGORIES
+          message: `Categories: ${CATALOG_CATEGORIES.join(', ')}`,
+          categories: CATALOG_CATEGORIES
         };
         break;
       }
@@ -425,24 +409,13 @@ After calling a tool, present the results in a friendly way.`
     
     // Search products
     if (input.includes('search') || input.includes('find') || input.includes('show')) {
-      const mockProducts: Product[] = [
-        { id: 1, name: "Nike Shoes", category: "Footwear", price: 4999, image: "👟" },
-        { id: 2, name: "Adidas T-Shirt", category: "Clothing", price: 1999, image: "👕" },
-        { id: 3, name: "Puma Cap", category: "Accessories", price: 999, image: "🧢" },
-        { id: 4, name: "Nike Jacket", category: "Clothing", price: 3999, image: "🧥" },
-        { id: 5, name: "Adidas Sneakers", category: "Footwear", price: 5999, image: "👟" },
-        { id: 6, name: "Puma Watch", category: "Accessories", price: 2999, image: "⌚" },
-        { id: 7, name: "Nike Bag", category: "Accessories", price: 1999, image: "👜" },
-        { id: 8, name: "Adidas Shorts", category: "Clothing", price: 1499, image: "🩳" },
-      ];
-      
-      let filtered = mockProducts;
+      let filtered = CATALOG_PRODUCTS;
       
       // Filter by search query
       const searchMatch = input.match(/(?:search|find|show|looking for)\s+(?:me\s+)?(.+)/i);
       if (searchMatch) {
         const query = searchMatch[1].toLowerCase();
-        filtered = mockProducts.filter(p => 
+        filtered = CATALOG_PRODUCTS.filter(p => 
           p.name.toLowerCase().includes(query) || 
           p.category.toLowerCase().includes(query)
         );
@@ -481,22 +454,11 @@ After calling a tool, present the results in a friendly way.`
       const productId = addMatch[1] ? parseInt(addMatch[1]) : null;
       const productName = addMatch[2] || '';
       
-      const mockProducts: Product[] = [
-        { id: 1, name: "Nike Shoes", category: "Footwear", price: 4999, image: "👟" },
-        { id: 2, name: "Adidas T-Shirt", category: "Clothing", price: 1999, image: "👕" },
-        { id: 3, name: "Puma Cap", category: "Accessories", price: 999, image: "🧢" },
-        { id: 4, name: "Nike Jacket", category: "Clothing", price: 3999, image: "🧥" },
-        { id: 5, name: "Adidas Sneakers", category: "Footwear", price: 5999, image: "👟" },
-        { id: 6, name: "Puma Watch", category: "Accessories", price: 2999, image: "⌚" },
-        { id: 7, name: "Nike Bag", category: "Accessories", price: 1999, image: "👜" },
-        { id: 8, name: "Adidas Shorts", category: "Clothing", price: 1499, image: "🩳" },
-      ];
-      
       let product: Product | undefined;
       if (productId) {
-        product = mockProducts.find(p => p.id === productId);
+        product = CATALOG_PRODUCTS.find(p => p.id === productId);
       } else {
-        product = mockProducts.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
+        product = CATALOG_PRODUCTS.find(p => p.name.toLowerCase().includes(productName.toLowerCase()));
       }
       
       if (product) {
@@ -669,8 +631,6 @@ After calling a tool, present the results in a friendly way.`
 
   // Handle UI actions from MCP-UI rendered resources
   const handleUIAction = useCallback(async (action: UIActionResult) => {
-    console.log('UI Action received:', action);
-    
     if (action.type === 'tool') {
       // Handle tool calls from UI
       const { toolName, params } = action.payload;
@@ -735,14 +695,13 @@ After calling a tool, present the results in a friendly way.`
   };
 
   // Filter products locally
-  const filteredProducts = products.length > 0 
-    ? products 
-    : (searchQuery || selectedCategory !== 'All') 
-      ? products.filter(p => 
-          (selectedCategory === 'All' || p.category === selectedCategory) &&
-          (searchQuery === '' || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        )
-      : [];
+  const baseProducts = products.length > 0 ? products : CATALOG_PRODUCTS;
+  const filteredProducts = (searchQuery || selectedCategory !== 'All')
+    ? baseProducts.filter(p =>
+        (selectedCategory === 'All' || p.category === selectedCategory) &&
+        (searchQuery === '' || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : baseProducts;
 
   // Render
   return (
@@ -788,7 +747,7 @@ After calling a tool, present the results in a friendly way.`
             }}
             style={{ width: '100%' }}
           >
-            {CATEGORIES.map(cat => (
+            {CATALOG_CATEGORIES.map(cat => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
@@ -828,32 +787,33 @@ After calling a tool, present the results in a friendly way.`
           {/* Render products or cart based on active view */}
           {activeView === 'products' ? (
             <div className="product-grid">
-              {(filteredProducts.length > 0 ? filteredProducts : [
-                { id: 1, name: "Nike Shoes", category: "Footwear", price: 4999, image: "👟" },
-                { id: 2, name: "Adidas T-Shirt", category: "Clothing", price: 1999, image: "👕" },
-                { id: 3, name: "Puma Cap", category: "Accessories", price: 999, image: "🧢" },
-                { id: 4, name: "Nike Jacket", category: "Clothing", price: 3999, image: "🧥" },
-                { id: 5, name: "Adidas Sneakers", category: "Footwear", price: 5999, image: "👟" },
-                { id: 6, name: "Puma Watch", category: "Accessories", price: 2999, image: "⌚" },
-                { id: 7, name: "Nike Bag", category: "Accessories", price: 1999, image: "👜" },
-                { id: 8, name: "Adidas Shorts", category: "Clothing", price: 1499, image: "🩳" },
-              ]).map((product) => (
-                <div key={product.id} className="product-card">
-                  <div className="product-image">{product.image}</div>
-                  <h3 className="product-name">{product.name}</h3>
-                  <p className="product-category">{product.category}</p>
-                  <p className="product-price">₹{product.price}</p>
-                  <div className="product-actions">
-                    <button 
-                      className="btn btn-primary"
-                      onClick={() => handleAddToCart(product.id)}
-                      style={{ flex: 1 }}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
+              {filteredProducts.length === 0 ? (
+                <div className="empty-state">
+                  <div className="empty-state-icon">📦</div>
+                  <h3 className="empty-state-title">No products found</h3>
+                  <p className="empty-state-description">
+                    Try adjusting your search or filter.
+                  </p>
                 </div>
-              ))}
+              ) : (
+                filteredProducts.map((product) => (
+                  <div key={product.id} className="product-card">
+                    <div className="product-image">{product.image}</div>
+                    <h3 className="product-name">{product.name}</h3>
+                    <p className="product-category">{product.category}</p>
+                    <p className="product-price">₹{product.price}</p>
+                    <div className="product-actions">
+                      <button 
+                        className="btn btn-primary"
+                        onClick={() => handleAddToCart(product.id)}
+                        style={{ flex: 1 }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           ) : (
             <div className="cart-items">
