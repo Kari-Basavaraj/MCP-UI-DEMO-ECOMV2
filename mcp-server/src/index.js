@@ -5,7 +5,9 @@ import {
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { startOpenRouterProxy } from "./openrouterProxy.js";
-import { products, categories } from "../../shared/catalog.js";
+import catalog from "../../shared/catalog.js";
+
+const { products, categories } = catalog;
 
 // In-memory cart
 let cart = [];

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { type UIActionResult } from '@mcp-ui/client';
-import { products as catalogProducts, categories as catalogCategories } from '../../shared/catalog.js';
+import catalog from '../../shared/catalog.js';
 
 // Types
 interface Product {
@@ -29,8 +29,8 @@ interface Message {
 
 // OpenRouter proxy configuration
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8787';
-const CATALOG_PRODUCTS = catalogProducts as Product[];
-const CATALOG_CATEGORIES = catalogCategories as string[];
+const CATALOG_PRODUCTS = (catalog as { products: Product[] }).products;
+const CATALOG_CATEGORIES = (catalog as { categories: string[] }).categories;
 
 const formatCatalogList = (items: Product[]) =>
   items

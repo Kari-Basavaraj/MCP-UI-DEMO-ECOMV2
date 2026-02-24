@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   { id: 1, name: "Nike Shoes", category: "Footwear", price: 4999, image: "👟" },
   { id: 2, name: "Adidas T-Shirt", category: "Clothing", price: 1999, image: "👕" },
   { id: 3, name: "Puma Cap", category: "Accessories", price: 999, image: "🧢" },
@@ -11,4 +11,9 @@ export const products = [
 
 const catalogCategories = Array.from(new Set(products.map((product) => product.category)));
 
-export const categories = ["All", ...catalogCategories];
+const categories = ["All", ...catalogCategories];
+
+module.exports = {
+  products,
+  categories,
+};
