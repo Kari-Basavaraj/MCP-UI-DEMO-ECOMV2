@@ -24,14 +24,22 @@ const pickOpenRouterOptions = (body) => {
   }, {});
 };
 
-export const startOpenRouterProxy = ({ port = 8787 } = {}) => {
+export const startOpenRouterProxy = ({
+  port = 8787,
+  listTools = () => [],
+  executeTool = async () => ({ content: [{ type: "text", text: JSON.stringify({ error: "Tool execution not configured" }) }] }),
+} = {}) => {
   const app = express();
 
   app.use(cors({ origin: true }));
   app.use(express.json({ limit: "1mb" }));
 
   app.get("/api/health", (_req, res) => {
-    res.json({ ok: true });
+    res.json({
+      ok: true,
+      openRouterConfigured: Boolean(process.env.OPENROUTER_API_KEY),
+      model: process.env.OPENROUTER_MODEL || DEFAULT_MODEL,
+    });
   });
 
   app.post("/api/openrouter/chat", async (req, res) => {
@@ -80,7 +88,47 @@ export const startOpenRouterProxy = ({ port = 8787 } = {}) => {
     }
   });
 
-  return app.listen(port, () => {
+  app.get("/api/tools", async (_req, res) => {
+    try {
+      const tools = await listTools();
+      return res.json({ tools });
+    } catch (error) {
+      return res.status(500).json({
+        error: error?.message || "Failed to list tools",
+      });
+    }
+  });
+
+  app.post("/api/tools/:toolName", async (req, res) => {
+    const { toolName } = req.params;
+
+    try {
+      const result = await executeTool(toolName, req.body || {});
+      return res.json(result);
+    } catch (error) {
+      return res.status(500).json({
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({ error: error?.message || "Failed to execute tool" }),
+          },
+        ],
+      });
+    }
+  });
+
+  const server = app.listen(port, () => {
     console.error(`OpenRouter proxy listening on :${port}`);
   });
+
+  server.on("error", (error) => {
+    if (error?.code === "EADDRINUSE") {
+      console.error(`OpenRouter proxy port ${port} already in use, skipping new listener`);
+      return;
+    }
+
+    throw error;
+  });
+
+  return server;
 };

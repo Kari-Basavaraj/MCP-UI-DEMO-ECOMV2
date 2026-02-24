@@ -10,3 +10,7 @@ mcp-server/node_modules/
 .env.*
 !.env.example
 !**/.env.example
+
+# Local tooling metadata
+.agents/
+.cursor/

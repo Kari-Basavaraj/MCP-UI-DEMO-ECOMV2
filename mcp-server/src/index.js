@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -5,9 +6,13 @@ import {
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { startOpenRouterProxy } from "./openrouterProxy.js";
-import catalog from "../../shared/catalog.js";
+import catalog from "../../shared/catalog.mjs";
 
 const { products, categories } = catalog;
+const RESOURCE_URIS = {
+  products: "ui://ecommerce/products/list",
+  cart: "ui://ecommerce/cart/view",
+};
 
 // In-memory cart
 let cart = [];
@@ -21,7 +26,7 @@ function generateProductListHtml(productsToShow) {
       <p style="margin: 0 0 8px 0; font-size: 14px; color: #666;">${product.category}</p>
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <span style="font-size: 20px; font-weight: 600; color: #4361ee;">₹${product.price}</span>
-        <button onclick="addToCart(${product.id})" style="background: #4361ee; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.2s;">Add to Cart</button>
+        <button onclick="window.parent.postMessage({ type: 'tool', payload: { toolName: 'add_to_cart', params: { productId: ${product.id} } } }, '*')" style="background: #4361ee; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.2s;">Add to Cart</button>
       </div>
     </div>
   `).join('');
@@ -34,6 +39,331 @@ function generateProductListHtml(productsToShow) {
       </div>
     </div>
   `;
+}
+
+const TOOL_DEFINITIONS = [
+  {
+    name: "search_products",
+    description: "Search for products by name or keyword",
+    inputSchema: {
+      type: "object",
+      properties: {
+        query: {
+          type: "string",
+          description: "Search query for product name",
+        },
+      },
+      required: ["query"],
+    },
+    _meta: {
+      ui: {
+        resourceUri: RESOURCE_URIS.products,
+      },
+    },
+  },
+  {
+    name: "filter_products",
+    description: "Filter products by category",
+    inputSchema: {
+      type: "object",
+      properties: {
+        category: {
+          type: "string",
+          description: "Category to filter by (Footwear, Clothing, Accessories, or All)",
+          enum: categories,
+        },
+      },
+      required: ["category"],
+    },
+    _meta: {
+      ui: {
+        resourceUri: RESOURCE_URIS.products,
+      },
+    },
+  },
+  {
+    name: "add_to_cart",
+    description: "Add a product to the shopping cart",
+    inputSchema: {
+      type: "object",
+      properties: {
+        productId: {
+          type: "number",
+          description: "ID of the product to add to cart",
+        },
+      },
+      required: ["productId"],
+    },
+    _meta: {
+      ui: {
+        resourceUri: RESOURCE_URIS.cart,
+      },
+    },
+  },
+  {
+    name: "remove_from_cart",
+    description: "Remove a product from the shopping cart",
+    inputSchema: {
+      type: "object",
+      properties: {
+        productId: {
+          type: "number",
+          description: "ID of the product to remove from cart",
+        },
+      },
+      required: ["productId"],
+    },
+    _meta: {
+      ui: {
+        resourceUri: RESOURCE_URIS.cart,
+      },
+    },
+  },
+  {
+    name: "get_cart",
+    description: "Get the current shopping cart contents",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+    _meta: {
+      ui: {
+        resourceUri: RESOURCE_URIS.cart,
+      },
+    },
+  },
+  {
+    name: "get_products",
+    description: "Get all available products",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+    _meta: {
+      ui: {
+        resourceUri: RESOURCE_URIS.products,
+      },
+    },
+  },
+  {
+    name: "get_categories",
+    description: "Get all available product categories",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+];
+
+async function executeTool(name, args = {}) {
+  switch (name) {
+    case "search_products": {
+      const query = String(args.query || "").toLowerCase();
+      const results = products.filter(
+        (p) =>
+          p.name.toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query)
+      );
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              products: results,
+              message: `Found ${results.length} product(s) matching "${args.query}"`,
+            }),
+          },
+          {
+            type: "resource",
+            resource: {
+              uri: RESOURCE_URIS.products,
+              mimeType: "text/html;profile=mcp-app",
+              text: generateProductListHtml(results),
+            },
+          },
+        ],
+      };
+    }
+
+    case "filter_products": {
+      const category = args.category;
+      const results =
+        category === "All"
+          ? products
+          : products.filter((p) => p.category === category);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              products: results,
+              message: `Found ${results.length} product(s) in ${category}`,
+            }),
+          },
+          {
+            type: "resource",
+            resource: {
+              uri: RESOURCE_URIS.products,
+              mimeType: "text/html;profile=mcp-app",
+              text: generateProductListHtml(results),
+            },
+          },
+        ],
+      };
+    }
+
+    case "add_to_cart": {
+      const product = products.find((p) => p.id === args.productId);
+      if (!product) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify({ success: false, message: "Product not found" }),
+            },
+          ],
+        };
+      }
+
+      const cartItem = { ...product, cartId: Date.now() };
+      cart.push(cartItem);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              success: true,
+              message: `Added "${product.name}" to cart`,
+              cart,
+              cartCount: cart.length,
+            }),
+          },
+          {
+            type: "resource",
+            resource: {
+              uri: RESOURCE_URIS.cart,
+              mimeType: "text/html;profile=mcp-app",
+              text: generateCartHtml(),
+            },
+          },
+        ],
+      };
+    }
+
+    case "remove_from_cart": {
+      const index = cart.findIndex((item) => item.id === args.productId);
+      if (index === -1) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify({ success: false, message: "Product not found in cart" }),
+            },
+          ],
+        };
+      }
+
+      const removedItem = cart.splice(index, 1)[0];
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              success: true,
+              message: `Removed "${removedItem.name}" from cart`,
+              cart,
+              cartCount: cart.length,
+            }),
+          },
+          {
+            type: "resource",
+            resource: {
+              uri: RESOURCE_URIS.cart,
+              mimeType: "text/html;profile=mcp-app",
+              text: generateCartHtml(),
+            },
+          },
+        ],
+      };
+    }
+
+    case "get_cart": {
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              cart,
+              total,
+              count: cart.length,
+              message: `You have ${cart.length} item(s) in cart. Total: ₹${total}`,
+            }),
+          },
+          {
+            type: "resource",
+            resource: {
+              uri: RESOURCE_URIS.cart,
+              mimeType: "text/html;profile=mcp-app",
+              text: generateCartHtml(),
+            },
+          },
+        ],
+      };
+    }
+
+    case "get_products": {
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              products,
+              categories,
+              message: "Here are all available products",
+            }),
+          },
+          {
+            type: "resource",
+            resource: {
+              uri: RESOURCE_URIS.products,
+              mimeType: "text/html;profile=mcp-app",
+              text: generateProductListHtml(products),
+            },
+          },
+        ],
+      };
+    }
+
+    case "get_categories": {
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              categories,
+              message: `Categories: ${categories.join(", ")}`,
+            }),
+          },
+        ],
+      };
+    }
+
+    default:
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({ error: "Unknown tool" }),
+          },
+        ],
+      };
+  }
 }
 
 // Generate cart HTML for UI resource
@@ -56,7 +386,7 @@ function generateCartHtml() {
           <p style="margin: 4px 0 0 0; font-size: 14px; color: #666;">₹${item.price}</p>
         </div>
       </div>
-      <button onclick="removeFromCart(${item.id})" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500;">Remove</button>
+      <button onclick="window.parent.postMessage({ type: 'tool', payload: { toolName: 'remove_from_cart', params: { productId: ${item.id} } } }, '*')" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500;">Remove</button>
     </div>
   `).join('');
 
@@ -92,89 +422,7 @@ const server = new Server(
 // List available tools
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
-    tools: [
-      {
-        name: "search_products",
-        description: "Search for products by name or keyword",
-        inputSchema: {
-          type: "object",
-          properties: {
-            query: {
-              type: "string",
-              description: "Search query for product name",
-            },
-          },
-          required: ["query"],
-        },
-      },
-      {
-        name: "filter_products",
-        description: "Filter products by category",
-        inputSchema: {
-          type: "object",
-          properties: {
-            category: {
-              type: "string",
-              description: "Category to filter by (Footwear, Clothing, Accessories, or All)",
-              enum: categories,
-            },
-          },
-          required: ["category"],
-        },
-      },
-      {
-        name: "add_to_cart",
-        description: "Add a product to the shopping cart",
-        inputSchema: {
-          type: "object",
-          properties: {
-            productId: {
-              type: "number",
-              description: "ID of the product to add to cart",
-            },
-          },
-          required: ["productId"],
-        },
-      },
-      {
-        name: "remove_from_cart",
-        description: "Remove a product from the shopping cart",
-        inputSchema: {
-          type: "object",
-          properties: {
-            productId: {
-              type: "number",
-              description: "ID of the product to remove from cart",
-            },
-          },
-          required: ["productId"],
-        },
-      },
-      {
-        name: "get_cart",
-        description: "Get the current shopping cart contents",
-        inputSchema: {
-          type: "object",
-          properties: {},
-        },
-      },
-      {
-        name: "get_products",
-        description: "Get all available products",
-        inputSchema: {
-          type: "object",
-          properties: {},
-        },
-      },
-      {
-        name: "get_categories",
-        description: "Get all available product categories",
-        inputSchema: {
-          type: "object",
-          properties: {},
-        },
-      },
-    ],
+    tools: TOOL_DEFINITIONS,
   };
 });
 
@@ -183,209 +431,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
   try {
-    switch (name) {
-      case "search_products": {
-        const query = args.query.toLowerCase();
-        const results = products.filter(
-          (p) =>
-            p.name.toLowerCase().includes(query) ||
-            p.category.toLowerCase().includes(query)
-        );
-        
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                products: results,
-                message: `Found ${results.length} product(s) matching "${args.query}"`,
-              }),
-            },
-            {
-              type: "resource",
-              resource: {
-                uri: "ecommerce://products/list",
-                mimeType: "text/html",
-                text: generateProductListHtml(results),
-              },
-            },
-          ],
-        };
-      }
-
-      case "filter_products": {
-        const category = args.category;
-        const results =
-          category === "All"
-            ? products
-            : products.filter((p) => p.category === category);
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                products: results,
-                message: `Found ${results.length} product(s) in ${category}`,
-              }),
-            },
-            {
-              type: "resource",
-              resource: {
-                uri: "ecommerce://products/list",
-                mimeType: "text/html",
-                text: generateProductListHtml(results),
-              },
-            },
-          ],
-        };
-      }
-
-      case "add_to_cart": {
-        const product = products.find((p) => p.id === args.productId);
-        if (!product) {
-          return {
-            content: [
-              {
-                type: "text",
-                text: JSON.stringify({ success: false, message: "Product not found" }),
-              },
-            ],
-          };
-        }
-
-        const cartItem = { ...product, cartId: Date.now() };
-        cart.push(cartItem);
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                success: true,
-                message: `Added "${product.name}" to cart`,
-                cartCount: cart.length,
-              }),
-            },
-            {
-              type: "resource",
-              resource: {
-                uri: "ecommerce://cart/view",
-                mimeType: "text/html",
-                text: generateCartHtml(),
-              },
-            },
-          ],
-        };
-      }
-
-      case "remove_from_cart": {
-        const index = cart.findIndex((item) => item.id === args.productId);
-        if (index === -1) {
-          return {
-            content: [
-              {
-                type: "text",
-                text: JSON.stringify({ success: false, message: "Product not found in cart" }),
-              },
-            ],
-          };
-        }
-
-        const removedItem = cart.splice(index, 1)[0];
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                success: true,
-                message: `Removed "${removedItem.name}" from cart`,
-                cartCount: cart.length,
-              }),
-            },
-            {
-              type: "resource",
-              resource: {
-                uri: "ecommerce://cart/view",
-                mimeType: "text/html",
-                text: generateCartHtml(),
-              },
-            },
-          ],
-        };
-      }
-
-      case "get_cart": {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                cart: cart,
-                total: total,
-                count: cart.length,
-              }),
-            },
-            {
-              type: "resource",
-              resource: {
-                uri: "ecommerce://cart/view",
-                mimeType: "text/html",
-                text: generateCartHtml(),
-              },
-            },
-          ],
-        };
-      }
-
-      case "get_products": {
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                products: products,
-                categories: categories,
-              }),
-            },
-            {
-              type: "resource",
-              resource: {
-                uri: "ecommerce://products/list",
-                mimeType: "text/html",
-                text: generateProductListHtml(products),
-              },
-            },
-          ],
-        };
-      }
-
-      case "get_categories": {
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                categories: categories,
-              }),
-            },
-          ],
-        };
-      }
-
-      default:
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({ error: "Unknown tool" }),
-            },
-          ],
-        };
-    }
+    return await executeTool(name, args || {});
   } catch (error) {
     return {
       content: [
@@ -400,7 +446,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
 // Start the server
 const apiPort = Number(process.env.API_PORT || process.env.PORT || 8787);
-startOpenRouterProxy({ port: apiPort });
+startOpenRouterProxy({
+  port: apiPort,
+  listTools: async () => TOOL_DEFINITIONS,
+  executeTool,
+});
 
 async function main() {
   const transport = new StdioServerTransport();

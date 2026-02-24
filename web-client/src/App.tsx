@@ -1,20 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { type UIActionResult } from '@mcp-ui/client';
-import catalog from '../../shared/catalog.js';
+import { UIResourceRenderer, type UIActionResult } from '@mcp-ui/client';
+import catalog from '../../shared/catalog.mjs';
+import { applyToolAction, type CartItem, type Product, type ToolState } from './lib/toolState';
 
 // Types
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-}
-
-interface CartItem extends Product {
-  cartId: number;
-}
-
 interface Message {
   id: string;
   role: 'user' | 'assistant';
@@ -155,6 +144,7 @@ function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [aiStatus, setAiStatus] = useState<'checking' | 'ready' | 'fallback'>('checking');
   
   // Store last rendered resource HTML (used by MCP-UI postMessage)
   const [lastResourceHtml, setLastResourceHtml] = useState<string>('');
@@ -163,11 +153,21 @@ function App() {
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const productsRef = useRef<Product[]>([]);
+  const cartRef = useRef<CartItem[]>([]);
 
   // Scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  useEffect(() => {
+    productsRef.current = products;
+  }, [products]);
+
+  useEffect(() => {
+    cartRef.current = cart;
+  }, [cart]);
 
   // Initialize with welcome message
   useEffect(() => {
@@ -179,6 +179,37 @@ function App() {
         timestamp: new Date(),
       },
     ]);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const checkAIStatus = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/health`);
+        const data = await response.json();
+
+        if (!mounted) {
+          return;
+        }
+
+        if (response.ok && data.openRouterConfigured) {
+          setAiStatus('ready');
+        } else {
+          setAiStatus('fallback');
+        }
+      } catch (_error) {
+        if (mounted) {
+          setAiStatus('fallback');
+        }
+      }
+    };
+
+    checkAIStatus();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   // Handle sending messages to LLM
@@ -226,6 +257,8 @@ function App() {
       if (!response.ok) {
         throw new Error('Failed to get response from API');
       }
+
+      setAiStatus('ready');
 
       const data = await response.json();
       const assistantMessage = data.choices[0].message;
@@ -279,6 +312,7 @@ function App() {
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      setAiStatus('fallback');
       
       // Fallback: simulate tool execution for demo
       const fallbackResponse = handleFallbackResponse(input);
@@ -290,117 +324,119 @@ function App() {
 
   // Execute MCP tool (simulated for demo)
   const executeMCPTool = async (toolName: string, args: any): Promise<any> => {
-    let result: any = { message: '' };
-    let resources: any[] = [];
+    const applyResultToState = (payload: Record<string, unknown>) => {
+      const nextProducts = payload.products as Product[] | undefined;
+      const nextCart = payload.cart as CartItem[] | undefined;
 
-    switch (toolName) {
-      case 'search_products': {
-        const query = args.query.toLowerCase();
-        const filtered = CATALOG_PRODUCTS.filter(p => 
-          p.name.toLowerCase().includes(query) || 
-          p.category.toLowerCase().includes(query)
-        );
-        result = { 
-          message: `Found ${filtered.length} product(s) matching "${args.query}"`,
-          products: filtered 
-        };
-        setProducts(filtered);
-        resources.push({
-          uri: 'ecommerce://products/list',
-          mimeType: 'text/html',
-          content: generateProductListHtml(filtered),
-        });
-        setLastResourceHtml(generateProductListHtml(filtered));
+      if (nextProducts) {
+        setProducts(nextProducts);
         setActiveView('products');
-        break;
       }
-      case 'filter_products': {
-        const category = args.category;
-        const filtered = category === 'All' 
-          ? CATALOG_PRODUCTS 
-          : CATALOG_PRODUCTS.filter(p => p.category === category);
-        result = { 
-          message: `Found ${filtered.length} product(s) in ${category}`,
-          products: filtered 
-        };
-        setProducts(filtered);
-        resources.push({
-          uri: 'ecommerce://products/list',
-          mimeType: 'text/html',
-          content: generateProductListHtml(filtered),
-        });
-        setLastResourceHtml(generateProductListHtml(filtered));
-        setActiveView('products');
-        break;
+
+      if (nextCart) {
+        setCart(nextCart);
       }
-      case 'add_to_cart': {
-        const product = CATALOG_PRODUCTS.find(p => p.id === args.productId);
-        if (product) {
-          const newItem: CartItem = { ...product, cartId: Date.now() };
-          const nextCart = [...cart, newItem];
-          setCart(nextCart);
-          result = { 
-            message: `Added "${product.name}" to cart`,
-            cart: nextCart
-          };
-        }
-        break;
-      }
-      case 'remove_from_cart': {
-        const index = cart.findIndex(item => item.id === args.productId);
-        if (index >= 0) {
-          const removed = cart[index];
-          const newCart = cart.filter((_, i) => i !== index);
-          setCart(newCart);
-          result = { 
-            message: `Removed "${removed.name}" from cart`,
-            cart: newCart
-          };
-        }
-        break;
-      }
-      case 'get_cart': {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        result = { 
-          message: `You have ${cart.length} item(s) in cart. Total: ₹${total}`,
-          cart: cart,
-          total: total
-        };
-        resources.push({
-          uri: 'ecommerce://cart/view',
-          mimeType: 'text/html',
-          content: generateCartHtml(cart),
-        });
-        setLastResourceHtml(generateCartHtml(cart));
+
+      if (toolName === 'get_cart') {
         setActiveView('cart');
-        break;
       }
-      case 'get_products': {
-        result = { 
-          message: `Here are all available products`,
-          products: CATALOG_PRODUCTS,
-          categories: CATALOG_CATEGORIES
-        };
-        setProducts(CATALOG_PRODUCTS);
-        resources.push({
-          uri: 'ecommerce://products/list',
-          mimeType: 'text/html',
-          content: generateProductListHtml(CATALOG_PRODUCTS),
-        });
-        setLastResourceHtml(generateProductListHtml(CATALOG_PRODUCTS));
-        setActiveView('products');
-        break;
-      }
-      case 'get_categories': {
-        result = { 
-          message: `Categories: ${CATALOG_CATEGORIES.join(', ')}`,
-          categories: CATALOG_CATEGORIES
-        };
-        break;
-      }
-    }
+    };
 
-    return { ...result, resources };
+    const normalizeResources = (content: Array<{ type: string; resource?: { uri: string; mimeType: string; text?: string } }>) => (
+      content
+        .filter((item) => item.type === 'resource' && item.resource)
+        .map((item) => ({
+          uri: item.resource!.uri,
+          mimeType: item.resource!.mimeType,
+          content: item.resource!.text || '',
+        }))
+    );
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/tools/${toolName}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(args ?? {}),
+      });
+
+      const result = await response.json();
+      const content = Array.isArray(result.content) ? result.content : [];
+      const textChunk = content.find((item: { type?: string }) => item.type === 'text');
+
+      let payload: Record<string, unknown> = {
+        message: `Executed ${toolName}`,
+      };
+
+      if (textChunk?.text) {
+        try {
+          payload = JSON.parse(textChunk.text);
+        } catch {
+          payload = { message: textChunk.text };
+        }
+      }
+
+      const resources = normalizeResources(content);
+      if (resources.length > 0) {
+        setLastResourceHtml(resources[0].content);
+      }
+
+      applyResultToState(payload);
+      return {
+        ...payload,
+        resources,
+      };
+    } catch (_error) {
+      const currentState: ToolState = {
+        products: productsRef.current.length > 0 ? productsRef.current : CATALOG_PRODUCTS,
+        cart: cartRef.current,
+        activeView,
+      };
+
+      const action = applyToolAction(
+        currentState,
+        toolName as Parameters<typeof applyToolAction>[1],
+        args ?? {},
+        CATALOG_PRODUCTS,
+        CATALOG_CATEGORIES
+      );
+
+      setProducts(action.state.products);
+      setCart(action.state.cart);
+      setActiveView(action.state.activeView);
+
+      const resources: Array<{ uri: string; mimeType: string; content: string }> = [];
+      const actionProducts = action.payload.products as Product[] | undefined;
+      const actionCart = action.payload.cart as CartItem[] | undefined;
+
+      if (actionProducts) {
+        const productsHtml = generateProductListHtml(actionProducts);
+        resources.push({
+          uri: 'ui://ecommerce/products/list',
+          mimeType: 'text/html;profile=mcp-app',
+          content: productsHtml,
+        });
+      }
+
+      if (actionCart && ['add_to_cart', 'remove_from_cart', 'get_cart'].includes(toolName)) {
+        const cartHtml = generateCartHtml(actionCart);
+        resources.push({
+          uri: 'ui://ecommerce/cart/view',
+          mimeType: 'text/html;profile=mcp-app',
+          content: cartHtml,
+        });
+      }
+
+      if (resources.length > 0) {
+        setLastResourceHtml(resources[0].content);
+      }
+
+      return {
+        ...action.payload,
+        resources,
+      };
+    }
   };
 
   // Handle fallback when API is not available
@@ -633,12 +669,20 @@ function App() {
   const handleUIAction = useCallback(async (action: UIActionResult) => {
     if (action.type === 'tool') {
       // Handle tool calls from UI
-      const { toolName, params } = action.payload;
+      if (!action.payload || typeof action.payload !== 'object') {
+        return;
+      }
+
+      const { toolName, params } = action.payload as { toolName?: string; params?: Record<string, unknown> };
+      if (!toolName) {
+        return;
+      }
+
       const result = await executeMCPTool(toolName, params);
       const message: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: result.message,
+        content: String(result.message || `Executed ${toolName}`),
         timestamp: new Date(),
         resources: result.resources || [],
       };
@@ -648,27 +692,12 @@ function App() {
       const message: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: action.payload.message,
+        content: String(action.payload?.message || ''),
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, message]);
     }
-  }, []);
-
-  // Listen for postMessage events from MCP-UI iframe
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Check if it's a UI action from our iframe
-      if (event.data && event.data.type === 'tool') {
-        handleUIAction(event.data as unknown as UIActionResult);
-      } else if (event.data && event.data.type === 'notify') {
-        handleUIAction(event.data as unknown as UIActionResult);
-      }
-    };
-    
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [handleUIAction]);
+  }, [executeMCPTool]);
 
   // Handle adding to cart from UI
   const handleAddToCart = async (productId: number) => {
@@ -860,7 +889,12 @@ function App() {
       {/* Chat Panel */}
       <div className="chat-container">
         <div className="chat-header">
-          <span className="chat-title">💬 AI Assistant</span>
+          <span className="chat-title">
+            💬 AI Assistant
+            <span style={{ fontSize: '11px', marginLeft: '8px', color: aiStatus === 'ready' ? '#14ae5c' : '#e5a000' }}>
+              {aiStatus === 'checking' ? 'Checking…' : aiStatus === 'ready' ? 'AI Connected' : 'Fallback Mode'}
+            </span>
+          </span>
           {hasResource && <span style={{ fontSize: '10px', marginLeft: '8px', color: '#4caf50' }}>●</span>}
         </div>
         
@@ -882,12 +916,16 @@ function App() {
               {message.resources && message.resources.length > 0 && (
                 <div className="tool-result">
                   <div className="tool-result-title">UI Rendered</div>
-                  <div 
-                    className="resource-content"
-                    dangerouslySetInnerHTML={{ 
-                      __html: message.resources[0].content 
-                    }}
-                  />
+                  <div className="resource-content">
+                    <UIResourceRenderer
+                      resource={{
+                        uri: message.resources[0].uri,
+                        mimeType: message.resources[0].mimeType,
+                        text: message.resources[0].content,
+                      }}
+                      onUIAction={handleUIAction}
+                    />
+                  </div>
                 </div>
               )}
             </div>
