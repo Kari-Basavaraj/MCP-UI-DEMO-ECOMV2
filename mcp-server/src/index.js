@@ -1,464 +1,207 @@
 import "dotenv/config";
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types.js";
-import { startOpenRouterProxy } from "./openrouterProxy.js";
+  registerAppTool,
+  registerAppResource,
+  RESOURCE_MIME_TYPE,
+} from "@modelcontextprotocol/ext-apps/server";
+import { z } from "zod";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { startOpenAIProxy } from "./openaiProxy.js";
 import catalog from "../../shared/catalog.mjs";
 
 const { products, categories } = catalog;
-const RESOURCE_URIS = {
-  products: "ui://ecommerce/products/list",
-  cart: "ui://ecommerce/cart/view",
-};
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// In-memory cart
+// ── Paths & URIs ────────────────────────────────────────────
+const DIST_DIR = path.join(__dirname, "..", "dist");
+const PRODUCTS_URI = "ui://ecommerce/products-app.html";
+const CART_URI = "ui://ecommerce/cart-app.html";
+
+// ── Pre-built UI HTML (cached at startup) ───────────────────
+let productsHtml = "";
+let cartHtml = "";
+try {
+  productsHtml = fs.readFileSync(path.join(DIST_DIR, "products-app.html"), "utf-8");
+  cartHtml = fs.readFileSync(path.join(DIST_DIR, "cart-app.html"), "utf-8");
+  console.error("✓ Loaded UI HTML from dist/");
+} catch {
+  console.error("⚠ dist/ HTML not found — run `npm run build` first");
+}
+
+/** Inject data into pre-built HTML so UIResourceRenderer can show it without ext-apps protocol */
+function embedData(html, data) {
+  if (!html) return `<html><body style="font-family:sans-serif;padding:2rem;color:#888;">UI not built — run <code>npm run build</code></body></html>`;
+  const tag = `<script>window.__MCP_TOOL_RESULT__=${JSON.stringify(data)};</script>`;
+  return html.replace("</head>", `${tag}</head>`);
+}
+
+// ── In-memory cart (shared across sessions) ─────────────────
 let cart = [];
 
-// Generate product list HTML for UI resource
-function generateProductListHtml(productsToShow) {
-  const productsHtml = productsToShow.map(product => `
-    <div style="background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s;">
-      <div style="font-size: 48px; text-align: center; margin-bottom: 12px;">${product.image}</div>
-      <h3 style="margin: 0 0 8px 0; font-size: 18px; color: #1a1a2e;">${product.name}</h3>
-      <p style="margin: 0 0 8px 0; font-size: 14px; color: #666;">${product.category}</p>
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 20px; font-weight: 600; color: #4361ee;">₹${product.price}</span>
-        <button onclick="window.parent.postMessage({ type: 'tool', payload: { toolName: 'add_to_cart', params: { productId: ${product.id} } } }, '*')" style="background: #4361ee; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.2s;">Add to Cart</button>
-      </div>
-    </div>
-  `).join('');
-
-  return `
-    <div style="padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-      <h2 style="margin: 0 0 24px 0; font-size: 24px; color: #1a1a2e;">Products</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
-        ${productsHtml || '<p style="color: #666;">No products found</p>'}
-      </div>
-    </div>
-  `;
-}
-
-const TOOL_DEFINITIONS = [
-  {
-    name: "search_products",
-    description: "Search for products by name or keyword",
-    inputSchema: {
-      type: "object",
-      properties: {
-        query: {
-          type: "string",
-          description: "Search query for product name",
-        },
-      },
-      required: ["query"],
-    },
-    _meta: {
-      ui: {
-        resourceUri: RESOURCE_URIS.products,
-      },
-    },
-  },
-  {
-    name: "filter_products",
-    description: "Filter products by category",
-    inputSchema: {
-      type: "object",
-      properties: {
-        category: {
-          type: "string",
-          description: "Category to filter by (Footwear, Clothing, Accessories, or All)",
-          enum: categories,
-        },
-      },
-      required: ["category"],
-    },
-    _meta: {
-      ui: {
-        resourceUri: RESOURCE_URIS.products,
-      },
-    },
-  },
-  {
-    name: "add_to_cart",
-    description: "Add a product to the shopping cart",
-    inputSchema: {
-      type: "object",
-      properties: {
-        productId: {
-          type: "number",
-          description: "ID of the product to add to cart",
-        },
-      },
-      required: ["productId"],
-    },
-    _meta: {
-      ui: {
-        resourceUri: RESOURCE_URIS.cart,
-      },
-    },
-  },
-  {
-    name: "remove_from_cart",
-    description: "Remove a product from the shopping cart",
-    inputSchema: {
-      type: "object",
-      properties: {
-        productId: {
-          type: "number",
-          description: "ID of the product to remove from cart",
-        },
-      },
-      required: ["productId"],
-    },
-    _meta: {
-      ui: {
-        resourceUri: RESOURCE_URIS.cart,
-      },
-    },
-  },
-  {
-    name: "get_cart",
-    description: "Get the current shopping cart contents",
-    inputSchema: {
-      type: "object",
-      properties: {},
-    },
-    _meta: {
-      ui: {
-        resourceUri: RESOURCE_URIS.cart,
-      },
-    },
-  },
-  {
-    name: "get_products",
-    description: "Get all available products",
-    inputSchema: {
-      type: "object",
-      properties: {},
-    },
-    _meta: {
-      ui: {
-        resourceUri: RESOURCE_URIS.products,
-      },
-    },
-  },
-  {
-    name: "get_categories",
-    description: "Get all available product categories",
-    inputSchema: {
-      type: "object",
-      properties: {},
-    },
-  },
-];
-
-async function executeTool(name, args = {}) {
-  switch (name) {
-    case "search_products": {
-      const query = String(args.query || "").toLowerCase();
-      const results = products.filter(
-        (p) =>
-          p.name.toLowerCase().includes(query) ||
-          p.category.toLowerCase().includes(query)
-      );
-
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              products: results,
-              message: `Found ${results.length} product(s) matching "${args.query}"`,
-            }),
-          },
-          {
-            type: "resource",
-            resource: {
-              uri: RESOURCE_URIS.products,
-              mimeType: "text/html;profile=mcp-app",
-              text: generateProductListHtml(results),
-            },
-          },
-        ],
-      };
-    }
-
-    case "filter_products": {
-      const category = args.category;
-      const results =
-        category === "All"
-          ? products
-          : products.filter((p) => p.category === category);
-
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              products: results,
-              message: `Found ${results.length} product(s) in ${category}`,
-            }),
-          },
-          {
-            type: "resource",
-            resource: {
-              uri: RESOURCE_URIS.products,
-              mimeType: "text/html;profile=mcp-app",
-              text: generateProductListHtml(results),
-            },
-          },
-        ],
-      };
-    }
-
-    case "add_to_cart": {
-      const product = products.find((p) => p.id === args.productId);
-      if (!product) {
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({ success: false, message: "Product not found" }),
-            },
-          ],
-        };
-      }
-
-      const cartItem = { ...product, cartId: Date.now() };
-      cart.push(cartItem);
-
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              success: true,
-              message: `Added "${product.name}" to cart`,
-              cart,
-              cartCount: cart.length,
-            }),
-          },
-          {
-            type: "resource",
-            resource: {
-              uri: RESOURCE_URIS.cart,
-              mimeType: "text/html;profile=mcp-app",
-              text: generateCartHtml(),
-            },
-          },
-        ],
-      };
-    }
-
-    case "remove_from_cart": {
-      const index = cart.findIndex((item) => item.id === args.productId);
-      if (index === -1) {
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({ success: false, message: "Product not found in cart" }),
-            },
-          ],
-        };
-      }
-
-      const removedItem = cart.splice(index, 1)[0];
-
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              success: true,
-              message: `Removed "${removedItem.name}" from cart`,
-              cart,
-              cartCount: cart.length,
-            }),
-          },
-          {
-            type: "resource",
-            resource: {
-              uri: RESOURCE_URIS.cart,
-              mimeType: "text/html;profile=mcp-app",
-              text: generateCartHtml(),
-            },
-          },
-        ],
-      };
-    }
-
-    case "get_cart": {
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              cart,
-              total,
-              count: cart.length,
-              message: `You have ${cart.length} item(s) in cart. Total: ₹${total}`,
-            }),
-          },
-          {
-            type: "resource",
-            resource: {
-              uri: RESOURCE_URIS.cart,
-              mimeType: "text/html;profile=mcp-app",
-              text: generateCartHtml(),
-            },
-          },
-        ],
-      };
-    }
-
-    case "get_products": {
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              products,
-              categories,
-              message: "Here are all available products",
-            }),
-          },
-          {
-            type: "resource",
-            resource: {
-              uri: RESOURCE_URIS.products,
-              mimeType: "text/html;profile=mcp-app",
-              text: generateProductListHtml(products),
-            },
-          },
-        ],
-      };
-    }
-
-    case "get_categories": {
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({
-              categories,
-              message: `Categories: ${categories.join(", ")}`,
-            }),
-          },
-        ],
-      };
-    }
-
-    default:
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify({ error: "Unknown tool" }),
-          },
-        ],
-      };
-  }
-}
-
-// Generate cart HTML for UI resource
-function generateCartHtml() {
-  if (cart.length === 0) {
-    return `
-      <div style="padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-        <h2 style="margin: 0 0 24px 0; font-size: 24px; color: #1a1a2e;">Shopping Cart</h2>
-        <p style="color: #666; text-align: center; padding: 40px;">Your cart is empty</p>
-      </div>
-    `;
-  }
-
-  const cartItemsHtml = cart.map(item => `
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #fff; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="font-size: 32px;">${item.image}</span>
-        <div>
-          <h4 style="margin: 0; font-size: 16px; color: #1a1a2e;">${item.name}</h4>
-          <p style="margin: 4px 0 0 0; font-size: 14px; color: #666;">₹${item.price}</p>
-        </div>
-      </div>
-      <button onclick="window.parent.postMessage({ type: 'tool', payload: { toolName: 'remove_from_cart', params: { productId: ${item.id} } } }, '*')" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500;">Remove</button>
-    </div>
-  `).join('');
-
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-  return `
-    <div style="padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-      <h2 style="margin: 0 0 24px 0; font-size: 24px; color: #1a1a2e;">Shopping Cart</h2>
-      <div style="margin-bottom: 20px;">
-        ${cartItemsHtml}
-      </div>
-      <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 18px; font-weight: 600; color: #1a1a2e;">Total:</span>
-        <span style="font-size: 24px; font-weight: 700; color: #4361ee;">₹${total}</span>
-      </div>
-    </div>
-  `;
-}
-
-// Server capabilities
-const server = new Server(
-  {
+// ── Server Factory ──────────────────────────────────────────
+export function createMCPServer() {
+  const server = new McpServer({
     name: "ecommerce-mcp-server",
     version: "1.0.0",
-  },
-  {
-    capabilities: {
-      tools: {},
-    },
-  }
-);
+  });
 
-// List available tools
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return {
-    tools: TOOL_DEFINITIONS,
-  };
-});
+  // ─── Resources (ext-apps hosts fetch these separately) ────
+  registerAppResource(server, PRODUCTS_URI, PRODUCTS_URI, {
+    mimeType: RESOURCE_MIME_TYPE,
+  }, async () => ({
+    contents: [{ uri: PRODUCTS_URI, mimeType: RESOURCE_MIME_TYPE, text: productsHtml }],
+  }));
 
-// Handle tool calls
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name, arguments: args } = request.params;
+  registerAppResource(server, CART_URI, CART_URI, {
+    mimeType: RESOURCE_MIME_TYPE,
+  }, async () => ({
+    contents: [{ uri: CART_URI, mimeType: RESOURCE_MIME_TYPE, text: cartHtml }],
+  }));
 
-  try {
-    return await executeTool(name, args || {});
-  } catch (error) {
+  // ─── Tools ────────────────────────────────────────────────
+
+  registerAppTool(server, "get_products", {
+    description: "Get all available products in the store",
+    inputSchema: {},
+    _meta: { ui: { resourceUri: PRODUCTS_URI } },
+  }, async () => {
+    const data = { products, categories, message: `Here are all ${products.length} products` };
     return {
       content: [
-        {
-          type: "text",
-          text: JSON.stringify({ error: error.message }),
-        },
+        { type: "text", text: JSON.stringify(data) },
+        { type: "resource", resource: { uri: PRODUCTS_URI, mimeType: RESOURCE_MIME_TYPE, text: embedData(productsHtml, data) } },
       ],
+      structuredContent: data,
     };
-  }
-});
+  });
 
-// Start the server
-const apiPort = Number(process.env.API_PORT || process.env.PORT || 8787);
-startOpenRouterProxy({
-  port: apiPort,
-  listTools: async () => TOOL_DEFINITIONS,
-  executeTool,
-});
+  registerAppTool(server, "search_products", {
+    description: "Search for products by name or keyword",
+    inputSchema: { query: z.string().describe("Search query for product name") },
+    _meta: { ui: { resourceUri: PRODUCTS_URI } },
+  }, async ({ query }) => {
+    const q = query.toLowerCase();
+    const results = products.filter(
+      (p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)
+    );
+    const data = { products: results, categories, query, message: `Found ${results.length} product(s) matching "${query}"` };
+    return {
+      content: [
+        { type: "text", text: JSON.stringify(data) },
+        { type: "resource", resource: { uri: PRODUCTS_URI, mimeType: RESOURCE_MIME_TYPE, text: embedData(productsHtml, data) } },
+      ],
+      structuredContent: data,
+    };
+  });
 
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error("E-commerce MCP Server running on stdio");
+  registerAppTool(server, "filter_products", {
+    description: "Filter products by category (All, Footwear, Clothing, or Accessories)",
+    inputSchema: { category: z.string().describe("Category: All, Footwear, Clothing, or Accessories") },
+    _meta: { ui: { resourceUri: PRODUCTS_URI } },
+  }, async ({ category }) => {
+    const results = category === "All" ? products : products.filter((p) => p.category === category);
+    const data = { products: results, categories, category, message: `Found ${results.length} product(s) in "${category}"` };
+    return {
+      content: [
+        { type: "text", text: JSON.stringify(data) },
+        { type: "resource", resource: { uri: PRODUCTS_URI, mimeType: RESOURCE_MIME_TYPE, text: embedData(productsHtml, data) } },
+      ],
+      structuredContent: data,
+    };
+  });
+
+  server.tool("get_categories",
+    "Get all available product categories",
+    {},
+    async () => {
+      const data = { categories, message: `Categories: ${categories.join(", ")}` };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data) }],
+      };
+    }
+  );
+
+  registerAppTool(server, "add_to_cart", {
+    description: "Add a product to the shopping cart",
+    inputSchema: { productId: z.number().describe("ID of the product to add") },
+    _meta: { ui: { resourceUri: CART_URI } },
+  }, async ({ productId }) => {
+    const product = products.find((p) => p.id === productId);
+    if (!product) {
+      return { content: [{ type: "text", text: JSON.stringify({ success: false, message: "Product not found" }) }] };
+    }
+    cart.push({ ...product, cartId: Date.now() });
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const data = { success: true, message: `Added "${product.name}" to cart`, cart, total, cartCount: cart.length };
+    return {
+      content: [
+        { type: "text", text: JSON.stringify(data) },
+        { type: "resource", resource: { uri: CART_URI, mimeType: RESOURCE_MIME_TYPE, text: embedData(cartHtml, data) } },
+      ],
+      structuredContent: data,
+    };
+  });
+
+  registerAppTool(server, "remove_from_cart", {
+    description: "Remove a product from the shopping cart",
+    inputSchema: { productId: z.number().describe("ID of the product to remove") },
+    _meta: { ui: { resourceUri: CART_URI } },
+  }, async ({ productId }) => {
+    const idx = cart.findIndex((i) => i.id === productId);
+    if (idx === -1) {
+      return { content: [{ type: "text", text: JSON.stringify({ success: false, message: "Product not in cart" }) }] };
+    }
+    const removed = cart.splice(idx, 1)[0];
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const data = { success: true, message: `Removed "${removed.name}" from cart`, cart, total, cartCount: cart.length };
+    return {
+      content: [
+        { type: "text", text: JSON.stringify(data) },
+        { type: "resource", resource: { uri: CART_URI, mimeType: RESOURCE_MIME_TYPE, text: embedData(cartHtml, data) } },
+      ],
+      structuredContent: data,
+    };
+  });
+
+  registerAppTool(server, "get_cart", {
+    description: "Get the current shopping cart contents",
+    inputSchema: {},
+    _meta: { ui: { resourceUri: CART_URI } },
+  }, async () => {
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const data = { cart, total, count: cart.length, message: `You have ${cart.length} item(s) in cart. Total: ₹${total}` };
+    return {
+      content: [
+        { type: "text", text: JSON.stringify(data) },
+        { type: "resource", resource: { uri: CART_URI, mimeType: RESOURCE_MIME_TYPE, text: embedData(cartHtml, data) } },
+      ],
+      structuredContent: data,
+    };
+  });
+
+  return server;
 }
 
-main().catch((error) => {
-  console.error("Server error:", error);
-  process.exit(1);
-});
+// ── Start HTTP + SSE ────────────────────────────────────────
+const apiPort = Number(process.env.API_PORT || process.env.PORT || 8787);
+startOpenAIProxy({ port: apiPort, createMCPServer });
+
+// ── Optionally start stdio transport (only when stdin is piped) ──
+if (process.env.MCP_STDIO === "1" || (!process.stdin.isTTY && process.env.MCP_STDIO !== "0")) {
+  async function main() {
+    const transport = new StdioServerTransport();
+    const server = createMCPServer();
+    await server.connect(transport);
+    console.error("E-commerce MCP Server running on stdio");
+  }
+
+  main().catch((err) => {
+    console.error("Stdio transport error:", err);
+  });
+} else {
+  console.error("Stdio transport skipped (HTTP-only mode)");
+}

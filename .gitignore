@@ -1,11 +1,18 @@
+# OS
 .DS_Store
+
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
+web-client/.next/
 web-client/node_modules/
 web-client/dist/
 mcp-server/node_modules/
+mcp-server/dist/
 
-# Env files
+# Env files (secrets)
 .env
 .env.*
 !.env.example
@@ -14,3 +21,12 @@ mcp-server/node_modules/
 # Local tooling metadata
 .agents/
 .cursor/
+
+# Archive & experiments (not part of the project)
+_archive/
+fresh/
+
+# Misc
+*.tgz
+*.tar.gz
+tech-arch.excalidraw

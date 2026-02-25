@@ -1,6 +1,6 @@
 # MCP E-Commerce Application
 
-A full-stack e-commerce application built with MCP-UI, React, TypeScript, and integrated with OpenRouter for AI-powered shopping assistance.
+A full-stack e-commerce application built with MCP-UI, React, TypeScript, and integrated with OpenAI for AI-powered shopping assistance.
 
 ## Architecture
 
@@ -16,13 +16,13 @@ A full-stack e-commerce application built with MCP-UI, React, TypeScript, and in
 3. **Add to Cart** - Add products to shopping cart
 4. **Remove from Cart** - Remove products from cart
 5. **Cart Summary** - View cart total and items
-6. **AI Assistant** - Chat with OpenRouter-powered AI to help with shopping
+6. **AI Assistant** - Chat with OpenAI-powered AI to help with shopping
 
 ## Tech Stack
 
 - **Frontend**: React 18 + TypeScript + Vite
 - **MCP**: @modelcontextprotocol/sdk, @mcp-ui/client
-- **AI**: OpenRouter API (supports Claude, GPT models)
+- **AI**: OpenAI API
 - **Design**: Custom CSS with modern e-commerce styling
 
 ## Quick Start
@@ -68,7 +68,7 @@ This will start:
 
 - MCP Server on stdio
 - Web Client at <http://localhost:5173>
-- OpenRouter proxy at <http://localhost:8787>
+- OpenAI proxy at <http://localhost:8787>
 
 #### Option 2: Run separately
 
@@ -86,16 +86,16 @@ cd web-client
 npm run dev
 ```
 
-### OpenRouter API Setup
+### OpenAI API Setup
 
-To use the AI assistant with OpenRouter:
+To use the AI assistant with OpenAI:
 
-1. Get an API key from <https://openrouter.ai/>.
+1. Get an API key from <https://platform.openai.com/>.
 2. Create `mcp-server/.env` from [mcp-server/.env.example](mcp-server/.env.example) and set:
 
    ```bash
-   OPENROUTER_API_KEY=your-actual-api-key
-   OPENROUTER_MODEL=arcee-ai/trinity-large-preview:free
+    OPENAI_API_KEY=your-actual-api-key
+    OPENAI_MODEL=gpt-4o-mini
    API_PORT=8787
     ```
 

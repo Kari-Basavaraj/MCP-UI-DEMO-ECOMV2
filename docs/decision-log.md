@@ -41,7 +41,7 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 - Rationale: Keeps chat/product/cart state aligned with backend MCP tool responses.
 - Impact: Chat UI now consumes authoritative tool output from the server API.
 - Rollback: Revert proxy tool endpoints and switch `executeMCPTool` back to local-only simulation.
-- Related: `mcp-server/src/openrouterProxy.js`, `mcp-server/src/index.js`, `web-client/src/App.tsx`
+- Related: `mcp-server/src/openaiProxy.js`, `mcp-server/src/index.js`, `web-client/src/App.tsx`
 
 ## [2026-02-24] Add MCP Apps-compatible UI metadata and URIs
 
@@ -86,22 +86,22 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 ## [2026-02-24] Add explicit AI integration status checks
 
 - Status: Accepted
-- Context: It was unclear whether chat responses came from OpenRouter or fallback mode.
+- Context: It was unclear whether chat responses came from OpenAI integration or fallback mode.
 - Decision: Extended proxy health response and surfaced AI status in the chat header.
 - Rationale: Makes model-integration state visible and easier to debug in local/dev environments.
 - Impact: Users can confirm if API key/model integration is active without inspecting network logs.
 - Rollback: Revert health payload and remove header status indicator.
-- Related: `mcp-server/src/openrouterProxy.js`, `web-client/src/App.tsx`
+- Related: `mcp-server/src/openaiProxy.js`, `web-client/src/App.tsx`
 
-## [2026-02-24] Route OpenRouter through local server proxy
+## [2026-02-24] Route OpenAI through local server proxy
 
 - Status: Accepted
 - Context: Client-side API key usage exposed secrets in browser builds.
-- Decision: Added a backend proxy endpoint for OpenRouter calls.
+- Decision: Added a backend proxy endpoint for OpenAI calls.
 - Rationale: Keeps secrets server-side and reduces accidental key leakage risk.
-- Impact: Client now calls local API; server requires OpenRouter env variables.
-- Rollback: Revert proxy files and switch client back to direct OpenRouter call.
-- Related: `mcp-server/src/openrouterProxy.js`, `mcp-server/src/index.js`, `web-client/src/App.tsx`
+- Impact: Client now calls local API; server requires OpenAI env variables.
+- Rollback: Revert proxy files and switch client back to direct OpenAI call.
+- Related: `mcp-server/src/openaiProxy.js`, `mcp-server/src/index.js`, `web-client/src/App.tsx`
 
 ## [2026-02-24] Centralize product catalog into shared module
 
