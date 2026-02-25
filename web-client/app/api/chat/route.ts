@@ -33,10 +33,17 @@ export async function POST(req: Request) {
     
     If tools are not available, tell the user they can add an MCP server from the sidebar.
     
-    ## Response Format
-    - Markdown is supported.
-    - Respond according to tool's response.
-    - If you don't know the answer, use the tools to find the answer.`,
+    ## CRITICAL: Response Format After Tool Calls
+    When a tool returns structured data (products, cart items, wishlist, reviews, etc.), the data is ALREADY being displayed to the user as an interactive visual widget. Therefore:
+    - **DO NOT** list, enumerate, or repeat the individual items from the tool result.
+    - **DO NOT** create markdown tables or bullet lists of the data.
+    - Instead, provide a **brief, friendly one-line summary** like "Here are all 8 products!" or "Your cart has 3 items totaling ₹12,497."
+    - You may add a short helpful suggestion, e.g. "Would you like to filter by category or see details for any product?"
+    - Keep your response to 1-2 short sentences maximum after a tool call.
+    
+    ## General Format
+    - Markdown is supported for non-tool responses.
+    - If you don't know the answer, use the tools to find it.`,
     messages,
     tools,
     maxSteps: 20,

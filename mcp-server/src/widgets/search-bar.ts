@@ -119,4 +119,10 @@ if (document.readyState === "loading") {
   setupListeners();
 }
 
+// Fallback: read pre-injected data when ext-apps bridge is not available
+const _injected = (window as any).__MCP_TOOL_RESULT__;
+if (_injected) {
+  renderResults(_injected.products ?? []);
+}
+
 app.connect();

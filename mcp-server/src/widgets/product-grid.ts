@@ -81,4 +81,10 @@ document.addEventListener("click", async (e) => {
   // "details" action is left to the host
 });
 
+// Fallback: read pre-injected data when ext-apps bridge is not available
+const _injected = (window as any).__MCP_TOOL_RESULT__;
+if (_injected) {
+  renderGrid(_injected.products ?? []);
+}
+
 app.connect();

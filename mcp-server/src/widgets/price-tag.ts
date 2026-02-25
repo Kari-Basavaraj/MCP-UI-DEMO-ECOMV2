@@ -108,4 +108,10 @@ document.addEventListener("click", async (e) => {
   }
 });
 
+// Fallback: read pre-injected data when ext-apps bridge is not available
+const _injected = (window as any).__MCP_TOOL_RESULT__;
+if (_injected) {
+  render(_injected.product ?? (_injected.id && _injected.price ? _injected : null));
+}
+
 app.connect();

@@ -90,4 +90,10 @@ document.addEventListener("click", async (e) => {
   // "checkout" action is left to the host via data-action="checkout"
 });
 
+// Fallback: read pre-injected data when ext-apps bridge is not available
+const _injected = (window as any).__MCP_TOOL_RESULT__;
+if (_injected) {
+  render(_injected);
+}
+
 app.connect();

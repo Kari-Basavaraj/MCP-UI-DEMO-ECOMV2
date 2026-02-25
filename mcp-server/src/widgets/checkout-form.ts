@@ -232,4 +232,12 @@ document.addEventListener("click", async (e) => {
 // Initial render
 renderForm();
 
+// Fallback: read pre-injected data when ext-apps bridge is not available
+const _injected = (window as any).__MCP_TOOL_RESULT__;
+if (_injected && _injected.orderId) {
+  // Show order success
+  const container = document.getElementById("checkout-form");
+  if (container) container.innerHTML = `<div class="success"><h2>✅ Order #${_injected.orderId}</h2><p>Total: ₹${_injected.total?.toLocaleString("en-IN") ?? "0"}</p></div>`;
+}
+
 app.connect();
