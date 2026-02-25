@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UIResourceRenderer } from "@mcp-ui/client";
+import { useTheme } from "@/lib/context/theme-context";
 import type { UseChatHelpers, Message as TMessage } from "@ai-sdk/react";
 import { nanoid } from "nanoid";
 
@@ -46,10 +47,39 @@ const TOOL_STATUS_LABELS: Record<string, { loading: string; done: string }> = {
   get_products: { loading: "Fetching products...", done: "Products loaded" },
   search_products: { loading: "Searching products...", done: "Search complete" },
   filter_products: { loading: "Filtering products...", done: "Products filtered" },
+  get_product_detail: { loading: "Loading product details...", done: "Product details loaded" },
+  get_price_info: { loading: "Checking price...", done: "Price loaded" },
   get_categories: { loading: "Loading categories...", done: "Categories loaded" },
+  get_cart: { loading: "Loading cart...", done: "Cart loaded" },
+  get_cart_summary: { loading: "Loading cart summary...", done: "Cart summary loaded" },
   add_to_cart: { loading: "Adding to cart...", done: "Added to cart" },
   remove_from_cart: { loading: "Removing from cart...", done: "Removed from cart" },
-  get_cart: { loading: "Loading cart...", done: "Cart loaded" },
+  checkout: { loading: "Loading checkout...", done: "Checkout ready" },
+  place_order: { loading: "Placing order...", done: "Order placed" },
+  get_reviews: { loading: "Loading reviews...", done: "Reviews loaded" },
+  get_wishlist: { loading: "Loading wishlist...", done: "Wishlist loaded" },
+  add_to_wishlist: { loading: "Adding to wishlist...", done: "Added to wishlist" },
+  remove_from_wishlist: { loading: "Removing from wishlist...", done: "Removed from wishlist" },
+};
+
+/* Map tool actions to natural language messages for the LLM */
+const ACTION_TO_NATURAL_LANGUAGE: Record<string, (params: any) => string> = {
+  add_to_cart: (p) => `Add ${p.quantity ? p.quantity + " of " : ""}product ${p.productId} to my cart`,
+  remove_from_cart: (p) => `Remove product ${p.productId} from my cart`,
+  get_cart: () => "Show me my cart",
+  get_cart_summary: () => "Show me my cart summary",
+  get_products: () => "Show me the products",
+  search_products: (p) => `Search for "${p.query}"`,
+  filter_products: (p) => `Show me products in the ${p.category} category`,
+  get_product_detail: (p) => `Show me details for product ${p.productId}`,
+  get_price_info: (p) => `What's the price of product ${p.productId}?`,
+  get_categories: () => "Show me the product categories",
+  checkout: () => "I'd like to checkout",
+  place_order: (p) => `Place my order${p.shippingAddress ? " to " + p.shippingAddress : ""}`,
+  get_reviews: (p) => `Show me reviews for product ${p.productId}`,
+  get_wishlist: () => "Show me my wishlist",
+  add_to_wishlist: (p) => `Add product ${p.productId} to my wishlist`,
+  remove_from_wishlist: (p) => `Remove product ${p.productId} from my wishlist`,
 };
 
 function getToolLabel(toolName: string, isRunning: boolean) {
@@ -100,6 +130,7 @@ export const ToolInvocation = memo(function ToolInvocation({
   const [showDebug, setShowDebug] = useState(false);
   const [htmlResourceContents, setHtmlResourceContents] = useState<HtmlResourceData[]>([]);
   const [isLoadingWidget, setIsLoadingWidget] = useState(false);
+  const { theme } = useTheme();
 
   const isRunning = state === "call" && isLatestMessage && status !== "ready";
   const hasWidget = htmlResourceContents.length > 0;
@@ -148,12 +179,23 @@ export const ToolInvocation = memo(function ToolInvocation({
             );
             if (resp.ok) {
               let html = await resp.text();
+              // Inject tool result data, current theme, and theme listener into the widget
+              const injections: string[] = [];
               if (dataJson) {
-                html = html.replace(
-                  "</head>",
-                  `<script>window.__MCP_TOOL_RESULT__=${dataJson};</script></head>`
-                );
+                injections.push(`window.__MCP_TOOL_RESULT__=${dataJson};`);
               }
+              injections.push(`document.documentElement.setAttribute('data-theme','${theme}');`);
+              // Listen for live theme changes from the parent
+              injections.push(
+                `window.addEventListener('message',function(e){` +
+                `if(e.data&&e.data.type==='theme-change'){` +
+                `document.documentElement.setAttribute('data-theme',e.data.theme);` +
+                `}});`
+              );
+              html = html.replace(
+                "</head>",
+                `<script>${injections.join("\n")}</script></head>`
+              );
               const normalizedMime = res.mimeType.startsWith('text/html') ? 'text/html' : res.mimeType;
               fetched.push({ uri: res.uri, mimeType: normalizedMime, text: html });
             }
@@ -204,12 +246,28 @@ export const ToolInvocation = memo(function ToolInvocation({
     }
   }, [result]);
 
+  // Broadcast theme changes to all widget iframes
+  useEffect(() => {
+    if (!hasWidget) return;
+    const iframes = document.querySelectorAll('iframe');
+    iframes.forEach((iframe) => {
+      try {
+        iframe.contentWindow?.postMessage({ type: 'theme-change', theme }, '*');
+      } catch { /* cross-origin, skip */ }
+    });
+  }, [theme, hasWidget]);
+
   const handleUiAction = useCallback(
     async (actionResult: any) => {
       if (append) {
         let userMessageContent = "";
         if (actionResult.type === "tool") {
-          userMessageContent = `Call ${actionResult.payload.toolName} with parameters: ${JSON.stringify(actionResult.payload.params)}`;
+          const { toolName, params } = actionResult.payload;
+          // Use natural language so the LLM responds conversationally
+          const toNatural = ACTION_TO_NATURAL_LANGUAGE[toolName];
+          userMessageContent = toNatural
+            ? toNatural(params || {})
+            : `Please run ${toolName} with ${JSON.stringify(params)}`;
         }
         if (actionResult.type === "prompt") {
           userMessageContent = actionResult.payload.prompt;
@@ -289,11 +347,13 @@ export const ToolInvocation = memo(function ToolInvocation({
     );
   }
 
-  // Has a widget to show — render it prominently (no chrome)
+  // Has a widget to show — render it in a styled container
   if (hasWidget) {
     return (
       <div className="mb-2 space-y-1">
-        {renderedHtmlResources}
+        <div className="rounded-xl border border-border/20 bg-card/50 shadow-sm overflow-hidden">
+          {renderedHtmlResources}
+        </div>
         {/* Small debug toggle for developers */}
         <button
           type="button"
@@ -322,6 +382,7 @@ export const ToolInvocation = memo(function ToolInvocation({
       </div>
     );
   }
+
 
   // No widget — fallback to a compact tool result view (non-UI tools like get_categories)
   return (

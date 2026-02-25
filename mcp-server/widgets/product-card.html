@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Card</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css">
+  <style>
+    .product-card { max-width: 280px; }
+    .product-image { font-size: 64px; text-align: center; padding: var(--sds-size-padding-lg, 16px) 0; background: var(--sds-color-background-default-secondary); border-radius: var(--sds-size-radius-200, 8px) var(--sds-size-radius-200, 8px) 0 0; }
+    .product-body { padding: var(--sds-size-padding-lg, 16px); }
+    .product-name { font-size: var(--sds-typo-heading-size-small, 20px); font-weight: var(--sds-typo-heading-font-weight, 600); color: var(--sds-color-text-default-default); margin: 0 0 4px; }
+    .product-category { font-size: var(--sds-typo-body-size-small, 14px); color: var(--sds-color-text-default-secondary); margin: 0 0 12px; }
+    .product-price { font-size: var(--sds-typo-heading-size-base, 24px); font-weight: 700; color: var(--sds-color-text-brand-default); margin: 0 0 16px; }
+    .product-actions { display: flex; gap: var(--sds-size-space-200, 8px); }
+  </style>
+</head>
+<body>
+  <div class="card product-card" id="product-container">
+    <div class="product-image" id="product-image">👟</div>
+    <div class="product-body">
+      <h3 class="product-name" id="product-name">Nike Shoes</h3>
+      <p class="product-category" id="product-category">Footwear</p>
+      <p class="product-price" id="product-price">₹4,999</p>
+      <div class="product-actions">
+        <button class="btn btn-primary" id="add-to-cart">Add to Cart</button>
+        <button class="btn" style="background: var(--sds-color-background-default-secondary); color: var(--sds-color-text-default-default);" id="view-details">Details</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/widgets/product-card.ts"></script>
+</body>
+</html>

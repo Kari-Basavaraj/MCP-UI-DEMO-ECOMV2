@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { MCPProvider } from '@/lib/context/mcp-context';
+import { ThemeProvider } from '@/lib/context/theme-context';
 import { Toaster } from 'sonner';
 import './globals.css';
 
@@ -10,12 +11,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <MCPProvider>
-          {children}
-          <Toaster position="top-center" richColors theme="dark" />
-        </MCPProvider>
+        <ThemeProvider>
+          <MCPProvider>
+            {children}
+            <Toaster position="top-center" richColors />
+          </MCPProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -98,7 +98,11 @@ export async function initializeMCPClients(
 
       // Create AI SDK tool definitions
       for (const mcpTool of mcpTools) {
-        const parameters = jsonSchemaToZod(mcpTool.inputSchema);
+        // Strip $schema key - it causes AI SDK to emit strict:true which
+        // breaks OpenAI when tools have optional parameters
+        const cleanSchema = { ...mcpTool.inputSchema };
+        delete cleanSchema.$schema;
+        const parameters = jsonSchemaToZod(cleanSchema);
 
         tools[mcpTool.name] = tool({
           description: mcpTool.description || mcpTool.name,

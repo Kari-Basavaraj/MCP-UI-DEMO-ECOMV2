@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review &amp; Rating – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
+  <style>
+    #review-container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--sds-size-padding-xl);
+      font-family: system-ui, sans-serif;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .rv-summary {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-400);
+      margin-bottom: var(--sds-size-space-600);
+      padding-bottom: var(--sds-size-space-600);
+      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    }
+
+    .rv-rating-big {
+      font-size: var(--sds-typo-subtitle-size-base);
+      font-weight: var(--sds-typo-heading-font-weight);
+      line-height: 1;
+    }
+
+    .rv-stars-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-200);
+    }
+
+    .rv-stars {
+      display: flex;
+      gap: 2px;
+      font-size: 20px;
+      color: var(--sds-color-background-warning-default);
+    }
+
+    .rv-star-empty {
+      color: var(--sds-color-border-default-default);
+    }
+
+    .rv-review-count {
+      font-size: var(--sds-typo-body-size-small);
+      color: var(--sds-color-text-default-secondary);
+    }
+
+    .rv-write-btn {
+      margin-left: auto;
+      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: var(--sds-size-radius-200);
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .rv-write-btn:hover {
+      opacity: 0.9;
+    }
+
+    .rv-reviews-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-400);
+    }
+
+    .rv-card {
+      padding: var(--sds-size-padding-lg);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-200);
+      background: var(--sds-color-background-default-default);
+    }
+
+    .rv-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sds-size-space-300);
+    }
+
+    .rv-card-user {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-300);
+    }
+
+    .rv-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+    }
+
+    .rv-username {
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+    }
+
+    .rv-date {
+      font-size: var(--sds-typo-body-size-small);
+      color: var(--sds-color-text-default-secondary);
+    }
+
+    .rv-card-stars {
+      display: flex;
+      gap: 2px;
+      font-size: 14px;
+      color: var(--sds-color-background-warning-default);
+    }
+
+    .rv-card-text {
+      font-size: var(--sds-typo-body-size-medium);
+      color: var(--sds-color-text-default-default);
+      line-height: 1.5;
+      margin: 0 0 var(--sds-size-space-400) 0;
+    }
+
+    .rv-card-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-400);
+    }
+
+    .rv-helpful-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-200);
+      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
+      background: var(--sds-color-background-default-secondary);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-full);
+      font-size: var(--sds-typo-body-size-small);
+      color: var(--sds-color-text-default-secondary);
+      cursor: pointer;
+    }
+
+    .rv-helpful-btn:hover {
+      background: var(--sds-color-background-default-default);
+      color: var(--sds-color-text-default-default);
+      border-color: var(--sds-color-text-default-default);
+    }
+  </style>
+</head>
+<body>
+  <div id="review-container">
+
+    <!-- Rating Summary -->
+    <div class="rv-summary">
+      <span class="rv-rating-big">4.2</span>
+      <div class="rv-stars-block">
+        <div class="rv-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span class="rv-star-empty">★</span>
+        </div>
+        <span class="rv-review-count">128 reviews</span>
+      </div>
+      <button class="rv-write-btn">Write a Review</button>
+    </div>
+
+    <!-- Reviews List -->
+    <div class="rv-reviews-list">
+
+      <!-- Review 1 -->
+      <div class="rv-card">
+        <div class="rv-card-header">
+          <div class="rv-card-user">
+            <div class="rv-avatar">AK</div>
+            <div>
+              <div class="rv-username">Anita Kumar</div>
+              <div class="rv-date">Feb 18, 2026</div>
+            </div>
+          </div>
+          <div class="rv-card-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+        </div>
+        <p class="rv-card-text">Absolutely love these shoes! Super comfortable for daily wear and the build quality is excellent. Would highly recommend to anyone looking for durable footwear.</p>
+        <div class="rv-card-actions">
+          <button class="rv-helpful-btn">👍 Helpful (12)</button>
+          <button class="rv-helpful-btn">👎 Not helpful (1)</button>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="rv-card">
+        <div class="rv-card-header">
+          <div class="rv-card-user">
+            <div class="rv-avatar">RS</div>
+            <div>
+              <div class="rv-username">Rahul Sharma</div>
+              <div class="rv-date">Feb 10, 2026</div>
+            </div>
+          </div>
+          <div class="rv-card-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="rv-star-empty" style="color: var(--sds-color-border-default-default);">★</span>
+          </div>
+        </div>
+        <p class="rv-card-text">Good product overall. Sizing runs a little small so I'd suggest ordering one size up. The material quality and stitching are top-notch though.</p>
+        <div class="rv-card-actions">
+          <button class="rv-helpful-btn">👍 Helpful (8)</button>
+          <button class="rv-helpful-btn">👎 Not helpful (0)</button>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="rv-card">
+        <div class="rv-card-header">
+          <div class="rv-card-user">
+            <div class="rv-avatar">PM</div>
+            <div>
+              <div class="rv-username">Priya Menon</div>
+              <div class="rv-date">Jan 28, 2026</div>
+            </div>
+          </div>
+          <div class="rv-card-stars">
+            <span>★</span><span>★</span><span>★</span><span class="rv-star-empty" style="color: var(--sds-color-border-default-default);">★</span><span class="rv-star-empty" style="color: var(--sds-color-border-default-default);">★</span>
+          </div>
+        </div>
+        <p class="rv-card-text">Decent shoes for the price. Delivery was fast and packaging was great. Comfort could be better for long walks though.</p>
+        <div class="rv-card-actions">
+          <button class="rv-helpful-btn">👍 Helpful (5)</button>
+          <button class="rv-helpful-btn">👎 Not helpful (2)</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="/src/widgets/review-rating.ts"></script>
+</body>
+</html>

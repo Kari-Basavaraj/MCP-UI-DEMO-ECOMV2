@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Detail – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
+  <style>
+    #product-detail {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--sds-size-padding-xl);
+      display: flex;
+      gap: var(--sds-size-space-800);
+      font-family: system-ui, sans-serif;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .pd-image-area {
+      flex: 0 0 360px;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sds-color-background-default-secondary);
+      border-radius: var(--sds-size-radius-400);
+      font-size: 120px;
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    }
+
+    .pd-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-400);
+    }
+
+    .pd-name {
+      font-size: var(--sds-typo-heading-size-large);
+      font-weight: var(--sds-typo-heading-font-weight);
+      margin: 0;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .pd-category-badge {
+      display: inline-block;
+      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
+      background: var(--sds-color-background-default-secondary);
+      border-radius: var(--sds-size-radius-full);
+      font-size: var(--sds-typo-body-size-small);
+      color: var(--sds-color-text-default-secondary);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      width: fit-content;
+    }
+
+    .pd-price {
+      font-size: var(--sds-typo-heading-size-base);
+      font-weight: var(--sds-typo-heading-font-weight);
+      color: var(--sds-color-text-brand-default);
+    }
+
+    .pd-description {
+      font-size: var(--sds-typo-body-size-medium);
+      color: var(--sds-color-text-default-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .pd-section-label {
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      color: var(--sds-color-text-default-secondary);
+      margin: 0 0 var(--sds-size-space-200) 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pd-sizes {
+      display: flex;
+      gap: var(--sds-size-space-200);
+    }
+
+    .pd-size-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-200);
+      background: var(--sds-color-background-default-default);
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      cursor: pointer;
+      color: var(--sds-color-text-default-default);
+      transition: all 0.15s ease;
+    }
+
+    .pd-size-btn.active,
+    .pd-size-btn:hover {
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border-color: var(--sds-color-background-brand-default);
+    }
+
+    .pd-colors {
+      display: flex;
+      gap: var(--sds-size-space-300);
+      align-items: center;
+    }
+
+    .pd-color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: var(--sds-size-stroke-focus-ring) solid transparent;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+
+    .pd-color-swatch:hover,
+    .pd-color-swatch.active {
+      border-color: var(--sds-color-text-brand-default);
+    }
+
+    .pd-quantity {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-300);
+    }
+
+    .pd-qty-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-100);
+      background: var(--sds-color-background-default-default);
+      font-size: var(--sds-typo-body-size-large);
+      cursor: pointer;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .pd-qty-btn:hover {
+      background: var(--sds-color-background-default-secondary);
+    }
+
+    .pd-qty-value {
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .pd-actions {
+      display: flex;
+      gap: var(--sds-size-space-300);
+      margin-top: var(--sds-size-space-200);
+    }
+
+    .pd-btn-cart {
+      flex: 1;
+      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: var(--sds-size-radius-200);
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      cursor: pointer;
+      height: 48px;
+    }
+
+    .pd-btn-cart:hover {
+      opacity: 0.9;
+    }
+
+    .pd-btn-wishlist {
+      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+      background: var(--sds-color-background-default-default);
+      color: var(--sds-color-text-default-default);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-200);
+      font-size: var(--sds-typo-body-size-medium);
+      cursor: pointer;
+      height: 48px;
+    }
+
+    .pd-btn-wishlist:hover {
+      background: var(--sds-color-background-default-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div id="product-detail">
+    <div class="pd-image-area">👟</div>
+
+    <div class="pd-info">
+      <h1 class="pd-name">Nike Shoes</h1>
+      <span class="pd-category-badge">Footwear</span>
+      <div class="pd-price">₹4,999</div>
+      <p class="pd-description">Premium quality product from trusted brand. Designed for comfort and durability, these shoes feature advanced cushioning technology and breathable materials.</p>
+
+      <div>
+        <p class="pd-section-label">Size</p>
+        <div class="pd-sizes">
+          <button class="pd-size-btn">S</button>
+          <button class="pd-size-btn active">M</button>
+          <button class="pd-size-btn">L</button>
+          <button class="pd-size-btn">XL</button>
+        </div>
+      </div>
+
+      <div>
+        <p class="pd-section-label">Color</p>
+        <div class="pd-colors">
+          <div class="pd-color-swatch active" style="background:#1e1e1e;"></div>
+          <div class="pd-color-swatch" style="background:#2563eb;"></div>
+          <div class="pd-color-swatch" style="background:#dc2626;"></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="pd-section-label">Quantity</p>
+        <div class="pd-quantity">
+          <button class="pd-qty-btn">−</button>
+          <span class="pd-qty-value">1</span>
+          <button class="pd-qty-btn">+</button>
+        </div>
+      </div>
+
+      <div class="pd-actions">
+        <button class="pd-btn-cart">Add to Cart</button>
+        <button class="pd-btn-wishlist">♡ Add to Wishlist</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/widgets/product-detail.ts"></script>
+</body>
+</html>

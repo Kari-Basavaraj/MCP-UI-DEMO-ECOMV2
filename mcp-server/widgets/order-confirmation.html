@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmation – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
+  <style>
+    #order-confirmation {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: var(--sds-size-padding-xxl);
+      font-family: system-ui, sans-serif;
+      color: var(--sds-color-text-default-default);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sds-size-space-600);
+    }
+
+    .oc-checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--sds-color-background-positive-default);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #fff;
+    }
+
+    .oc-heading {
+      font-size: var(--sds-typo-heading-size-large);
+      font-weight: var(--sds-typo-heading-font-weight);
+      margin: 0;
+      color: var(--sds-color-text-positive-default);
+    }
+
+    .oc-order-number {
+      font-size: var(--sds-typo-body-size-medium);
+      color: var(--sds-color-text-default-secondary);
+    }
+
+    .oc-summary {
+      width: 100%;
+      background: var(--sds-color-background-default-secondary);
+      border-radius: var(--sds-size-radius-200);
+      padding: var(--sds-size-padding-lg);
+    }
+
+    .oc-summary-title {
+      font-size: var(--sds-typo-heading-size-small);
+      font-weight: var(--sds-typo-heading-font-weight);
+      margin: 0 0 var(--sds-size-space-400) 0;
+    }
+
+    .oc-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .oc-table th {
+      text-align: left;
+      font-size: var(--sds-typo-body-size-small);
+      color: var(--sds-color-text-default-secondary);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      padding: var(--sds-size-padding-xs) 0;
+      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    }
+
+    .oc-table th:last-child,
+    .oc-table td:last-child {
+      text-align: right;
+    }
+
+    .oc-table td {
+      padding: var(--sds-size-padding-sm) 0;
+      font-size: var(--sds-typo-body-size-medium);
+      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    }
+
+    .oc-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .oc-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--sds-size-space-400);
+      margin-top: var(--sds-size-space-200);
+      border-top: var(--sds-size-stroke-focus-ring) solid var(--sds-color-text-default-default);
+    }
+
+    .oc-total-label {
+      font-size: var(--sds-typo-body-size-large);
+      font-weight: var(--sds-typo-heading-font-weight);
+    }
+
+    .oc-total-amount {
+      font-size: var(--sds-typo-heading-size-base);
+      font-weight: var(--sds-typo-heading-font-weight);
+      color: var(--sds-color-text-brand-default);
+    }
+
+    .oc-delivery {
+      width: 100%;
+      background: var(--sds-color-background-positive-tertiary);
+      border-radius: var(--sds-size-radius-200);
+      padding: var(--sds-size-padding-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-300);
+      font-size: var(--sds-typo-body-size-medium);
+      color: var(--sds-color-text-positive-default);
+    }
+
+    .oc-delivery-icon {
+      font-size: 24px;
+    }
+
+    .oc-btn-continue {
+      padding: var(--sds-size-padding-sm) var(--sds-size-padding-xxl);
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: var(--sds-size-radius-200);
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      cursor: pointer;
+      height: 48px;
+    }
+
+    .oc-btn-continue:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div id="order-confirmation">
+    <div class="oc-checkmark">✓</div>
+    <h1 class="oc-heading">Order Confirmed!</h1>
+    <span class="oc-order-number">Order #ORD-2024-001</span>
+
+    <div class="oc-summary">
+      <h2 class="oc-summary-title">Order Summary</h2>
+      <table class="oc-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>👟 Nike Shoes</td>
+            <td>1</td>
+            <td>₹4,999</td>
+          </tr>
+          <tr>
+            <td>👕 Adidas T-Shirt</td>
+            <td>2</td>
+            <td>₹3,998</td>
+          </tr>
+          <tr>
+            <td>🧢 Puma Cap</td>
+            <td>1</td>
+            <td>₹999</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="oc-total-row">
+        <span class="oc-total-label">Total</span>
+        <span class="oc-total-amount">₹9,996</span>
+      </div>
+    </div>
+
+    <div class="oc-delivery">
+      <span class="oc-delivery-icon">📦</span>
+      <span>Estimated Delivery: <strong>March 3, 2026</strong></span>
+    </div>
+
+    <button class="oc-btn-continue">Continue Shopping</button>
+  </div>
+
+  <script type="module" src="/src/widgets/order-confirmation.ts"></script>
+</body>
+</html>

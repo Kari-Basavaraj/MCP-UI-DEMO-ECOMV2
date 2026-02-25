@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
+  <style>
+    #wishlist-container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--sds-size-padding-xl);
+      font-family: system-ui, sans-serif;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .wl-header {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-300);
+      margin-bottom: var(--sds-size-space-600);
+    }
+
+    .wl-heart-icon {
+      font-size: 28px;
+    }
+
+    .wl-title {
+      font-size: var(--sds-typo-heading-size-base);
+      font-weight: var(--sds-typo-heading-font-weight);
+      margin: 0;
+    }
+
+    .wl-count {
+      font-size: var(--sds-typo-body-size-small);
+      color: var(--sds-color-text-default-secondary);
+      margin-left: auto;
+    }
+
+    .wl-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-400);
+    }
+
+    .wl-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-400);
+      padding: var(--sds-size-padding-lg);
+      background: var(--sds-color-background-default-default);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-200);
+      transition: box-shadow 0.15s ease;
+    }
+
+    .wl-item:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .wl-item-image {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sds-color-background-default-secondary);
+      border-radius: var(--sds-size-radius-200);
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .wl-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .wl-item-name {
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      margin: 0 0 var(--sds-size-space-200) 0;
+    }
+
+    .wl-item-price {
+      font-size: var(--sds-typo-body-size-medium);
+      color: var(--sds-color-text-brand-default);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+    }
+
+    .wl-item-actions {
+      display: flex;
+      gap: var(--sds-size-space-200);
+      flex-shrink: 0;
+    }
+
+    .wl-btn-cart {
+      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: var(--sds-size-radius-100);
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: var(--sds-typo-body-font-weight-strong);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .wl-btn-cart:hover {
+      opacity: 0.9;
+    }
+
+    .wl-btn-remove {
+      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
+      background: var(--sds-color-background-default-default);
+      color: var(--sds-color-background-danger-default);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-100);
+      font-size: var(--sds-typo-body-size-small);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .wl-btn-remove:hover {
+      background: var(--sds-color-background-default-secondary);
+    }
+
+    .wl-empty {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sds-size-padding-xxl);
+      gap: var(--sds-size-space-400);
+      color: var(--sds-color-text-default-secondary);
+    }
+
+    .wl-empty-icon {
+      font-size: 48px;
+      opacity: 0.4;
+    }
+
+    .wl-empty-text {
+      font-size: var(--sds-typo-body-size-medium);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="wishlist-container">
+    <div class="wl-header">
+      <span class="wl-heart-icon">❤️</span>
+      <h1 class="wl-title">My Wishlist</h1>
+      <span class="wl-count">3 items</span>
+    </div>
+
+    <div class="wl-list">
+      <div class="wl-item">
+        <div class="wl-item-image">👟</div>
+        <div class="wl-item-info">
+          <p class="wl-item-name">Nike Shoes</p>
+          <span class="wl-item-price">₹4,999</span>
+        </div>
+        <div class="wl-item-actions">
+          <button class="wl-btn-cart">Move to Cart</button>
+          <button class="wl-btn-remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="wl-item">
+        <div class="wl-item-image">🧥</div>
+        <div class="wl-item-info">
+          <p class="wl-item-name">Nike Jacket</p>
+          <span class="wl-item-price">₹3,999</span>
+        </div>
+        <div class="wl-item-actions">
+          <button class="wl-btn-cart">Move to Cart</button>
+          <button class="wl-btn-remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="wl-item">
+        <div class="wl-item-image">⌚</div>
+        <div class="wl-item-info">
+          <p class="wl-item-name">Puma Watch</p>
+          <span class="wl-item-price">₹2,999</span>
+        </div>
+        <div class="wl-item-actions">
+          <button class="wl-btn-cart">Move to Cart</button>
+          <button class="wl-btn-remove">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wl-empty">
+      <span class="wl-empty-icon">♡</span>
+      <p class="wl-empty-text">Your wishlist is empty</p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/widgets/wishlist.ts"></script>
+</body>
+</html>

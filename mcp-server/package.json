@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build:products": "cross-env ENTRY=products-app vite build",
-    "build:cart": "cross-env ENTRY=cart-app vite build",
-    "build": "npm run build:products && npm run build:cart",
+    "build:widget": "cross-env INPUT=widgets/$WIDGET.html vite build",
+    "build:all-widgets": "for w in product-card product-detail product-grid cart-view cart-summary category-filter search-bar checkout-form order-confirmation review-rating price-tag wishlist; do WIDGET=$w npm run build:widget || exit 1; done",
+    "build": "rm -rf dist/widgets && mkdir -p dist/widgets && npm run build:all-widgets",
     "dev": "concurrently -n ui,srv -c blue,green \"npm run build\" \"node --watch src/index.js\"",
     "start": "node src/index.js"
   },
@@ -22,7 +22,7 @@
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1",
+    "vite": "^6.4.1",
     "vite-plugin-singlefile": "^2.3.0"
   }
 }

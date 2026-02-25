@@ -21,8 +21,9 @@ export function getLanguageModel(modelId: string) {
   const client = createOpenAI({
     baseURL: 'https://openrouter.ai/api/v1',
     apiKey,
+    compatibility: 'compatible',  // disables strict mode / structuredOutputs
   });
-  return client(modelId);
+  return client(modelId, { structuredOutputs: false });
 }
 
 export type modelID = string;

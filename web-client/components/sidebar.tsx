@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useMCP } from "@/lib/context/mcp-context";
-import { Server, PlusCircle } from "lucide-react";
+import { useTheme } from "@/lib/context/theme-context";
+import { Server, PlusCircle, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MCPServerConfig } from "./mcp-server-config";
 
@@ -10,6 +11,7 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const [showConfig, setShowConfig] = useState(false);
   const { mcpServers } = useMCP();
+  const { theme, toggleTheme } = useTheme();
 
   const connectedCount = mcpServers.filter((s) => s.status === "connected").length;
 
@@ -50,6 +52,14 @@ export default function Sidebar() {
 
         {/* Footer */}
         <div className="border-t border-border/30 p-3 space-y-2">
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-2 w-full rounded-lg px-2 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+          </button>
           <div className="text-[10px] text-muted-foreground/50 text-center">
             Built with MCP-UI
           </div>
