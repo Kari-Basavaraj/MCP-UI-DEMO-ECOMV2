@@ -44,7 +44,7 @@ export default function Chat() {
       mcpServers: mcpServersForApi,
       userId,
     },
-    experimental_throttle: 500,
+    experimental_throttle: 100,
     onError: (error) => {
       toast.error(
         error.message.length > 0 ? error.message : "An error occurred, please try again later.",
@@ -67,7 +67,7 @@ export default function Chat() {
     <div className="h-dvh flex flex-col justify-center w-full max-w-3xl mx-auto px-4 sm:px-6 md:py-4">
       {messages.length === 0 ? (
         <div className="max-w-xl mx-auto w-full">
-          <ProjectOverview />
+          <ProjectOverview append={append} />
           <form onSubmit={handleFormSubmit} className="mt-4 w-full mx-auto">
             <Textarea
               selectedModel={selectedModel}

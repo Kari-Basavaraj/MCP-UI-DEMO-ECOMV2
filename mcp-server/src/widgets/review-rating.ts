@@ -1,4 +1,4 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import "./bridge"; // auto-resize
 
 interface Review {
   id: number;
@@ -14,111 +14,65 @@ interface ReviewData {
   count: number;
 }
 
-const app = new App({ name: "Review Rating", version: "1.0.0" });
-
 function renderStars(rating: number): string {
-  const fullStars = Math.floor(rating);
-  const emptyStars = 5 - fullStars;
-  return "★".repeat(fullStars) + "☆".repeat(emptyStars);
+  const full = Math.floor(rating);
+  const empty = 5 - full;
+  return "★".repeat(full) + "☆".repeat(empty);
 }
 
 function render(data: ReviewData): void {
-  const container = document.getElementById("review-container");
-  if (!container) return;
-
   const { reviews, averageRating, count } = data;
 
-  container.innerHTML = `
-    <div class="reviews">
-      <div class="reviews__header">
-        <h2 class="reviews__title">Customer Reviews</h2>
-        <button class="reviews__write-btn" data-action="write-review">Write a Review</button>
-      </div>
+  // Update summary
+  const avgEl = document.getElementById("rv-avg");
+  const starsEl = document.getElementById("rv-stars");
+  const countEl = document.getElementById("rv-count");
+  if (avgEl) avgEl.textContent = averageRating.toFixed(1);
+  if (starsEl) starsEl.textContent = renderStars(Math.round(averageRating));
+  if (countEl) countEl.textContent = `${count} review${count !== 1 ? "s" : ""}`;
 
-      <div class="reviews__summary">
-        <div class="reviews__average">
-          <span class="reviews__average-number">${averageRating.toFixed(1)}</span>
-          <span class="reviews__average-stars">${renderStars(Math.round(averageRating))}</span>
-        </div>
-        <span class="reviews__count">${count} review${count !== 1 ? "s" : ""}</span>
-      </div>
+  // Calculate distribution
+  const dist = [0, 0, 0, 0, 0]; // index 0 = 1-star, 4 = 5-star
+  for (const r of reviews) {
+    const idx = Math.min(Math.max(Math.round(r.rating), 1), 5) - 1;
+    dist[idx]++;
+  }
+  const total = reviews.length || 1;
+  const pcts = dist.map((d) => Math.round((d / total) * 100));
 
-      <div class="reviews__list">
-        ${
-          reviews.length === 0
-            ? `<p class="reviews__empty">No reviews yet. Be the first to review!</p>`
-            : reviews
-                .map(
-                  (review) => `
-            <div class="reviews__card" data-review-id="${review.id}">
-              <div class="reviews__card-header">
-                <span class="reviews__card-username">${review.username}</span>
-                <span class="reviews__card-date">${review.date}</span>
-              </div>
-              <div class="reviews__card-rating">${renderStars(review.rating)}</div>
-              <p class="reviews__card-text">${review.text}</p>
-              <div class="reviews__card-actions">
-                <button class="reviews__helpful-btn" data-action="helpful" data-review-id="${review.id}">👍 Helpful</button>
-                <button class="reviews__not-helpful-btn" data-action="not-helpful" data-review-id="${review.id}">👎 Not Helpful</button>
-              </div>
-            </div>`
-                )
-                .join("")
-        }
-      </div>
-    </div>
-  `;
+  const barsEl = document.getElementById("rv-bars");
+  if (barsEl) {
+    barsEl.innerHTML = [5, 4, 3, 2, 1]
+      .map(
+        (star) =>
+          `<div class="rv-bar-row"><span class="rv-bar-label">${star} star</span><div class="rv-bar-bg"><div class="rv-bar-fill" style="width:${pcts[star - 1]}%"></div></div><span class="rv-bar-pct">${pcts[star - 1]}%</span></div>`
+      )
+      .join("");
+  }
+
+  // Render review cards
+  const listEl = document.getElementById("rv-list");
+  if (listEl) {
+    if (reviews.length === 0) {
+      listEl.innerHTML = `<p style="text-align:center;padding:24px;color:var(--sds-color-text-default-secondary);">No reviews yet.</p>`;
+    } else {
+      listEl.innerHTML = reviews
+        .map(
+          (r) => `
+        <div class="rv-review">
+          <div class="rv-review__header">
+            <span class="rv-review__name">${r.username}</span>
+            <span class="rv-review__stars">${renderStars(r.rating)}</span>
+          </div>
+          <p class="rv-review__text">${r.text}</p>
+          <span class="rv-review__date">${r.date}</span>
+        </div>`
+        )
+        .join("");
+    }
+  }
 }
 
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data = JSON.parse(text);
-      if (data.reviews !== undefined && data.averageRating !== undefined) {
-        render(data as ReviewData);
-      }
-    } catch {
-      /* fallback */
-    }
-  }
-};
-
-document.addEventListener("click", async (e) => {
-  const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
-  if (!btn) return;
-
-  const action = btn.dataset.action;
-
-  switch (action) {
-    case "write-review":
-      // Could open a review form modal or navigate to review page
-      break;
-
-    case "helpful": {
-      const reviewId = Number(btn.dataset.reviewId);
-      if (reviewId) {
-        btn.classList.add("reviews__helpful-btn--active");
-        btn.textContent = "👍 Helpful ✓";
-      }
-      break;
-    }
-
-    case "not-helpful": {
-      const reviewId = Number(btn.dataset.reviewId);
-      if (reviewId) {
-        btn.classList.add("reviews__not-helpful-btn--active");
-        btn.textContent = "👎 Not Helpful ✓";
-      }
-      break;
-    }
-  }
-});
-
-// Fallback: read pre-injected data when ext-apps bridge is not available
+// Read pre-injected data
 const _injected = (window as any).__MCP_TOOL_RESULT__;
-if (_injected) {
-  render(_injected);
-}
-
-app.connect();
+if (_injected) render(_injected);

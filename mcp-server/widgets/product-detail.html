@@ -6,238 +6,198 @@
   <title>Product Detail – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #product-detail {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: var(--sds-size-padding-xl);
+
+    .pd-card {
+      max-width: 100%;
+      width: 100%;
       display: flex;
-      gap: var(--sds-size-space-800);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
+      flex-direction: row;
+      gap: 0;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: inherit;
     }
 
-    .pd-image-area {
-      flex: 0 0 360px;
-      height: 360px;
+    /* Image half */
+    .pd-image {
+      flex: 0 0 50%;
+      max-width: 430px;
+      min-height: 350px;
+      position: relative;
+      background: var(--sds-color-background-default-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+    }
+    .pd-image img { width:100%; height:100%; object-fit:cover; }
+    .pd-image__badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 4px 12px;
       background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-400);
-      font-size: 120px;
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--sds-color-text-brand-default);
     }
 
+    /* Info half */
     .pd-info {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: var(--sds-size-space-400);
+      gap: 12px;
+      padding: 24px;
     }
+    .pd-category { font-size:12px; font-weight:600; color: var(--sds-color-text-brand-default); text-transform:uppercase; letter-spacing:0.08em; }
+    .pd-name { margin:0; font-size:32px; font-weight:700; color: var(--sds-color-text-default-default); line-height:1.2; }
 
-    .pd-name {
-      font-size: var(--sds-typo-heading-size-large);
-      font-weight: var(--sds-typo-heading-font-weight);
-      margin: 0;
-      color: var(--sds-color-text-default-default);
-    }
-
-    .pd-category-badge {
-      display: inline-block;
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
+    .pd-price-row { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+    .pd-current { font-size:24px; font-weight:700; color: var(--sds-color-text-default-default); }
+    .pd-original { font-size:16px; font-weight:400; color: var(--sds-color-text-default-tertiary); text-decoration:line-through; }
+    .pd-discount-pill {
+      padding: 4px 12px;
       background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-full);
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      width: fit-content;
-    }
-
-    .pd-price {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 700;
       color: var(--sds-color-text-brand-default);
     }
 
-    .pd-description {
-      font-size: var(--sds-typo-body-size-medium);
-      color: var(--sds-color-text-default-secondary);
-      line-height: 1.5;
-      margin: 0;
-    }
+    .pd-desc { margin:0; font-size:16px; font-weight:400; color: var(--sds-color-text-default-secondary); line-height:1.5; }
 
-    .pd-section-label {
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      color: var(--sds-color-text-default-secondary);
-      margin: 0 0 var(--sds-size-space-200) 0;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .pd-sizes {
-      display: flex;
-      gap: var(--sds-size-space-200);
-    }
-
+    /* Sizes */
+    .pd-sizes { display:flex; flex-direction:column; gap:8px; }
+    .pd-sizes__label { font-size:14px; font-weight:600; color: var(--sds-color-text-default-secondary); }
+    .pd-sizes__options { display:flex; gap:8px; }
     .pd-size-btn {
       width: 44px;
       height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      background: var(--sds-color-background-default-default);
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      background: transparent;
       cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      font-family: inherit;
       color: var(--sds-color-text-default-default);
-      transition: all 0.15s ease;
     }
+    .pd-size-btn:hover { border-color:var(--sds-color-border-brand-default); }
+    .pd-size-btn--active { background:var(--sds-color-background-brand-default); color: var(--sds-color-text-brand-on-brand); border-color:var(--sds-color-border-brand-default); }
 
-    .pd-size-btn.active,
-    .pd-size-btn:hover {
-      background: var(--sds-color-background-brand-default);
-      color: var(--sds-color-text-brand-on-brand);
-      border-color: var(--sds-color-background-brand-default);
-    }
-
-    .pd-colors {
-      display: flex;
-      gap: var(--sds-size-space-300);
-      align-items: center;
-    }
-
-    .pd-color-swatch {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: var(--sds-size-stroke-focus-ring) solid transparent;
-      cursor: pointer;
-      transition: border-color 0.15s ease;
-    }
-
-    .pd-color-swatch:hover,
-    .pd-color-swatch.active {
-      border-color: var(--sds-color-text-brand-default);
-    }
-
-    .pd-quantity {
+    /* Quantity */
+    .pd-qty-controls {
       display: flex;
       align-items: center;
-      gap: var(--sds-size-space-300);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      overflow: hidden;
+      width: 144px;
+      height: 40px;
     }
-
     .pd-qty-btn {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-100);
-      background: var(--sds-color-background-default-default);
-      font-size: var(--sds-typo-body-size-large);
+      border: none;
+      background: var(--sds-color-background-default-secondary);
       cursor: pointer;
+      font-size: 18px;
+      font-family: inherit;
       color: var(--sds-color-text-default-default);
     }
+    .pd-qty-btn:hover { background:var(--sds-color-background-default-secondary-hover); }
+    .pd-qty-value { flex:1; text-align:center; font-size:16px; font-weight:600; color: var(--sds-color-text-default-default); }
 
-    .pd-qty-btn:hover {
-      background: var(--sds-color-background-default-secondary);
-    }
-
-    .pd-qty-value {
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      min-width: 24px;
-      text-align: center;
-    }
-
-    .pd-actions {
-      display: flex;
-      gap: var(--sds-size-space-300);
-      margin-top: var(--sds-size-space-200);
-    }
-
-    .pd-btn-cart {
+    /* Actions */
+    .pd-actions { display:flex; gap:12px; padding-top:8px; }
+    .pd-add-cart {
       flex: 1;
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
       background: var(--sds-color-background-brand-default);
       color: var(--sds-color-text-brand-on-brand);
       border: none;
-      border-radius: var(--sds-size-radius-200);
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      height: 48px;
+      box-sizing: border-box;
     }
-
-    .pd-btn-cart:hover {
-      opacity: 0.9;
-    }
-
-    .pd-btn-wishlist {
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-      background: var(--sds-color-background-default-default);
+    .pd-add-cart:hover { opacity:0.9; }
+    .pd-add-wishlist {
+      min-width: 104px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      background: transparent;
       color: var(--sds-color-text-default-default);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      font-size: var(--sds-typo-body-size-medium);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      height: 48px;
+      box-sizing: border-box;
+      white-space: nowrap;
     }
-
-    .pd-btn-wishlist:hover {
-      background: var(--sds-color-background-default-secondary);
-    }
+    .pd-add-wishlist:hover { border-color:var(--sds-color-border-brand-default); }
   </style>
 </head>
 <body>
-  <div id="product-detail">
-    <div class="pd-image-area">👟</div>
-
+  <div class="pd-card fade-in" id="product-detail">
+    <div class="pd-image">
+      <img id="pd-img" src="" alt="" />
+      <span class="pd-image__badge" id="pd-badge">23% OFF</span>
+    </div>
     <div class="pd-info">
-      <h1 class="pd-name">Nike Shoes</h1>
-      <span class="pd-category-badge">Footwear</span>
-      <div class="pd-price">₹4,999</div>
-      <p class="pd-description">Premium quality product from trusted brand. Designed for comfort and durability, these shoes feature advanced cushioning technology and breathable materials.</p>
+      <span class="pd-category" id="pd-category">FOOTWEAR</span>
+      <h1 class="pd-name" id="pd-name">Running Shoes</h1>
+      <div class="pd-price-row">
+        <span class="pd-current" id="pd-current">₹3,799</span>
+        <span class="pd-original" id="pd-original">₹4,999</span>
+        <span class="pd-discount-pill" id="pd-discount">23% OFF</span>
+      </div>
+      <p class="pd-desc" id="pd-desc">Premium running shoes with advanced cushioning technology for daily running and training.</p>
 
-      <div>
-        <p class="pd-section-label">Size</p>
-        <div class="pd-sizes">
-          <button class="pd-size-btn">S</button>
-          <button class="pd-size-btn active">M</button>
-          <button class="pd-size-btn">L</button>
-          <button class="pd-size-btn">XL</button>
+      <div class="pd-sizes">
+        <span class="pd-sizes__label">Size</span>
+        <div class="pd-sizes__options" id="pd-sizes">
+          <button class="pd-size-btn" data-action="select-size" data-size="S">S</button>
+          <button class="pd-size-btn pd-size-btn--active" data-action="select-size" data-size="M">M</button>
+          <button class="pd-size-btn" data-action="select-size" data-size="L">L</button>
+          <button class="pd-size-btn" data-action="select-size" data-size="XL">XL</button>
         </div>
       </div>
 
-      <div>
-        <p class="pd-section-label">Color</p>
-        <div class="pd-colors">
-          <div class="pd-color-swatch active" style="background:#1e1e1e;"></div>
-          <div class="pd-color-swatch" style="background:#2563eb;"></div>
-          <div class="pd-color-swatch" style="background:#dc2626;"></div>
-        </div>
-      </div>
-
-      <div>
-        <p class="pd-section-label">Quantity</p>
-        <div class="pd-quantity">
-          <button class="pd-qty-btn">−</button>
-          <span class="pd-qty-value">1</span>
-          <button class="pd-qty-btn">+</button>
-        </div>
+      <div class="pd-qty-controls">
+        <button class="pd-qty-btn" data-action="decrease-qty">−</button>
+        <span class="pd-qty-value" id="qty-display">1</span>
+        <button class="pd-qty-btn" data-action="increase-qty">+</button>
       </div>
 
       <div class="pd-actions">
-        <button class="pd-btn-cart">Add to Cart</button>
-        <button class="pd-btn-wishlist">♡ Add to Wishlist</button>
+        <button class="pd-add-cart" data-action="add-to-cart" id="pd-add-cart">Add to Cart</button>
+        <button class="pd-add-wishlist" data-action="add-to-wishlist" id="pd-add-wishlist">♡ Wishlist</button>
       </div>
     </div>
   </div>
-
   <script type="module" src="/src/widgets/product-detail.ts"></script>
 </body>
 </html>

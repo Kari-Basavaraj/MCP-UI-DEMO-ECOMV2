@@ -1,4 +1,4 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import { callTool } from "./bridge";
 
 interface Product {
   id: number;
@@ -11,150 +11,98 @@ interface Product {
   inStock?: boolean;
 }
 
-const app = new App({ name: "Product Detail", version: "1.0.0" });
-
 let selectedSize = "M";
 let quantity = 1;
+let currentProductId = 0;
 
-function formatPrice(price: number): string {
-  return `₹${price.toLocaleString("en-IN")}`;
+function fmt(p: number): string {
+  return `₹${p.toLocaleString("en-IN")}`;
 }
 
 function render(product: Product): void {
-  const container = document.getElementById("product-detail");
-  if (!container) return;
+  currentProductId = product.id;
+  const img = document.getElementById("pd-img") as HTMLImageElement | null;
+  if (img) { img.src = product.image; img.alt = product.name; }
 
-  const sizes = ["S", "M", "L", "XL"];
   const discount =
     product.originalPrice && product.originalPrice > product.price
       ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
       : 0;
 
-  container.innerHTML = `
-    <div class="product-detail">
-      <div class="product-detail__image">
-        <img src="${product.image}" alt="${product.name}" />
-      </div>
-      <div class="product-detail__info">
-        <span class="product-detail__category">${product.category}</span>
-        <h1 class="product-detail__name">${product.name}</h1>
-        <div class="product-detail__price">
-          <span class="product-detail__current-price">${formatPrice(product.price)}</span>
-          ${
-            product.originalPrice && discount > 0
-              ? `<span class="product-detail__original-price"><s>${formatPrice(product.originalPrice)}</s></span>
-                 <span class="product-detail__discount">${discount}% off</span>`
-              : ""
-          }
-        </div>
-        ${product.description ? `<p class="product-detail__description">${product.description}</p>` : ""}
-
-        <div class="product-detail__sizes">
-          <span class="product-detail__label">Size:</span>
-          <div class="product-detail__size-options">
-            ${sizes
-              .map(
-                (s) =>
-                  `<button class="product-detail__size-btn${s === selectedSize ? " product-detail__size-btn--active" : ""}" data-action="select-size" data-size="${s}">${s}</button>`
-              )
-              .join("")}
-          </div>
-        </div>
-
-        <div class="product-detail__quantity">
-          <span class="product-detail__label">Quantity:</span>
-          <div class="product-detail__quantity-controls">
-            <button class="product-detail__qty-btn" data-action="decrease-qty">−</button>
-            <span class="product-detail__qty-value" id="qty-display">${quantity}</span>
-            <button class="product-detail__qty-btn" data-action="increase-qty">+</button>
-          </div>
-        </div>
-
-        <div class="product-detail__actions">
-          <button class="product-detail__add-cart" data-action="add-to-cart" data-product-id="${product.id}">Add to Cart</button>
-          <button class="product-detail__add-wishlist" data-action="add-to-wishlist" data-product-id="${product.id}">♡ Add to Wishlist</button>
-        </div>
-      </div>
-    </div>
-  `;
+  const badge = document.getElementById("pd-badge");
+  if (badge) {
+    if (discount > 0) { badge.textContent = `${discount}% OFF`; badge.style.display = ""; }
+    else { badge.style.display = "none"; }
+  }
+  const cat = document.getElementById("pd-category");
+  if (cat) cat.textContent = product.category.toUpperCase();
+  const name = document.getElementById("pd-name");
+  if (name) name.textContent = product.name;
+  const cur = document.getElementById("pd-current");
+  if (cur) cur.textContent = fmt(product.price);
+  const orig = document.getElementById("pd-original");
+  if (orig) {
+    if (product.originalPrice && discount > 0) { orig.textContent = fmt(product.originalPrice); orig.style.display = ""; }
+    else { orig.style.display = "none"; }
+  }
+  const discEl = document.getElementById("pd-discount");
+  if (discEl) {
+    if (discount > 0) { discEl.textContent = `${discount}% OFF`; discEl.style.display = ""; }
+    else { discEl.style.display = "none"; }
+  }
+  const desc = document.getElementById("pd-desc");
+  if (desc) desc.textContent = product.description || "";
+  quantity = 1;
+  updateQuantityDisplay();
+  selectedSize = "M";
+  updateSizeButtons();
 }
 
 function updateQuantityDisplay(): void {
-  const qtyEl = document.getElementById("qty-display");
-  if (qtyEl) qtyEl.textContent = String(quantity);
+  const el = document.getElementById("qty-display");
+  if (el) el.textContent = String(quantity);
 }
 
 function updateSizeButtons(): void {
-  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-action='select-size']");
-  buttons.forEach((btn) => {
-    btn.classList.toggle("product-detail__size-btn--active", btn.dataset.size === selectedSize);
+  document.querySelectorAll<HTMLButtonElement>("[data-action='select-size']").forEach((btn) => {
+    btn.classList.toggle("pd-size-btn--active", btn.dataset.size === selectedSize);
   });
 }
 
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data = JSON.parse(text);
-      if (data.product) {
-        render(data.product);
-      }
-    } catch {
-      /* fallback */
-    }
-  }
-};
-
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
   if (!btn) return;
-
-  const action = btn.dataset.action;
-
-  switch (action) {
+  switch (btn.dataset.action) {
     case "select-size":
       selectedSize = btn.dataset.size || "M";
       updateSizeButtons();
       break;
-
     case "increase-qty":
       quantity = Math.min(quantity + 1, 10);
       updateQuantityDisplay();
       break;
-
     case "decrease-qty":
       quantity = Math.max(quantity - 1, 1);
       updateQuantityDisplay();
       break;
-
-    case "add-to-cart": {
-      const productId = Number(btn.dataset.productId);
-      if (productId) {
-        await app.callServerTool({
-          name: "add_to_cart",
-          arguments: { productId },
-        });
+    case "add-to-cart":
+      if (currentProductId) {
+        btn.textContent = "Adding…";
+        (btn as HTMLButtonElement).disabled = true;
+        callTool("add_to_cart", { productId: currentProductId });
+        setTimeout(() => { btn.textContent = "Add to Cart"; (btn as HTMLButtonElement).disabled = false; }, 2000);
       }
       break;
-    }
-
-    case "add-to-wishlist": {
-      const productId = Number(btn.dataset.productId);
-      if (productId) {
-        await app.callServerTool({
-          name: "add_to_wishlist",
-          arguments: { productId },
-        });
+    case "add-to-wishlist":
+      if (currentProductId) {
+        btn.textContent = "Saving…";
+        (btn as HTMLButtonElement).disabled = true;
+        callTool("add_to_wishlist", { productId: currentProductId });
+        setTimeout(() => { btn.textContent = "♡ Wishlist"; (btn as HTMLButtonElement).disabled = false; }, 2000);
       }
       break;
-    }
   }
 });
 
-// Fallback: read pre-injected data when ext-apps bridge is not available
 const _injected = (window as any).__MCP_TOOL_RESULT__;
-if (_injected) {
-  render(_injected.product);
-}
-
-app.connect();
+if (_injected) render(_injected.product);

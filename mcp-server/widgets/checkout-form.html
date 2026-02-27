@@ -6,296 +6,137 @@
   <title>Checkout – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #checkout-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
-      display: flex;
-      gap: var(--sds-size-space-800);
-    }
 
-    .co-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-600);
-    }
-
-    .co-sidebar {
-      width: 300px;
-      flex-shrink: 0;
-    }
-
-    .co-section-title {
-      font-size: var(--sds-typo-heading-size-small);
-      font-weight: var(--sds-typo-heading-font-weight);
-      margin: 0 0 var(--sds-size-space-400) 0;
-    }
-
-    /* Form fields */
-    .co-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sds-size-space-400);
-    }
-
-    .co-field {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-200);
-    }
-
-    .co-field.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .co-label {
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      color: var(--sds-color-text-default-default);
-    }
-
-    .co-input {
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-sm);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-100);
-      font-size: var(--sds-typo-body-size-medium);
-      color: var(--sds-color-text-default-default);
-      background: var(--sds-color-background-default-default);
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    .co-input:focus {
-      border-color: var(--sds-color-background-brand-default);
-      box-shadow: 0 0 0 var(--sds-size-stroke-focus-ring) rgba(44, 44, 44, 0.15);
-    }
-
-    .co-input::placeholder {
-      color: var(--sds-color-text-default-secondary);
-    }
-
-    /* Payment methods */
-    .co-payment-options {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-300);
-    }
-
-    .co-payment-option {
-      display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-300);
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      cursor: pointer;
-      transition: border-color 0.15s ease;
-    }
-
-    .co-payment-option:hover {
-      border-color: var(--sds-color-background-brand-default);
-    }
-
-    .co-payment-option input[type="radio"] {
-      accent-color: var(--sds-color-background-brand-default);
-      width: 18px;
-      height: 18px;
-      margin: 0;
-    }
-
-    .co-payment-label {
-      font-size: var(--sds-typo-body-size-medium);
-      flex: 1;
-    }
-
-    .co-payment-icon {
-      font-size: 20px;
-    }
-
-    /* Sidebar order summary */
-    .co-order-summary {
-      background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-200);
-      padding: var(--sds-size-padding-lg);
-      position: sticky;
-      top: var(--sds-size-space-600);
-    }
-
-    .co-summary-items {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-300);
-      padding-bottom: var(--sds-size-space-400);
-      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      margin-bottom: var(--sds-size-space-400);
-    }
-
-    .co-summary-item {
-      display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-300);
-      font-size: var(--sds-typo-body-size-small);
-    }
-
-    .co-summary-item-emoji {
-      font-size: 20px;
-    }
-
-    .co-summary-item-name {
-      flex: 1;
-    }
-
-    .co-summary-item-price {
-      font-weight: var(--sds-typo-body-font-weight-strong);
-    }
-
-    .co-totals {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-200);
-      font-size: var(--sds-typo-body-size-small);
-    }
-
-    .co-total-line {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .co-total-line.grand {
-      padding-top: var(--sds-size-space-300);
-      margin-top: var(--sds-size-space-200);
-      border-top: var(--sds-size-stroke-focus-ring) solid var(--sds-color-text-default-default);
-      font-size: var(--sds-typo-body-size-large);
-      font-weight: var(--sds-typo-heading-font-weight);
-    }
-
-    .co-free {
-      color: var(--sds-color-text-positive-default);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-    }
-
-    .co-btn-place-order {
+    .co-card {
+      max-width: 520px;
       width: 100%;
-      margin-top: var(--sds-size-space-600);
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    .co-title { margin:0; font-size:24px; font-weight:700; color: var(--sds-color-text-default-default); }
+
+    .co-section-title { margin:0; font-size:16px; font-weight:600; color: var(--sds-color-text-default-default); }
+
+    .co-fields { display:flex; flex-direction:column; gap:12px; }
+
+    .co-row { display:flex; gap:12px; }
+    .co-row > .co-field { flex:1; }
+
+    .co-field { display:flex; flex-direction:column; gap:4px; }
+    .co-field label { font-size:14px; font-weight:500; color: var(--sds-color-text-default-secondary); }
+    .co-field input {
+      height: 40px;
+      padding: 0 12px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      background: var(--sds-color-background-default-default);
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--sds-color-text-default-default);
+      outline: none;
+      box-sizing: border-box;
+    }
+    .co-field input::placeholder { color: var(--sds-color-text-default-tertiary); }
+    .co-field input:focus { border-color:var(--sds-color-border-brand-default); }
+    .co-field input.co-input--error { border-color:var(--sds-color-border-danger-tertiary); }
+
+    .co-error { font-size:12px; font-weight:400; color: var(--sds-color-text-danger-default); min-height:16px; }
+
+    .co-divider { height:1px; background:var(--sds-color-border-default-default); border:none; margin:0; }
+
+    .co-pay-btn {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
       background: var(--sds-color-background-brand-default);
       color: var(--sds-color-text-brand-on-brand);
       border: none;
-      border-radius: var(--sds-size-radius-200);
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      height: 48px;
+      box-sizing: border-box;
     }
-
-    .co-btn-place-order:hover {
-      opacity: 0.9;
-    }
+    .co-pay-btn:hover { opacity:0.9; }
+    .co-pay-btn:disabled { opacity:0.5; cursor:not-allowed; }
   </style>
 </head>
 <body>
-  <div id="checkout-container">
+  <div class="co-card fade-in" id="checkout-container">
+    <h1 class="co-title">Checkout</h1>
 
-    <!-- Main Form -->
-    <div class="co-main">
-
-      <!-- Shipping Information -->
-      <section>
-        <h2 class="co-section-title">Shipping Information</h2>
-        <div class="co-form-grid">
-          <div class="co-field">
-            <label class="co-label" for="co-name">Full Name</label>
-            <input class="co-input" id="co-name" type="text" placeholder="Rahul Sharma" required />
-          </div>
-          <div class="co-field">
-            <label class="co-label" for="co-email">Email</label>
-            <input class="co-input" id="co-email" type="email" placeholder="rahul@example.com" required />
-          </div>
-          <div class="co-field full-width">
-            <label class="co-label" for="co-address">Address</label>
-            <input class="co-input" id="co-address" type="text" placeholder="123, MG Road, Indiranagar" required />
-          </div>
-          <div class="co-field">
-            <label class="co-label" for="co-city">City</label>
-            <input class="co-input" id="co-city" type="text" placeholder="Bangalore" required />
-          </div>
-          <div class="co-field">
-            <label class="co-label" for="co-zip">PIN Code</label>
-            <input class="co-input" id="co-zip" type="text" placeholder="560038" pattern="[0-9]{6}" maxlength="6" required />
-          </div>
+    <!-- Shipping Address -->
+    <h2 class="co-section-title">Shipping Address</h2>
+    <div class="co-fields">
+      <div class="co-row">
+        <div class="co-field">
+          <label for="field-firstName">First Name</label>
+          <input id="field-firstName" name="firstName" type="text" placeholder="First Name" required />
+          <span class="co-error" id="error-firstName"></span>
         </div>
-      </section>
-
-      <!-- Payment Method -->
-      <section>
-        <h2 class="co-section-title">Payment Method</h2>
-        <div class="co-payment-options">
-          <label class="co-payment-option">
-            <input type="radio" name="payment" value="credit-card" checked />
-            <span class="co-payment-label">Credit Card</span>
-            <span class="co-payment-icon">💳</span>
-          </label>
-          <label class="co-payment-option">
-            <input type="radio" name="payment" value="upi" />
-            <span class="co-payment-label">UPI</span>
-            <span class="co-payment-icon">📱</span>
-          </label>
-          <label class="co-payment-option">
-            <input type="radio" name="payment" value="cod" />
-            <span class="co-payment-label">Cash on Delivery</span>
-            <span class="co-payment-icon">💵</span>
-          </label>
+        <div class="co-field">
+          <label for="field-lastName">Last Name</label>
+          <input id="field-lastName" name="lastName" type="text" placeholder="Last Name" required />
+          <span class="co-error" id="error-lastName"></span>
         </div>
-      </section>
+      </div>
+      <div class="co-field">
+        <label for="field-address">Address</label>
+        <input id="field-address" name="address" type="text" placeholder="Street Address" required />
+        <span class="co-error" id="error-address"></span>
+      </div>
+      <div class="co-row">
+        <div class="co-field">
+          <label for="field-city">City</label>
+          <input id="field-city" name="city" type="text" placeholder="City" required />
+          <span class="co-error" id="error-city"></span>
+        </div>
+        <div class="co-field">
+          <label for="field-pin">PIN Code</label>
+          <input id="field-pin" name="pin" type="text" placeholder="000 000" required pattern="\d{6}" />
+          <span class="co-error" id="error-pin"></span>
+        </div>
+      </div>
     </div>
 
-    <!-- Order Summary Sidebar -->
-    <aside class="co-sidebar">
-      <div class="co-order-summary">
-        <h2 class="co-section-title">Order Summary</h2>
+    <hr class="co-divider" />
 
-        <div class="co-summary-items">
-          <div class="co-summary-item">
-            <span class="co-summary-item-emoji">👟</span>
-            <span class="co-summary-item-name">Nike Shoes × 1</span>
-            <span class="co-summary-item-price">₹4,999</span>
-          </div>
-          <div class="co-summary-item">
-            <span class="co-summary-item-emoji">👕</span>
-            <span class="co-summary-item-name">Adidas T-Shirt × 2</span>
-            <span class="co-summary-item-price">₹3,998</span>
-          </div>
-          <div class="co-summary-item">
-            <span class="co-summary-item-emoji">🧢</span>
-            <span class="co-summary-item-name">Puma Cap × 1</span>
-            <span class="co-summary-item-price">₹999</span>
-          </div>
-        </div>
-
-        <div class="co-totals">
-          <div class="co-total-line">
-            <span>Subtotal</span>
-            <span>₹9,996</span>
-          </div>
-          <div class="co-total-line">
-            <span>Shipping</span>
-            <span class="co-free">FREE</span>
-          </div>
-          <div class="co-total-line grand">
-            <span>Total</span>
-            <span>₹9,996</span>
-          </div>
-        </div>
-
-        <button class="co-btn-place-order">Place Order</button>
+    <!-- Payment Details -->
+    <h2 class="co-section-title">Payment Details</h2>
+    <div class="co-fields">
+      <div class="co-field">
+        <label for="field-cardNumber">Card Number</label>
+        <input id="field-cardNumber" name="cardNumber" type="text" placeholder="0000 0000 0000 0000" required />
+        <span class="co-error" id="error-cardNumber"></span>
       </div>
-    </aside>
+      <div class="co-row">
+        <div class="co-field">
+          <label for="field-expiry">Expiry</label>
+          <input id="field-expiry" name="expiry" type="text" placeholder="MM/YY" required />
+          <span class="co-error" id="error-expiry"></span>
+        </div>
+        <div class="co-field">
+          <label for="field-cvv">CVV</label>
+          <input id="field-cvv" name="cvv" type="text" placeholder="000" required />
+          <span class="co-error" id="error-cvv"></span>
+        </div>
+      </div>
+    </div>
 
+    <button type="button" class="co-pay-btn" id="pay-btn" data-action="place-order">Pay ₹8,492</button>
   </div>
-
   <script type="module" src="/src/widgets/checkout-form.ts"></script>
 </body>
 </html>

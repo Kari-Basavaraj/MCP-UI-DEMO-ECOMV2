@@ -1,29 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Product Card</title>
-  <link rel="stylesheet" href="/src/widgets/shared.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Card – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    .product-card { max-width: 280px; }
-    .product-image { font-size: 64px; text-align: center; padding: var(--sds-size-padding-lg, 16px) 0; background: var(--sds-color-background-default-secondary); border-radius: var(--sds-size-radius-200, 8px) var(--sds-size-radius-200, 8px) 0 0; }
-    .product-body { padding: var(--sds-size-padding-lg, 16px); }
-    .product-name { font-size: var(--sds-typo-heading-size-small, 20px); font-weight: var(--sds-typo-heading-font-weight, 600); color: var(--sds-color-text-default-default); margin: 0 0 4px; }
-    .product-category { font-size: var(--sds-typo-body-size-small, 14px); color: var(--sds-color-text-default-secondary); margin: 0 0 12px; }
-    .product-price { font-size: var(--sds-typo-heading-size-base, 24px); font-weight: 700; color: var(--sds-color-text-brand-default); margin: 0 0 16px; }
-    .product-actions { display: flex; gap: var(--sds-size-space-200, 8px); }
+    .pc-wrap {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    #product-container {
+      width: 100%;
+      max-width: 274px;
+      margin: 24px auto 0;
+      background: var(--sds-comp-card-bg);
+      border: 1px solid var(--sds-comp-card-border);
+      border-radius: var(--sds-comp-card-radius);
+      overflow: hidden;
+      box-shadow: var(--sds-comp-card-shadow);
+    }
+
+    .pc-image-area {
+      position: relative;
+      width: 100%;
+      height: 184px;
+      background: var(--sds-color-background-default-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #product-image {
+      max-width: 52%;
+      max-height: 56%;
+      object-fit: contain;
+    }
+
+    .pc-category-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--sds-color-background-default-default);
+      border-radius: var(--sds-size-radius-100);
+      padding: 2px 6px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .pc-body {
+      padding: var(--sds-size-padding-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-100);
+    }
+
+    #product-name {
+      font-size: var(--sds-typo-heading-size-small);
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .pc-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--sds-size-space-100);
+    }
+
+    .pc-original-price {
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 400;
+      color: var(--sds-color-text-default-tertiary);
+      text-decoration: line-through;
+    }
+
+    .pc-sale-price {
+      font-size: var(--sds-typo-heading-size-medium);
+      font-weight: 700;
+      color: var(--sds-color-text-positive-default);
+    }
+
+    .pc-actions {
+      display: flex;
+      gap: var(--sds-size-space-200);
+    }
+
+    .pc-actions .btn {
+      flex: 1;
+      height: var(--sds-comp-button-height-sm);
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
-  <div class="card product-card" id="product-container">
-    <div class="product-image" id="product-image">👟</div>
-    <div class="product-body">
-      <h3 class="product-name" id="product-name">Nike Shoes</h3>
-      <p class="product-category" id="product-category">Footwear</p>
-      <p class="product-price" id="product-price">₹4,999</p>
-      <div class="product-actions">
-        <button class="btn btn-primary" id="add-to-cart">Add to Cart</button>
-        <button class="btn" style="background: var(--sds-color-background-default-secondary); color: var(--sds-color-text-default-default);" id="view-details">Details</button>
+  <div class="pc-wrap fade-in">
+    <div id="product-container" style="display:none">
+      <div class="pc-image-area">
+        <span class="pc-category-tag" id="product-category"></span>
+        <img id="product-image" alt="" />
+      </div>
+      <div class="pc-body">
+        <h3 id="product-name"></h3>
+        <div class="pc-price-row">
+          <span class="pc-original-price" id="product-original-price"></span>
+          <span class="pc-sale-price" id="product-price"></span>
+        </div>
+        <div class="pc-actions">
+          <button class="btn btn-primary" data-action="add-to-cart">Add to Cart</button>
+          <button class="btn btn-secondary" data-action="details">Details</button>
+        </div>
       </div>
     </div>
   </div>

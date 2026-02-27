@@ -1,4 +1,4 @@
-/* shared.css – base styles for MCP UI ecommerce widgets */
+/* shared.css – base component styles for MCP UI ecommerce widgets */
 @import '../../tokens/figma-tokens-light.css';
 @import '../../tokens/figma-tokens-dark.css';
 
@@ -14,62 +14,313 @@ body {
   background: var(--sds-color-background-default-default);
   color: var(--sds-color-text-default-default);
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: var(--sds-size-padding-lg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+img { display: block; max-width: 100%; }
+a   { color: inherit; text-decoration: none; }
 
 /* ── Text Utilities ───────────────────────────────────── */
 .text-brand     { color: var(--sds-color-text-brand-default); }
 .text-secondary { color: var(--sds-color-text-default-secondary); }
 .text-danger    { color: var(--sds-color-text-danger-default); }
 .text-positive  { color: var(--sds-color-text-positive-default); }
+.text-accent    { color: var(--sds-color-text-positive-default); }
 .text-warning   { color: var(--sds-color-text-warning-default); }
+.text-sm        { font-size: var(--sds-typo-body-size-small); }
+.text-lg        { font-size: var(--sds-typo-body-size-large); }
+.text-heading   { font-size: var(--sds-typo-heading-size-base); font-weight: 600; }
+.font-semibold  { font-weight: 600; }
 
 /* ── Background Utilities ─────────────────────────────── */
 .bg-brand     { background: var(--sds-color-background-brand-default);    color: var(--sds-color-text-brand-on-brand); }
 .bg-danger    { background: var(--sds-color-background-danger-default);   color: var(--sds-color-text-danger-on-danger); }
 .bg-positive  { background: var(--sds-color-background-positive-default); color: var(--sds-color-text-positive-on-positive); }
+.bg-accent    { background: var(--sds-color-background-positive-default); color: var(--sds-color-text-positive-on-positive); }
 .bg-warning   { background: var(--sds-color-background-warning-default);  color: var(--sds-color-text-warning-on-warning); }
 .bg-secondary { background: var(--sds-color-background-default-secondary); }
 
 /* ── Card ─────────────────────────────────────────────── */
 .card {
-  background: #fff;
-  border: 1px solid var(--sds-color-border-default-default);
-  border-radius: var(--sds-size-radius-200, 8px);
-  padding: var(--sds-size-padding-lg, 16px);
+  background: var(--sds-comp-card-bg);
+  border: 1px solid var(--sds-comp-card-border);
+  border-radius: var(--sds-comp-card-radius);
+  padding: var(--sds-comp-card-padding);
+  box-shadow: var(--sds-comp-card-shadow);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.card:hover {
+  box-shadow: var(--sds-comp-card-shadow-hover);
+  transform: translateY(-2px);
 }
 
 /* ── Buttons ──────────────────────────────────────────── */
 .btn {
-  padding: 8px 16px;
-  border-radius: var(--sds-size-radius-100, 4px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 var(--sds-size-padding-lg);
+  height: var(--sds-comp-button-height-md);
+  border-radius: var(--sds-comp-button-radius);
   border: none;
   cursor: pointer;
   font-weight: 600;
-  font-size: 14px;
-  transition: background 0.2s;
+  font-size: var(--sds-typo-body-size-small);
+  font-family: inherit;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-sm {
+  height: var(--sds-comp-button-height-sm);
+  padding: 0 var(--sds-size-padding-sm);
+  font-size: 12px;
+}
+
+.btn-lg {
+  height: var(--sds-comp-button-height-lg);
+  padding: 0 var(--sds-size-padding-xl);
+  font-size: var(--sds-typo-body-size-medium);
 }
 
 .btn-primary {
   background: var(--sds-color-background-brand-default);
   color: var(--sds-color-text-brand-on-brand);
 }
+.btn-primary:hover { background: var(--sds-color-background-brand-hover); }
+
+.btn-secondary {
+  background: var(--sds-color-background-default-secondary);
+  color: var(--sds-color-text-default-default);
+  border: 1px solid var(--sds-color-border-default-default);
+}
+.btn-secondary:hover { background: var(--sds-color-background-default-tertiary); }
 
 .btn-danger {
   background: var(--sds-color-background-danger-default);
   color: var(--sds-color-text-danger-on-danger);
 }
+.btn-danger:hover { background: var(--sds-color-background-danger-hover); }
 
-.btn-positive {
-  background: var(--sds-color-background-positive-default);
-  color: var(--sds-color-text-positive-on-positive);
+.btn-ghost {
+  background: transparent;
+  color: var(--sds-color-text-default-default);
+}
+.btn-ghost:hover { background: var(--sds-color-background-default-secondary); }
+
+.btn-accent-outline {
+  background: var(--sds-color-background-positive-tertiary);
+  color: var(--sds-color-text-positive-default);
+  border: 1px solid var(--sds-color-border-positive-tertiary);
+}
+.btn-accent-outline:hover { background: var(--sds-color-background-positive-secondary); }
+
+.btn-pill { border-radius: var(--sds-comp-button-radius-full); }
+
+/* BEM double-dash aliases (TS widgets use btn--primary syntax) */
+.btn--primary   { background: var(--sds-color-background-brand-default); color: var(--sds-color-text-brand-on-brand); }
+.btn--primary:hover { background: var(--sds-color-background-brand-hover); }
+.btn--secondary { background: var(--sds-color-background-default-secondary); color: var(--sds-color-text-default-default); border: 1px solid var(--sds-color-border-default-default); }
+.btn--secondary:hover { background: var(--sds-color-background-default-tertiary); }
+.btn--danger    { background: var(--sds-color-background-danger-default);  color: var(--sds-color-text-danger-on-danger); }
+.btn--danger:hover { background: var(--sds-color-background-danger-hover); }
+
+/* ── Badges ───────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--sds-comp-badge-radius);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--sds-comp-badge-bg);
+  color: var(--sds-comp-badge-text);
+}
+.badge-accent {
+  background: var(--sds-color-background-positive-tertiary);
+  color: var(--sds-color-text-positive-default);
+}
+.badge-neutral {
+  background: var(--sds-color-background-neutral-tertiary);
+  color: var(--sds-color-text-neutral-default);
 }
 
+/* ── Inputs ───────────────────────────────────────────── */
+.input {
+  width: 100%;
+  height: var(--sds-comp-input-height);
+  padding: 0 var(--sds-size-padding-lg);
+  border: 1px solid var(--sds-comp-input-border);
+  border-radius: var(--sds-comp-input-radius);
+  background: var(--sds-comp-input-bg);
+  color: var(--sds-color-text-default-default);
+  font-family: inherit;
+  font-size: var(--sds-typo-body-size-medium);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input:focus {
+  border-color: var(--sds-comp-input-border-focus);
+  box-shadow: 0 0 0 3px var(--sds-color-background-brand-tertiary);
+}
+.input::placeholder {
+  color: var(--sds-color-text-default-tertiary);
+}
+
+/* ── Product Card ─────────────────────────────────────── */
+.product-card {
+  background: var(--sds-comp-card-bg);
+  border: 1px solid var(--sds-comp-card-border);
+  border-radius: var(--sds-comp-card-radius);
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  box-shadow: var(--sds-comp-card-shadow);
+}
+.product-card:hover {
+  box-shadow: var(--sds-comp-card-shadow-hover);
+  transform: translateY(-3px);
+}
+
+.product-card__image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--sds-comp-image-bg);
+  position: relative;
+}
+/* When TS applies .product-card__image directly on <img> */
+img.product-card__image {
+  object-fit: cover;
+  border-radius: var(--sds-comp-card-radius) var(--sds-comp-card-radius) 0 0;
+}
+.product-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.product-card:hover .product-card__image img {
+  transform: scale(1.05);
+}
+.product-card__image .emoji-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+}
+
+.product-card__body {
+  padding: var(--sds-comp-card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-100);
+}
+
+.product-card__category {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sds-color-text-brand-default);
+}
+
+.product-card__name {
+  font-size: var(--sds-typo-body-size-medium);
+  font-weight: 600;
+  margin: 0;
+  color: var(--sds-color-text-default-default);
+  line-height: 1.3;
+}
+
+.product-card__price-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  margin-top: var(--sds-size-space-100);
+}
+
+.product-card__price {
+  font-size: var(--sds-typo-heading-size-small);
+  font-weight: 700;
+  color: var(--sds-color-text-default-default);
+}
+
+.product-card__original-price {
+  font-size: var(--sds-typo-body-size-small);
+  color: var(--sds-color-text-default-tertiary);
+  text-decoration: line-through;
+}
+
+.product-card__discount {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--sds-color-text-positive-default);
+}
+
+.product-card__actions {
+  display: flex;
+  gap: var(--sds-size-space-200);
+  margin-top: var(--sds-size-space-200);
+}
+
+/* ── Price Display ────────────────────────────────────── */
+.price-current {
+  font-size: var(--sds-typo-heading-size-base);
+  font-weight: 700;
+  color: var(--sds-color-text-default-default);
+}
+.price-original {
+  font-size: var(--sds-typo-body-size-medium);
+  color: var(--sds-color-text-default-tertiary);
+  text-decoration: line-through;
+}
+.price-discount {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--sds-comp-badge-radius);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--sds-color-background-positive-tertiary);
+  color: var(--sds-color-text-positive-default);
+}
+
+/* ── Divider ──────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--sds-color-border-default-default);
+  margin: var(--sds-size-space-400) 0;
+}
+
+/* ── Star Rating ──────────────────────────────────────── */
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--sds-color-background-warning-default);
+  font-size: 16px;
+}
+.stars .empty { color: var(--sds-color-border-default-default); }
+
 /* ── Layout Utilities ─────────────────────────────────── */
-.grid     { display: grid; gap: var(--sds-size-space-400, 16px); }
+.grid     { display: grid; gap: var(--sds-size-space-400); }
 .flex     { display: flex; }
 .flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.w-full { width: 100%; }
 
 /* ── Gap Utilities ────────────────────────────────────── */
+.gap-xs { gap: var(--sds-size-space-100, 4px); }
 .gap-sm { gap: var(--sds-size-space-200, 8px); }
 .gap-md { gap: var(--sds-size-space-400, 16px); }
 .gap-lg { gap: var(--sds-size-space-600, 24px); }
@@ -78,3 +329,12 @@ body {
 .p-sm { padding: var(--sds-size-padding-sm, 8px); }
 .p-md { padding: var(--sds-size-padding-lg, 16px); }
 .p-lg { padding: var(--sds-size-padding-xl, 24px); }
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}

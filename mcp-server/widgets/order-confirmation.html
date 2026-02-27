@@ -3,188 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order Confirmation – MCP Ecommerce</title>
+  <title>Order Confirmed – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #order-confirmation {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: var(--sds-size-padding-xxl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
+
+    .oc-card {
+      max-width: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    /* Header */
+    .oc-header {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--sds-size-space-600);
+      gap: 8px;
+      text-align: center;
     }
-
-    .oc-checkmark {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--sds-color-background-positive-default);
+    .oc-check {
+      width: 56px;
+      height: 56px;
+      border-radius: 9999px;
+      background: var(--sds-color-background-brand-default);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
-      color: #fff;
-    }
-
-    .oc-heading {
-      font-size: var(--sds-typo-heading-size-large);
-      font-weight: var(--sds-typo-heading-font-weight);
-      margin: 0;
-      color: var(--sds-color-text-positive-default);
-    }
-
-    .oc-order-number {
-      font-size: var(--sds-typo-body-size-medium);
-      color: var(--sds-color-text-default-secondary);
-    }
-
-    .oc-summary {
-      width: 100%;
-      background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-200);
-      padding: var(--sds-size-padding-lg);
-    }
-
-    .oc-summary-title {
-      font-size: var(--sds-typo-heading-size-small);
-      font-weight: var(--sds-typo-heading-font-weight);
-      margin: 0 0 var(--sds-size-space-400) 0;
-    }
-
-    .oc-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .oc-table th {
-      text-align: left;
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      padding: var(--sds-size-padding-xs) 0;
-      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-    }
-
-    .oc-table th:last-child,
-    .oc-table td:last-child {
-      text-align: right;
-    }
-
-    .oc-table td {
-      padding: var(--sds-size-padding-sm) 0;
-      font-size: var(--sds-typo-body-size-medium);
-      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-    }
-
-    .oc-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .oc-total-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: var(--sds-size-space-400);
-      margin-top: var(--sds-size-space-200);
-      border-top: var(--sds-size-stroke-focus-ring) solid var(--sds-color-text-default-default);
-    }
-
-    .oc-total-label {
-      font-size: var(--sds-typo-body-size-large);
-      font-weight: var(--sds-typo-heading-font-weight);
-    }
-
-    .oc-total-amount {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
-      color: var(--sds-color-text-brand-default);
-    }
-
-    .oc-delivery {
-      width: 100%;
-      background: var(--sds-color-background-positive-tertiary);
-      border-radius: var(--sds-size-radius-200);
-      padding: var(--sds-size-padding-lg);
-      display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-300);
-      font-size: var(--sds-typo-body-size-medium);
-      color: var(--sds-color-text-positive-default);
-    }
-
-    .oc-delivery-icon {
-      font-size: 24px;
-    }
-
-    .oc-btn-continue {
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-xxl);
-      background: var(--sds-color-background-brand-default);
       color: var(--sds-color-text-brand-on-brand);
-      border: none;
-      border-radius: var(--sds-size-radius-200);
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      cursor: pointer;
-      height: 48px;
+      font-size: 32px;
+      font-weight: 700;
     }
+    .oc-title { margin:0; font-size:24px; font-weight:700; color: var(--sds-color-text-default-default); }
+    .oc-subtitle { margin:0; font-size:14px; font-weight:400; color: var(--sds-color-text-default-secondary); }
 
-    .oc-btn-continue:hover {
-      opacity: 0.9;
+    /* Details box */
+    .oc-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--sds-color-background-default-secondary);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
     }
+    .oc-detail-row {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+    }
+    .oc-detail-label { font-size:14px; font-weight:400; color: var(--sds-color-text-default-secondary); }
+    .oc-detail-spacer { flex:1; }
+    .oc-detail-value { font-size:14px; font-weight:600; color: var(--sds-color-text-default-default); }
+
+    /* Items */
+    .oc-items-title { margin:0; font-size:20px; font-weight:700; color: var(--sds-color-text-default-default); }
+    .oc-items { display:flex; flex-direction:column; gap:8px; }
+    .oc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: var(--sds-color-background-default-secondary);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+    }
+    .oc-item__thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--sds-color-background-default-tertiary);
+      flex-shrink: 0;
+    }
+    .oc-item__info { flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .oc-item__name { font-size:14px; font-weight:600; color: var(--sds-color-text-default-default); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .oc-item__cat { font-size:12px; font-weight:500; color: var(--sds-color-text-default-secondary); }
+    .oc-item__price { font-size:14px; font-weight:700; color: var(--sds-color-text-default-default); flex-shrink:0; }
+
+    /* Total row */
+    .oc-total {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--sds-color-background-default-default);
+      border-radius: 16px;
+    }
+    .oc-total__label { font-size:16px; font-weight:600; color: var(--sds-color-text-default-default); }
+    .oc-total__spacer { flex:1; }
+    .oc-total__value { font-size:24px; font-weight:700; color: var(--sds-color-text-default-default); }
+
+    /* Continue button */
+    .oc-continue-btn {
+      min-width: 169px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+      padding: 12px 24px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--sds-color-text-default-default);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    .oc-continue-btn:hover { background:var(--sds-color-background-default-secondary); }
   </style>
 </head>
 <body>
-  <div id="order-confirmation">
-    <div class="oc-checkmark">✓</div>
-    <h1 class="oc-heading">Order Confirmed!</h1>
-    <span class="oc-order-number">Order #ORD-2024-001</span>
+  <div class="oc-card fade-in" id="order-confirmation">
+    <div class="oc-header">
+      <div class="oc-check">✓</div>
+      <h1 class="oc-title">Order Confirmed!</h1>
+      <p class="oc-subtitle">Thank you for your purchase</p>
+    </div>
 
-    <div class="oc-summary">
-      <h2 class="oc-summary-title">Order Summary</h2>
-      <table class="oc-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Qty</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>👟 Nike Shoes</td>
-            <td>1</td>
-            <td>₹4,999</td>
-          </tr>
-          <tr>
-            <td>👕 Adidas T-Shirt</td>
-            <td>2</td>
-            <td>₹3,998</td>
-          </tr>
-          <tr>
-            <td>🧢 Puma Cap</td>
-            <td>1</td>
-            <td>₹999</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="oc-total-row">
-        <span class="oc-total-label">Total</span>
-        <span class="oc-total-amount">₹9,996</span>
+    <div class="oc-details" id="oc-details">
+      <div class="oc-detail-row">
+        <span class="oc-detail-label">Order Number</span>
+        <span class="oc-detail-spacer"></span>
+        <span class="oc-detail-value" id="order-number">ORD-2024-001</span>
+      </div>
+      <div class="oc-detail-row">
+        <span class="oc-detail-label">Estimated Delivery</span>
+        <span class="oc-detail-spacer"></span>
+        <span class="oc-detail-value" id="delivery-date">Dec 25, 2024</span>
+      </div>
+      <div class="oc-detail-row">
+        <span class="oc-detail-label">Payment Method</span>
+        <span class="oc-detail-spacer"></span>
+        <span class="oc-detail-value">Credit Card</span>
       </div>
     </div>
 
-    <div class="oc-delivery">
-      <span class="oc-delivery-icon">📦</span>
-      <span>Estimated Delivery: <strong>March 3, 2026</strong></span>
+    <h2 class="oc-items-title">Items Ordered</h2>
+    <div class="oc-items" id="order-items">
+      <div class="oc-item">
+        <div class="oc-item__thumb"></div>
+        <div class="oc-item__info">
+          <span class="oc-item__name">Running Shoes</span>
+          <span class="oc-item__cat">Footwear</span>
+        </div>
+        <span class="oc-item__price">₹3,799</span>
+      </div>
+      <div class="oc-item">
+        <div class="oc-item__thumb"></div>
+        <div class="oc-item__info">
+          <span class="oc-item__name">Cotton T-Shirt</span>
+          <span class="oc-item__cat">Clothing</span>
+        </div>
+        <span class="oc-item__price">₹899</span>
+      </div>
     </div>
 
-    <button class="oc-btn-continue">Continue Shopping</button>
-  </div>
+    <div class="oc-total">
+      <span class="oc-total__label">Total Paid</span>
+      <span class="oc-total__spacer"></span>
+      <span class="oc-total__value" id="order-total">₹4,698</span>
+    </div>
 
+    <button class="oc-continue-btn" data-action="continue">Continue Shopping</button>
+  </div>
   <script type="module" src="/src/widgets/order-confirmation.ts"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 @theme {
   --color-background: #ffffff;
   --color-foreground: #1e1e1e;
+  --color-card: #ffffff;
   --color-muted: #f5f5f5;
   --color-muted-foreground: #757575;
   --color-border: #d9d9d9;
@@ -23,6 +24,7 @@
 [data-theme="dark"] {
   --color-background: #1e1e1e;
   --color-foreground: #ffffff;
+  --color-card: #262626;
   --color-muted: #2c2c2c;
   --color-muted-foreground: rgba(255, 255, 255, 0.70);
   --color-border: #444444;
@@ -60,4 +62,61 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Skeleton shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #e5e5e5 25%, #d4d4d4 50%, #e5e5e5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+[data-theme="dark"] .skeleton-shimmer {
+  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200% 100%;
+}
+.skeleton-block {
+  background-color: #d4d4d4;
+  border-radius: 6px;
+}
+[data-theme="dark"] .skeleton-block {
+  background-color: #404040;
+}
+.skeleton-container {
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 16px;
+}
+[data-theme="dark"] .skeleton-container {
+  background-color: #262626;
+  border-color: #404040;
+}
+
+/* Widget appear animation */
+@keyframes widget-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-widget-appear {
+  animation: widget-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Shimmer text effect for loading labels */
+@keyframes shimmer-text {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+.shimmer-text {
+  animation: shimmer-text 1.4s ease-in-out infinite;
 }

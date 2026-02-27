@@ -1,4 +1,4 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import { callTool } from "./bridge";
 
 interface CartData {
   view: string;
@@ -7,8 +7,6 @@ interface CartData {
   count: number;
 }
 
-const app = new App({ name: "Cart Summary", version: "1.0.0" });
-
 function formatPrice(price: number): string {
   return `₹${price.toLocaleString("en-IN")}`;
 }
@@ -16,40 +14,33 @@ function formatPrice(price: number): string {
 function render(data: CartData): void {
   const countEl = document.getElementById("item-count");
   const totalEl = document.getElementById("cart-total-price");
+  const subtotalEl = document.getElementById("cs-subtotal");
+  const discountEl = document.getElementById("cs-discount");
+  const taxEl = document.getElementById("cs-tax");
+  const savingsEl = document.getElementById("cs-savings");
 
-  if (countEl) {
-    countEl.textContent = String(data.count);
-    countEl.style.display = data.count > 0 ? "" : "none";
-  }
+  if (countEl) countEl.textContent = String(data.count);
+  const subtotal = Math.round(data.total * 1.15);
+  const discount = subtotal - data.total;
+  const tax = Math.round(data.total * 0.05);
 
-  if (totalEl) {
-    totalEl.textContent = formatPrice(data.total);
-  }
+  if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+  if (discountEl) discountEl.textContent = `−${formatPrice(discount)}`;
+  if (taxEl) taxEl.textContent = formatPrice(tax);
+  if (totalEl) totalEl.textContent = formatPrice(data.total);
+  if (savingsEl) savingsEl.textContent = `You save ${formatPrice(discount)} on this order!`;
 }
 
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data: CartData = JSON.parse(text);
-      render(data);
-    } catch {
-      // ignore parse errors
-    }
-  }
-};
-
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
   if (!btn) return;
-
-  // "open-cart" action is handled by the host via data-action="open-cart"
+  if (btn.dataset.action === "open-cart") {
+    callTool("get_cart", {});
+  }
+  if (btn.dataset.action === "place-order") {
+    callTool("checkout", {});
+  }
 });
 
-// Fallback: read pre-injected data when ext-apps bridge is not available
 const _injected = (window as any).__MCP_TOOL_RESULT__;
-if (_injected) {
-  render(_injected);
-}
-
-app.connect();
+if (_injected) render(_injected);

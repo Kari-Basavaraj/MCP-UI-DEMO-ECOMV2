@@ -30,3 +30,9 @@ fresh/
 *.tgz
 *.tar.gz
 tech-arch.excalidraw
+
+# Test & debug artifacts
+playwright-report/
+test-results/
+screenshots/actual/
+screenshots/diff/

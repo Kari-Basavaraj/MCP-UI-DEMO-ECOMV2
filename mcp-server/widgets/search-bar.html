@@ -6,149 +6,172 @@
   <title>Search – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #search-container {
-      max-width: 640px;
+    .sb-wrap {
+      max-width: 600px;
       margin: 0 auto;
+    }
+
+    /* ── Card Container ─── */
+    .sb-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-400);
       padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
+      background: var(--sds-color-background-default-default);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-size-radius-400);
     }
 
-    .sb-wrapper {
+    /* ── Search Input ─── */
+    .sb-input-wrap {
       position: relative;
-      margin-bottom: var(--sds-size-space-400);
+      width: 100%;
     }
 
-    .sb-icon {
+    .sb-input-wrap .sb-search-icon {
       position: absolute;
       left: var(--sds-size-space-300);
       top: 50%;
       transform: translateY(-50%);
-      font-size: 18px;
-      color: var(--sds-color-icon-default-secondary);
+      width: 16px;
+      height: 16px;
       pointer-events: none;
+      color: var(--sds-color-text-default-tertiary);
     }
 
     #search-input {
       width: 100%;
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-      padding-left: 40px;
-      font-size: var(--sds-typo-body-size-medium);
+      height: 42px;
+      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg) var(--sds-size-padding-sm) 40px;
       border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-full);
+      border-radius: var(--sds-size-radius-200);
       background: var(--sds-color-background-default-default);
       color: var(--sds-color-text-default-default);
+      font-family: inherit;
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: 400;
       outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-      height: 48px;
+      box-sizing: border-box;
     }
-
+    #search-input::placeholder {
+      color: var(--sds-color-text-default-tertiary);
+    }
     #search-input:focus {
       border-color: var(--sds-color-border-brand-default);
-      box-shadow: 0 0 0 3px var(--sds-color-background-brand-tertiary);
     }
 
-    #search-input::placeholder {
-      color: var(--sds-color-text-default-secondary);
-    }
-
-    .sb-clear {
-      position: absolute;
-      right: var(--sds-size-space-300);
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--sds-color-background-default-secondary);
-      border: none;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-      color: var(--sds-color-text-default-secondary);
-    }
-
-    .sb-clear:hover {
-      background: var(--sds-color-background-default-tertiary);
+    /* ── Section Labels ─── */
+    .sb-section-label {
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 600;
       color: var(--sds-color-text-default-default);
+      margin: 0;
     }
 
-    #search-results {
-      display: none;
+    /* ── Recent Search Tags ─── */
+    .sb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sds-size-space-200);
+    }
+
+    .sb-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--sds-size-space-150) var(--sds-size-space-300);
+      background: var(--sds-color-background-default-secondary);
+      border-radius: var(--sds-size-radius-full);
+      border: none;
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 500;
+      color: var(--sds-color-text-default-secondary);
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .sb-tag:hover {
+      background: var(--sds-color-background-default-tertiary);
+    }
+
+    /* ── Trending Items ─── */
+    .sb-trending-list {
+      display: flex;
       flex-direction: column;
       gap: var(--sds-size-space-200);
     }
 
-    .search-result-item {
+    .sb-trending-item {
       display: flex;
       align-items: center;
-      gap: var(--sds-size-space-300);
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-      background: var(--sds-color-background-default-default);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-100);
+      gap: var(--sds-size-space-200);
       cursor: pointer;
-      transition: background 0.15s ease;
     }
 
-    .search-result-item:hover {
+    .sb-trending-item__thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--sds-size-radius-200);
       background: var(--sds-color-background-default-secondary);
-    }
-
-    .search-result-item__image {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-100);
-      font-size: 24px;
+      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .search-result-item__info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-100);
+    .sb-trending-item__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .search-result-item__name {
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-    }
-
-    .search-result-item__price {
+    .sb-trending-item__name {
       font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-brand-default);
-      font-weight: var(--sds-typo-body-font-weight-strong);
+      font-weight: 400;
+      color: var(--sds-color-text-default-default);
     }
 
-    .search-results__empty {
-      text-align: center;
-      padding: var(--sds-size-padding-xxl);
-      color: var(--sds-color-text-default-secondary);
-      font-size: var(--sds-typo-body-size-medium);
+    /* ── Results Dropdown (for dynamic search) ─── */
+    #search-results {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div id="search-container">
-    <div class="sb-wrapper">
-      <span class="sb-icon">🔍</span>
-      <input
-        id="search-input"
-        type="text"
-        placeholder="Search products…"
-        autocomplete="off"
-      />
-      <button class="sb-clear" data-action="clear-search" title="Clear search">✕</button>
-    </div>
-    <div id="search-results">
-      <!-- Dynamically rendered by search-bar.ts -->
+  <div class="sb-wrap fade-in">
+    <div class="sb-card">
+
+      <!-- Search Input with icon overlay -->
+      <div class="sb-input-wrap">
+        <svg class="sb-search-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="13" y1="13" x2="17.5" y2="17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="search" id="search-input" placeholder="Search products..." autocomplete="off" />
+      </div>
+
+      <h3 class="sb-section-label">Recent Searches</h3>
+      <div class="sb-tags">
+        <button class="sb-tag" data-action="tag-search" data-query="Nike Air Max">Nike Air Max</button>
+        <button class="sb-tag" data-action="tag-search" data-query="Running Shoes">Running Shoes</button>
+        <button class="sb-tag" data-action="tag-search" data-query="T-Shirts">T-Shirts</button>
+        <button class="sb-tag" data-action="tag-search" data-query="Caps">Caps</button>
+        <button class="sb-tag" data-action="tag-search" data-query="Urban Bomber">Urban Bomber</button>
+      </div>
+
+      <h3 class="sb-section-label">Trending</h3>
+      <div class="sb-trending-list" id="trending-list">
+        <div class="sb-trending-item" data-action="select-product" data-product-id="5">
+          <div class="sb-trending-item__thumb"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=64&h=64&fit=crop&q=80" alt="" /></div>
+          <span class="sb-trending-item__name">Ultra Boost Sneakers</span>
+        </div>
+        <div class="sb-trending-item" data-action="select-product" data-product-id="7">
+          <div class="sb-trending-item__thumb"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=64&h=64&fit=crop&q=80" alt="" /></div>
+          <span class="sb-trending-item__name">Trail Utility Backpack</span>
+        </div>
+        <div class="sb-trending-item" data-action="select-product" data-product-id="6">
+          <div class="sb-trending-item__thumb"><img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=64&h=64&fit=crop&q=80" alt="" /></div>
+          <span class="sb-trending-item__name">Chronograph Watch</span>
+        </div>
+      </div>
+
+      <div id="search-results"></div>
     </div>
   </div>
   <script type="module" src="/src/widgets/search-bar.ts"></script>

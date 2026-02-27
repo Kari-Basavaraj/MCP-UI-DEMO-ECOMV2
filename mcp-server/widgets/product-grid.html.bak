@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Grid – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
+  <style>
+    .pg-wrap {
+      width: 950px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .pg-card {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+    }
+
+    .pg-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pg-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
+      margin: 0;
+    }
+
+    .pg-search-pill {
+      height: 40px;
+      min-width: 194px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 16px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 9999px;
+      background: var(--sds-color-background-default-default);
+      color: var(--sds-color-text-default-secondary);
+      font-size: 14px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .pg-count {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--sds-color-text-default-secondary);
+    }
+
+    #product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Grid Card ─── */
+    .pg-product {
+      width: 100%;
+      min-width: 0;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pg-product__thumb {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: var(--sds-color-background-default-secondary);
+      overflow: hidden;
+    }
+
+    .pg-product__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pg-product__cat-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 2px 6px;
+      background: var(--sds-color-background-default-default);
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-secondary);
+      text-transform: uppercase;
+    }
+
+    .pg-product__info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .pg-product__name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-default);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .pg-product__price-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pg-product__price-original {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--sds-color-text-default-tertiary);
+      text-decoration: line-through;
+    }
+
+    .pg-product__price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--sds-color-text-positive-default);
+    }
+
+    .pg-product__btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 12px 8px;
+    }
+    .pg-product__btn:hover {
+      background: var(--sds-color-background-brand-hover);
+    }
+
+    .pg-product__btn--secondary {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sds-color-background-default-secondary-hover);
+      color: var(--sds-color-text-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 12px 8px;
+    }
+    .pg-product__btn--secondary:hover {
+      border-color: var(--sds-color-border-brand-default);
+      color: var(--sds-color-text-brand-default);
+    }
+
+    .pg-product__actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .empty-state {
+      width: 100%;
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--sds-color-text-default-secondary);
+      font-size: 16px;
+    }
+
+    /* ── Filter Tabs ─── */
+    #filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pg-tab {
+      height: 32px;
+      padding: 0 8px;
+      border-radius: 8px;
+      border: 1px solid var(--sds-color-border-default-default);
+      background: var(--sds-color-background-default-default);
+      color: var(--sds-color-text-default-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .pg-tab:hover {
+      border-color: var(--sds-color-border-brand-default);
+      color: var(--sds-color-text-brand-default);
+    }
+    .pg-tab--active {
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border-color: var(--sds-color-background-brand-default);
+    }
+    .pg-tab--active:hover {
+      background: var(--sds-color-background-brand-hover);
+      color: var(--sds-color-text-brand-on-brand);
+    }
+  </style>
+</head>
+<body>
+  <div class="pg-wrap fade-in">
+    <div class="pg-card">
+      <div class="pg-header">
+        <h1 class="pg-title">Shop All Products</h1>
+        <button class="pg-search-pill" data-action="open-search">Search products...</button>
+      </div>
+      <span class="pg-count" id="product-count"></span>
+      <div id="filter-tabs"></div>
+      <div id="product-grid">
+        <p class="empty-state">Loading products…</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/widgets/product-grid.ts"></script>
+</body>
+</html>

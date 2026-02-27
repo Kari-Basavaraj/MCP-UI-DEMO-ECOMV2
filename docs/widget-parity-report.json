@@ -1,0 +1,245 @@
+{
+  "generatedAt": "2026-02-26T12:51:32.239Z",
+  "report": [
+    {
+      "widget": "product-grid",
+      "status": "ok",
+      "ref": {
+        "width": 950,
+        "height": 855
+      },
+      "act": {
+        "width": 950,
+        "height": 879
+      },
+      "compared": {
+        "width": 950,
+        "height": 855
+      },
+      "diffPixels": 328551,
+      "diffRatio": 0.4044949215143121,
+      "parityScore": 59.55,
+      "diffImage": "screenshots/diff/product-grid.png"
+    },
+    {
+      "widget": "category-filter",
+      "status": "ok",
+      "ref": {
+        "width": 950,
+        "height": 453
+      },
+      "act": {
+        "width": 950,
+        "height": 727
+      },
+      "compared": {
+        "width": 950,
+        "height": 453
+      },
+      "diffPixels": 173551,
+      "diffRatio": 0.4032787266178692,
+      "parityScore": 59.67,
+      "diffImage": "screenshots/diff/category-filter.png"
+    },
+    {
+      "widget": "product-card",
+      "status": "ok",
+      "ref": {
+        "width": 420,
+        "height": 449
+      },
+      "act": {
+        "width": 420,
+        "height": 489
+      },
+      "compared": {
+        "width": 420,
+        "height": 449
+      },
+      "diffPixels": 69188,
+      "diffRatio": 0.36688938381588715,
+      "parityScore": 63.31,
+      "diffImage": "screenshots/diff/product-card.png"
+    },
+    {
+      "widget": "wishlist",
+      "status": "ok",
+      "ref": {
+        "width": 950,
+        "height": 438
+      },
+      "act": {
+        "width": 950,
+        "height": 478
+      },
+      "compared": {
+        "width": 950,
+        "height": 438
+      },
+      "diffPixels": 136497,
+      "diffRatio": 0.32803893294881037,
+      "parityScore": 67.2,
+      "diffImage": "screenshots/diff/wishlist.png"
+    },
+    {
+      "widget": "product-detail",
+      "status": "ok",
+      "ref": {
+        "width": 860,
+        "height": 570
+      },
+      "act": {
+        "width": 860,
+        "height": 499
+      },
+      "compared": {
+        "width": 860,
+        "height": 499
+      },
+      "diffPixels": 136995,
+      "diffRatio": 0.31923148622827047,
+      "parityScore": 68.08,
+      "diffImage": "screenshots/diff/product-detail.png"
+    },
+    {
+      "widget": "cart-view",
+      "status": "ok",
+      "ref": {
+        "width": 520,
+        "height": 426
+      },
+      "act": {
+        "width": 520,
+        "height": 461
+      },
+      "compared": {
+        "width": 520,
+        "height": 426
+      },
+      "diffPixels": 55805,
+      "diffRatio": 0.2519185626579993,
+      "parityScore": 74.81,
+      "diffImage": "screenshots/diff/cart-view.png"
+    },
+    {
+      "widget": "checkout-form",
+      "status": "ok",
+      "ref": {
+        "width": 520,
+        "height": 900
+      },
+      "act": {
+        "width": 520,
+        "height": 761
+      },
+      "compared": {
+        "width": 520,
+        "height": 761
+      },
+      "diffPixels": 43183,
+      "diffRatio": 0.10912513898716264,
+      "parityScore": 89.09,
+      "diffImage": "screenshots/diff/checkout-form.png"
+    },
+    {
+      "widget": "price-tag",
+      "status": "ok",
+      "ref": {
+        "width": 420,
+        "height": 203
+      },
+      "act": {
+        "width": 420,
+        "height": 350
+      },
+      "compared": {
+        "width": 420,
+        "height": 203
+      },
+      "diffPixels": 8970,
+      "diffRatio": 0.10520760028149191,
+      "parityScore": 89.48,
+      "diffImage": "screenshots/diff/price-tag.png"
+    },
+    {
+      "widget": "search-bar",
+      "status": "ok",
+      "ref": {
+        "width": 520,
+        "height": 120
+      },
+      "act": {
+        "width": 520,
+        "height": 372
+      },
+      "compared": {
+        "width": 520,
+        "height": 120
+      },
+      "diffPixels": 6537,
+      "diffRatio": 0.10475961538461538,
+      "parityScore": 89.52,
+      "diffImage": "screenshots/diff/search-bar.png"
+    },
+    {
+      "widget": "order-confirmation",
+      "status": "ok",
+      "ref": {
+        "width": 540,
+        "height": 747
+      },
+      "act": {
+        "width": 540,
+        "height": 706
+      },
+      "compared": {
+        "width": 540,
+        "height": 706
+      },
+      "diffPixels": 38662,
+      "diffRatio": 0.10141118455566048,
+      "parityScore": 89.86,
+      "diffImage": "screenshots/diff/order-confirmation.png"
+    },
+    {
+      "widget": "review-rating",
+      "status": "ok",
+      "ref": {
+        "width": 520,
+        "height": 762
+      },
+      "act": {
+        "width": 520,
+        "height": 600
+      },
+      "compared": {
+        "width": 520,
+        "height": 600
+      },
+      "diffPixels": 30647,
+      "diffRatio": 0.0982275641025641,
+      "parityScore": 90.18,
+      "diffImage": "screenshots/diff/review-rating.png"
+    },
+    {
+      "widget": "cart-summary",
+      "status": "ok",
+      "ref": {
+        "width": 420,
+        "height": 100
+      },
+      "act": {
+        "width": 420,
+        "height": 401
+      },
+      "compared": {
+        "width": 420,
+        "height": 100
+      },
+      "diffPixels": 3137,
+      "diffRatio": 0.0746904761904762,
+      "parityScore": 92.53,
+      "diffImage": "screenshots/diff/cart-summary.png"
+    }
+  ]
+}

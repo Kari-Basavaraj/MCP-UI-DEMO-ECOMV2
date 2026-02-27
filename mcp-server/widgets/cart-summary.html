@@ -6,85 +6,150 @@
   <title>Cart Summary – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #cart-summary {
-      max-width: 320px;
+    .cs-wrap {
+      max-width: 360px;
       margin: 0 auto;
-      padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
     }
 
     .cs-card {
-      background: var(--sds-color-background-default-default);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      padding: var(--sds-size-padding-lg);
       display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+    }
+
+    .cs-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
+      margin: 0;
+    }
+
+    .cs-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cs-line {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: var(--sds-size-space-400);
-      cursor: pointer;
-      transition: box-shadow 0.15s ease;
     }
 
-    .cs-card:hover {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    .cs-line__label {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--sds-color-text-default-secondary);
     }
 
-    .cs-icon {
-      font-size: 28px;
-      position: relative;
+    .cs-line__value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-default);
     }
 
-    .cs-badge {
-      position: absolute;
-      top: -6px;
-      right: -8px;
-      width: 20px;
-      height: 20px;
+    .cs-line__value--discount {
+      color: var(--sds-color-text-positive-default);
+    }
+
+    .cs-line__value--free {
+      color: var(--sds-color-text-positive-tertiary);
+    }
+
+    .cs-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--sds-color-border-default-default);
+      border: none;
+      margin: 0;
+    }
+
+    .cs-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cs-total-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .cs-total-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .cs-savings {
+      padding: 8px 12px;
+      background: var(--sds-color-background-positive-tertiary);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--sds-color-text-positive-default);
+    }
+
+    .cs-btn {
+      width: 100%;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--sds-color-background-danger-default);
-      color: var(--sds-color-text-danger-on-danger);
-      border-radius: 50%;
-      font-size: 11px;
-      font-weight: var(--sds-typo-body-font-weight-strong);
+      padding: 12px;
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
     }
-
-    .cs-info {
-      flex: 1;
-    }
-
-    .cs-label {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-      margin: 0 0 var(--sds-size-space-100) 0;
-    }
-
-    #cart-total-price {
-      font-size: var(--sds-typo-heading-size-small);
-      font-weight: var(--sds-typo-heading-font-weight);
-      color: var(--sds-color-text-brand-default);
-    }
-
-    .cs-arrow {
-      font-size: 18px;
-      color: var(--sds-color-icon-default-secondary);
+    .cs-btn:hover {
+      background: var(--sds-color-background-brand-hover);
     }
   </style>
 </head>
 <body>
-  <div id="cart-summary">
-    <div class="cs-card" data-action="open-cart">
-      <div class="cs-icon">
-        🛒
-        <span class="cs-badge" id="item-count" style="display: none;">0</span>
+  <div class="cs-wrap fade-in">
+    <div class="cs-card">
+      <h2 class="cs-title">Order Summary</h2>
+
+      <div class="cs-lines">
+        <div class="cs-line">
+          <span class="cs-line__label">Subtotal (<span id="item-count">0</span> items)</span>
+          <span class="cs-line__value" id="cs-subtotal">₹0</span>
+        </div>
+        <div class="cs-line">
+          <span class="cs-line__label">Discount</span>
+          <span class="cs-line__value cs-line__value--discount" id="cs-discount">−₹0</span>
+        </div>
+        <div class="cs-line">
+          <span class="cs-line__label">Shipping</span>
+          <span class="cs-line__value cs-line__value--free" id="cs-shipping">FREE</span>
+        </div>
+        <div class="cs-line">
+          <span class="cs-line__label">Tax</span>
+          <span class="cs-line__value" id="cs-tax">₹0</span>
+        </div>
       </div>
-      <div class="cs-info">
-        <p class="cs-label">Cart Total</p>
-        <span id="cart-total-price">₹0</span>
+
+      <hr class="cs-divider" />
+
+      <div class="cs-total-row">
+        <span class="cs-total-label">Total</span>
+        <span class="cs-total-value" id="cart-total-price">₹0</span>
       </div>
-      <span class="cs-arrow">›</span>
+
+      <div class="cs-savings" id="cs-savings">You save ₹0 on this order!</div>
+
+      <button class="cs-btn" data-action="open-cart">Place Order</button>
     </div>
   </div>
   <script type="module" src="/src/widgets/cart-summary.ts"></script>

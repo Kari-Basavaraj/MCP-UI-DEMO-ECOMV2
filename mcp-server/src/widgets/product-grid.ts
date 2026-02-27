@@ -1,40 +1,64 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import { callTool } from "./bridge";
 
 interface Product {
   id: number;
   name: string;
   category: string;
   price: number;
+  originalPrice?: number;
   image: string;
 }
 
-const app = new App({ name: "Product Grid", version: "1.0.0" });
+let allProducts: Product[] = [];
+let activeFilter = "All";
 
 function formatPrice(price: number): string {
   return `₹${price.toLocaleString("en-IN")}`;
 }
 
+function renderFilterTabs(categories: string[]): void {
+  const tabsEl = document.getElementById("filter-tabs");
+  if (!tabsEl) return;
+  const cats = ["All", ...categories.filter((c) => c !== "All")];
+  tabsEl.innerHTML = cats
+    .map(
+      (cat) =>
+        `<button class="pg-tab${activeFilter === cat ? " pg-tab--active" : ""}" data-action="local-filter" data-category="${cat}">${cat}</button>`
+    )
+    .join("");
+}
+
+function formatOriginalPrice(p: Product): string {
+  const orig = p.originalPrice ?? Math.round(p.price * 1.3);
+  return `₹${orig.toLocaleString("en-IN")}`;
+}
+
 function renderGrid(products: Product[]): void {
   const grid = document.getElementById("product-grid");
+  const countEl = document.getElementById("product-count");
   if (!grid) return;
-
+  if (countEl) countEl.textContent = `${products.length} products`;
   if (products.length === 0) {
     grid.innerHTML = `<p class="empty-state">No products found.</p>`;
     return;
   }
-
   grid.innerHTML = products
     .map(
       (p) => `
-    <div class="product-card" data-product-id="${p.id}">
-      <img src="${p.image}" alt="${p.name}" class="product-card__image" />
-      <div class="product-card__body">
-        <h3 class="product-card__name">${p.name}</h3>
-        <span class="product-card__category">${p.category}</span>
-        <span class="product-card__price">${formatPrice(p.price)}</span>
-        <div class="product-card__actions">
-          <button data-action="add-to-cart" data-product-id="${p.id}" class="btn btn--primary">Add to Cart</button>
-          <button data-action="details" data-product-id="${p.id}" class="btn btn--secondary">Details</button>
+    <div class="pg-product" data-action="details" data-product-id="${p.id}">
+      <div class="pg-product__thumb">
+        <img class="pg-product__img" src="${p.image}" alt="${p.name}" />
+        <span class="pg-product__cat-tag">${p.category}</span>
+      </div>
+      <div class="pg-product__info">
+        <h3 class="pg-product__name">${p.name}</h3>
+        <div class="pg-product__price-row">
+          <span class="pg-product__price-original">${formatOriginalPrice(p)}</span>
+          <span class="pg-product__price">${formatPrice(p.price)}</span>
+        </div>
+        <div class="pg-product__actions">
+          <button class="pg-product__btn" data-action="add-to-cart" data-product-id="${p.id}">Add to Cart</button>
+          <button class="pg-product__btn--secondary" data-action="details" data-product-id="${p.id}">Details</button>
         </div>
       </div>
     </div>`
@@ -42,49 +66,49 @@ function renderGrid(products: Product[]): void {
     .join("");
 }
 
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data = JSON.parse(text);
-      const products: Product[] = data.products ?? [];
-      renderGrid(products);
-    } catch {
-      // ignore parse errors
-    }
-  }
-};
+function applyFilter(category: string): void {
+  activeFilter = category;
+  const filtered =
+    category === "All"
+      ? allProducts
+      : allProducts.filter((p) => p.category === category);
+  renderGrid(filtered);
+  document.querySelectorAll<HTMLButtonElement>(".pg-tab").forEach((btn) => {
+    btn.classList.toggle("pg-tab--active", btn.dataset.category === category);
+  });
+}
 
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
   if (!btn) return;
-
   const action = btn.dataset.action;
   const productId = btn.dataset.productId ? Number(btn.dataset.productId) : undefined;
 
-  if (action === "add-to-cart" && productId !== undefined) {
-    const result = await app.callServerTool({ name: "add_to_cart", arguments: { productId } });
-    const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-    if (text) {
-      try {
-        const data = JSON.parse(text);
-        // Optionally re-render if the response includes updated product list
-        if (data.products) {
-          renderGrid(data.products);
-        }
-      } catch {
-        // ignore
-      }
-    }
+  if (action === "local-filter") {
+    applyFilter(btn.dataset.category ?? "All");
+    return;
   }
-
-  // "details" action is left to the host
+  if (action === "open-search") {
+    callTool("search_products", { query: "" });
+    return;
+  }
+  if (action === "add-to-cart" && productId !== undefined) {
+    btn.textContent = "Adding…";
+    (btn as HTMLButtonElement).disabled = true;
+    callTool("add_to_cart", { productId });
+    setTimeout(() => { btn.textContent = "Add to Cart"; (btn as HTMLButtonElement).disabled = false; }, 2000);
+    return;
+  }
+  if (action === "details" && productId !== undefined) {
+    if ((e.target as HTMLElement).closest('[data-action="add-to-cart"]')) return;
+    callTool("get_product_detail", { productId });
+  }
 });
 
-// Fallback: read pre-injected data when ext-apps bridge is not available
 const _injected = (window as any).__MCP_TOOL_RESULT__;
 if (_injected) {
-  renderGrid(_injected.products ?? []);
+  allProducts = (_injected.products ?? []);
+  const categories = _injected.categories ?? [...new Set(allProducts.map((p: Product) => p.category))];
+  renderFilterTabs(categories);
+  renderGrid(allProducts);
 }
-
-app.connect();

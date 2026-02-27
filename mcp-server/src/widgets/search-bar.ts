@@ -1,4 +1,4 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import { callTool } from "./bridge";
 
 interface Product {
   id: number;
@@ -7,11 +7,6 @@ interface Product {
   price: number;
   image: string;
 }
-
-const app = new App({ name: "Search Bar", version: "1.0.0" });
-
-let debounceTimer: ReturnType<typeof setTimeout> | null = null;
-const DEBOUNCE_MS = 300;
 
 function formatPrice(price: number): string {
   return `₹${price.toLocaleString("en-IN")}`;
@@ -39,7 +34,6 @@ function renderResults(products: Product[]): void {
     </div>`
     )
     .join("");
-
   resultsEl.style.display = "";
 }
 
@@ -51,78 +45,38 @@ function clearResults(): void {
   }
 }
 
-async function performSearch(query: string): Promise<void> {
-  if (!query.trim()) {
-    clearResults();
-    return;
-  }
-
-  const result = await app.callServerTool({ name: "search_products", arguments: { query } });
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data = JSON.parse(text);
-      const products: Product[] = data.products ?? [];
-      renderResults(products);
-    } catch {
-      // ignore
+// Search on Enter key
+const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
+if (searchInput) {
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && searchInput.value.trim()) {
+      callTool("search_products", { query: searchInput.value.trim() });
     }
-  }
+  });
 }
 
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data = JSON.parse(text);
-      if (data.products) {
-        renderResults(data.products);
-      }
-    } catch {
-      // ignore parse errors
-    }
-  }
-};
-
-function setupListeners(): void {
-  const input = document.getElementById("search-input") as HTMLInputElement | null;
-
-  if (input) {
-    input.addEventListener("input", () => {
-      if (debounceTimer) clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        performSearch(input.value);
-      }, DEBOUNCE_MS);
-    });
-  }
-}
-
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
   if (!btn) return;
 
-  const action = btn.dataset.action;
-
-  if (action === "clear-search") {
-    const input = document.getElementById("search-input") as HTMLInputElement | null;
-    if (input) input.value = "";
+  if (btn.dataset.action === "clear-search") {
+    if (searchInput) searchInput.value = "";
     clearResults();
   }
-
-  // "select-product" action is left to the host
+  if (btn.dataset.action === "select-product") {
+    const productId = btn.dataset.productId ? Number(btn.dataset.productId) : undefined;
+    if (productId !== undefined) {
+      callTool("get_product_detail", { productId });
+    }
+  }
+  if (btn.dataset.action === "tag-search") {
+    const query = btn.dataset.query ?? "";
+    if (searchInput) searchInput.value = query;
+    if (query) callTool("search_products", { query });
+  }
 });
 
-// Set up input listeners once DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", setupListeners);
-} else {
-  setupListeners();
-}
-
-// Fallback: read pre-injected data when ext-apps bridge is not available
 const _injected = (window as any).__MCP_TOOL_RESULT__;
-if (_injected) {
-  renderResults(_injected.products ?? []);
+if (_injected && _injected.products) {
+  renderResults(_injected.products);
 }
-
-app.connect();

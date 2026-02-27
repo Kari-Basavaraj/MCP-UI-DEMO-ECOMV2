@@ -175,8 +175,8 @@ export function createMCPServer() {
     const data = {
       product: {
         ...product,
-        description: "Premium quality product from a trusted brand. Designed for comfort and durability.",
-        originalPrice: Math.round(product.price * 1.25),
+        description: product.description || "Premium quality product from a trusted brand. Designed for comfort and durability.",
+        originalPrice: product.originalPrice || Math.round(product.price * 1.25),
         inStock: true,
       },
     };
@@ -199,7 +199,7 @@ export function createMCPServer() {
       return { content: [{ type: "text", text: JSON.stringify({ message: "Product not found" }) }] };
     }
     const data = {
-      product: { ...product, originalPrice: Math.round(product.price * 1.3), inStock: true },
+      product: { ...product, originalPrice: product.originalPrice || Math.round(product.price * 1.3), inStock: true },
     };
     return {
       content: [

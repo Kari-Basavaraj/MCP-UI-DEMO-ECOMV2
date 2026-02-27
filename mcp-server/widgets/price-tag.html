@@ -3,159 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Price Tag – MCP Ecommerce</title>
+  <title>Price – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #price-tag {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-800);
-    }
-
-    .pt-variant-label {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      margin: 0 0 var(--sds-size-space-300) 0;
-    }
 
     .pt-card {
-      padding: var(--sds-size-padding-lg);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      background: var(--sds-color-background-default-default);
-    }
-
-    /* Sale variant */
-    .pt-sale {
+      max-width: 420px;
+      width: 100%;
       display: flex;
-      align-items: baseline;
-      gap: var(--sds-size-space-300);
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+      box-sizing: border-box;
+      font-family: inherit;
+      overflow: hidden;
     }
 
-    .pt-original-price {
-      font-size: var(--sds-typo-body-size-medium);
-      color: var(--sds-color-text-default-secondary);
-      text-decoration: line-through;
+    .pt-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--sds-color-background-default-secondary);
+    }
+    .pt-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .pt-sale-price {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
-      color: var(--sds-color-text-brand-default);
+    .pt-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 24px 24px;
     }
 
-    .pt-discount-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
-      background: var(--sds-color-background-positive-default);
-      color: #fff;
-      border-radius: var(--sds-size-radius-full);
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
+    .pt-name { margin:0; font-size:20px; font-weight:700; color: var(--sds-color-text-default-default); }
+    .pt-desc { margin:0; font-size:14px; font-weight:400; color: var(--sds-color-text-default-secondary); line-height:1.4; }
+
+    .pt-tags { display:flex; gap:8px; align-items:center; }
+    .pt-tag--sale {
+      padding: 4px 8px;
+      background: var(--sds-color-background-danger-tertiary);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sds-color-text-danger-default);
+    }
+    .pt-tag--off {
+      padding: 4px 8px;
+      background: var(--sds-color-background-positive-tertiary);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sds-color-text-positive-default);
     }
 
-    .pt-limited-label {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--sds-size-space-200);
-      margin-top: var(--sds-size-space-300);
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
-      background: var(--sds-color-background-warning-tertiary);
-      color: var(--sds-color-icon-warning-default);
-      border-radius: var(--sds-size-radius-100);
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      width: fit-content;
-    }
+    .pt-prices { display:flex; align-items:baseline; gap:12px; }
+    .pt-sale-price { font-size:32px; font-weight:700; color: var(--sds-color-text-positive-default); }
+    .pt-original-price { font-size:16px; font-weight:400; color: var(--sds-color-text-default-tertiary); text-decoration:line-through; }
 
-    .pt-limited-label::before {
-      content: "⏰";
-    }
+    .pt-savings { font-size:14px; font-weight:500; color: var(--sds-color-text-positive-default); }
 
-    /* Regular variant */
-    .pt-regular-price {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
-      color: var(--sds-color-text-default-default);
-    }
+    .pt-divider { height:1px; background:var(--sds-color-border-default-default); border:none; margin:0; }
 
-    .pt-regular-info {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-      margin-top: var(--sds-size-space-200);
-    }
-
-    /* Out-of-stock variant */
-    .pt-oos {
-      opacity: 0.6;
-    }
-
-    .pt-oos-price {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
-      color: var(--sds-color-text-default-secondary);
-      text-decoration: line-through;
-    }
-
-    .pt-oos-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
-      background: var(--sds-color-background-danger-default);
-      color: #fff;
-      border-radius: var(--sds-size-radius-full);
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      margin-left: var(--sds-size-space-300);
-    }
+    .pt-emi { font-size:14px; font-weight:400; color: var(--sds-color-text-default-secondary); }
+    .pt-tax { font-size:12px; font-weight:400; color: var(--sds-color-text-default-tertiary); }
   </style>
 </head>
 <body>
-  <div id="price-tag">
-
-    <!-- Sale Variant -->
-    <div>
-      <p class="pt-variant-label">Sale Price</p>
-      <div class="pt-card">
-        <div class="pt-sale">
-          <span class="pt-original-price">₹4,999</span>
-          <span class="pt-sale-price">₹3,999</span>
-          <span class="pt-discount-badge">20% OFF</span>
-        </div>
-        <div class="pt-limited-label">Limited Time</div>
-      </div>
+  <div class="pt-card fade-in" id="price-tag">
+    <div class="pt-image" id="pt-image">
+      <img id="pt-img" src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=400&h=225&fit=crop&q=80" alt="Product" />
     </div>
+    <div class="pt-body">
+      <h2 class="pt-name" id="pt-name">Running Shoes</h2>
+      <p class="pt-desc" id="pt-desc">Premium running shoes with advanced cushioning technology</p>
 
-    <!-- Regular Variant -->
-    <div>
-      <p class="pt-variant-label">Regular Price</p>
-      <div class="pt-card">
-        <span class="pt-regular-price">₹1,999</span>
-        <p class="pt-regular-info">Inclusive of all taxes</p>
+      <div class="pt-tags">
+        <span class="pt-tag--sale">SALE</span>
+        <span class="pt-tag--off" id="pt-off-tag">23% OFF</span>
       </div>
-    </div>
 
-    <!-- Out of Stock Variant -->
-    <div>
-      <p class="pt-variant-label">Out of Stock</p>
-      <div class="pt-card pt-oos">
-        <span class="pt-oos-price">₹2,999</span>
-        <span class="pt-oos-badge">Out of Stock</span>
+      <div class="pt-prices">
+        <span class="pt-sale-price" id="pt-sale-price">₹3,799</span>
+        <span class="pt-original-price" id="pt-original-price">₹4,999</span>
       </div>
-    </div>
 
+      <span class="pt-savings" id="pt-savings">You save ₹1,200</span>
+
+      <hr class="pt-divider" />
+
+      <span class="pt-emi" id="pt-emi">EMI from ₹317/month</span>
+      <span class="pt-tax">Inclusive of all taxes</span>
+    </div>
   </div>
-
   <script type="module" src="/src/widgets/price-tag.ts"></script>
 </body>
 </html>

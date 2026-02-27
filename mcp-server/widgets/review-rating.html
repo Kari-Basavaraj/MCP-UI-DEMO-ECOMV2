@@ -3,244 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Review &amp; Rating – MCP Ecommerce</title>
+  <title>Reviews – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #review-container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
-    }
-
-    .rv-summary {
-      display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-400);
-      margin-bottom: var(--sds-size-space-600);
-      padding-bottom: var(--sds-size-space-600);
-      border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-    }
-
-    .rv-rating-big {
-      font-size: var(--sds-typo-subtitle-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
-      line-height: 1;
-    }
-
-    .rv-stars-block {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-200);
-    }
-
-    .rv-stars {
-      display: flex;
-      gap: 2px;
-      font-size: 20px;
-      color: var(--sds-color-background-warning-default);
-    }
-
-    .rv-star-empty {
-      color: var(--sds-color-border-default-default);
-    }
-
-    .rv-review-count {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-    }
-
-    .rv-write-btn {
-      margin-left: auto;
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-      background: var(--sds-color-background-brand-default);
-      color: var(--sds-color-text-brand-on-brand);
-      border: none;
-      border-radius: var(--sds-size-radius-200);
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .rv-write-btn:hover {
-      opacity: 0.9;
-    }
-
-    .rv-reviews-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-400);
-    }
 
     .rv-card {
-      padding: var(--sds-size-padding-lg);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
       background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+      box-sizing: border-box;
+      font-family: inherit;
     }
 
-    .rv-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: var(--sds-size-space-300);
-    }
+    .rv-title { margin:0; font-size:20px; font-weight:700; color: var(--sds-color-text-default-default); }
 
-    .rv-card-user {
+    /* Summary row */
+    .rv-summary {
       display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-300);
+      gap: 16px;
+      align-items: stretch;
+      padding: 16px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
     }
-
-    .rv-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--sds-color-background-brand-default);
-      color: var(--sds-color-text-brand-on-brand);
+    .rv-summary__left {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
+      gap: 4px;
+      min-width: 80px;
     }
+    .rv-summary__number { font-size:40px; font-weight:700; color: var(--sds-color-text-default-default); line-height:1; }
+    .rv-summary__stars { font-size:20px; color: var(--sds-color-background-warning-default); letter-spacing:2px; }
+    .rv-summary__count { font-size:12px; font-weight:400; color: var(--sds-color-text-default-secondary); }
 
-    .rv-username {
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-    }
+    .rv-summary__right { flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center; }
+    .rv-bar-row { display:flex; align-items:center; gap:8px; }
+    .rv-bar-label { font-size:12px; font-weight:500; color: var(--sds-color-text-default-secondary); min-width:40px; }
+    .rv-bar-bg { flex:1; height:8px; background:var(--sds-color-background-default-secondary); border-radius:8px; overflow:hidden; }
+    .rv-bar-fill { height:100%; border-radius:8px; background:var(--sds-color-background-warning-default); }
+    .rv-bar-pct { font-size:12px; font-weight:400; color: var(--sds-color-text-default-tertiary); min-width:30px; text-align:right; }
 
-    .rv-date {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-    }
+    .rv-divider { height:1px; background:var(--sds-color-border-default-default); border:none; margin:0; }
 
-    .rv-card-stars {
+    /* Review cards */
+    .rv-list { display:flex; flex-direction:column; gap:4px; }
+    .rv-review {
       display: flex;
-      gap: 2px;
-      font-size: 14px;
-      color: var(--sds-color-background-warning-default);
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
     }
-
-    .rv-card-text {
-      font-size: var(--sds-typo-body-size-medium);
-      color: var(--sds-color-text-default-default);
-      line-height: 1.5;
-      margin: 0 0 var(--sds-size-space-400) 0;
-    }
-
-    .rv-card-actions {
-      display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-400);
-    }
-
-    .rv-helpful-btn {
-      display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-200);
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
-      background: var(--sds-color-background-default-secondary);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-full);
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-      cursor: pointer;
-    }
-
-    .rv-helpful-btn:hover {
-      background: var(--sds-color-background-default-default);
-      color: var(--sds-color-text-default-default);
-      border-color: var(--sds-color-text-default-default);
-    }
+    .rv-review__header { display:flex; align-items:center; gap:8px; }
+    .rv-review__name { font-size:14px; font-weight:600; color: var(--sds-color-text-default-default); }
+    .rv-review__stars { font-size:12px; color: var(--sds-color-background-warning-default); }
+    .rv-review__text { margin:0; font-size:14px; font-weight:400; color: var(--sds-color-text-default-secondary); line-height:1.4; }
+    .rv-review__date { font-size:12px; font-weight:400; color: var(--sds-color-text-default-tertiary); }
   </style>
 </head>
 <body>
-  <div id="review-container">
+  <div class="rv-card fade-in" id="review-container">
+    <h2 class="rv-title">Customer Reviews</h2>
 
-    <!-- Rating Summary -->
     <div class="rv-summary">
-      <span class="rv-rating-big">4.2</span>
-      <div class="rv-stars-block">
-        <div class="rv-stars">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span class="rv-star-empty">★</span>
-        </div>
-        <span class="rv-review-count">128 reviews</span>
+      <div class="rv-summary__left">
+        <span class="rv-summary__number" id="rv-avg">4.2</span>
+        <span class="rv-summary__stars" id="rv-stars">★★★★☆</span>
+        <span class="rv-summary__count" id="rv-count">128 reviews</span>
       </div>
-      <button class="rv-write-btn">Write a Review</button>
+      <div class="rv-summary__right" id="rv-bars">
+        <div class="rv-bar-row"><span class="rv-bar-label">5 star</span><div class="rv-bar-bg"><div class="rv-bar-fill" style="width:60%"></div></div><span class="rv-bar-pct">60%</span></div>
+        <div class="rv-bar-row"><span class="rv-bar-label">4 star</span><div class="rv-bar-bg"><div class="rv-bar-fill" style="width:25%"></div></div><span class="rv-bar-pct">25%</span></div>
+        <div class="rv-bar-row"><span class="rv-bar-label">3 star</span><div class="rv-bar-bg"><div class="rv-bar-fill" style="width:10%"></div></div><span class="rv-bar-pct">10%</span></div>
+        <div class="rv-bar-row"><span class="rv-bar-label">2 star</span><div class="rv-bar-bg"><div class="rv-bar-fill" style="width:3%"></div></div><span class="rv-bar-pct">3%</span></div>
+        <div class="rv-bar-row"><span class="rv-bar-label">1 star</span><div class="rv-bar-bg"><div class="rv-bar-fill" style="width:2%"></div></div><span class="rv-bar-pct">2%</span></div>
+      </div>
     </div>
 
-    <!-- Reviews List -->
-    <div class="rv-reviews-list">
+    <hr class="rv-divider" />
 
-      <!-- Review 1 -->
-      <div class="rv-card">
-        <div class="rv-card-header">
-          <div class="rv-card-user">
-            <div class="rv-avatar">AK</div>
-            <div>
-              <div class="rv-username">Anita Kumar</div>
-              <div class="rv-date">Feb 18, 2026</div>
-            </div>
-          </div>
-          <div class="rv-card-stars">
-            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-          </div>
+    <div class="rv-list" id="rv-list">
+      <div class="rv-review">
+        <div class="rv-review__header">
+          <span class="rv-review__name">Rahul M.</span>
+          <span class="rv-review__stars">★★★★★</span>
         </div>
-        <p class="rv-card-text">Absolutely love these shoes! Super comfortable for daily wear and the build quality is excellent. Would highly recommend to anyone looking for durable footwear.</p>
-        <div class="rv-card-actions">
-          <button class="rv-helpful-btn">👍 Helpful (12)</button>
-          <button class="rv-helpful-btn">👎 Not helpful (1)</button>
-        </div>
+        <p class="rv-review__text">Excellent quality and very comfortable for daily running.</p>
+        <span class="rv-review__date">2 days ago</span>
       </div>
-
-      <!-- Review 2 -->
-      <div class="rv-card">
-        <div class="rv-card-header">
-          <div class="rv-card-user">
-            <div class="rv-avatar">RS</div>
-            <div>
-              <div class="rv-username">Rahul Sharma</div>
-              <div class="rv-date">Feb 10, 2026</div>
-            </div>
-          </div>
-          <div class="rv-card-stars">
-            <span>★</span><span>★</span><span>★</span><span>★</span><span class="rv-star-empty" style="color: var(--sds-color-border-default-default);">★</span>
-          </div>
+      <div class="rv-review">
+        <div class="rv-review__header">
+          <span class="rv-review__name">Priya S.</span>
+          <span class="rv-review__stars">★★★★☆</span>
         </div>
-        <p class="rv-card-text">Good product overall. Sizing runs a little small so I'd suggest ordering one size up. The material quality and stitching are top-notch though.</p>
-        <div class="rv-card-actions">
-          <button class="rv-helpful-btn">👍 Helpful (8)</button>
-          <button class="rv-helpful-btn">👎 Not helpful (0)</button>
-        </div>
+        <p class="rv-review__text">Good shoes but sizing runs a bit small. Order half size up.</p>
+        <span class="rv-review__date">1 week ago</span>
       </div>
-
-      <!-- Review 3 -->
-      <div class="rv-card">
-        <div class="rv-card-header">
-          <div class="rv-card-user">
-            <div class="rv-avatar">PM</div>
-            <div>
-              <div class="rv-username">Priya Menon</div>
-              <div class="rv-date">Jan 28, 2026</div>
-            </div>
-          </div>
-          <div class="rv-card-stars">
-            <span>★</span><span>★</span><span>★</span><span class="rv-star-empty" style="color: var(--sds-color-border-default-default);">★</span><span class="rv-star-empty" style="color: var(--sds-color-border-default-default);">★</span>
-          </div>
-        </div>
-        <p class="rv-card-text">Decent shoes for the price. Delivery was fast and packaging was great. Comfort could be better for long walks though.</p>
-        <div class="rv-card-actions">
-          <button class="rv-helpful-btn">👍 Helpful (5)</button>
-          <button class="rv-helpful-btn">👎 Not helpful (2)</button>
-        </div>
-      </div>
-
     </div>
   </div>
-
   <script type="module" src="/src/widgets/review-rating.ts"></script>
 </body>
 </html>

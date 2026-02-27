@@ -10,6 +10,10 @@
     "install:all": "npm install && cd mcp-server && npm install && cd ../web-client && npm install"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@playwright/test": "^1.58.2",
+    "concurrently": "^8.2.2",
+    "pixelmatch": "^7.1.0",
+    "playwright": "^1.58.2",
+    "pngjs": "^7.0.0"
   }
 }

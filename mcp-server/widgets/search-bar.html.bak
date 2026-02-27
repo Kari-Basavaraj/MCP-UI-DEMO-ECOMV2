@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search – MCP Ecommerce</title>
+  <link rel="stylesheet" href="/src/widgets/shared.css" />
+  <style>
+    .sb-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .sb-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
+    }
+
+    /* ── Search Input Row ─── */
+    .sb-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .sb-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 40px;
+      padding: 12px 4px 12px 12px;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    #search-input {
+      flex: 1;
+      height: 41px;
+      padding: 12px 12px 12px 8px;
+      border: none;
+      background: transparent;
+      color: var(--sds-color-text-default-default);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 400;
+      outline: none;
+    }
+    #search-input::placeholder {
+      color: var(--sds-color-text-default-tertiary);
+    }
+
+    .sb-search-btn {
+      height: 32px;
+      padding: 0 12px;
+      margin-right: 4px;
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .sb-search-btn:hover {
+      background: var(--sds-color-background-brand-hover);
+    }
+
+    /* ── Section Labels ─── */
+    .sb-section-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-default);
+      margin: 0;
+    }
+
+    /* ── Recent Search Tags ─── */
+    .sb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sb-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: var(--sds-color-background-default-secondary);
+      border-radius: 9999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--sds-color-text-default-secondary);
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .sb-tag:hover {
+      background: var(--sds-color-background-default-tertiary);
+    }
+
+    /* ── Trending Items ─── */
+    .sb-trending-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sb-trending-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .sb-trending-item__thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--sds-color-background-default-secondary);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .sb-trending-item__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sb-trending-item__name {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--sds-color-text-default-default);
+    }
+
+    /* ── Results Dropdown (kept for dynamic search) ─── */
+    #search-results {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="sb-wrap fade-in">
+    <div class="sb-card">
+      <div class="sb-input-row">
+        <span class="sb-icon">🔍</span>
+        <input type="search" id="search-input" placeholder="Search products…" autocomplete="off" />
+        <button class="sb-search-btn" data-action="do-search">🔍 Search</button>
+      </div>
+
+      <h3 class="sb-section-label">Recent Searches</h3>
+      <div class="sb-tags">
+        <button class="sb-tag" data-action="tag-search" data-query="Running Shoes">Running Shoes</button>
+        <button class="sb-tag" data-action="tag-search" data-query="T-Shirt">T-Shirt</button>
+        <button class="sb-tag" data-action="tag-search" data-query="Watch">Watch</button>
+        <button class="sb-tag" data-action="tag-search" data-query="Backpack">Backpack</button>
+      </div>
+
+      <h3 class="sb-section-label">Trending</h3>
+      <div class="sb-trending-list" id="trending-list">
+        <div class="sb-trending-item" data-action="select-product" data-product-id="1">
+          <div class="sb-trending-item__thumb"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=64&h=64&fit=crop&q=80" alt="" /></div>
+          <span class="sb-trending-item__name">Nike Air Max 90</span>
+        </div>
+        <div class="sb-trending-item" data-action="select-product" data-product-id="5">
+          <div class="sb-trending-item__thumb"><img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=64&h=64&fit=crop&q=80" alt="" /></div>
+          <span class="sb-trending-item__name">Ultra Boost Sneakers</span>
+        </div>
+        <div class="sb-trending-item" data-action="select-product" data-product-id="6">
+          <div class="sb-trending-item__thumb"><img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=64&h=64&fit=crop&q=80" alt="" /></div>
+          <span class="sb-trending-item__name">Chronograph Watch</span>
+        </div>
+      </div>
+
+      <div id="search-results"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/widgets/search-bar.ts"></script>
+</body>
+</html>

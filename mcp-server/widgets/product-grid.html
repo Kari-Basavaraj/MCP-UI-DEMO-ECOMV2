@@ -6,133 +6,239 @@
   <title>Product Grid – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #product-grid-container {
-      max-width: 960px;
+    .pg-wrap {
+      width: 100%;
+      max-width: 100%;
       margin: 0 auto;
+    }
+
+    /* ── Container ─── */
+    .pg-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-600);
       padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
+      background: var(--sds-comp-card-bg);
+      border: var(--sds-size-stroke-border) solid var(--sds-comp-card-border);
+      border-radius: var(--sds-comp-card-radius);
     }
 
     .pg-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: var(--sds-size-space-600);
     }
 
     .pg-title {
       font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
       margin: 0;
+    }
+
+    .pg-search-pill {
+      height: var(--sds-size-icon-large);
+      min-width: 160px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 var(--sds-size-padding-lg);
+      border: var(--sds-size-stroke-border) solid var(--sds-comp-input-border);
+      border-radius: var(--sds-size-radius-full);
+      background: var(--sds-comp-input-bg);
+      color: var(--sds-color-text-default-secondary);
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
     }
 
     .pg-count {
       font-size: var(--sds-typo-body-size-small);
+      font-weight: 400;
       color: var(--sds-color-text-default-secondary);
     }
 
+    /* ── 2×2 Grid ─── */
     #product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: var(--sds-size-space-400);
     }
 
-    .product-card {
-      background: var(--sds-color-background-default-default);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      overflow: hidden;
-      transition: box-shadow 0.15s ease, transform 0.15s ease;
-    }
-
-    .product-card:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-      transform: translateY(-2px);
-    }
-
-    .product-card__image {
+    /* ── Product Card (matches Figma Product Card component) ─── */
+    .pg-product {
       width: 100%;
-      height: 180px;
+      min-width: 0;
+      background: var(--sds-comp-card-bg);
+      border: var(--sds-size-stroke-border) solid var(--sds-comp-card-border);
+      border-radius: var(--sds-comp-card-radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pg-product__thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--sds-comp-image-bg);
+      overflow: hidden;
+    }
+
+    .pg-product__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pg-product__cat-tag {
+      position: absolute;
+      top: var(--sds-size-padding-sm);
+      left: var(--sds-size-padding-sm);
+      padding: var(--sds-size-space-050) var(--sds-size-space-150);
+      background: var(--sds-color-background-default-default);
+      border-radius: var(--sds-size-radius-400);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-secondary);
+      text-transform: uppercase;
+    }
+
+    .pg-product__info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sds-size-space-400);
+      padding: var(--sds-comp-card-padding);
+    }
+
+    .pg-product__name {
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: 600;
+      color: var(--sds-color-text-default-default);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .pg-product__price-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sds-size-space-200);
+    }
+
+    .pg-product__price-original {
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 400;
+      color: var(--sds-color-text-default-tertiary);
+      text-decoration: line-through;
+    }
+
+    .pg-product__price {
+      font-size: var(--sds-typo-body-size-large);
+      font-weight: 700;
+      color: var(--sds-color-text-positive-default);
+    }
+
+    /* ── Actions ─── */
+    .pg-product__actions {
+      display: flex;
+      gap: var(--sds-size-space-200);
+    }
+
+    .pg-product__btn {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--sds-color-background-default-secondary);
-      font-size: 64px;
-    }
-
-    .product-card__body {
-      padding: var(--sds-size-padding-lg);
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-200);
-    }
-
-    .product-card__name {
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: var(--sds-comp-button-radius);
       font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      margin: 0;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+      padding: var(--sds-size-space-300) var(--sds-size-padding-sm);
+    }
+    .pg-product__btn:hover {
+      background: var(--sds-color-background-brand-hover);
+    }
+
+    .pg-product__btn--secondary {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sds-color-background-default-secondary-hover);
       color: var(--sds-color-text-default-default);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      border-radius: var(--sds-comp-button-radius);
+      font-size: var(--sds-typo-body-size-medium);
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+      padding: var(--sds-size-space-300) var(--sds-size-padding-sm);
     }
-
-    .product-card__category {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-default-secondary);
-    }
-
-    .product-card__price {
-      font-size: var(--sds-typo-heading-size-small);
-      font-weight: var(--sds-typo-heading-font-weight);
+    .pg-product__btn--secondary:hover {
+      border-color: var(--sds-color-border-brand-default);
       color: var(--sds-color-text-brand-default);
     }
 
-    .product-card__actions {
-      display: flex;
-      gap: var(--sds-size-space-200);
-      margin-top: var(--sds-size-space-200);
-    }
-
-    .btn {
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
-      border-radius: var(--sds-size-radius-100);
-      border: none;
-      cursor: pointer;
-      font-size: var(--sds-typo-body-size-small);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      transition: opacity 0.15s ease;
-    }
-
-    .btn:hover { opacity: 0.9; }
-
-    .btn--primary {
-      background: var(--sds-color-background-brand-default);
-      color: var(--sds-color-text-brand-on-brand);
-    }
-
-    .btn--secondary {
-      background: var(--sds-color-background-default-secondary);
-      color: var(--sds-color-text-default-default);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-    }
-
     .empty-state {
-      grid-column: 1 / -1;
+      width: 100%;
       text-align: center;
-      padding: var(--sds-size-padding-xxl);
+      padding: var(--sds-size-space-1200) var(--sds-size-space-600);
       color: var(--sds-color-text-default-secondary);
       font-size: var(--sds-typo-body-size-medium);
+    }
+
+    /* ── Filter Tabs ─── */
+    #filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sds-size-space-200);
+    }
+
+    .pg-tab {
+      height: var(--sds-size-icon-medium);
+      padding: 0 var(--sds-size-padding-sm);
+      border-radius: var(--sds-comp-button-radius);
+      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+      background: var(--sds-color-background-default-default);
+      color: var(--sds-color-text-default-secondary);
+      font-size: var(--sds-typo-body-size-small);
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .pg-tab:hover {
+      border-color: var(--sds-color-border-brand-default);
+      color: var(--sds-color-text-brand-default);
+    }
+    .pg-tab--active {
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border-color: var(--sds-color-background-brand-default);
+    }
+    .pg-tab--active:hover {
+      background: var(--sds-color-background-brand-hover);
+      color: var(--sds-color-text-brand-on-brand);
     }
   </style>
 </head>
 <body>
-  <div id="product-grid-container">
-    <div class="pg-header">
-      <h1 class="pg-title">All Products</h1>
-      <span class="pg-count" id="product-count">8 products</span>
-    </div>
-    <div id="product-grid">
-      <!-- Dynamic content rendered by product-grid.ts -->
-      <p class="empty-state">Loading products…</p>
+  <div class="pg-wrap fade-in">
+    <div class="pg-card">
+      <div class="pg-header">
+        <h1 class="pg-title">Shop All Products</h1>
+        <button class="pg-search-pill" data-action="open-search">Search products...</button>
+      </div>
+      <span class="pg-count" id="product-count"></span>
+      <div id="filter-tabs"></div>
+      <div id="product-grid">
+        <p class="empty-state">Loading products…</p>
+      </div>
     </div>
   </div>
   <script type="module" src="/src/widgets/product-grid.ts"></script>

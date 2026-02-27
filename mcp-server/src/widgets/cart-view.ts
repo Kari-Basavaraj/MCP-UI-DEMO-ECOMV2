@@ -1,4 +1,4 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import { callTool } from "./bridge";
 
 interface CartItem {
   cartId: number;
@@ -16,8 +16,6 @@ interface CartData {
   count: number;
 }
 
-const app = new App({ name: "Cart View", version: "1.0.0" });
-
 function formatPrice(price: number): string {
   return `₹${price.toLocaleString("en-IN")}`;
 }
@@ -26,6 +24,9 @@ function render(data: CartData): void {
   const emptyEl = document.getElementById("empty-cart");
   const itemsEl = document.getElementById("cart-items");
   const totalEl = document.getElementById("cart-total");
+  const countEl = document.getElementById("cart-count");
+
+  if (countEl) countEl.textContent = `${data.count} items`;
 
   if (data.cart.length === 0) {
     if (emptyEl) emptyEl.style.display = "";
@@ -41,59 +42,42 @@ function render(data: CartData): void {
           <img src="${item.image}" alt="${item.name}" class="cart-item__image" />
           <div class="cart-item__info">
             <span class="cart-item__name">${item.name}</span>
-            <span class="cart-item__price">${formatPrice(item.price)}</span>
+            <span class="cart-item__category">${item.category}</span>
+            <span class="cart-item__qty">Qty: 1</span>
           </div>
-          <button data-action="remove" data-product-id="${item.id}" class="btn btn--danger" aria-label="Remove ${item.name}">✕</button>
+          <span class="cart-item__price">${formatPrice(item.price)}</span>
+          <button class="cart-item__remove" data-action="remove" data-product-id="${item.id}" aria-label="Remove ${item.name}">✕</button>
         </div>`
         )
         .join("");
     }
   }
-
   if (totalEl) totalEl.textContent = formatPrice(data.total);
 }
 
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data: CartData = JSON.parse(text);
-      render(data);
-    } catch {
-      // ignore parse errors
-    }
-  }
-};
-
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
   if (!btn) return;
 
-  const action = btn.dataset.action;
-
-  if (action === "remove") {
+  if (btn.dataset.action === "remove") {
     const productId = btn.dataset.productId ? Number(btn.dataset.productId) : undefined;
     if (productId !== undefined) {
-      const result = await app.callServerTool({ name: "remove_from_cart", arguments: { productId } });
-      const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-      if (text) {
-        try {
-          const data: CartData = JSON.parse(text);
-          render(data);
-        } catch {
-          // ignore
-        }
-      }
+      // Visual removal
+      const row = btn.closest(".cart-item");
+      if (row) (row as HTMLElement).style.opacity = "0.4";
+      callTool("remove_from_cart", { productId });
     }
   }
-
-  // "checkout" action is left to the host via data-action="checkout"
+  if (btn.dataset.action === "checkout") {
+    btn.textContent = "Loading…";
+    (btn as HTMLButtonElement).disabled = true;
+    callTool("checkout", {});
+    setTimeout(() => { btn.textContent = "Proceed to Checkout"; (btn as HTMLButtonElement).disabled = false; }, 2000);
+  }
+  if (btn.dataset.action === "continue") {
+    callTool("get_products", {});
+  }
 });
 
-// Fallback: read pre-injected data when ext-apps bridge is not available
 const _injected = (window as any).__MCP_TOOL_RESULT__;
-if (_injected) {
-  render(_injected);
-}
-
-app.connect();
+if (_injected) render(_injected);

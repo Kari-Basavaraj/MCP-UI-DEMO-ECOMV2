@@ -1,4 +1,4 @@
-import { App } from "@modelcontextprotocol/ext-apps";
+import { callTool } from "./bridge";
 
 interface Product {
   id: number;
@@ -8,131 +8,76 @@ interface Product {
   image: string;
 }
 
-interface FilterResult {
-  categories?: string[];
-  products?: Product[];
-}
-
-const app = new App({ name: "Category Filter", version: "1.0.0" });
-
 let activeCategory = "";
+let allProducts: Product[] = [];
 
-function formatPrice(price: number): string {
-  return `₹${price.toLocaleString("en-IN")}`;
+const CATEGORY_EMOJIS: Record<string, string> = {
+  All: "📦",
+  Footwear: "👟",
+  Clothing: "👕",
+  Accessories: "⌚",
+};
+
+function getCategoryCount(category: string): number {
+  if (category === "" || category === "All") return allProducts.length;
+  return allProducts.filter((p) => p.category === category).length;
 }
 
 function renderCategories(categories: string[]): void {
   const container = document.getElementById("category-filter");
   if (!container) return;
 
-  const allPill = `<button class="pill${activeCategory === "" ? " active" : ""}" data-action="filter" data-category="">All</button>`;
+  const allRow = `<button class="cf-row${activeCategory === "" ? " active" : ""}" data-action="filter" data-category="">
+    <span class="cf-row__emoji">${CATEGORY_EMOJIS["All"] || "📦"}</span>
+    <span class="cf-row__name">All</span>
+    <span class="cf-row__count">${getCategoryCount("")}</span>
+  </button>`;
 
   container.innerHTML =
-    allPill +
+    allRow +
     categories
+      .filter((cat) => cat !== "All")
       .map(
         (cat) =>
-          `<button class="pill${activeCategory === cat ? " active" : ""}" data-action="filter" data-category="${cat}">${cat}</button>`
+          `<button class="cf-row${activeCategory === cat ? " active" : ""}" data-action="filter" data-category="${cat}">
+            <span class="cf-row__emoji">${CATEGORY_EMOJIS[cat] || "🏷️"}</span>
+            <span class="cf-row__name">${cat}</span>
+            <span class="cf-row__count">${getCategoryCount(cat)}</span>
+          </button>`
       )
       .join("");
 }
 
-function renderProducts(products: Product[]): void {
-  const grid = document.getElementById("product-grid");
-  if (!grid) return;
-
-  if (products.length === 0) {
-    grid.innerHTML = `<p class="empty-state">No products in this category.</p>`;
-    return;
-  }
-
-  grid.innerHTML = products
-    .map(
-      (p) => `
-    <div class="product-card" data-product-id="${p.id}">
-      <img src="${p.image}" alt="${p.name}" class="product-card__image" />
-      <div class="product-card__body">
-        <h3 class="product-card__name">${p.name}</h3>
-        <span class="product-card__category">${p.category}</span>
-        <span class="product-card__price">${formatPrice(p.price)}</span>
-      </div>
-    </div>`
-    )
-    .join("");
-}
-
-app.ontoolresult = (result) => {
-  const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-  if (text) {
-    try {
-      const data: FilterResult = JSON.parse(text);
-      if (data.categories) {
-        renderCategories(data.categories);
-      }
-      if (data.products) {
-        renderProducts(data.products);
-      }
-    } catch {
-      // ignore parse errors
-    }
-  }
-};
-
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest("[data-action]") as HTMLElement | null;
   if (!btn) return;
 
-  const action = btn.dataset.action;
-
-  if (action === "filter") {
+  if (btn.dataset.action === "filter") {
     const category = btn.dataset.category ?? "";
     activeCategory = category;
 
-    // Update active pill immediately
+    // Update active row styling immediately
     const container = document.getElementById("category-filter");
     if (container) {
-      container.querySelectorAll(".pill").forEach((pill) => {
-        pill.classList.remove("active");
-        if ((pill as HTMLElement).dataset.category === category) {
-          pill.classList.add("active");
+      container.querySelectorAll(".cf-row").forEach((row) => {
+        row.classList.remove("active");
+        if ((row as HTMLElement).dataset.category === category) {
+          row.classList.add("active");
         }
       });
     }
 
+    // Fire through the chat so LLM shows the right grid
     if (category === "") {
-      // Fetch all products
-      const result = await app.callServerTool({ name: "get_products", arguments: {} });
-      const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-      if (text) {
-        try {
-          const data = JSON.parse(text);
-          if (data.products) renderProducts(data.products);
-          if (data.categories) renderCategories(data.categories);
-        } catch {
-          // ignore
-        }
-      }
+      callTool("get_products", {});
     } else {
-      const result = await app.callServerTool({ name: "filter_products", arguments: { category } });
-      const text = (result.content?.find((c: any) => c.type === "text") as any)?.text;
-      if (text) {
-        try {
-          const data = JSON.parse(text);
-          if (data.products) renderProducts(data.products);
-          if (data.categories) renderCategories(data.categories);
-        } catch {
-          // ignore
-        }
-      }
+      callTool("filter_products", { category });
     }
   }
 });
 
-// Fallback: read pre-injected data when ext-apps bridge is not available
 const _injected = (window as any).__MCP_TOOL_RESULT__;
 if (_injected) {
+  if (_injected.products) allProducts = _injected.products;
   renderCategories(_injected.categories ?? []);
-  renderProducts(_injected.products ?? []);
 }
-
-app.connect();

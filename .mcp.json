@@ -1,5 +1,11 @@
 {
   "mcpServers": {
+    "FoxyDesignMaster": {
+      "command": "bun",
+      "args": [
+        "/Users/kari.basavaraj.k.m/Documents/code/foxy-design-system-master/src/foxy_mcp/server.ts"
+      ]
+    },
     "figma": {
       "url": "https://mcp.figma.com/mcp",
       "bearer_token_env_var": "FIGMA_OAUTH_TOKEN",

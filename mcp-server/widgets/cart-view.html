@@ -3,179 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shopping Cart – MCP Ecommerce</title>
+  <title>Cart – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
-    #cart-container {
-      max-width: 640px;
+    .cv-wrap {
+      max-width: 520px;
+      width: 100%;
       margin: 0 auto;
-      padding: var(--sds-size-padding-xl);
-      font-family: system-ui, sans-serif;
-      color: var(--sds-color-text-default-default);
+    }
+
+    .cv-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+      background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
     }
 
     .cv-header {
       display: flex;
       align-items: center;
-      gap: var(--sds-size-space-300);
-      margin-bottom: var(--sds-size-space-600);
+      justify-content: space-between;
     }
 
-    .cv-icon { font-size: 28px; }
-
     .cv-title {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
       margin: 0;
     }
 
-    .cv-count {
-      font-size: var(--sds-typo-body-size-small);
+    .cv-items-count {
+      font-size: 14px;
+      font-weight: 400;
       color: var(--sds-color-text-default-secondary);
-      margin-left: auto;
     }
 
-    #cart-items {
-      display: flex;
-      flex-direction: column;
-      gap: var(--sds-size-space-300);
+    .cv-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--sds-color-border-default-default);
+      border: none;
+      margin: 0;
     }
 
+    /* ── Cart Item ─── */
     .cart-item {
       display: flex;
-      align-items: center;
-      gap: var(--sds-size-space-400);
-      padding: var(--sds-size-padding-lg);
-      background: var(--sds-color-background-default-default);
-      border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-      border-radius: var(--sds-size-radius-200);
-      transition: box-shadow 0.15s ease;
-    }
-
-    .cart-item:hover {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
     }
 
     .cart-item__image {
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
       background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-100);
-      font-size: 28px;
       flex-shrink: 0;
     }
 
     .cart-item__info {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
       min-width: 0;
     }
 
     .cart-item__name {
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      margin: 0 0 var(--sds-size-space-100) 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-default);
     }
 
-    .cart-item__price {
-      font-size: var(--sds-typo-body-size-small);
-      color: var(--sds-color-text-brand-default);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-    }
-
-    .btn--danger {
-      background: var(--sds-color-background-danger-default);
-      color: var(--sds-color-text-danger-on-danger);
-      padding: var(--sds-size-padding-xs) var(--sds-size-padding-sm);
-      border: none;
-      border-radius: var(--sds-size-radius-100);
-      font-size: var(--sds-typo-body-size-small);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .btn--danger:hover { opacity: 0.9; }
-
-    .cv-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: var(--sds-size-space-600);
-      padding: var(--sds-size-padding-lg);
-      background: var(--sds-color-background-default-secondary);
-      border-radius: var(--sds-size-radius-200);
-    }
-
-    .cv-total-label {
-      font-size: var(--sds-typo-body-size-large);
-      font-weight: var(--sds-typo-heading-font-weight);
-    }
-
-    #cart-total {
-      font-size: var(--sds-typo-heading-size-base);
-      font-weight: var(--sds-typo-heading-font-weight);
-      color: var(--sds-color-text-brand-default);
-    }
-
-    .cv-checkout-btn {
-      display: block;
-      width: 100%;
-      margin-top: var(--sds-size-space-400);
-      padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-      background: var(--sds-color-background-brand-default);
-      color: var(--sds-color-text-brand-on-brand);
-      border: none;
-      border-radius: var(--sds-size-radius-200);
-      font-size: var(--sds-typo-body-size-medium);
-      font-weight: var(--sds-typo-body-font-weight-strong);
-      cursor: pointer;
-      height: 48px;
-    }
-
-    .cv-checkout-btn:hover { opacity: 0.9; }
-
-    #empty-cart {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: var(--sds-size-padding-xxl);
-      gap: var(--sds-size-space-400);
+    .cart-item__category {
+      font-size: 12px;
+      font-weight: 400;
       color: var(--sds-color-text-default-secondary);
     }
 
-    .cv-empty-icon { font-size: 48px; opacity: 0.4; }
+    .cart-item__qty {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--sds-color-text-default-tertiary);
+    }
 
-    .cv-empty-text {
-      font-size: var(--sds-typo-body-size-medium);
-      margin: 0;
+    .cart-item__price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
+      flex-shrink: 0;
+    }
+
+    .cart-item__remove {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--sds-color-text-danger-default);
+      cursor: pointer;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    /* ── Footer ─── */
+    .cv-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cv-total-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .cv-total-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--sds-color-text-default-default);
+    }
+
+    .cv-checkout-btn {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      background: var(--sds-color-background-brand-default);
+      color: var(--sds-color-text-brand-on-brand);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .cv-checkout-btn:hover {
+      background: var(--sds-color-background-brand-hover);
+    }
+
+    /* Empty state */
+    .cv-empty {
+      text-align: center;
+      padding: 48px 16px;
+      color: var(--sds-color-text-default-secondary);
+    }
+    .cv-empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+    .cv-empty-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      color: var(--sds-color-text-default-default);
     }
   </style>
 </head>
 <body>
-  <div id="cart-container">
-    <div class="cv-header">
-      <span class="cv-icon">🛒</span>
-      <h1 class="cv-title">Shopping Cart</h1>
-      <span class="cv-count" id="cart-count">0 items</span>
-    </div>
+  <div class="cv-wrap fade-in">
+    <div class="cv-card">
+      <div class="cv-header">
+        <h1 class="cv-title">Shopping Cart</h1>
+        <span class="cv-items-count" id="cart-count"></span>
+      </div>
 
-    <div id="cart-items">
-      <!-- Dynamically rendered by cart-view.ts -->
-    </div>
+      <hr class="cv-divider" />
 
-    <div id="empty-cart">
-      <span class="cv-empty-icon">🛒</span>
-      <p class="cv-empty-text">Your cart is empty</p>
-    </div>
+      <div id="empty-cart" class="cv-empty">
+        <div class="cv-empty-icon">🛒</div>
+        <h2 class="cv-empty-title">Your cart is empty</h2>
+        <p>Add some products to get started.</p>
+      </div>
 
-    <div class="cv-footer">
-      <span class="cv-total-label">Total</span>
-      <span id="cart-total">₹0</span>
-    </div>
+      <div id="cart-items" style="display:none"></div>
 
-    <button class="cv-checkout-btn" data-action="checkout">Proceed to Checkout</button>
+      <hr class="cv-divider" />
+
+      <div class="cv-total-row">
+        <span class="cv-total-label">Total</span>
+        <span class="cv-total-value" id="cart-total">₹0</span>
+      </div>
+
+      <button class="cv-checkout-btn" data-action="checkout">Proceed to Checkout</button>
+    </div>
   </div>
   <script type="module" src="/src/widgets/cart-view.ts"></script>
 </body>

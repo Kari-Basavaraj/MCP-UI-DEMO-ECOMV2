@@ -49,42 +49,59 @@ const PureMessage = ({
               <span className="text-sm text-muted-foreground/70 animate-pulse">Thinking...</span>
             </div>
           )}
-          {message.parts?.map((part, i) => {
-            switch (part.type) {
-              case "text":
-                return part.text ? (
-                  <div key={`part-${i}`} className="flex flex-row gap-2 items-start w-full">
-                    <div
-                      className={cn("flex flex-col gap-3 w-full", {
-                        "bg-secondary text-secondary-foreground px-4 py-3 rounded-2xl":
-                          message.role === "user",
-                      })}
-                    >
-                      <Markdown>{part.text}</Markdown>
+          {(() => {
+            let seenWidget = false;
+            return message.parts?.map((part, i) => {
+              // Track if we've passed a widget tool result
+              if (part.type === "tool-invocation") {
+                const res = "result" in part.toolInvocation ? (part.toolInvocation as any).result : null;
+                if (res?._uiResources?.length > 0) seenWidget = true;
+              }
+              switch (part.type) {
+                case "text":
+                  if (!part.text) return null;
+                  // After a widget, render assistant text compactly to reduce noise
+                  if (seenWidget && message.role === "assistant") {
+                    return (
+                      <div key={`part-${i}`} className="px-1">
+                        <p className="text-sm text-muted-foreground">{part.text}</p>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div key={`part-${i}`} className="flex flex-row gap-2 items-start w-full">
+                      <div
+                        className={cn("flex flex-col gap-3 w-full", {
+                          "bg-secondary text-secondary-foreground px-4 py-3 rounded-2xl":
+                            message.role === "user",
+                        })}
+                      >
+                        <Markdown>{part.text}</Markdown>
+                      </div>
                     </div>
-                  </div>
-                ) : null;
-              case "tool-invocation":
-                return (
-                  <ToolInvocation
-                    key={`part-${i}`}
-                    toolName={part.toolInvocation.toolName}
-                    state={part.toolInvocation.state}
-                    args={part.toolInvocation.args}
-                    result={
-                      "result" in part.toolInvocation
-                        ? part.toolInvocation.result
-                        : null
-                    }
-                    isLatestMessage={isLatestMessage}
-                    status={status}
-                    append={append}
-                  />
-                );
-              default:
-                return null;
-            }
-          })}
+                  );
+                case "tool-invocation":
+                  return (
+                    <ToolInvocation
+                      key={`part-${i}`}
+                      toolName={part.toolInvocation.toolName}
+                      state={part.toolInvocation.state}
+                      args={part.toolInvocation.args}
+                      result={
+                        "result" in part.toolInvocation
+                          ? part.toolInvocation.result
+                          : null
+                      }
+                      isLatestMessage={isLatestMessage}
+                      status={status}
+                      append={append}
+                    />
+                  );
+                default:
+                  return null;
+              }
+            });
+          })()}
         </div>
       </div>
     </div>
