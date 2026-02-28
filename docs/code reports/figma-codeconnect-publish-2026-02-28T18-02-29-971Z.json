@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-02-28T18:02:25.395Z",
+  "dryRun": false,
+  "applyRequested": true,
+  "route": "office",
+  "codeConnectMode": "publish-enabled",
+  "parseCheck": {
+    "ok": true,
+    "status": 0,
+    "stdout": "[]",
+    "stderr": "Config file found, parsing /Users/kari.basavaraj.k.m/code/MCP-UI-DEMO-ECOMV2 using specified include globs"
+  },
+  "publish": {
+    "ok": true,
+    "status": 0,
+    "stdout": "",
+    "stderr": "Config file found, parsing /Users/kari.basavaraj.k.m/code/MCP-UI-DEMO-ECOMV2 using specified include globs\nNo Code Connect files found in /Users/kari.basavaraj.k.m/code/MCP-UI-DEMO-ECOMV2 - Make sure you have configured `include` and `exclude` in your figma.config.json file correctly, or that you are running in a directory that contains Code Connect files."
+  },
+  "unresolvedNodeIds": []
+}

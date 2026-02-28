@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-28T18:01:11.751Z",
+  "generatedAt": "2026-02-28T19:05:06.387Z",
   "config": {
     "primaryFileKey": "p3SdnPiT3DYRtOu2CZs97P",
     "region": "us-east-1",
@@ -22,8 +22,8 @@
     "mappingSourcePath": "figma/code-connect/mappings.source.json"
   },
   "variablesRead": {
-    "ok": false,
-    "message": "403 Forbidden"
+    "ok": true,
+    "message": "200 OK"
   },
   "codeConnectParse": {
     "ok": true,
@@ -34,8 +34,8 @@
     "message": "publish command available"
   },
   "variablesWriteProbe": {
-    "ok": false,
-    "message": "403 Forbidden"
+    "ok": true,
+    "message": "200 OK"
   },
-  "selectedRoute": "Route C"
+  "selectedRoute": "Route B"
 }

@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-02-28T18:02:08.260Z",
+  "dryRun": true,
+  "applyRequested": false,
+  "route": "office",
+  "codeConnectMode": "publish-enabled",
+  "parseCheck": {
+    "ok": true,
+    "status": 0,
+    "stdout": "[]",
+    "stderr": "Config file found, parsing /Users/kari.basavaraj.k.m/code/MCP-UI-DEMO-ECOMV2 using specified include globs"
+  },
+  "publish": null,
+  "unresolvedNodeIds": []
+}

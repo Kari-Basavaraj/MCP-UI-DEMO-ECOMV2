@@ -1,0 +1,3444 @@
+{
+  "generatedAt": "2026-02-28T19:04:54.019Z",
+  "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+  "modeSelection": {
+    "lightModeId": "3919:21",
+    "lightModeName": "SDS Light",
+    "darkModeId": "3919:22",
+    "darkModeName": "SDS Dark"
+  },
+  "variables": {
+    "--sds-color-background-brand-default": {
+      "variableId": "VariableID:3919:36428",
+      "figmaName": "Background/Brand/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-brand-hover": {
+      "variableId": "VariableID:3919:36431",
+      "figmaName": "Background/Brand/Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-brand-secondary": {
+      "variableId": "VariableID:3919:36430",
+      "figmaName": "Background/Brand/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-brand-secondary-hover": {
+      "variableId": "VariableID:4035:5558",
+      "figmaName": "Background/Brand/Secondary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-brand-tertiary": {
+      "variableId": "VariableID:9670:11772",
+      "figmaName": "Background/Brand/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-brand-tertiary-hover": {
+      "variableId": "VariableID:9670:12886",
+      "figmaName": "Background/Brand/Tertiary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-danger-default": {
+      "variableId": "VariableID:3919:36443",
+      "figmaName": "Background/Danger/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-danger-hover": {
+      "variableId": "VariableID:3919:36446",
+      "figmaName": "Background/Danger/Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-danger-secondary": {
+      "variableId": "VariableID:3919:36445",
+      "figmaName": "Background/Danger/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-danger-secondary-hover": {
+      "variableId": "VariableID:56:9909",
+      "figmaName": "Background/Danger/Secondary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-danger-tertiary": {
+      "variableId": "VariableID:2002:7450",
+      "figmaName": "Background/Danger/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-danger-tertiary-hover": {
+      "variableId": "VariableID:2002:7451",
+      "figmaName": "Background/Danger/Tertiary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-default-default": {
+      "variableId": "VariableID:3919:36423",
+      "figmaName": "Background/Default/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-default-default-hover": {
+      "variableId": "VariableID:3919:36426",
+      "figmaName": "Background/Default/Default Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-default-secondary": {
+      "variableId": "VariableID:3919:36424",
+      "figmaName": "Background/Default/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-default-secondary-hover": {
+      "variableId": "VariableID:56:9309",
+      "figmaName": "Background/Default/Secondary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-default-tertiary": {
+      "variableId": "VariableID:3919:36425",
+      "figmaName": "Background/Default/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-default-tertiary-hover": {
+      "variableId": "VariableID:56:9310",
+      "figmaName": "Background/Default/Tertiary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-disabled-default": {
+      "variableId": "VariableID:3919:36448",
+      "figmaName": "Background/Disabled/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-neutral-default": {
+      "variableId": "VariableID:106:12464",
+      "figmaName": "Background/Neutral/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-neutral-hover": {
+      "variableId": "VariableID:106:12465",
+      "figmaName": "Background/Neutral/Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-neutral-secondary": {
+      "variableId": "VariableID:106:12466",
+      "figmaName": "Background/Neutral/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-neutral-secondary-hover": {
+      "variableId": "VariableID:106:12467",
+      "figmaName": "Background/Neutral/Secondary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-neutral-tertiary": {
+      "variableId": "VariableID:106:12468",
+      "figmaName": "Background/Neutral/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-neutral-tertiary-hover": {
+      "variableId": "VariableID:106:12469",
+      "figmaName": "Background/Neutral/Tertiary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-positive-default": {
+      "variableId": "VariableID:3919:36433",
+      "figmaName": "Background/Positive/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-positive-hover": {
+      "variableId": "VariableID:3919:36436",
+      "figmaName": "Background/Positive/Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-positive-secondary": {
+      "variableId": "VariableID:3919:36435",
+      "figmaName": "Background/Positive/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-positive-secondary-hover": {
+      "variableId": "VariableID:56:9907",
+      "figmaName": "Background/Positive/Secondary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-positive-tertiary": {
+      "variableId": "VariableID:2002:7433",
+      "figmaName": "Background/Positive/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-positive-tertiary-hover": {
+      "variableId": "VariableID:2002:7447",
+      "figmaName": "Background/Positive/Tertiary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-utilities-blanket": {
+      "variableId": "VariableID:2142:11243",
+      "figmaName": "Background/Utilities/Blanket",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-utilities-measurement": {
+      "variableId": "VariableID:72:9197",
+      "figmaName": "Background/Utilities/Measurement",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-utilities-overlay": {
+      "variableId": "VariableID:7786:36548",
+      "figmaName": "Background/Utilities/Overlay",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-utilities-scrim": {
+      "variableId": "VariableID:7753:3701",
+      "figmaName": "Background/Utilities/Scrim",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-warning-default": {
+      "variableId": "VariableID:3919:36438",
+      "figmaName": "Background/Warning/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-warning-hover": {
+      "variableId": "VariableID:3919:36441",
+      "figmaName": "Background/Warning/Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-warning-secondary": {
+      "variableId": "VariableID:3919:36440",
+      "figmaName": "Background/Warning/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-warning-secondary-hover": {
+      "variableId": "VariableID:56:9908",
+      "figmaName": "Background/Warning/Secondary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-warning-tertiary": {
+      "variableId": "VariableID:2002:7448",
+      "figmaName": "Background/Warning/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-background-warning-tertiary-hover": {
+      "variableId": "VariableID:2002:7449",
+      "figmaName": "Background/Warning/Tertiary Hover",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-black-100": {
+      "variableId": "VariableID:9:11234",
+      "figmaName": "Black/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-1000": {
+      "variableId": "VariableID:9:11243",
+      "figmaName": "Black/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-200": {
+      "variableId": "VariableID:9:11235",
+      "figmaName": "Black/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-300": {
+      "variableId": "VariableID:9:11236",
+      "figmaName": "Black/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-400": {
+      "variableId": "VariableID:9:11237",
+      "figmaName": "Black/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-500": {
+      "variableId": "VariableID:9:11238",
+      "figmaName": "Black/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-600": {
+      "variableId": "VariableID:9:11239",
+      "figmaName": "Black/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-700": {
+      "variableId": "VariableID:9:11240",
+      "figmaName": "Black/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-800": {
+      "variableId": "VariableID:9:11241",
+      "figmaName": "Black/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-black-900": {
+      "variableId": "VariableID:9:11242",
+      "figmaName": "Black/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-100": {
+      "variableId": "VariableID:4317:10391",
+      "figmaName": "Blue/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-1000": {
+      "variableId": "VariableID:4317:10400",
+      "figmaName": "Blue/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-200": {
+      "variableId": "VariableID:4317:10392",
+      "figmaName": "Blue/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-300": {
+      "variableId": "VariableID:4317:10393",
+      "figmaName": "Blue/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-400": {
+      "variableId": "VariableID:4317:10394",
+      "figmaName": "Blue/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-500": {
+      "variableId": "VariableID:4317:10395",
+      "figmaName": "Blue/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-600": {
+      "variableId": "VariableID:4317:10396",
+      "figmaName": "Blue/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-700": {
+      "variableId": "VariableID:4317:10397",
+      "figmaName": "Blue/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-800": {
+      "variableId": "VariableID:4317:10398",
+      "figmaName": "Blue/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-blue-900": {
+      "variableId": "VariableID:4317:10399",
+      "figmaName": "Blue/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-border-brand-default": {
+      "variableId": "VariableID:3919:36516",
+      "figmaName": "Border/Brand/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-brand-secondary": {
+      "variableId": "VariableID:3919:36517",
+      "figmaName": "Border/Brand/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-brand-tertiary": {
+      "variableId": "VariableID:159:12725",
+      "figmaName": "Border/Brand/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-danger-default": {
+      "variableId": "VariableID:3919:36528",
+      "figmaName": "Border/Danger/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-danger-secondary": {
+      "variableId": "VariableID:3919:36529",
+      "figmaName": "Border/Danger/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-danger-tertiary": {
+      "variableId": "VariableID:159:12728",
+      "figmaName": "Border/Danger/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-default-default": {
+      "variableId": "VariableID:3919:36514",
+      "figmaName": "Border/Default/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-default-secondary": {
+      "variableId": "VariableID:3919:36515",
+      "figmaName": "Border/Default/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-default-tertiary": {
+      "variableId": "VariableID:159:12723",
+      "figmaName": "Border/Default/tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-disabled-default": {
+      "variableId": "VariableID:3919:36532",
+      "figmaName": "Border/Disabled/default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-disabled-secondary": {
+      "variableId": "VariableID:3919:36533",
+      "figmaName": "border/disabled/secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-neutral-default": {
+      "variableId": "VariableID:106:12485",
+      "figmaName": "Border/Neutral/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-neutral-secondary": {
+      "variableId": "VariableID:106:12486",
+      "figmaName": "Border/Neutral/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-neutral-tertiary": {
+      "variableId": "VariableID:159:12724",
+      "figmaName": "Border/Neutral/tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-positive-default": {
+      "variableId": "VariableID:3919:36520",
+      "figmaName": "Border/Positive/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-positive-secondary": {
+      "variableId": "VariableID:3919:36521",
+      "figmaName": "Border/Positive/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-positive-tertiary": {
+      "variableId": "VariableID:159:12726",
+      "figmaName": "Border/Positive/tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-utilities-measurement": {
+      "variableId": "VariableID:72:10154",
+      "figmaName": "Border/Utilities/Measurement",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-utilities-swatch": {
+      "variableId": "VariableID:315:32841",
+      "figmaName": "Border/Utilities/Swatch",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-warning-default": {
+      "variableId": "VariableID:3919:36524",
+      "figmaName": "Border/Warning/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-warning-secondary": {
+      "variableId": "VariableID:3919:36525",
+      "figmaName": "Border/Warning/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-border-warning-tertiary": {
+      "variableId": "VariableID:159:12727",
+      "figmaName": "Border/Warning/tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-brand-100": {
+      "variableId": "VariableID:3919:36614",
+      "figmaName": "Brand/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-1000": {
+      "variableId": "VariableID:3919:36623",
+      "figmaName": "Brand/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-200": {
+      "variableId": "VariableID:3919:36615",
+      "figmaName": "Brand/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-300": {
+      "variableId": "VariableID:3919:36616",
+      "figmaName": "Brand/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-400": {
+      "variableId": "VariableID:3919:36617",
+      "figmaName": "Brand/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-500": {
+      "variableId": "VariableID:3919:36618",
+      "figmaName": "Brand/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-600": {
+      "variableId": "VariableID:3919:36619",
+      "figmaName": "Brand/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-700": {
+      "variableId": "VariableID:3919:36620",
+      "figmaName": "Brand/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-800": {
+      "variableId": "VariableID:3919:36621",
+      "figmaName": "Brand/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-brand-900": {
+      "variableId": "VariableID:3919:36622",
+      "figmaName": "Brand/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-100": {
+      "variableId": "VariableID:611:26724",
+      "figmaName": "Gray/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-1000": {
+      "variableId": "VariableID:611:26733",
+      "figmaName": "Gray/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-200": {
+      "variableId": "VariableID:611:26725",
+      "figmaName": "Gray/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-300": {
+      "variableId": "VariableID:611:26726",
+      "figmaName": "Gray/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-400": {
+      "variableId": "VariableID:611:26727",
+      "figmaName": "Gray/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-500": {
+      "variableId": "VariableID:611:26728",
+      "figmaName": "Gray/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-600": {
+      "variableId": "VariableID:611:26729",
+      "figmaName": "Gray/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-700": {
+      "variableId": "VariableID:611:26730",
+      "figmaName": "Gray/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-800": {
+      "variableId": "VariableID:611:26731",
+      "figmaName": "Gray/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-gray-900": {
+      "variableId": "VariableID:611:26732",
+      "figmaName": "Gray/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-100": {
+      "variableId": "VariableID:3919:36654",
+      "figmaName": "Green/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-1000": {
+      "variableId": "VariableID:3919:36663",
+      "figmaName": "Green/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-200": {
+      "variableId": "VariableID:3919:36655",
+      "figmaName": "Green/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-300": {
+      "variableId": "VariableID:3919:36656",
+      "figmaName": "Green/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-400": {
+      "variableId": "VariableID:3919:36657",
+      "figmaName": "Green/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-500": {
+      "variableId": "VariableID:3919:36658",
+      "figmaName": "Green/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-600": {
+      "variableId": "VariableID:3919:36659",
+      "figmaName": "Green/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-700": {
+      "variableId": "VariableID:3919:36660",
+      "figmaName": "Green/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-800": {
+      "variableId": "VariableID:3919:36661",
+      "figmaName": "Green/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-green-900": {
+      "variableId": "VariableID:3919:36662",
+      "figmaName": "Green/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-icon-brand-default": {
+      "variableId": "VariableID:3919:36488",
+      "figmaName": "Icon/Brand/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-brand-on-brand": {
+      "variableId": "VariableID:3919:36491",
+      "figmaName": "Icon/Brand/On Brand",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-brand-on-brand-secondary": {
+      "variableId": "VariableID:3919:36493",
+      "figmaName": "Icon/Brand/On Brand Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-brand-on-brand-tertiary": {
+      "variableId": "VariableID:106:5932",
+      "figmaName": "Icon/Brand/On Brand Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-brand-secondary": {
+      "variableId": "VariableID:3919:36489",
+      "figmaName": "Icon/Brand/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-brand-tertiary": {
+      "variableId": "VariableID:3919:36490",
+      "figmaName": "Icon/Brand/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-danger-default": {
+      "variableId": "VariableID:3919:36506",
+      "figmaName": "Icon/Danger/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-danger-on-danger": {
+      "variableId": "VariableID:3919:36509",
+      "figmaName": "Icon/Danger/On Danger",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-danger-on-danger-secondary": {
+      "variableId": "VariableID:3919:36510",
+      "figmaName": "Icon/Danger/On Danger Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-danger-on-danger-tertiary": {
+      "variableId": "VariableID:106:5934",
+      "figmaName": "Icon/Danger/On Danger Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-danger-secondary": {
+      "variableId": "VariableID:3919:36507",
+      "figmaName": "Icon/Danger/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-danger-tertiary": {
+      "variableId": "VariableID:3919:36508",
+      "figmaName": "Icon/Danger/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-default-default": {
+      "variableId": "VariableID:3919:36482",
+      "figmaName": "Icon/Default/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-default-secondary": {
+      "variableId": "VariableID:3919:36483",
+      "figmaName": "Icon/Default/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-default-tertiary": {
+      "variableId": "VariableID:3919:36484",
+      "figmaName": "Icon/Default/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-disabled-default": {
+      "variableId": "VariableID:3919:36512",
+      "figmaName": "Icon/Disabled/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-disabled-on-disabled": {
+      "variableId": "VariableID:3919:36513",
+      "figmaName": "Icon/Disabled/On Disabled",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-neutral-default": {
+      "variableId": "VariableID:106:12479",
+      "figmaName": "Icon/Neutral/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-neutral-on-neutral": {
+      "variableId": "VariableID:106:12482",
+      "figmaName": "Icon/Neutral/On Neutral",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-neutral-on-neutral-secondary": {
+      "variableId": "VariableID:106:12483",
+      "figmaName": "Icon/Neutral/On Neutral Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-neutral-on-neutral-tertiary": {
+      "variableId": "VariableID:106:12484",
+      "figmaName": "Icon/Neutral/On Neutral Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-neutral-secondary": {
+      "variableId": "VariableID:106:12480",
+      "figmaName": "Icon/Neutral/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-neutral-tertiary": {
+      "variableId": "VariableID:106:12481",
+      "figmaName": "Icon/Neutral/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-positive-default": {
+      "variableId": "VariableID:3919:36494",
+      "figmaName": "Icon/Positive/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-positive-on-positive": {
+      "variableId": "VariableID:3919:36497",
+      "figmaName": "Icon/Positive/On Positive",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-positive-on-positive-secondary": {
+      "variableId": "VariableID:3919:36498",
+      "figmaName": "Icon/Positive/On Positive Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-positive-on-positive-tertiary": {
+      "variableId": "VariableID:106:5935",
+      "figmaName": "Icon/Positive/On Positive Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-positive-secondary": {
+      "variableId": "VariableID:3919:36495",
+      "figmaName": "Icon/Positive/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-positive-tertiary": {
+      "variableId": "VariableID:3919:36496",
+      "figmaName": "Icon/Positive/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-utilities-icon": {
+      "variableId": "VariableID:320:298",
+      "figmaName": "Icon/Utilities/Icon",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-utilities-icon-on-measurement": {
+      "variableId": "VariableID:280:16549",
+      "figmaName": "Icon/Utilities/Icon On Measurement",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-warning-default": {
+      "variableId": "VariableID:3919:36500",
+      "figmaName": "Icon/Warning/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-warning-on-warning": {
+      "variableId": "VariableID:3919:36503",
+      "figmaName": "Icon/Warning/On Warning",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-warning-on-warning-secondary": {
+      "variableId": "VariableID:3919:36504",
+      "figmaName": "Icon/Warning/On Warning Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-warning-on-warning-tertiary": {
+      "variableId": "VariableID:106:5933",
+      "figmaName": "Icon/Warning/On Warning Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-warning-secondary": {
+      "variableId": "VariableID:3919:36501",
+      "figmaName": "Icon/Warning/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-icon-warning-tertiary": {
+      "variableId": "VariableID:3919:36502",
+      "figmaName": "Icon/Warning/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-pink-100": {
+      "variableId": "VariableID:280:16481",
+      "figmaName": "Pink/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-1000": {
+      "variableId": "VariableID:280:16498",
+      "figmaName": "Pink/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-200": {
+      "variableId": "VariableID:280:16482",
+      "figmaName": "Pink/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-300": {
+      "variableId": "VariableID:280:16483",
+      "figmaName": "Pink/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-400": {
+      "variableId": "VariableID:280:16486",
+      "figmaName": "Pink/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-500": {
+      "variableId": "VariableID:280:16490",
+      "figmaName": "Pink/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-600": {
+      "variableId": "VariableID:280:16491",
+      "figmaName": "Pink/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-700": {
+      "variableId": "VariableID:280:16493",
+      "figmaName": "Pink/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-800": {
+      "variableId": "VariableID:280:16494",
+      "figmaName": "Pink/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-pink-900": {
+      "variableId": "VariableID:280:16497",
+      "figmaName": "Pink/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-100": {
+      "variableId": "VariableID:3919:36624",
+      "figmaName": "Red/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-1000": {
+      "variableId": "VariableID:3919:36633",
+      "figmaName": "Red/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-200": {
+      "variableId": "VariableID:3919:36625",
+      "figmaName": "Red/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-300": {
+      "variableId": "VariableID:3919:36626",
+      "figmaName": "Red/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-400": {
+      "variableId": "VariableID:3919:36627",
+      "figmaName": "Red/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-500": {
+      "variableId": "VariableID:3919:36628",
+      "figmaName": "Red/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-600": {
+      "variableId": "VariableID:3919:36629",
+      "figmaName": "Red/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-700": {
+      "variableId": "VariableID:3919:36630",
+      "figmaName": "Red/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-800": {
+      "variableId": "VariableID:3919:36631",
+      "figmaName": "Red/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-red-900": {
+      "variableId": "VariableID:3919:36632",
+      "figmaName": "Red/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-100": {
+      "variableId": "VariableID:3919:36534",
+      "figmaName": "Slate/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-1000": {
+      "variableId": "VariableID:3919:36543",
+      "figmaName": "Slate/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-200": {
+      "variableId": "VariableID:3919:36535",
+      "figmaName": "Slate/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-300": {
+      "variableId": "VariableID:3919:36536",
+      "figmaName": "Slate/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-400": {
+      "variableId": "VariableID:3919:36537",
+      "figmaName": "Slate/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-500": {
+      "variableId": "VariableID:3919:36538",
+      "figmaName": "Slate/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-600": {
+      "variableId": "VariableID:3919:36539",
+      "figmaName": "Slate/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-700": {
+      "variableId": "VariableID:3919:36540",
+      "figmaName": "Slate/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-800": {
+      "variableId": "VariableID:3919:36541",
+      "figmaName": "Slate/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-slate-900": {
+      "variableId": "VariableID:3919:36542",
+      "figmaName": "Slate/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-text-brand-default": {
+      "variableId": "VariableID:3919:36456",
+      "figmaName": "Text/Brand/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-brand-on-brand": {
+      "variableId": "VariableID:3919:36459",
+      "figmaName": "Text/Brand/On Brand",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-brand-on-brand-secondary": {
+      "variableId": "VariableID:3919:36461",
+      "figmaName": "Text/Brand/On Brand Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-brand-on-brand-tertiary": {
+      "variableId": "VariableID:9670:11773",
+      "figmaName": "Text/Brand/On Brand Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-brand-secondary": {
+      "variableId": "VariableID:3919:36457",
+      "figmaName": "Text/Brand/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-brand-tertiary": {
+      "variableId": "VariableID:3919:36458",
+      "figmaName": "Text/Brand/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-danger-default": {
+      "variableId": "VariableID:3919:36474",
+      "figmaName": "Text/Danger/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-danger-on-danger": {
+      "variableId": "VariableID:3919:36477",
+      "figmaName": "Text/Danger/On Danger",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-danger-on-danger-secondary": {
+      "variableId": "VariableID:3919:36479",
+      "figmaName": "Text/Danger/On Danger Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-danger-on-danger-tertiary": {
+      "variableId": "VariableID:2002:7454",
+      "figmaName": "Text/Danger/On Danger Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-danger-secondary": {
+      "variableId": "VariableID:3919:36475",
+      "figmaName": "Text/Danger/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-danger-tertiary": {
+      "variableId": "VariableID:3919:36476",
+      "figmaName": "Text/Danger/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-default-default": {
+      "variableId": "VariableID:3919:36450",
+      "figmaName": "Text/Default/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-default-secondary": {
+      "variableId": "VariableID:3919:36451",
+      "figmaName": "Text/Default/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-default-tertiary": {
+      "variableId": "VariableID:3919:36452",
+      "figmaName": "Text/Default/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-disabled-default": {
+      "variableId": "VariableID:3919:36480",
+      "figmaName": "Text/Disabled/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-disabled-on-disabled": {
+      "variableId": "VariableID:3919:36481",
+      "figmaName": "Text/Disabled/On Disabled",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-neutral-default": {
+      "variableId": "VariableID:106:12473",
+      "figmaName": "Text/Neutral/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-neutral-on-neutral": {
+      "variableId": "VariableID:106:12476",
+      "figmaName": "Text/Neutral/On Neutral",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-neutral-on-neutral-secondary": {
+      "variableId": "VariableID:106:12477",
+      "figmaName": "Text/Neutral/On Neutral Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-neutral-on-neutral-tertiary": {
+      "variableId": "VariableID:106:12478",
+      "figmaName": "Text/Neutral/On Neutral Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-neutral-secondary": {
+      "variableId": "VariableID:106:12474",
+      "figmaName": "Text/Neutral/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-neutral-tertiary": {
+      "variableId": "VariableID:106:12475",
+      "figmaName": "Text/Neutral/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-positive-default": {
+      "variableId": "VariableID:3919:36462",
+      "figmaName": "Text/Positive/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-positive-on-positive": {
+      "variableId": "VariableID:3919:36465",
+      "figmaName": "Text/Positive/On Positive",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-positive-on-positive-secondary": {
+      "variableId": "VariableID:3919:36467",
+      "figmaName": "Text/Positive/On Positive Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-positive-on-positive-tertiary": {
+      "variableId": "VariableID:2002:7455",
+      "figmaName": "Text/Positive/On Positive Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-positive-secondary": {
+      "variableId": "VariableID:3919:36463",
+      "figmaName": "Text/Positive/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-positive-tertiary": {
+      "variableId": "VariableID:3919:36464",
+      "figmaName": "Text/Positive/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-utilities-text-on-measurement": {
+      "variableId": "VariableID:72:10153",
+      "figmaName": "Text/Utilities/Text On Measurement",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-utilities-text-on-overlay": {
+      "variableId": "VariableID:9643:10770",
+      "figmaName": "Text/Utilities/Text On Overlay",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-warning-default": {
+      "variableId": "VariableID:3919:36468",
+      "figmaName": "Text/Warning/Default",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-warning-on-warning": {
+      "variableId": "VariableID:3919:36471",
+      "figmaName": "Text/Warning/On Warning",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-warning-on-warning-secondary": {
+      "variableId": "VariableID:3919:36473",
+      "figmaName": "Text/Warning/On Warning Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-warning-on-warning-tertiary": {
+      "variableId": "VariableID:2002:7453",
+      "figmaName": "Text/Warning/On Warning Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-warning-secondary": {
+      "variableId": "VariableID:3919:36469",
+      "figmaName": "Text/Warning/Secondary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-text-warning-tertiary": {
+      "variableId": "VariableID:3919:36470",
+      "figmaName": "Text/Warning/Tertiary",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "modes": {
+        "SDS Light": "3919:21",
+        "SDS Dark": "3919:22"
+      }
+    },
+    "--sds-color-white-100": {
+      "variableId": "VariableID:3919:36544",
+      "figmaName": "White/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-1000": {
+      "variableId": "VariableID:3919:36553",
+      "figmaName": "White/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-200": {
+      "variableId": "VariableID:3919:36545",
+      "figmaName": "White/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-300": {
+      "variableId": "VariableID:3919:36546",
+      "figmaName": "White/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-400": {
+      "variableId": "VariableID:3919:36547",
+      "figmaName": "White/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-500": {
+      "variableId": "VariableID:3919:36548",
+      "figmaName": "White/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-600": {
+      "variableId": "VariableID:3919:36549",
+      "figmaName": "White/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-700": {
+      "variableId": "VariableID:3919:36550",
+      "figmaName": "White/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-800": {
+      "variableId": "VariableID:3919:36551",
+      "figmaName": "White/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-white-900": {
+      "variableId": "VariableID:3919:36552",
+      "figmaName": "White/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-100": {
+      "variableId": "VariableID:3919:36644",
+      "figmaName": "Yellow/100",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-1000": {
+      "variableId": "VariableID:3919:36653",
+      "figmaName": "Yellow/1000",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-200": {
+      "variableId": "VariableID:3919:36645",
+      "figmaName": "Yellow/200",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-300": {
+      "variableId": "VariableID:3919:36646",
+      "figmaName": "Yellow/300",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-400": {
+      "variableId": "VariableID:3919:36647",
+      "figmaName": "Yellow/400",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-500": {
+      "variableId": "VariableID:3919:36648",
+      "figmaName": "Yellow/500",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-600": {
+      "variableId": "VariableID:3919:36649",
+      "figmaName": "Yellow/600",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-700": {
+      "variableId": "VariableID:3919:36650",
+      "figmaName": "Yellow/700",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-800": {
+      "variableId": "VariableID:3919:36651",
+      "figmaName": "Yellow/800",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-color-yellow-900": {
+      "variableId": "VariableID:3919:36652",
+      "figmaName": "Yellow/900",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "Value": "3919:19"
+      }
+    },
+    "--sds-responsive-border-width": {
+      "variableId": "VariableID:9:11227",
+      "figmaName": "border-width",
+      "collectionId": "VariableCollectionId:9:11202",
+      "collectionName": "Responsive",
+      "modes": {
+        "Desktop": "9:4",
+        "Mobile": "9:5",
+        "Tablet": "9:6"
+      }
+    },
+    "--sds-responsive-device": {
+      "variableId": "VariableID:234:21585",
+      "figmaName": "Device",
+      "collectionId": "VariableCollectionId:9:11202",
+      "collectionName": "Responsive",
+      "modes": {
+        "Desktop": "9:4",
+        "Mobile": "9:5",
+        "Tablet": "9:6"
+      }
+    },
+    "--sds-responsive-device-width": {
+      "variableId": "VariableID:9:11219",
+      "figmaName": "Device Width",
+      "collectionId": "VariableCollectionId:9:11202",
+      "collectionName": "Responsive",
+      "modes": {
+        "Desktop": "9:4",
+        "Mobile": "9:5",
+        "Tablet": "9:6"
+      }
+    },
+    "--sds-responsive-root-font-size": {
+      "variableId": "VariableID:9:11224",
+      "figmaName": "Root Font Size",
+      "collectionId": "VariableCollectionId:9:11202",
+      "collectionName": "Responsive",
+      "modes": {
+        "Desktop": "9:4",
+        "Mobile": "9:5",
+        "Tablet": "9:6"
+      }
+    },
+    "--sds-responsive-scale": {
+      "variableId": "VariableID:231:21547",
+      "figmaName": "Scale",
+      "collectionId": "VariableCollectionId:9:11202",
+      "collectionName": "Responsive",
+      "modes": {
+        "Desktop": "9:4",
+        "Mobile": "9:5",
+        "Tablet": "9:6"
+      }
+    },
+    "--sds-size-blur-100": {
+      "variableId": "VariableID:228:6769",
+      "figmaName": "Blur/100",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-0": {
+      "variableId": "VariableID:9:11280",
+      "figmaName": "Depth/0",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-025": {
+      "variableId": "VariableID:9:11281",
+      "figmaName": "Depth/025",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-100": {
+      "variableId": "VariableID:9:11282",
+      "figmaName": "Depth/100",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-1200": {
+      "variableId": "VariableID:9:11286",
+      "figmaName": "Depth/1200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-200": {
+      "variableId": "VariableID:9:11283",
+      "figmaName": "Depth/200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-400": {
+      "variableId": "VariableID:9:11284",
+      "figmaName": "Depth/400",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-800": {
+      "variableId": "VariableID:9:11285",
+      "figmaName": "Depth/800",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-negative-025": {
+      "variableId": "VariableID:9:11287",
+      "figmaName": "Depth/Negative 025",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-negative-100": {
+      "variableId": "VariableID:9:11288",
+      "figmaName": "Depth/Negative 100",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-negative-1200": {
+      "variableId": "VariableID:9:11292",
+      "figmaName": "Depth/Negative 1200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-negative-200": {
+      "variableId": "VariableID:9:11289",
+      "figmaName": "Depth/Negative 200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-negative-400": {
+      "variableId": "VariableID:9:11290",
+      "figmaName": "Depth/Negative 400",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-depth-negative-800": {
+      "variableId": "VariableID:9:11291",
+      "figmaName": "Depth/Negative 800",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-height-button-lg": {
+      "variableId": "VariableID:3034:9014",
+      "figmaName": "Height/Button LG",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-height-button-md": {
+      "variableId": "VariableID:3034:9013",
+      "figmaName": "Height/Button MD",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-height-button-sm": {
+      "variableId": "VariableID:3034:9012",
+      "figmaName": "Height/Button SM",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-height-input": {
+      "variableId": "VariableID:3034:9015",
+      "figmaName": "Height/Input",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-icon-large": {
+      "variableId": "VariableID:409:8193",
+      "figmaName": "Icon/Large",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-icon-medium": {
+      "variableId": "VariableID:409:8192",
+      "figmaName": "Icon/Medium",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-icon-small": {
+      "variableId": "VariableID:409:8191",
+      "figmaName": "Icon/Small",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-padding-lg": {
+      "variableId": "VariableID:9:11271",
+      "figmaName": "Padding/lg",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-padding-sm": {
+      "variableId": "VariableID:9:11269",
+      "figmaName": "Padding/sm",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-padding-xl": {
+      "variableId": "VariableID:9:11272",
+      "figmaName": "Padding/xl",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-padding-xs": {
+      "variableId": "VariableID:9:11268",
+      "figmaName": "Padding/xs",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-padding-xxl": {
+      "variableId": "VariableID:9:11273",
+      "figmaName": "Padding/xxl",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-radius-100": {
+      "variableId": "VariableID:9:11274",
+      "figmaName": "Radius/100",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-radius-200": {
+      "variableId": "VariableID:9:11275",
+      "figmaName": "Radius/200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-radius-400": {
+      "variableId": "VariableID:9:11277",
+      "figmaName": "Radius/400",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-radius-full": {
+      "variableId": "VariableID:56:9308",
+      "figmaName": "Radius/Full",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-radius-xl": {
+      "variableId": "VariableID:9:11278",
+      "figmaName": "Radius/xl",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-0": {
+      "variableId": "VariableID:364:11151",
+      "figmaName": "Space/0",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-050": {
+      "variableId": "VariableID:364:11161",
+      "figmaName": "Space/050",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-100": {
+      "variableId": "VariableID:9:11258",
+      "figmaName": "Space/100",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-1200": {
+      "variableId": "VariableID:346:10903",
+      "figmaName": "Space/1200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-150": {
+      "variableId": "VariableID:364:11163",
+      "figmaName": "Space/150",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-1600": {
+      "variableId": "VariableID:107:11150",
+      "figmaName": "Space/1600",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-200": {
+      "variableId": "VariableID:9:11259",
+      "figmaName": "Space/200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-2400": {
+      "variableId": "VariableID:346:10904",
+      "figmaName": "Space/2400",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-250": {
+      "variableId": "VariableID:3038:5603",
+      "figmaName": "Space/250",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-300": {
+      "variableId": "VariableID:9:11260",
+      "figmaName": "Space/300",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-400": {
+      "variableId": "VariableID:9:11261",
+      "figmaName": "Space/400",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-4000": {
+      "variableId": "VariableID:346:10896",
+      "figmaName": "Space/4000",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-500": {
+      "variableId": "VariableID:3034:9011",
+      "figmaName": "Space/500",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-600": {
+      "variableId": "VariableID:9:11262",
+      "figmaName": "Space/600",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-800": {
+      "variableId": "VariableID:346:10902",
+      "figmaName": "Space/800",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-negative-100": {
+      "variableId": "VariableID:9:11263",
+      "figmaName": "Space/Negative 100",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-negative-200": {
+      "variableId": "VariableID:9:11264",
+      "figmaName": "Space/Negative 200",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-negative-300": {
+      "variableId": "VariableID:9:11265",
+      "figmaName": "Space/Negative 300",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-negative-400": {
+      "variableId": "VariableID:9:11266",
+      "figmaName": "Space/Negative 400",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-space-negative-600": {
+      "variableId": "VariableID:9:11267",
+      "figmaName": "Space/Negative 600",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-stroke-border": {
+      "variableId": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
+      "figmaName": "Stroke/Border",
+      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-size-stroke-focus-ring": {
+      "variableId": "VariableID:197:17451",
+      "figmaName": "Stroke/Focus Ring",
+      "collectionId": "VariableCollectionId:9:11257",
+      "collectionName": "Size",
+      "modes": {
+        "Default": "9:7"
+      }
+    },
+    "--sds-typo-body-font-family": {
+      "variableId": "VariableID:66:10179",
+      "figmaName": "Body/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-body-font-style-italic": {
+      "variableId": "VariableID:66:14846",
+      "figmaName": "Body/Font Style Italic",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-body-font-weight-regular": {
+      "variableId": "VariableID:66:10181",
+      "figmaName": "Body/Font Weight Regular",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-body-font-weight-strong": {
+      "variableId": "VariableID:66:14844",
+      "figmaName": "Body/Font Weight Strong",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-body-size-large": {
+      "variableId": "VariableID:66:10215",
+      "figmaName": "Body/Size Large",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-body-size-medium": {
+      "variableId": "VariableID:66:10180",
+      "figmaName": "Body/Size Medium",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-body-size-small": {
+      "variableId": "VariableID:66:10216",
+      "figmaName": "Body/Size Small",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-code-font-family": {
+      "variableId": "VariableID:66:10182",
+      "figmaName": "Code/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-code-font-weight": {
+      "variableId": "VariableID:66:10184",
+      "figmaName": "Code/Font Weight",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-code-size-base": {
+      "variableId": "VariableID:66:10183",
+      "figmaName": "Code/Size Base",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-code-size-large": {
+      "variableId": "VariableID:66:10217",
+      "figmaName": "Code/Size Large",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-code-size-small": {
+      "variableId": "VariableID:66:10218",
+      "figmaName": "Code/Size Small",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-family-mono": {
+      "variableId": "VariableID:9:11201",
+      "figmaName": "Family Mono",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-family-sans": {
+      "variableId": "VariableID:9:11199",
+      "figmaName": "Family Sans",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-family-serif": {
+      "variableId": "VariableID:9:11200",
+      "figmaName": "Family Serif",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-fonts-font-sans": {
+      "variableId": "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
+      "figmaName": "Fonts/Font Sans",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
+      "modes": {
+        "Value": "7:3"
+      }
+    },
+    "--sds-typo-heading-font-family": {
+      "variableId": "VariableID:66:10185",
+      "figmaName": "Heading/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-heading-font-weight": {
+      "variableId": "VariableID:66:10187",
+      "figmaName": "Heading/Font Weight",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-heading-size-base": {
+      "variableId": "VariableID:66:10186",
+      "figmaName": "Heading/Size Base",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-heading-size-large": {
+      "variableId": "VariableID:66:10211",
+      "figmaName": "Heading/Size Large",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-heading-size-small": {
+      "variableId": "VariableID:66:10212",
+      "figmaName": "Heading/Size Small",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-leading-leading-tight": {
+      "variableId": "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310",
+      "figmaName": "Leading/Leading Tight",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
+      "modes": {
+        "Value": "7:3"
+      }
+    },
+    "--sds-typo-scale-01": {
+      "variableId": "VariableID:9:11198",
+      "figmaName": "Scale 01",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-02": {
+      "variableId": "VariableID:9:11197",
+      "figmaName": "Scale 02",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-03": {
+      "variableId": "VariableID:9:11196",
+      "figmaName": "Scale 03",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-04": {
+      "variableId": "VariableID:9:11195",
+      "figmaName": "Scale 04",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-05": {
+      "variableId": "VariableID:9:11194",
+      "figmaName": "Scale 05",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-06": {
+      "variableId": "VariableID:9:11193",
+      "figmaName": "Scale 06",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-07": {
+      "variableId": "VariableID:9:11192",
+      "figmaName": "Scale 07",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-08": {
+      "variableId": "VariableID:9:11191",
+      "figmaName": "Scale 08",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-09": {
+      "variableId": "VariableID:9:11190",
+      "figmaName": "Scale 09",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-scale-10": {
+      "variableId": "VariableID:9:11189",
+      "figmaName": "Scale 10",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-size-text-sm": {
+      "variableId": "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
+      "figmaName": "Size/Text Sm",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
+      "modes": {
+        "Value": "7:3"
+      }
+    },
+    "--sds-typo-subheading-font-family": {
+      "variableId": "VariableID:2103:22306",
+      "figmaName": "Subheading/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subheading-font-weight": {
+      "variableId": "VariableID:2103:22310",
+      "figmaName": "Subheading/Font Weight",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subheading-size-large": {
+      "variableId": "VariableID:2103:22309",
+      "figmaName": "Subheading/Size Large",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subheading-size-medium": {
+      "variableId": "VariableID:2103:22308",
+      "figmaName": "Subheading/Size Medium",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subheading-size-small": {
+      "variableId": "VariableID:2103:22307",
+      "figmaName": "Subheading/Size Small",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subtitle-font-family": {
+      "variableId": "VariableID:66:10176",
+      "figmaName": "Subtitle/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subtitle-font-weight": {
+      "variableId": "VariableID:66:10178",
+      "figmaName": "Subtitle/Font Weight",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subtitle-size-base": {
+      "variableId": "VariableID:66:10177",
+      "figmaName": "Subtitle/Size Base",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subtitle-size-large": {
+      "variableId": "VariableID:66:10209",
+      "figmaName": "Subtitle/Size Large",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-subtitle-size-small": {
+      "variableId": "VariableID:66:10210",
+      "figmaName": "Subtitle/Size Small",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-hero-font-family": {
+      "variableId": "VariableID:66:10188",
+      "figmaName": "Title Hero/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-hero-font-weight": {
+      "variableId": "VariableID:66:10190",
+      "figmaName": "Title Hero/Font Weight",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-hero-size": {
+      "variableId": "VariableID:66:10189",
+      "figmaName": "Title Hero/Size",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-page-font-family": {
+      "variableId": "VariableID:58:8569",
+      "figmaName": "Title Page/Font Family",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-page-font-weight": {
+      "variableId": "VariableID:58:8572",
+      "figmaName": "Title Page/Font Weight",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-page-size-base": {
+      "variableId": "VariableID:66:10197",
+      "figmaName": "Title Page/Size Base",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-page-size-large": {
+      "variableId": "VariableID:66:10198",
+      "figmaName": "Title Page/Size Large",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-title-page-size-small": {
+      "variableId": "VariableID:58:8574",
+      "figmaName": "Title Page/Size Small",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
+      "modes": {
+        "Mode 1": "58:0"
+      }
+    },
+    "--sds-typo-weight-black": {
+      "variableId": "VariableID:9:11188",
+      "figmaName": "Weight Black",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-black-italic": {
+      "variableId": "VariableID:66:10208",
+      "figmaName": "Weight Black Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-bold": {
+      "variableId": "VariableID:9:11186",
+      "figmaName": "Weight Bold",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-bold-italic": {
+      "variableId": "VariableID:56:8553",
+      "figmaName": "Weight Bold Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-extra-bold": {
+      "variableId": "VariableID:9:11187",
+      "figmaName": "Weight Extra Bold",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-extra-bold-italic": {
+      "variableId": "VariableID:66:10204",
+      "figmaName": "Weight Extra Bold Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-extra-light": {
+      "variableId": "VariableID:9:11181",
+      "figmaName": "Weight Extra Light",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-extralight-italic": {
+      "variableId": "VariableID:66:10201",
+      "figmaName": "Weight Extralight Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-font-normal": {
+      "variableId": "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
+      "figmaName": "Weight/Font Normal",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
+      "modes": {
+        "Value": "7:3"
+      }
+    },
+    "--sds-typo-weight-light": {
+      "variableId": "VariableID:9:11182",
+      "figmaName": "Weight Light",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-light-italic": {
+      "variableId": "VariableID:56:8551",
+      "figmaName": "Weight Light Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-medium": {
+      "variableId": "VariableID:9:11184",
+      "figmaName": "Weight Medium",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-medium-italic": {
+      "variableId": "VariableID:66:10202",
+      "figmaName": "Weight Medium Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-regular": {
+      "variableId": "VariableID:9:11183",
+      "figmaName": "Weight Regular",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-regular-italic": {
+      "variableId": "VariableID:56:8552",
+      "figmaName": "Weight Regular Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-semibold": {
+      "variableId": "VariableID:9:11185",
+      "figmaName": "Weight Semibold",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-semibold-italic": {
+      "variableId": "VariableID:66:10203",
+      "figmaName": "Weight Semibold Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-thin": {
+      "variableId": "VariableID:9:11180",
+      "figmaName": "Weight Thin",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    },
+    "--sds-typo-weight-thin-italic": {
+      "variableId": "VariableID:66:10200",
+      "figmaName": "Weight Thin Italic",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
+      "modes": {
+        "Default": "9:2"
+      }
+    }
+  }
+}

@@ -104,7 +104,7 @@ export async function figmaApi(path, { method = 'GET', body = null, config = loa
   }
   const url = `https://api.figma.com${path.replace('{file_key}', fileKey)}`;
   const headers = {
-    Authorization: `Bearer ${token}`,
+    'X-Figma-Token': token,
     'Content-Type': 'application/json',
     'X-Figma-Region': getRegion(config),
   };
@@ -160,11 +160,28 @@ export function slugifyName(value) {
     .replace(/^-+|-+$/g, '');
 }
 
-export function inferCssVarName(figmaVariableName, nameMap = {}) {
+const COLLECTION_PREFIX_MAP = {
+  'color': 'color',
+  'color primitives': 'color',
+  'colors': 'color',
+  'size': 'size',
+  'typography': 'typo',
+  'typography primitives': 'typo',
+  'responsive': 'responsive',
+};
+
+export function inferCssVarName(figmaVariableName, nameMap = {}, collectionName = '') {
   const mapped = nameMap?.[figmaVariableName];
   if (mapped) return mapped.startsWith('--') ? mapped : `--${mapped}`;
   const slug = slugifyName(figmaVariableName).replace(/\//g, '-');
-  return slug.startsWith('sds-') ? `--${slug}` : `--sds-${slug}`;
+  const colPrefix = COLLECTION_PREFIX_MAP[(collectionName || '').toLowerCase().trim()] || '';
+  const base = slug.startsWith('sds-') ? slug : `sds-${slug}`;
+  // If the slug already starts with the collection prefix, don't double it
+  const withoutSds = base.replace(/^sds-/, '');
+  if (colPrefix && !withoutSds.startsWith(colPrefix + '-') && !withoutSds.startsWith(colPrefix)) {
+    return `--sds-${colPrefix}-${withoutSds}`;
+  }
+  return `--${base}`;
 }
 
 export function componentAliasBlock(light = true) {

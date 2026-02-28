@@ -73,7 +73,7 @@ export function normalizeFigmaVariables(rawData, { config }) {
   Object.values(variables).forEach((variable) => {
     const collection = collections[variable.variableCollectionId] || null;
     const modeIds = (collection?.modes || []).map((mode) => mode.modeId);
-    const cssVar = inferCssVarName(variable.name, tokenMap.nameMap);
+    const cssVar = inferCssVarName(variable.name, tokenMap.nameMap, collection?.name || '');
 
     const modes = {};
     modeIds.forEach((modeId) => {
