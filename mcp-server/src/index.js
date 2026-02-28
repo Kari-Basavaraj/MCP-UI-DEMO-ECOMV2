@@ -50,24 +50,52 @@ const DIST_FILES = {
   wishlist: "widgets/wishlist.html",
 };
 
-// ── Pre-load widget HTML (cached at startup) ────────────────────────────
+function missingWidgetHtml(key) {
+  return `<html><body style="font-family:sans-serif;padding:2rem;color:#888;">Widget "${key}" not built — run <code>npm run build</code></body></html>`;
+}
+
+// ── Widget HTML cache (reloads when dist file changes) ──────────────────
 const widgetHtml = {};
+const widgetMTime = {};
+const widgetReadErrors = new Set();
 let loadedCount = 0;
-for (const [key, file] of Object.entries(DIST_FILES)) {
+
+function loadWidgetHtmlFromDisk(key, { force = false } = {}) {
+  const file = DIST_FILES[key];
+  if (!file) return "";
+  const filePath = path.join(DIST_DIR, file);
+
   try {
-    widgetHtml[key] = fs.readFileSync(path.join(DIST_DIR, file), "utf-8");
+    const stat = fs.statSync(filePath);
+    if (!force && widgetHtml[key] && widgetMTime[key] === stat.mtimeMs) {
+      return widgetHtml[key];
+    }
+    const html = fs.readFileSync(filePath, "utf-8");
+    widgetHtml[key] = html;
+    widgetMTime[key] = stat.mtimeMs;
+    widgetReadErrors.delete(key);
+    return html;
+  } catch (error) {
+    if (!widgetReadErrors.has(key)) {
+      console.error(`⚠ Failed to read widget "${key}" from ${filePath}: ${error?.message || error}`);
+      widgetReadErrors.add(key);
+    }
+    return widgetHtml[key] || "";
+  }
+}
+
+for (const key of Object.keys(DIST_FILES)) {
+  if (loadWidgetHtmlFromDisk(key, { force: true })) {
     loadedCount++;
-  } catch {
-    widgetHtml[key] = "";
   }
 }
 console.error(`✓ Loaded ${loadedCount}/${Object.keys(DIST_FILES).length} widget HTML files from dist/`);
 
 /** Inject tool result data into pre-built HTML */
 function embedData(key, data) {
-  const html = widgetHtml[key];
+  const html = loadWidgetHtmlFromDisk(key);
   if (!html) {
-    return `<html><body style="font-family:sans-serif;padding:2rem;color:#888;">Widget "${key}" not built — run <code>npm run build</code></body></html>`;
+    return missingWidgetHtml(key);
   }
   const tag = `<script>window.__MCP_TOOL_RESULT__=${JSON.stringify(data)};</script>`;
   return html.replace("</head>", `${tag}</head>`);
@@ -127,7 +155,11 @@ export function createMCPServer() {
     registerAppResource(server, uri, uri, {
       mimeType: RESOURCE_MIME_TYPE,
     }, async () => ({
-      contents: [{ uri, mimeType: RESOURCE_MIME_TYPE, text: widgetHtml[key] || "" }],
+      contents: [{
+        uri,
+        mimeType: RESOURCE_MIME_TYPE,
+        text: loadWidgetHtmlFromDisk(key) || missingWidgetHtml(key),
+      }],
     }));
   }
 

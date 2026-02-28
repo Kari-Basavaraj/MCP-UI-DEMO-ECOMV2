@@ -17,7 +17,7 @@ Interactive MCP-based e-commerce demo with a Next.js chat host and an Express MC
 - Frontend: Next.js 15, React 19, Tailwind v4, `@mcp-ui/client`.
 - Server: Express 4, `@modelcontextprotocol/sdk`.
 - Widget build: Vite + `vite-plugin-singlefile`.
-- AI bridge: OpenAI chat-completions proxy endpoint.
+- AI bridge: OpenRouter via `web-client/app/api/chat` (`OPENROUTER_API_KEY`).
 
 ## Quick Start
 
@@ -75,15 +75,26 @@ npm --prefix web-client run build
 
 ## Environment
 
-Set `mcp-server/.env` from `mcp-server/.env.example`:
+Set `web-client/.env.local` from `web-client/.env.example`:
 
 ```bash
-OPENAI_API_KEY=your-api-key
-OPENAI_MODEL=gpt-4o-mini
+OPENROUTER_API_KEY=sk-or-v1-your-key-here
+```
+
+For the MCP server, set `mcp-server/.env` from `mcp-server/.env.example`:
+
+```bash
 API_PORT=8787
 ```
 
-Without `OPENAI_API_KEY`, AI chat proxy calls fail, but local tool and widget behavior is still testable.
+Optional (legacy route only: `POST /api/openai/chat` in `mcp-server/src/openaiProxy.js`):
+
+```bash
+OPENAI_API_KEY=your-openai-key
+OPENAI_MODEL=gpt-4o-mini
+```
+
+Without `OPENROUTER_API_KEY`, `web-client` model listing and chat (`/api/models`, `/api/chat`) fail.
 
 ## UI Resource URIs
 

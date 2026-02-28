@@ -1,9 +1,152 @@
 "use client";
 
 import type { ModelInfo } from "@/ai/providers";
-import { ArrowUpIcon, StopCircleIcon, ChevronDownIcon, SearchIcon } from "lucide-react";
+import { ArrowUpIcon, StopCircleIcon, ChevronDownIcon, SearchIcon, SparklesIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect, useMemo } from "react";
+
+const PROVIDER_LOGOS: Record<string, string> = {
+  openai: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openai.svg",
+  anthropic: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/anthropic.svg",
+  google: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/google.svg",
+  meta: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/meta.svg",
+  "meta-llama": "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/meta.svg",
+  xai: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg",
+  "x-ai": "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg",
+  qwen: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/alibabadotcom.svg",
+  moonshotai: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kuaishou.svg",
+  perplexity: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/perplexity.svg",
+};
+
+function getProviderKey(modelId: string, modelDetails: Record<string, ModelInfo>): string {
+  return (modelDetails[modelId]?.provider || modelId.split("/")[0] || "other").toLowerCase();
+}
+
+function ProviderBadge({
+  modelId,
+  modelDetails,
+}: {
+  modelId: string;
+  modelDetails: Record<string, ModelInfo>;
+}) {
+  const providerKey = getProviderKey(modelId, modelDetails);
+  const logoSrc = PROVIDER_LOGOS[providerKey];
+  const providerName = modelDetails[modelId]?.provider || providerKey;
+
+  return logoSrc ? (
+    <span className="inline-flex h-3.5 w-3.5 items-center justify-center" title={providerName} aria-label={providerName}>
+      <img
+        src={logoSrc}
+        alt={`${providerName} logo`}
+        className="h-3.5 w-3.5 object-contain opacity-90"
+        loading="lazy"
+        referrerPolicy="no-referrer"
+      />
+    </span>
+  ) : (
+    <span className="inline-flex h-3.5 w-3.5 items-center justify-center text-muted-foreground" title={providerName} aria-label={providerName}>
+      <SparklesIcon className="h-3.5 w-3.5" />
+    </span>
+  );
+}
+
+function ProviderLabel({
+  modelId,
+  modelDetails,
+}: {
+  modelId: string;
+  modelDetails: Record<string, ModelInfo>;
+}) {
+  return (
+    <div className="flex items-center gap-2 min-w-0">
+      <ProviderBadge modelId={modelId} modelDetails={modelDetails} />
+      <div className="font-medium truncate">{modelDetails[modelId]?.name || modelId}</div>
+    </div>
+  );
+}
+
+// Keep provider logo rendering as plain icon (no circle/chip background).
+
+function ProviderIconOnly({
+  modelId,
+  modelDetails,
+}: {
+  modelId: string;
+  modelDetails: Record<string, ModelInfo>;
+}) {
+  return <ProviderBadge modelId={modelId} modelDetails={modelDetails} />;
+}
+
+function SelectedModelText({
+  selectedModel,
+  modelDetails,
+}: {
+  selectedModel: string;
+  modelDetails: Record<string, ModelInfo>;
+}) {
+  return (
+    <>
+      <ProviderIconOnly modelId={selectedModel} modelDetails={modelDetails} />
+      <span>{modelDetails[selectedModel]?.name || selectedModel}</span>
+    </>
+  );
+}
+
+// Existing selection/dropdown layout consumes icon-only + label.
+
+function ModelRow({
+  modelId,
+  modelDetails,
+}: {
+  modelId: string;
+  modelDetails: Record<string, ModelInfo>;
+}) {
+  return (
+    <>
+      <ProviderLabel modelId={modelId} modelDetails={modelDetails} />
+      {modelDetails[modelId]?.contextLength && (
+        <span className="text-muted-foreground text-[10px]">
+          {Math.round(modelDetails[modelId].contextLength! / 1000)}K ctx
+        </span>
+      )}
+    </>
+  );
+}
+
+// ----
+
+/*
+  NOTE:
+  This component intentionally uses plain provider icons (without circular
+  containers) based on feedback for a cleaner, more accurate appearance.
+*/
+
+// ----
+
+// original rendering moved below
+
+/*
+    <span
+      className={cn(
+        "inline-flex h-4 w-4 items-center justify-center rounded-full border overflow-hidden",
+        brand?.bgClass || "bg-muted border-border text-muted-foreground"
+      )}
+      title={providerName}
+      aria-label={providerName}
+    >
+      {brand ? (
+        <img
+          src={logoSrc}
+          alt={`${providerName} logo`}
+          className="h-3.5 w-3.5 object-contain opacity-90"
+          loading="lazy"
+          referrerPolicy="no-referrer"
+        />
+      ) : (
+        <SparklesIcon className="h-3.5 w-3.5" />
+      )}
+    </span>
+*/
 
 export function Textarea({
   selectedModel,
@@ -109,7 +252,7 @@ export function Textarea({
             onClick={() => setShowModels(!showModels)}
             className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
           >
-            <span>{modelDetails[selectedModel]?.name || selectedModel}</span>
+            <SelectedModelText selectedModel={selectedModel} modelDetails={modelDetails} />
             <ChevronDownIcon className="h-3 w-3" />
           </button>
 
@@ -163,12 +306,7 @@ export function Textarea({
                           m === selectedModel ? "text-primary bg-muted/30" : "text-foreground"
                         )}
                       >
-                        <div className="font-medium truncate">{modelDetails[m]?.name || m}</div>
-                        {modelDetails[m]?.contextLength && (
-                          <span className="text-muted-foreground text-[10px]">
-                            {Math.round(modelDetails[m].contextLength! / 1000)}K ctx
-                          </span>
-                        )}
+                        <ModelRow modelId={m} modelDetails={modelDetails} />
                       </button>
                     ))}
                   </div>
