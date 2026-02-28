@@ -27,23 +27,18 @@
 
 | Layer | File | Token style | Example |
 |-------|------|------------|---------|
-| CSS custom properties | `web-client/src/index.css` `:root` | `--primary`, `--border`, `--radius` | `--primary: #111111` |
-| SDS design system vars | `web-client/src/index.css` (consumed) | `--sds-color-*`, `--sds-radius-*` | `--sds-color-background-brand-default` |
-| MCP server inline HTML | `mcp-server/src/index.js` | Hardcoded hex in `style=""` | `color: #4361ee`, `color: #1a1a2e` |
+| Canonical token source | `mcp-server/tokens/figma-tokens-*.css` | `--sds-color-*`, `--sds-size-*`, `--sds-typo-*` | `--sds-color-background-brand-default` |
+| Web-client token mirror | `web-client/tokens/figma-tokens-*.css` | Synced copy of canonical files | `--sds-color-text-default-default` |
+| Web-client consumption | `web-client/app/globals.css` | Tailwind bridge via CSS vars | `--color-background: var(--sds-color-background-default-default)` |
+| Widget consumption | `mcp-server/src/widgets/shared.css` | Direct token imports | `@import '../../tokens/figma-tokens-light.css'` |
 | Shared catalog | `shared/catalog.mjs` | Product data (no tokens) | — |
 
-### SDS dependency
+### Current tokenization status
 
-```jsonc
-// web-client/package.json
-"sds": "github:figma/sds"   // Figma Simple Design System
-```
+All widget styles are tokenized and consume `--sds-*` variables from `mcp-server/tokens/figma-tokens-*.css`.
+Primary remaining governance risk is drift between canonical and mirrored token files.
 
-SDS already provides CSS custom properties (`--sds-color-*`, `--sds-radius-*`, etc.) that map 1-to-1 with Figma variable collections.
-
-### What needs tokenization
-
-The MCP server's inline HTML in `generateProductListHtml()` and `generateCartHtml()` uses hardcoded hex values that must be replaced with token references:
+### Historical hardcoded mapping reference
 
 | Hardcoded value | Semantic meaning | Target token |
 |----------------|------------------|-------------|
@@ -56,13 +51,13 @@ The MCP server's inline HTML in `generateProductListHtml()` and `generateCartHtm
 
 ### MCP-UI rendering context
 
-Tools in `mcp-server/src/index.js` declare `_meta.ui.resourceUri` (e.g. `ui://ecommerce/products/list`).
+Tools in `mcp-server/src/index.js` declare `_meta.ui.resourceUri` (e.g. `ui://ecommerce/product-grid.html`).
 The `web-client` renders them via `@mcp-ui/client`'s `UIResourceRenderer`.
-Inline HTML returned by the server is rendered inside an iframe — so tokens must either be:
-- Injected as a `<style>` block within the HTML string, **or**
-- Served via a shared CSS file accessible from the iframe origin.
-
-The recommended path: generate a `tokens/figma-tokens.css` file from Figma variables and inject it as a `<style>` preamble in server-generated HTML.
+Widget HTML is built as self-contained files by Vite and already includes shared token imports through `shared.css`.
+Recommended governance path:
+- Keep canonical source in `mcp-server/tokens`.
+- Sync into `web-client/tokens` with `npm run tokens:sync`.
+- Enforce drift checks with `npm run tokens:check`.
 
 ---
 
@@ -196,7 +191,7 @@ If a variable's value is `{ "type": "VARIABLE_ALIAS", "id": "VariableId:5:11" }`
 |-------------|---------|------------|
 | `tokens/figma/variables.raw.json` | Raw API response (cache) | Scripts |
 | `tokens/figma/variables.normalized.json` | Flattened name→value map per mode | Scripts |
-| `tokens/figma-tokens.css` | CSS custom properties (Light mode default) | `web-client/src/index.css` via `@import`, and MCP server HTML preamble |
+| `mcp-server/tokens/figma-tokens-light.css` | Canonical CSS custom properties (Light mode default) | Imported by widget shared CSS and synced to web-client mirror |
 | `tokens/figma-tokens-dark.css` | Dark mode overrides | Optional `prefers-color-scheme` |
 
 Example generated `tokens/figma-tokens.css`:
@@ -245,8 +240,9 @@ jobs:
 
 After tokens are committed:
 
-1. `web-client/src/index.css` imports `tokens/figma-tokens.css` — all SDS vars update automatically.
-2. `mcp-server/src/index.js` reads `tokens/figma-tokens.css` at startup and injects it as a `<style>` block in every `generateProductListHtml()` / `generateCartHtml()` response — so `UIResourceRenderer` iframes get correct tokens.
+1. `mcp-server/tokens/figma-tokens-*.css` remains the canonical source of truth.
+2. `web-client/tokens/figma-tokens-*.css` is synced from canonical files (`npm run tokens:sync`).
+3. `web-client/app/globals.css` and `mcp-server/src/widgets/shared.css` consume the same `--sds-*` variables.
 3. The `@mcp-ui/client` / `@mcp-ui/server` handshake is unaffected — only visual tokens change.
 
 ---
@@ -295,12 +291,12 @@ on:
   push:
     paths:
       - 'tokens/**'
-      - 'web-client/src/index.css'
+      - 'web-client/app/globals.css'
 ```
 
 For this codebase, the relevant token source paths are:
 - `tokens/figma-tokens.css` (if generated tokens are manually edited)
-- `web-client/src/index.css` (if `:root` block is the canonical source)
+- `mcp-server/tokens/figma-tokens-light.css` and `mcp-server/tokens/figma-tokens-dark.css` (canonical source)
 
 ### Step 2 — Get variables from Figma (read current state)
 
@@ -466,21 +462,20 @@ scripts/
 
 ### Consuming tokens in MCP-UI server HTML
 
-The MCP server generates inline HTML for `UIResourceRenderer` iframes. To use Figma-synced tokens instead of hardcoded hex:
+Widgets are built as single-file HTML and rendered via `UIResourceRenderer`. Token consumption is already centralized:
 
 ```js
-// mcp-server/src/index.js — proposed pattern
-import { readFileSync } from 'fs';
-const TOKEN_CSS = readFileSync('../tokens/figma-tokens.css', 'utf-8');
+// mcp-server/src/widgets/shared.css
+@import '../../tokens/figma-tokens-light.css';
+@import '../../tokens/figma-tokens-dark.css';
 
-function wrapWithTokens(html) {
-  return `<style>${TOKEN_CSS}</style>${html}`;
-}
+// web-client/app/globals.css
+@import '../tokens/figma-tokens-light.css';
+@import '../tokens/figma-tokens-dark.css';
 
-// Then in generateProductListHtml():
-// Replace: color: #4361ee  → color: var(--sds-color-background-brand-default)
-// Replace: color: #1a1a2e  → color: var(--sds-color-text-default-default)
-// And wrap: return wrapWithTokens(html);
+// Governance commands
+// npm run tokens:sync  -> sync canonical mcp-server/tokens into web-client/tokens
+// npm run tokens:check -> fail on drift
 ```
 
 ---
