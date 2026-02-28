@@ -1,6 +1,14 @@
 import express from "express";
 import cors from "cors";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import {
+  getAgentationTrackerOverview,
+  importAgentationSessions,
+  listAgentationComments,
+  processAgentationWebhook,
+  resolveAgentationComment,
+  syncAgentationCommentsToLinear,
+} from "./agentationTracker.js";
 
 const DEFAULT_MODEL = "gpt-4o-mini";
 const DEFAULT_MUTATING_TOOLS = [
@@ -97,6 +105,119 @@ export const startOpenAIProxy = ({
       aiConfigured: configured,
       model: process.env.OPENAI_MODEL || DEFAULT_MODEL,
     });
+  });
+
+  app.post("/api/agentation/webhook", async (req, res) => {
+    try {
+      const result = processAgentationWebhook(req.body || {});
+      const linear = await syncAgentationCommentsToLinear({
+        commentIds: result.processedIds,
+        reason: `webhook:${result.event}`,
+      });
+      return res.json({ ...result, linear });
+    } catch (error) {
+      return res.status(400).json({
+        ok: false,
+        error: error?.message || "Failed to process Agentation webhook",
+      });
+    }
+  });
+
+  app.get("/api/agentation/comments", (req, res) => {
+    try {
+      const status =
+        typeof req.query.status === "string" && req.query.status.trim().length > 0
+          ? req.query.status.trim()
+          : undefined;
+      const sessionId =
+        typeof req.query.sessionId === "string" && req.query.sessionId.trim().length > 0
+          ? req.query.sessionId.trim()
+          : undefined;
+      const result = listAgentationComments({ status, sessionId });
+      return res.json({ ok: true, ...result });
+    } catch (error) {
+      return res.status(500).json({
+        ok: false,
+        error: error?.message || "Failed to read Agentation comments",
+      });
+    }
+  });
+
+  app.post("/api/agentation/comments/:annotationId/resolve", (req, res) => {
+    (async () => {
+      const { annotationId } = req.params;
+      const resolved = resolveAgentationComment(annotationId, req.body || {});
+      const linear = await syncAgentationCommentsToLinear({
+        commentIds: [annotationId],
+        reason: "comment:resolve",
+      });
+      return res.json({ ok: true, comment: resolved, linear });
+    })().catch((error) => {
+      const message = error?.message || "Failed to resolve comment";
+      const statusCode = message.startsWith("Annotation not found") ? 404 : 400;
+      return res.status(statusCode).json({
+        ok: false,
+        error: message,
+      });
+    });
+  });
+
+  app.post("/api/agentation/import", async (req, res) => {
+    try {
+      const endpoint =
+        typeof req.body?.endpoint === "string" && req.body.endpoint.trim().length > 0
+          ? req.body.endpoint.trim()
+          : "http://localhost:4747";
+      const result = await importAgentationSessions({ endpoint });
+      const shouldSyncLinear =
+        typeof req.body?.syncLinear === "boolean" ? req.body.syncLinear : true;
+      const linear = shouldSyncLinear
+        ? await syncAgentationCommentsToLinear({
+            reason: "import",
+            syncAll: true,
+          })
+        : {
+            ok: false,
+            skipped: true,
+            reason: "syncLinear-disabled-for-request",
+          };
+      return res.json({ ...result, linear });
+    } catch (error) {
+      return res.status(400).json({
+        ok: false,
+        error: error?.message || "Failed to import Agentation sessions",
+      });
+    }
+  });
+
+  app.get("/api/agentation/overview", (_req, res) => {
+    try {
+      const overview = getAgentationTrackerOverview();
+      return res.json({ ok: true, ...overview });
+    } catch (error) {
+      return res.status(500).json({
+        ok: false,
+        error: error?.message || "Failed to read Agentation tracker overview",
+      });
+    }
+  });
+
+  app.post("/api/agentation/sync-linear", async (req, res) => {
+    try {
+      const commentIds = Array.isArray(req.body?.commentIds) ? req.body.commentIds : undefined;
+      const syncAll = Boolean(req.body?.syncAll);
+      const reason =
+        typeof req.body?.reason === "string" && req.body.reason.trim().length > 0
+          ? req.body.reason.trim()
+          : "manual-sync";
+      const result = await syncAgentationCommentsToLinear({ commentIds, syncAll, reason });
+      return res.json(result);
+    } catch (error) {
+      return res.status(400).json({
+        ok: false,
+        error: error?.message || "Failed to sync Agentation comments to Linear",
+      });
+    }
   });
 
   const handleChatCompletion = async (req, res) => {

@@ -17,7 +17,9 @@ export function AgentationToolbar() {
   if (!isEnabled) return null;
 
   const endpoint = env("NEXT_PUBLIC_AGENTATION_ENDPOINT") ?? "http://localhost:4747";
-  const webhookUrl = env("NEXT_PUBLIC_AGENTATION_WEBHOOK_URL");
+  const webhookUrl =
+    env("NEXT_PUBLIC_AGENTATION_WEBHOOK_URL") ??
+    "http://localhost:8787/api/agentation/webhook";
 
   return <Agentation endpoint={endpoint} webhookUrl={webhookUrl} />;
 }

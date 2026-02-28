@@ -241,6 +241,8 @@ https://images.unsplash.com/photo-{ID}?w={WIDTH}&h={HEIGHT}&fit=crop&q=80
 4. **Body style overrides**: 6 widgets override `body` with hardcoded `#f5f5f5`. Remove these — shared.css handles it.
 5. **Widget action buttons silent fail**: If clicking doesn't work, check: (a) `data-action` attribute on the button, (b) event delegation with `[data-action]` selector, (c) bridge.ts is imported.
 6. **Build required**: After ANY change to `.ts` or `.html` widget sources, run `npm run build` in mcp-server.
+7. **Do not trust ad-hoc restarts**: before reporting a localhost fix, run `npm run dev:clean` then `npm run dev:health` and verify `http://localhost:3000/` has no `Internal Server Error` text.
+7. **No raw Internal Server Error responses**: For `web-client/app/api/*` routes, never rely on uncaught throws. Always wrap handlers in `try/catch`, return structured JSON with a `requestId`, and preserve response shape on failure so the UI can degrade gracefully with actionable errors.
 
 ---
 
@@ -294,6 +296,56 @@ npm run parity:run
 5. `product-detail`
 
 These should be addressed one-by-one using the parity report + diff images as the acceptance loop.
+
+---
+
+## 10. Agentation FeedbackOps Protocol (Added 2026-02-28)
+
+### Objective
+Convert visual annotations into a durable, auditable execution pipeline:
+1. capture comment
+2. track status
+3. link work/commit
+4. close with evidence
+
+### Runtime Contract
+1. Webhook receiver: `POST /api/agentation/webhook`
+2. Tracker files:
+- `docs/code reports/agentation-comments-tracker.json`
+- `docs/code reports/agentation-comments-tracker.md`
+3. Default webhook in toolbar (dev):
+- `http://localhost:8787/api/agentation/webhook`
+
+### Status Contract
+1. `pending` = new annotation, not yet accepted
+2. `acknowledged` = accepted for implementation (auto on `submit`)
+3. `resolved` = code change complete with summary/commit context
+4. `dismissed` = intentionally not implementing (with reason)
+
+### Linear Sync Contract (Optional, recommended)
+1. Env-gated via:
+- `AGENTATION_LINEAR_ENABLED`
+- `LINEAR_API_KEY`
+- `AGENTATION_LINEAR_TEAM_ID`
+2. Status mapping:
+- pending -> unstarted
+- acknowledged -> started
+- resolved -> completed
+- dismissed -> canceled (fallback completed)
+3. Sync endpoints:
+- `POST /api/agentation/sync-linear`
+- `GET /api/agentation/overview`
+
+### Non-negotiable Rule
+For any annotation being closed as `resolved`, include:
+1. resolution summary
+2. commit SHA
+3. optional commit URL
+
+### Linear Scope Rule
+1. All Agentation-driven issue sync must be project-scoped to this repository.
+2. Do not allow team-level or unscoped issue creation in strict mode.
+3. If project routing is missing, sync must skip with an explicit reason and keep tracker as source of truth.
 
 ---
 

@@ -1,0 +1,447 @@
+{
+  "version": 1,
+  "updatedAt": "2026-02-28T14:13:10.016Z",
+  "sessions": {
+    "mm61a5x1-yvw0yl": {
+      "id": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/#hosts",
+      "createdAt": "2026-02-28T10:50:10.722Z",
+      "updatedAt": "2026-02-28T10:54:58.772Z",
+      "commentIds": [
+        "mm61qy6e-y6egax",
+        "mm66v787-3uvk88",
+        "mm66you7-epzau5",
+        "mm671osk-2091pk",
+        "mm67a4v0-cxf0re",
+        "mm67btx5-q7lo9z",
+        "mm67cswy-z9dvin"
+      ]
+    }
+  },
+  "comments": {
+    "mm61qy6e-y6egax": {
+      "id": "mm61qy6e-y6egax",
+      "createdAt": "2026-02-28T08:15:55.526Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:50:10.722Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-127"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/",
+      "comment": "logo should adopt to dark and light modes",
+      "element": "<SegmentViewNode> <Chat> <Textarea> <ProviderBadge> \"O\"",
+      "elementPath": ".flex > .relative > .flex > .inline-flex",
+      "fullPath": "body.antialiased > div.flex > main.flex-1 > div.h-dvh > div.max-w-xl > form.mt-4 > div.relative > div.flex > div.relative > button.flex > span.inline-flex",
+      "cssClasses": "inline-flex, h-4, min-w-4, items-center, justify-center, rounded-full, border, px-1, text-[9px], font-semibold, leading-none, bg-emerald-500/20, text-emerald-200, border-emerald-400/30",
+      "reactComponents": "<SegmentViewNode> <Chat> <Textarea> <ProviderBadge>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772266555523,
+      "boundingBox": {
+        "x": 707,
+        "y": 581.25,
+        "width": 17.203125,
+        "height": 16
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "34453a74-eed5-406f-8747-728c16a98235",
+        "identifier": "BAS-127",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-127/annotation-mm61qy6e-y6egax-provider-logo-must-adapt-to-darklight-modes",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    },
+    "mm66v787-3uvk88": {
+      "id": "mm66v787-3uvk88",
+      "createdAt": "2026-02-28T10:39:11.959Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:50:10.722Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-128"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/",
+      "comment": "by default dark mode is enabled, light mode dark mode switch is not fucntioniong pls fix the fucntionality",
+      "element": "<SegmentViewNode> <SegmentViewNode> <Sidebar> button \"Light Mode\"",
+      "elementPath": ".flex > .h-dvh > .border-t > .flex",
+      "fullPath": "body.antialiased > div.flex > aside.h-dvh > div.border-t > button.flex",
+      "cssClasses": "flex, items-center, gap-2, w-full, rounded-lg, px-2, py-2, text-sm, text-muted-foreground, hover:text-foreground, hover:bg-muted/30, transition-colors",
+      "reactComponents": "<SegmentViewNode> <SegmentViewNode> <Sidebar>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772275151956,
+      "boundingBox": {
+        "x": 12,
+        "y": 765,
+        "width": 199,
+        "height": 36
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "c611b8e0-49bc-491a-af7f-7aded2185473",
+        "identifier": "BAS-128",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-128/annotation-mm66v787-3uvk88-darklight-mode-switch-must-function",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    },
+    "mm66you7-epzau5": {
+      "id": "mm66you7-epzau5",
+      "createdAt": "2026-02-28T10:41:54.751Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:50:10.722Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-129"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/",
+      "comment": "for filters view port is not auto resizing",
+      "element": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> rounded 2xl",
+      "elementPath": ".flex > .flex > .mb-2 > .rounded-2xl",
+      "fullPath": "body.antialiased > div.flex > main.flex-1 > div.h-dvh > div.flex-1 > div.h-full > div.max-w-lg > div.w-full > div.flex > div.flex > div.mb-2 > div.rounded-2xl",
+      "cssClasses": "rounded-2xl, border, border-border/40, bg-card, shadow-md, overflow-hidden, animate-widget-appear",
+      "reactComponents": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772275314749,
+      "boundingBox": {
+        "x": 628,
+        "y": 43.75,
+        "width": 688,
+        "height": 1790
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "4fbc8336-a077-4998-96cd-efeb40f8bf9b",
+        "identifier": "BAS-129",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-129/annotation-mm66you7-epzau5-filters-viewport-must-auto-resize-to",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    },
+    "mm671osk-2091pk": {
+      "id": "mm671osk-2091pk",
+      "createdAt": "2026-02-28T10:44:14.660Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:50:10.722Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-130"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/",
+      "comment": "widget UI should auto resize by using  auto layout decided in figma, widget UI should be responsive, and should adjust and fit to fit in the widget container",
+      "element": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> rounded 2xl",
+      "elementPath": ".flex > .flex > .mb-2 > .rounded-2xl",
+      "fullPath": "body.antialiased > div.flex > main.flex-1 > div.h-dvh > div.flex-1 > div.h-full > div.max-w-lg > div.w-full > div.flex > div.flex > div.mb-2 > div.rounded-2xl",
+      "cssClasses": "rounded-2xl, border, border-border/40, bg-card, shadow-md, overflow-hidden, animate-widget-appear",
+      "reactComponents": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772275454657,
+      "boundingBox": {
+        "x": 628,
+        "y": 287,
+        "width": 688,
+        "height": 364
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "f4494c96-266c-4285-88fd-150be4face4e",
+        "identifier": "BAS-130",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-130/annotation-mm671osk-2091pk-make-widget-container-responsive-with-figma",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    },
+    "mm67a4v0-cxf0re": {
+      "id": "mm67a4v0-cxf0re",
+      "createdAt": "2026-02-28T10:50:48.732Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-131"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/#hosts",
+      "comment": "remove this not needed",
+      "element": "<SegmentViewNode> <SegmentViewNode> <Sidebar> text [10px]",
+      "elementPath": ".flex > .h-dvh > .border-t > .text-[10px]",
+      "fullPath": "body.antialiased > div.flex > aside.h-dvh > div.border-t > div.text-[10px]",
+      "cssClasses": "text-[10px], text-muted-foreground/50, text-center",
+      "reactComponents": "<SegmentViewNode> <SegmentViewNode> <Sidebar>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772275848729,
+      "boundingBox": {
+        "x": 12,
+        "y": 809,
+        "width": 199,
+        "height": 15
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "a3ac2afe-2adc-4a9e-9341-16efbd3fc9f6",
+        "identifier": "BAS-131",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-131/annotation-mm67a4v0-cxf0re-remove-unnecessary-sidebar-footer-micro",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    },
+    "mm67btx5-q7lo9z": {
+      "id": "mm67btx5-q7lo9z",
+      "createdAt": "2026-02-28T10:52:07.865Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-132"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/#hosts",
+      "comment": "make entire web client plaground UI shadcn / vercel style.\nplease note: the css for this should be seperate from MCP APP MCP UI widget UI",
+      "element": "<__next_root_layout_boundary__> <SegmentViewNode> <SegmentViewNode> flex overflow",
+      "elementPath": ".flex > .flex-1",
+      "fullPath": "body.antialiased > div.flex > main.flex-1",
+      "cssClasses": "flex-1, overflow-hidden",
+      "reactComponents": "<__next_root_layout_boundary__> <SegmentViewNode> <SegmentViewNode>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772275927862,
+      "boundingBox": {
+        "x": 224,
+        "y": 0,
+        "width": 1496,
+        "height": 880
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "27ed3aa1-c392-4ea0-8d6a-a323cb7eb3c8",
+        "identifier": "BAS-132",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-132/annotation-mm67btx5-q7lo9z-apply-shadcnvercel-style-polish-to-web",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    },
+    "mm67cswy-z9dvin": {
+      "id": "mm67cswy-z9dvin",
+      "createdAt": "2026-02-28T10:52:53.218Z",
+      "history": [
+        {
+          "at": "2026-02-28T10:54:14.729Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T10:54:58.772Z",
+          "event": "import.session",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-02-28T14:13:10.016Z",
+          "event": "linear.link.manual",
+          "status": "acknowledged",
+          "note": "linked to BAS-133"
+        }
+      ],
+      "sessionId": "mm61a5x1-yvw0yl",
+      "url": "http://localhost:3000/#hosts",
+      "comment": "change this to mcp ui playground for consistency with other mentions",
+      "element": "<SegmentViewNode> <SegmentViewNode> <Sidebar> \"MCP\"",
+      "elementPath": ".flex > .h-dvh > .flex > .text-sm",
+      "fullPath": "body.antialiased > div.flex > aside.h-dvh > div.flex > span.text-sm",
+      "cssClasses": "text-sm, font-semibold, tracking-tight",
+      "reactComponents": "<SegmentViewNode> <SegmentViewNode> <Sidebar>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772275973217,
+      "boundingBox": {
+        "x": 52,
+        "y": 20,
+        "width": 30.546875,
+        "height": 20
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-02-28T14:13:10.016Z",
+      "status": "acknowledged",
+      "linear": {
+        "issueId": "b7611b9b-9ff4-41b4-a9ea-168ee4fc4ffc",
+        "identifier": "BAS-133",
+        "url": "https://linear.app/basavaraj-team/issue/BAS-133/annotation-mm67cswy-z9dvin-normalize-naming-to-mcp-ui-playground",
+        "stateName": "Todo",
+        "stateType": "unstarted",
+        "lastSyncAt": "2026-02-28T14:13:10.016Z",
+        "lastSyncReason": "manual-bootstrap",
+        "syncError": ""
+      }
+    }
+  },
+  "submissions": [],
+  "stats": {
+    "total": 7,
+    "pending": 0,
+    "acknowledged": 7,
+    "resolved": 0,
+    "dismissed": 0
+  }
+}
