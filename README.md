@@ -1,220 +1,121 @@
-# MCP E-Commerce Application
+# MCP-UI E-commerce Playground
 
-A full-stack e-commerce application built with MCP-UI, React, TypeScript, and integrated with OpenAI for AI-powered shopping assistance.
+Interactive MCP-based e-commerce demo with a Next.js chat host and an Express MCP server that renders 12 tokenized HTML widgets.
 
 ## Architecture
 
-```text
-/mcp-server       - MCP Server with tools for product search, filter, and cart
-/web-client       - React application with @mcp-ui/client integration
-```
-
-## Features
-
-1. **Product Search** - Search products by name or keyword
-2. **Category Filter** - Filter by Footwear, Clothing, or Accessories
-3. **Add to Cart** - Add products to shopping cart
-4. **Remove from Cart** - Remove products from cart
-5. **Cart Summary** - View cart total and items
-6. **AI Assistant** - Chat with OpenAI-powered AI to help with shopping
+- `web-client/`: Next.js App Router UI (`next dev --turbopack -p 3000`).
+- `mcp-server/`: Express API + MCP bridge on port `8787`.
+- `mcp-server/widgets/`: Widget source HTML.
+- `mcp-server/src/widgets/`: Widget TS logic + shared CSS.
+- `mcp-server/dist/widgets/`: Built single-file widget artifacts.
+- `mcp-server/tokens/`: Canonical Figma token CSS.
+- `shared/catalog.mjs`: Product catalog data.
 
 ## Tech Stack
 
-- **Frontend**: React 18 + TypeScript + Vite
-- **MCP**: @modelcontextprotocol/sdk, @mcp-ui/client
-- **AI**: OpenAI API
-- **Design**: Custom CSS with modern e-commerce styling
+- Frontend: Next.js 15, React 19, Tailwind v4, `@mcp-ui/client`.
+- Server: Express 4, `@modelcontextprotocol/sdk`.
+- Widget build: Vite + `vite-plugin-singlefile`.
+- AI bridge: OpenAI chat-completions proxy endpoint.
 
 ## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js 18+ (Node 20+ recommended)
+- npm
 
-### Installation
+### Install
 
-1. **Install root dependencies:**
+```bash
+npm run install:all
+```
 
-   ```bash
-   npm install
-    ```
-
-2. **Install server dependencies:**
-
-   ```bash
-   cd mcp-server
-   npm install
-   cd ..
-    ```
-
-3. **Install client dependencies:**
-
-   ```bash
-   cd web-client
-   npm install
-   cd ..
-    ```
-
-### Running the Application
-
-#### Option 1: Run both servers (recommended)
+### Run (recommended)
 
 ```bash
 npm run dev
 ```
 
-This will start:
+This starts:
 
-- MCP Server HTTP bridge on <http://localhost:8787>
-- Web Client at <http://localhost:3000>
-- OpenAI proxy at <http://localhost:8787>
+- MCP/HTTP bridge at `http://localhost:8787`
+- Next.js web client at `http://localhost:3000`
 
-#### Option 2: Run separately
+### Run separately
 
-Terminal 1 - MCP Server:
+Terminal 1:
 
 ```bash
 cd mcp-server
 npm run dev
 ```
 
-Terminal 2 - Web Client:
+Terminal 2:
 
 ```bash
 cd web-client
 npm run dev
 ```
 
-### OpenAI API Setup
+## Build
 
-To use the AI assistant with OpenAI:
-
-1. Get an API key from <https://platform.openai.com/>.
-2. Create `mcp-server/.env` from [mcp-server/.env.example](mcp-server/.env.example) and set:
-
-   ```bash
-    OPENAI_API_KEY=your-actual-api-key
-    OPENAI_MODEL=gpt-4o-mini
-   API_PORT=8787
-    ```
-
-3. (Optional) Create `web-client/.env` from [web-client/.env.example](web-client/.env.example) if you need to override the proxy base URL.
-
-The application still works in demo mode without an API key, using fallback responses.
-
-### Secure Run Mode (recommended for shared/staging environments)
-
-The MCP HTTP bridge now supports env-gated guardrails for mutable tools.
-
-Add these to `mcp-server/.env` when running outside local development:
+Build widgets + server artifacts:
 
 ```bash
-MCP_SECURITY_MODE=strict
-MCP_ALLOWED_ORIGINS=https://your-app.example.com
-MCP_BRIDGE_AUTH_ENABLED=true
-MCP_BRIDGE_AUTH_TOKEN=strong-random-token
-MCP_MUTATING_TOOL_ALLOWLIST=add_to_cart,remove_from_cart,checkout,place_order,add_to_wishlist,remove_from_wishlist
-MCP_MAX_ARGUMENT_BYTES=8192
-MCP_RATE_LIMIT_ENABLED=true
-MCP_RATE_LIMIT_WINDOW_MS=60000
-MCP_RATE_LIMIT_MAX_REQUESTS=120
+npm --prefix mcp-server run build
 ```
 
-Notes:
-- Auth and rate limit checks apply to mutable `/api/mcp/call` tool invocations.
-- Keep `MCP_BRIDGE_AUTH_ENABLED=false` in local dev unless your client sends auth headers.
-- `MCP_SECURITY_MODE=strict` enforces the `MCP_ALLOWED_ORIGINS` CORS allowlist.
-
-### Token Governance
-
-Canonical token source is `mcp-server/tokens`. Keep `web-client/tokens` in sync with:
+Build frontend:
 
 ```bash
-npm run tokens:sync
+npm --prefix web-client run build
 ```
 
-Validate no drift before commits/CI:
+## Environment
+
+Set `mcp-server/.env` from `mcp-server/.env.example`:
 
 ```bash
-npm run tokens:check
+OPENAI_API_KEY=your-api-key
+OPENAI_MODEL=gpt-4o-mini
+API_PORT=8787
 ```
 
-## MCP Tools
+Without `OPENAI_API_KEY`, AI chat proxy calls fail, but local tool and widget behavior is still testable.
 
-The server provides the following tools:
+## UI Resource URIs
 
-| Tool | Description |
-| --- | --- |
-| `search_products` | Search products by name/keyword |
-| `filter_products` | Filter by category |
-| `add_to_cart` | Add product to cart |
-| `remove_from_cart` | Remove product from cart |
-| `get_cart` | Get cart contents |
-| `get_products` | Get all products |
-| `get_categories` | Get all categories |
+Widgets are served as MCP UI resources via `ui://ecommerce/*.html`, including:
 
-## Mock Products
+- `ui://ecommerce/product-grid.html`
+- `ui://ecommerce/product-detail.html`
+- `ui://ecommerce/cart-view.html`
+- `ui://ecommerce/checkout-form.html`
+- `ui://ecommerce/order-confirmation.html`
 
-| ID | Name | Category | Price |
-| --- | --- | --- | --- |
-| 1 | Nike Shoes | Footwear | ₹4,999 |
-| 2 | Adidas T-Shirt | Clothing | ₹1,999 |
-| 3 | Puma Cap | Accessories | ₹999 |
-| 4 | Nike Jacket | Clothing | ₹3,999 |
-| 5 | Adidas Sneakers | Footwear | ₹5,999 |
-| 6 | Puma Watch | Accessories | ₹2,999 |
-| 7 | Nike Bag | Accessories | ₹1,999 |
-| 8 | Adidas Shorts | Clothing | ₹1,499 |
+## Token Governance
 
-## Example Interactions
+Canonical token source is `mcp-server/tokens`.
+Web-client token files live in `web-client/tokens` and should be kept aligned with the canonical source.
 
-- "Show me Nike products"
-- "What footwear do you have?"
-- "Add the Puma Watch to my cart"
-- "Show my cart"
-- "What's in my cart?"
+## Testing
 
-## UI Resources
+Server test suite:
 
-The MCP server returns widget HTML resources under `ui://ecommerce/*` (for example:
-`ui://ecommerce/product-grid.html`, `ui://ecommerce/cart-view.html`, `ui://ecommerce/product-detail.html`).
-These are rendered inside the chat interface for a seamless experience.
+```bash
+npm --prefix mcp-server test
+```
 
-## Project Structure
+Visual parity suite:
 
-```text
-.
-├── docs/
-│   └── decision-log.md        # Architecture and implementation decisions
-├── package.json              # Root package.json
-├── mcp-server/
-│   ├── package.json
-│   ├── legacy/               # Archived legacy runtime artifacts (non-active)
-│   └── src/
-│       └── index.js          # MCP Server with tools
-└── web-client/
-    ├── package.json
-    ├── app/                  # Next.js app routes
-    ├── components/           # Chat and UI components
-    └── lib/                  # MCP client + utilities
+```bash
+npx playwright test tests/visual-diff.spec.ts
 ```
 
 ## Documentation
 
-- Decision log: [docs/decision-log.md](docs/decision-log.md)
-
-## Script Bootstrap & Troubleshooting
-
-Many utility scripts in `scripts/` support optional Figma automation.
-
-1. Read setup instructions: [scripts/README.md](scripts/README.md)
-2. Prefer env-based path configuration (`FOXY_TOOL_CALL` or `FOXY_ROOT`) over absolute paths.
-3. If a script fails with a path error, verify:
-   - `FOXY_TOOL_CALL` points to `foxy-tool-call.mjs`, or
-   - `FOXY_ROOT/scripts/foxy-tool-call.mjs` exists.
-4. For image-embedding scripts, verify `PRODUCT_IMAGE_DIR` (or default `assets/product-images`) exists.
-
-## License
-
-MIT
+- [docs/decision-log.md](docs/decision-log.md)
+- [docs/code reports/codebase-analysis-report.md](docs/code%20reports/codebase-analysis-report.md)
+- [docs/code reports/cleanup-hardening-plan.md](docs/code%20reports/cleanup-hardening-plan.md)
