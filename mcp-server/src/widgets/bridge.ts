@@ -39,8 +39,30 @@ export function openLink(url: string): void {
 function postSize(): void {
   const body = document.body;
   const html = document.documentElement;
-  const height = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight);
-  const width = Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth);
+  // Avoid viewport-locked measurements (e.g. html.scrollHeight in 100% iframes)
+  // and report actual rendered content bounds instead.
+  const bodyRect = body.getBoundingClientRect();
+  const htmlRect = html.getBoundingClientRect();
+  const height = Math.ceil(
+    Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      body.clientHeight,
+      bodyRect.height,
+      html.clientHeight,
+      htmlRect.height
+    )
+  );
+  const width = Math.ceil(
+    Math.max(
+      body.scrollWidth,
+      body.offsetWidth,
+      body.clientWidth,
+      bodyRect.width,
+      html.clientWidth,
+      htmlRect.width
+    )
+  );
   window.parent.postMessage(
     { type: "ui-size-change", payload: { width, height } },
     "*"
