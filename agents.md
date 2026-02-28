@@ -294,3 +294,106 @@ npm run parity:run
 5. `product-detail`
 
 These should be addressed one-by-one using the parity report + diff images as the acceptance loop.
+
+---
+
+## 10. PM Skill Orchestration Policy (Added 2026-02-28)
+
+### Objective
+Use both Dean Peters repositories without duplicating frameworks or causing routing drift.
+
+### Canonical-First Rule (MANDATORY)
+1. Use `Product-Manager-Skills` as the default skill source for PM work.
+2. Use prompt-derived skills only where no strong canonical equivalent exists.
+3. For broad or ambiguous PM requests, start with the master router skill:
+   - `/Users/basavarajkm/.codex/skills/pm-master-orchestrator/SKILL.md`
+
+### Source-of-Truth Mapping
+- Full mapping and decisions live in:
+  - `docs/pm-prompts-to-skills-matrix-2026-02-28.md`
+- Decision outcomes from that matrix:
+  - `Link to canonical skills`: 20 assets
+  - `Convert now`: 6 source prompt files -> 4 new skills
+  - `Keep as reference`: 9 assets
+
+### Prompt-Derived Skills Added
+- `/Users/basavarajkm/.codex/skills/pm-prompt-builder/SKILL.md`
+- `/Users/basavarajkm/.codex/skills/legacy-spec-to-prd/SKILL.md`
+- `/Users/basavarajkm/.codex/skills/strategic-scrum-kickoff/SKILL.md`
+- `/Users/basavarajkm/.codex/skills/futuristic-product-faq/SKILL.md`
+
+### Default PM Execution Chain
+For "help me figure this out" PM asks, run:
+1. `problem-framing-canvas`
+2. `prioritization-advisor`
+3. `prd-development`
+4. `user-story`
+
+### Anti-Drift Rule
+- If a prompt-derived skill starts overlapping with an existing canonical skill, deprecate the prompt-derived path and route back to the canonical skill.
+- Do not maintain two active skills for the same PM framework unless there is a clear, documented specialization boundary.
+
+### Quick Invocation Pattern
+Use this structure in Codex/agents:
+```text
+Using /Users/basavarajkm/.codex/skills/pm-master-orchestrator/SKILL.md:
+1) Ask up to 3 clarifying questions only if routing is unclear.
+2) Choose canonical skills first.
+3) Execute phase-by-phase and show risks/assumptions.
+```
+
+---
+
+## 11. Agentation Standard (Added 2026-02-28)
+
+### Policy (MANDATORY)
+- Use [Agentation](https://agentation.dev/) as the default visual feedback system for this repo and all new projects.
+- Install and mount Agentation in the frontend root so design/code feedback can be captured with exact element selectors and context.
+- Keep Agentation active in development by default; allow opt-out only via explicit env flag.
+
+### Required Setup Pattern
+1. Install package in the app workspace:
+   - `npm install agentation`
+2. Mount the client component at app root (dev-only guard).
+3. Register Agentation MCP for local tool workflows:
+   - `.mcp.json` server command: `npx -y agentation-mcp server`
+
+### Optional Remote Sync
+- Use `endpoint` and `webhookUrl` props when team sync or automation ingestion is required.
+- Reference docs:
+  - Install: `https://agentation.dev/install`
+  - Schema: `https://agentation.dev/schema`
+  - Features: `https://agentation.dev/features`
+  - MCP: `https://agentation.dev/mcp`
+  - API: `https://agentation.dev/api`
+  - Webhooks: `https://agentation.dev/webhooks`
+  - Intro post: `https://agentation.dev/blog/introducing-agentation-2`
+  - Source: `https://github.com/benjitaylor/agentation`
+
+---
+
+## 12. Agentation Skill Routing (Added 2026-02-28)
+
+### Canonical Skill File
+- Use `~/.agents/skills/agentation/SKILL.md` as the primary workflow guide when handling Agentation requests.
+- Official upstream setup reference is available at `~/.agents/skills/agentation-official/SKILL.md`.
+- Official upstream self-driving reference is available at `~/.agents/skills/agentation-self-driving/SKILL.md`.
+
+### Trigger Phrases (MANDATORY)
+- Activate this skill when the user mentions:
+  - `agentation` / `agentative`
+  - `annotate UI` / `visual feedback`
+  - `watch mode` / `hands free mode`
+  - `critic mode` / `critique mode`
+  - `self-driving mode` / `auto-fix UI from annotations`
+
+### Mode Routing
+1. **Manual Mode (default)**: read pending annotations, implement fixes, resolve via MCP.
+2. **Watch / Hands Free Mode**: loop on incoming annotations and process continuously.
+3. **Critic Mode**: generate design critique annotations on the live page.
+4. **Self-Driving Mode**: critique + implement + resolve in one loop.
+
+### Repo-Specific Overrides for Codex
+- Use project MCP config `.mcp.json` (not `.cursor/mcp.json`) for Agentation server registration.
+- For browser-driven critique/self-driving flows, use available Codex browser tooling (Playwright) when `agent-browser` is unavailable.
+- Always confirm selected mode before execution; if unclear, default to **Manual**.

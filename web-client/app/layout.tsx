@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { MCPProvider } from '@/lib/context/mcp-context';
 import { ThemeProvider } from '@/lib/context/theme-context';
+import { AgentationToolbar } from '@/components/agentation-toolbar';
 import { Toaster } from 'sonner';
 import './globals.css';
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <MCPProvider>
             {children}
             <Toaster position="top-center" richColors />
+            <AgentationToolbar />
           </MCPProvider>
         </ThemeProvider>
       </body>
