@@ -66,8 +66,8 @@ npm run dev
 
 This will start:
 
-- MCP Server on stdio
-- Web Client at <http://localhost:5173>
+- MCP Server HTTP bridge on <http://localhost:8787>
+- Web Client at <http://localhost:3000>
 - OpenAI proxy at <http://localhost:8787>
 
 #### Option 2: Run separately
@@ -163,11 +163,8 @@ The server provides the following tools:
 
 ## UI Resources
 
-The MCP server returns HTML resources for:
-
-- Product lists (`ecommerce://products/list`)
-- Cart view (`ecommerce://cart/view`)
-
+The MCP server returns widget HTML resources under `ui://ecommerce/*` (for example:
+`ui://ecommerce/product-grid.html`, `ui://ecommerce/cart-view.html`, `ui://ecommerce/product-detail.html`).
 These are rendered inside the chat interface for a seamless experience.
 
 ## Project Structure
@@ -179,18 +176,14 @@ These are rendered inside the chat interface for a seamless experience.
 ├── package.json              # Root package.json
 ├── mcp-server/
 │   ├── package.json
+│   ├── legacy/               # Archived legacy runtime artifacts (non-active)
 │   └── src/
 │       └── index.js          # MCP Server with tools
 └── web-client/
     ├── package.json
-    ├── vite.config.ts
-    ├── tsconfig.json
-    ├── index.html
-    └── src/
-        ├── main.tsx
-        ├── App.tsx           # Main React app
-        ├── index.css         # Styles
-        └── vite-env.d.ts
+    ├── app/                  # Next.js app routes
+    ├── components/           # Chat and UI components
+    └── lib/                  # MCP client + utilities
 ```
 
 ## Documentation
