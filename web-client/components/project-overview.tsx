@@ -64,7 +64,7 @@ export function ProjectOverview({ append }: { append?: UseChatHelpers["append"] 
           <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shadow-sm">
             <span className="text-primary text-xl font-bold">M</span>
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight">MCP-UI Playground</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">MCP UI Playground</h1>
         </div>
         <p className="text-muted-foreground text-sm max-w-md mx-auto">
           Shop with an AI assistant — browse products, compare prices, read reviews, 

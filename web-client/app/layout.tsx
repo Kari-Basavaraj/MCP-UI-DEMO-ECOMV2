@@ -6,8 +6,8 @@ import { Toaster } from 'sonner';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'MCP-UI Playground',
-  description: 'Interactive MCP-UI Ecommerce Playground',
+  title: 'MCP UI Playground',
+  description: 'Interactive MCP UI Playground',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

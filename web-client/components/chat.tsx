@@ -126,9 +126,9 @@ export default function Chat() {
   const isLoading = status === "streaming" || status === "submitted";
 
   return (
-    <div className="h-dvh flex flex-col justify-center w-full max-w-3xl mx-auto px-4 sm:px-6 md:py-4">
+    <div className="h-full min-h-0 flex flex-col w-full max-w-3xl mx-auto px-4 sm:px-6 md:py-4">
       {messages.length === 0 ? (
-        <div className="max-w-xl mx-auto w-full">
+        <div className="max-w-xl mx-auto w-full my-auto">
           <ProjectOverview append={append} />
           <form onSubmit={handleFormSubmit} className="mt-4 w-full mx-auto">
             <Textarea
