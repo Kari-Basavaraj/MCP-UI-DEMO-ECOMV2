@@ -1,8 +1,36 @@
 #!/usr/bin/env python3
-"""Find all emoji text nodes in the current Figma page"""
-import subprocess, json, os, sys
+"""Find all emoji text nodes in the current Figma page."""
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
 
-FOXY_DIR = "/Users/kari.basavaraj.k.m/Documents/code/foxy-design-system-master"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def resolve_foxy_tool():
+    explicit = os.environ.get("FOXY_TOOL_CALL")
+    if explicit:
+        p = Path(explicit).expanduser().resolve()
+        if p.exists():
+            return p
+        raise FileNotFoundError(f"FOXY_TOOL_CALL does not exist: {p}")
+
+    foxy_root = os.environ.get("FOXY_ROOT")
+    if foxy_root:
+        p = Path(foxy_root).expanduser().resolve() / "scripts" / "foxy-tool-call.mjs"
+        if p.exists():
+            return p
+        raise FileNotFoundError(f"FOXY_ROOT configured but tool missing: {p}")
+
+    sibling = (REPO_ROOT.parent / "foxy-design-system-master" / "scripts" / "foxy-tool-call.mjs").resolve()
+    if sibling.exists():
+        return sibling
+
+    raise FileNotFoundError(
+        "Unable to resolve foxy-tool-call.mjs. Set FOXY_TOOL_CALL or FOXY_ROOT."
+    )
 
 code = r"""
 const page = figma.currentPage;
@@ -32,13 +60,16 @@ page.findAll(n => {
 return results;
 """
 
+FOXY_TOOL = resolve_foxy_tool()
+FOXY_DIR = FOXY_TOOL.parent.parent
+
 result = subprocess.run(
-    ["node", "scripts/foxy-tool-call.mjs"],
+    ["node", str(FOXY_TOOL)],
     capture_output=True, text=True,
-    cwd=FOXY_DIR,
+    cwd=str(FOXY_DIR),
     env={
         **os.environ,
-        "JOIN_CHANNEL": "default",
+        "JOIN_CHANNEL": os.environ.get("JOIN_CHANNEL", "default"),
         "TOOL": "execute_figma_code",
         "ARGS": json.dumps({"code": code.strip()}),
     },

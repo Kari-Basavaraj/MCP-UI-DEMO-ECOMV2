@@ -197,6 +197,17 @@ These are rendered inside the chat interface for a seamless experience.
 
 - Decision log: [docs/decision-log.md](docs/decision-log.md)
 
+## Script Bootstrap & Troubleshooting
+
+Many utility scripts in `scripts/` support optional Figma automation.
+
+1. Read setup instructions: [scripts/README.md](scripts/README.md)
+2. Prefer env-based path configuration (`FOXY_TOOL_CALL` or `FOXY_ROOT`) over absolute paths.
+3. If a script fails with a path error, verify:
+   - `FOXY_TOOL_CALL` points to `foxy-tool-call.mjs`, or
+   - `FOXY_ROOT/scripts/foxy-tool-call.mjs` exists.
+4. For image-embedding scripts, verify `PRODUCT_IMAGE_DIR` (or default `assets/product-images`) exists.
+
 ## License
 
 MIT

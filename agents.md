@@ -266,7 +266,7 @@ https://images.unsplash.com/photo-{ID}?w={WIDTH}&h={HEIGHT}&fit=crop&q=80
 
 ### Commands
 ```bash
-cd /Users/kari.basavaraj.k.m/Documents/code/MCP-UI-Demo-EcomV1
+cd <repo-root>
 node scripts/capture-widgets-actual.mjs
 node scripts/compare-widget-parity.mjs
 ```

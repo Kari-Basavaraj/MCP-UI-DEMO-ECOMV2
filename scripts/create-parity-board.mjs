@@ -14,8 +14,17 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const FOXY_SCRIPT = '/Users/kari.basavaraj.k.m/Documents/code/foxy-design-system-master/scripts/foxy-tool-call.mjs';
+const ROOT = path.resolve(__dirname, '..');
+const FOXY_SCRIPT = process.env.FOXY_TOOL_CALL
+  || (process.env.FOXY_ROOT ? path.join(process.env.FOXY_ROOT, 'scripts', 'foxy-tool-call.mjs') : null)
+  || path.resolve(ROOT, '..', 'foxy-design-system-master', 'scripts', 'foxy-tool-call.mjs');
 const SCREENSHOT_DIR = path.join(__dirname, '..', 'screenshots', 'actual');
+if (!fs.existsSync(FOXY_SCRIPT)) {
+  throw new Error(`Unable to find foxy tool. Set FOXY_TOOL_CALL or FOXY_ROOT. Resolved: ${FOXY_SCRIPT}`);
+}
+if (!fs.existsSync(SCREENSHOT_DIR)) {
+  throw new Error(`Missing screenshots directory: ${SCREENSHOT_DIR}`);
+}
 
 function callFoxyTool(tool, args) {
   return new Promise((resolve, reject) => {
