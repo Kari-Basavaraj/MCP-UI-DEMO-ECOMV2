@@ -35,13 +35,19 @@ npm run install:all
 ### Run (recommended)
 
 ```bash
-npm run dev
+npm run dev:clean
 ```
 
 This starts:
 
 - MCP/HTTP bridge at `http://localhost:8787`
 - Next.js web client at `http://localhost:3000`
+
+In a second terminal, verify both services:
+
+```bash
+npm run dev:health
+```
 
 ### Run separately
 
