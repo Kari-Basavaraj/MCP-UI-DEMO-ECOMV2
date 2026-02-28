@@ -1,4 +1,4 @@
-import { getLanguageModel, type modelID } from '@/ai/providers';
+import { fetchOpenRouterModels, getLanguageModel, type modelID } from '@/ai/providers';
 import { streamText, type UIMessage } from 'ai';
 import { initializeMCPClients, type MCPServerConfig } from '@/lib/mcp-client';
 
@@ -10,21 +10,33 @@ export async function POST(req: Request) {
   const {
     messages,
     selectedModel,
+    model,
     mcpServers = [],
     userId = "",
   }: {
     messages: UIMessage[];
-    selectedModel: modelID;
+    selectedModel?: modelID;
+    model?: modelID;
     mcpServers?: MCPServerConfig[];
     userId?: string;
   } = await req.json();
+
+  const requestedModel = (selectedModel || model || '').trim();
+  let resolvedModel = requestedModel;
+  if (!resolvedModel) {
+    const { defaultModel } = await fetchOpenRouterModels();
+    resolvedModel = defaultModel;
+  }
+  if (!resolvedModel) {
+    throw new Error('No model selected and no default model is available.');
+  }
 
   const { tools, cleanup } = await initializeMCPClients(mcpServers, req.signal, userId);
 
   let responseCompleted = false;
 
   const result = streamText({
-    model: getLanguageModel(selectedModel),
+    model: getLanguageModel(resolvedModel),
     system: `You are a friendly e-commerce shopping assistant for an Indian fashion & lifestyle store.
 Today is ${new Date().toISOString().split('T')[0]}.
 
