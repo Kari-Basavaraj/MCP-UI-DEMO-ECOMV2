@@ -64,7 +64,8 @@ function jsonSchemaToZod(schema: any): z.ZodType<any> {
  */
 export async function initializeMCPClients(
   mcpServers: MCPServerConfig[] = [],
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  userId?: string
 ): Promise<MCPClientManager> {
   let tools: Record<string, any> = {};
 
@@ -108,10 +109,14 @@ export async function initializeMCPClients(
           description: mcpTool.description || mcpTool.name,
           parameters,
           execute: async (args: any) => {
+            const callArgs = {
+              ...(args || {}),
+              ...(userId ? { userId } : {}),
+            };
             const callRes = await fetch(`${baseUrl}/api/mcp/call`, {
               method: 'POST',
               headers,
-              body: JSON.stringify({ name: mcpTool.name, arguments: args }),
+              body: JSON.stringify({ name: mcpTool.name, arguments: callArgs }),
             });
 
             if (!callRes.ok) {

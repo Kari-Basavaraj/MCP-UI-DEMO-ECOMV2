@@ -73,18 +73,40 @@ function embedData(key, data) {
   return html.replace("</head>", `${tag}</head>`);
 }
 
-// ── In-memory state ─────────────────────────────────────────────────────
-let cart = [];
-let wishlist = [];
-let lastOrderId = 0;
+// ── In-memory state (session scoped) ────────────────────────────────────
+const FALLBACK_SESSION_ID = "anonymous";
+const sessionStore = new Map();
 
-function cartTotal() {
+function withUserId(schema = {}) {
+  return {
+    ...schema,
+    userId: z.string().optional().describe("Session user identifier"),
+  };
+}
+
+function normalizeSessionId(userId) {
+  if (typeof userId !== "string") return FALLBACK_SESSION_ID;
+  const trimmed = userId.trim();
+  return trimmed.length > 0 ? trimmed : FALLBACK_SESSION_ID;
+}
+
+function getSessionState(userId) {
+  const sessionId = normalizeSessionId(userId);
+  let session = sessionStore.get(sessionId);
+  if (!session) {
+    session = { cart: [], wishlist: [], lastOrderId: 0 };
+    sessionStore.set(sessionId, session);
+  }
+  return session;
+}
+
+function cartTotal(cart) {
   return cart.reduce((s, i) => s + i.price, 0);
 }
 
-function generateOrderId() {
-  lastOrderId++;
-  return `ORD-${Date.now()}-${String(lastOrderId).padStart(3, "0")}`;
+function generateOrderId(session) {
+  session.lastOrderId++;
+  return `ORD-${Date.now()}-${String(session.lastOrderId).padStart(3, "0")}`;
 }
 
 function getEstimatedDelivery() {
@@ -115,7 +137,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_products", {
     description: "Get all available products in a grid view",
-    inputSchema: {},
+    inputSchema: withUserId(),
     _meta: { ui: { resourceUri: RESOURCE_URIS.productGrid } },
   }, async () => {
     const data = { products, categories, message: `Here are all ${products.length} available products` };
@@ -130,7 +152,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "search_products", {
     description: "Search for products by name, category, or keyword",
-    inputSchema: { query: z.string().describe("Search query for product name or category") },
+    inputSchema: withUserId({ query: z.string().describe("Search query for product name or category") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.searchBar } },
   }, async ({ query }) => {
     const q = (query ?? "").toLowerCase();
@@ -149,7 +171,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "filter_products", {
     description: "Filter products by category (All, Footwear, Clothing, or Accessories)",
-    inputSchema: { category: z.string().describe("Category to filter by") },
+    inputSchema: withUserId({ category: z.string().describe("Category to filter by") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.categoryFilter } },
   }, async ({ category }) => {
     const results = category === "All" ? products : products.filter((p) => p.category === category);
@@ -165,7 +187,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_product_detail", {
     description: "Show detailed product view with size, quantity, and add-to-cart options",
-    inputSchema: { productId: z.number().describe("ID of the product to show details for") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to show details for") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.productDetail } },
   }, async ({ productId }) => {
     const product = products.find((p) => p.id === productId);
@@ -191,7 +213,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_price_info", {
     description: "Show price tag with sale, regular, or out-of-stock variants",
-    inputSchema: { productId: z.number().describe("ID of the product to show price for") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to show price for") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.priceTag } },
   }, async ({ productId }) => {
     const product = products.find((p) => p.id === productId);
@@ -212,7 +234,7 @@ export function createMCPServer() {
 
   server.tool("get_categories",
     "Get all available product categories",
-    {},
+    withUserId(),
     async () => {
       const data = { categories, message: `Categories: ${categories.join(", ")}` };
       return { content: [{ type: "text", text: JSON.stringify(data) }] };
@@ -225,11 +247,18 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_cart", {
     description: "Show the shopping cart with all items",
-    inputSchema: {},
+    inputSchema: withUserId(),
     _meta: { ui: { resourceUri: RESOURCE_URIS.cartView } },
-  }, async () => {
-    const total = cartTotal();
-    const data = { view: "cart", cart, total, count: cart.length, message: `${cart.length} item(s) in cart. Total: ₹${total}` };
+  }, async ({ userId } = {}) => {
+    const session = getSessionState(userId);
+    const total = cartTotal(session.cart);
+    const data = {
+      view: "cart",
+      cart: session.cart,
+      total,
+      count: session.cart.length,
+      message: `${session.cart.length} item(s) in cart. Total: ₹${total}`,
+    };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -241,11 +270,12 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_cart_summary", {
     description: "Show a compact cart badge with item count and total",
-    inputSchema: {},
+    inputSchema: withUserId(),
     _meta: { ui: { resourceUri: RESOURCE_URIS.cartSummary } },
-  }, async () => {
-    const total = cartTotal();
-    const data = { view: "cart", cart, total, count: cart.length };
+  }, async ({ userId } = {}) => {
+    const session = getSessionState(userId);
+    const total = cartTotal(session.cart);
+    const data = { view: "cart", cart: session.cart, total, count: session.cart.length };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -257,16 +287,24 @@ export function createMCPServer() {
 
   registerAppTool(server, "add_to_cart", {
     description: "Add a product to the shopping cart",
-    inputSchema: { productId: z.number().describe("ID of the product to add") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to add") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.cartView } },
-  }, async ({ productId }) => {
+  }, async ({ productId, userId }) => {
     const product = products.find((p) => p.id === productId);
     if (!product) {
       return { content: [{ type: "text", text: JSON.stringify({ success: false, message: "Product not found" }) }] };
     }
-    cart.push({ ...product, cartId: Date.now() });
-    const total = cartTotal();
-    const data = { view: "cart", success: true, message: `Added "${product.name}" to cart`, cart, total, count: cart.length };
+    const session = getSessionState(userId);
+    session.cart.push({ ...product, cartId: Date.now() });
+    const total = cartTotal(session.cart);
+    const data = {
+      view: "cart",
+      success: true,
+      message: `Added "${product.name}" to cart`,
+      cart: session.cart,
+      total,
+      count: session.cart.length,
+    };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -278,16 +316,24 @@ export function createMCPServer() {
 
   registerAppTool(server, "remove_from_cart", {
     description: "Remove a product from the shopping cart",
-    inputSchema: { productId: z.number().describe("ID of the product to remove") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to remove") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.cartView } },
-  }, async ({ productId }) => {
-    const idx = cart.findIndex((i) => i.id === productId);
+  }, async ({ productId, userId }) => {
+    const session = getSessionState(userId);
+    const idx = session.cart.findIndex((i) => i.id === productId);
     if (idx === -1) {
       return { content: [{ type: "text", text: JSON.stringify({ success: false, message: "Product not in cart" }) }] };
     }
-    const removed = cart.splice(idx, 1)[0];
-    const total = cartTotal();
-    const data = { view: "cart", success: true, message: `Removed "${removed.name}" from cart`, cart, total, count: cart.length };
+    const removed = session.cart.splice(idx, 1)[0];
+    const total = cartTotal(session.cart);
+    const data = {
+      view: "cart",
+      success: true,
+      message: `Removed "${removed.name}" from cart`,
+      cart: session.cart,
+      total,
+      count: session.cart.length,
+    };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -303,11 +349,12 @@ export function createMCPServer() {
 
   registerAppTool(server, "checkout", {
     description: "Show the checkout form for placing an order",
-    inputSchema: {},
+    inputSchema: withUserId(),
     _meta: { ui: { resourceUri: RESOURCE_URIS.checkoutForm } },
-  }, async () => {
-    const total = cartTotal();
-    const data = { cart, total, count: cart.length, message: "Please fill in your shipping and payment details" };
+  }, async ({ userId } = {}) => {
+    const session = getSessionState(userId);
+    const total = cartTotal(session.cart);
+    const data = { cart: session.cart, total, count: session.cart.length, message: "Please fill in your shipping and payment details" };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -319,7 +366,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "place_order", {
     description: "Place an order with shipping and payment details",
-    inputSchema: {
+    inputSchema: withUserId({
       name: z.string().describe("Full name"),
       email: z.string().describe("Email address"),
       phone: z.string().optional().describe("Phone number"),
@@ -328,13 +375,14 @@ export function createMCPServer() {
       state: z.string().optional().describe("State"),
       pin: z.string().describe("PIN code"),
       paymentMethod: z.string().optional().describe("Payment method"),
-    },
+    }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.orderConfirmation } },
   }, async (args) => {
-    const orderId = generateOrderId();
-    const items = [...cart];
-    const total = cartTotal();
-    cart = [];
+    const session = getSessionState(args.userId);
+    const orderId = generateOrderId(session);
+    const items = [...session.cart];
+    const total = cartTotal(session.cart);
+    session.cart = [];
     const data = {
       orderId,
       items,
@@ -358,7 +406,7 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_reviews", {
     description: "Show reviews and ratings for a product",
-    inputSchema: { productId: z.number().describe("ID of the product to show reviews for") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to show reviews for") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.reviewRating } },
   }, async ({ productId }) => {
     const product = products.find((p) => p.id === productId);
@@ -386,10 +434,15 @@ export function createMCPServer() {
 
   registerAppTool(server, "get_wishlist", {
     description: "Show the user's wishlist",
-    inputSchema: {},
+    inputSchema: withUserId(),
     _meta: { ui: { resourceUri: RESOURCE_URIS.wishlist } },
-  }, async () => {
-    const data = { wishlist, count: wishlist.length, message: `${wishlist.length} item(s) in wishlist` };
+  }, async ({ userId } = {}) => {
+    const session = getSessionState(userId);
+    const data = {
+      wishlist: session.wishlist,
+      count: session.wishlist.length,
+      message: `${session.wishlist.length} item(s) in wishlist`,
+    };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -401,17 +454,23 @@ export function createMCPServer() {
 
   registerAppTool(server, "add_to_wishlist", {
     description: "Add a product to the wishlist",
-    inputSchema: { productId: z.number().describe("ID of the product to add to wishlist") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to add to wishlist") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.wishlist } },
-  }, async ({ productId }) => {
+  }, async ({ productId, userId }) => {
     const product = products.find((p) => p.id === productId);
     if (!product) {
       return { content: [{ type: "text", text: JSON.stringify({ success: false, message: "Product not found" }) }] };
     }
-    if (!wishlist.find((w) => w.id === productId)) {
-      wishlist.push(product);
+    const session = getSessionState(userId);
+    if (!session.wishlist.find((w) => w.id === productId)) {
+      session.wishlist.push(product);
     }
-    const data = { success: true, wishlist, count: wishlist.length, message: `Added "${product.name}" to wishlist` };
+    const data = {
+      success: true,
+      wishlist: session.wishlist,
+      count: session.wishlist.length,
+      message: `Added "${product.name}" to wishlist`,
+    };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
@@ -423,15 +482,21 @@ export function createMCPServer() {
 
   registerAppTool(server, "remove_from_wishlist", {
     description: "Remove a product from the wishlist",
-    inputSchema: { productId: z.number().describe("ID of the product to remove from wishlist") },
+    inputSchema: withUserId({ productId: z.number().describe("ID of the product to remove from wishlist") }),
     _meta: { ui: { resourceUri: RESOURCE_URIS.wishlist } },
-  }, async ({ productId }) => {
-    const idx = wishlist.findIndex((w) => w.id === productId);
+  }, async ({ productId, userId }) => {
+    const session = getSessionState(userId);
+    const idx = session.wishlist.findIndex((w) => w.id === productId);
     if (idx === -1) {
       return { content: [{ type: "text", text: JSON.stringify({ success: false, message: "Product not in wishlist" }) }] };
     }
-    const removed = wishlist.splice(idx, 1)[0];
-    const data = { success: true, wishlist, count: wishlist.length, message: `Removed "${removed.name}" from wishlist` };
+    const removed = session.wishlist.splice(idx, 1)[0];
+    const data = {
+      success: true,
+      wishlist: session.wishlist,
+      count: session.wishlist.length,
+      message: `Removed "${removed.name}" from wishlist`,
+    };
     return {
       content: [
         { type: "text", text: JSON.stringify(data) },
