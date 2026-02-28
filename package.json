@@ -4,8 +4,9 @@
   "private": true,
   "description": "MCP-UI based e-commerce application",
   "scripts": {
-    "dev": "npx concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:clean": "bash ./scripts/dev-preflight.sh && npm run dev",
+    "dev:start": "npx concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev": "bash ./scripts/dev-preflight.sh && npm run dev:start",
+    "dev:clean": "npm run dev",
     "dev:health": "bash ./scripts/dev-health.sh",
     "dev:server": "cd mcp-server && npm run dev",
     "dev:client": "cd web-client && npm run dev",
