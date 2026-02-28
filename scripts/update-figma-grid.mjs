@@ -6,10 +6,26 @@
  * 3. Update header text
  */
 import { execSync } from "child_process";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const FOXY = "/Users/kari.basavaraj.k.m/Documents/code/foxy-design-system-master/scripts/foxy-tool-call.mjs";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, "..");
+
+function resolveFoxyTool() {
+  if (process.env.FOXY_TOOL_CALL) return process.env.FOXY_TOOL_CALL;
+  if (process.env.FOXY_ROOT) return path.join(process.env.FOXY_ROOT, "scripts", "foxy-tool-call.mjs");
+  return path.resolve(ROOT, "..", "foxy-design-system-master", "scripts", "foxy-tool-call.mjs");
+}
+
+const FOXY = resolveFoxyTool();
+if (!fs.existsSync(FOXY)) {
+  throw new Error(`Unable to find foxy tool. Set FOXY_TOOL_CALL or FOXY_ROOT. Resolved: ${FOXY}`);
+}
 
 function figmaExec(code) {
+  if (!FOXY) throw new Error("FOXY tool path unresolved");
   const escaped = JSON.stringify({ code });
   const cmd = `JOIN_CHANNEL=default TOOL=execute_figma_code ARGS='${escaped}' node ${FOXY} 2>&1`;
   const raw = execSync(cmd, { encoding: "utf-8", timeout: 30000 });

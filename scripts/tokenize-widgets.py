@@ -6,8 +6,12 @@ Context-aware: differentiates background, color (text), and border properties.
 """
 import re
 import os
+from pathlib import Path
 
-WIDGETS_DIR = "/Users/kari.basavaraj.k.m/Documents/code/MCP-UI-Demo-EcomV1/mcp-server/widgets"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+WIDGETS_DIR = Path(
+    os.environ.get("WIDGETS_DIR", str(REPO_ROOT / "mcp-server" / "widgets"))
+).expanduser().resolve()
 
 # Files needing full tokenization (100% hardcoded)
 FULL_TOKENIZE = [
@@ -140,8 +144,8 @@ def main():
     all_files = FULL_TOKENIZE + PARTIAL_FIX
 
     for fname in all_files:
-        fpath = os.path.join(WIDGETS_DIR, fname)
-        if not os.path.exists(fpath):
+        fpath = WIDGETS_DIR / fname
+        if not fpath.exists():
             print(f"  SKIP {fname}: not found")
             continue
 
@@ -176,4 +180,6 @@ def main():
 
 
 if __name__ == '__main__':
+    if not WIDGETS_DIR.exists():
+        raise SystemExit(f"WIDGETS_DIR does not exist: {WIDGETS_DIR}")
     main()

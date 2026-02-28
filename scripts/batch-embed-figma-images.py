@@ -1,23 +1,70 @@
 #!/usr/bin/env python3
 """Batch embed product images into all Figma widget emoji nodes."""
-import subprocess, json, os, sys, time
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
 
-FOXY_DIR = "/Users/kari.basavaraj.k.m/Documents/code/foxy-design-system-master"
-IMG_DIR = "../MCP-UI-Demo-EcomV1/assets/product-images"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def resolve_foxy_tool():
+    explicit = os.environ.get("FOXY_TOOL_CALL")
+    if explicit:
+        p = Path(explicit).expanduser().resolve()
+        if p.exists():
+            return p
+        raise FileNotFoundError(f"FOXY_TOOL_CALL does not exist: {p}")
+
+    foxy_root = os.environ.get("FOXY_ROOT")
+    if foxy_root:
+        p = Path(foxy_root).expanduser().resolve() / "scripts" / "foxy-tool-call.mjs"
+        if p.exists():
+            return p
+        raise FileNotFoundError(f"FOXY_ROOT configured but tool missing: {p}")
+
+    sibling = (REPO_ROOT.parent / "foxy-design-system-master" / "scripts" / "foxy-tool-call.mjs").resolve()
+    if sibling.exists():
+        return sibling
+
+    raise FileNotFoundError(
+        "Unable to resolve foxy-tool-call.mjs. Set FOXY_TOOL_CALL or FOXY_ROOT."
+    )
+
+
+def resolve_image_dir():
+    explicit = os.environ.get("PRODUCT_IMAGE_DIR")
+    if explicit:
+      p = Path(explicit).expanduser().resolve()
+      if not p.exists():
+          raise FileNotFoundError(f"PRODUCT_IMAGE_DIR does not exist: {p}")
+      return p
+    default = (REPO_ROOT / "assets" / "product-images").resolve()
+    if not default.exists():
+        raise FileNotFoundError(
+            f"Product image directory missing: {default}. Set PRODUCT_IMAGE_DIR."
+        )
+    return default
+
+
+FOXY_TOOL = resolve_foxy_tool()
+FOXY_DIR = FOXY_TOOL.parent.parent
+IMG_DIR = resolve_image_dir()
 
 # Emoji → product image file mapping
 EMOJI_TO_IMAGE = {
     "👟": None,  # Contextual: Nike or Ultra Boost - resolved per path
-    "👕": f"{IMG_DIR}/crew-tshirt.jpg",
-    "🧢": f"{IMG_DIR}/sport-cap.jpg",
-    "🧥": f"{IMG_DIR}/bomber-jacket.jpg",
-    "🎒": f"{IMG_DIR}/trail-backpack.jpg",
-    "⌚": f"{IMG_DIR}/chronograph-watch.jpg",
-    "🩳": f"{IMG_DIR}/flex-shorts.jpg",
+    "👕": str(IMG_DIR / "crew-tshirt.jpg"),
+    "🧢": str(IMG_DIR / "sport-cap.jpg"),
+    "🧥": str(IMG_DIR / "bomber-jacket.jpg"),
+    "🎒": str(IMG_DIR / "trail-backpack.jpg"),
+    "⌚": str(IMG_DIR / "chronograph-watch.jpg"),
+    "🩳": str(IMG_DIR / "flex-shorts.jpg"),
 }
 
-NIKE_IMAGE = f"{IMG_DIR}/nike-air-max.jpg"
-ULTRA_IMAGE = f"{IMG_DIR}/ultra-boost.jpg"
+NIKE_IMAGE = str(IMG_DIR / "nike-air-max.jpg")
+ULTRA_IMAGE = str(IMG_DIR / "ultra-boost.jpg")
 
 def resolve_shoe_image(path):
     """Resolve 👟 to Nike or Ultra Boost based on context."""
@@ -105,12 +152,12 @@ EMBED_TARGETS = [
 def embed_image(node_id, image_path, context):
     """Embed an image into a Figma node."""
     result = subprocess.run(
-        ["node", "scripts/foxy-tool-call.mjs"],
+        ["node", str(FOXY_TOOL)],
         capture_output=True, text=True,
-        cwd=FOXY_DIR,
+        cwd=str(FOXY_DIR),
         env={
             **os.environ,
-            "JOIN_CHANNEL": "default",
+            "JOIN_CHANNEL": os.environ.get("JOIN_CHANNEL", "default"),
             "TOOL": "embed_image_in_node",
             "ARGS": json.dumps({
                 "nodeId": node_id,
