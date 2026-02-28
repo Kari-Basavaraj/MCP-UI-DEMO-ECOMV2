@@ -9,7 +9,7 @@ import {
 import { z } from "zod";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { startOpenAIProxy } from "./openaiProxy.js";
 import catalog from "../../shared/catalog.mjs";
 
@@ -444,21 +444,32 @@ export function createMCPServer() {
   return server;
 }
 
-// ── Start HTTP + SSE ────────────────────────────────────────────────────
-const apiPort = Number(process.env.API_PORT || process.env.PORT || 8787);
-startOpenAIProxy({ port: apiPort, createMCPServer });
-
-// ── Optionally start stdio transport (only when stdin is piped) ─────────
-if (process.env.MCP_STDIO === "1" || (!process.stdin.isTTY && process.env.MCP_STDIO !== "0")) {
-  async function main() {
-    const transport = new StdioServerTransport();
-    const server = createMCPServer();
-    await server.connect(transport);
-    console.error("E-commerce MCP Server running on stdio");
+function isMainModule() {
+  if (!process.argv[1]) return false;
+  try {
+    return import.meta.url === pathToFileURL(process.argv[1]).href;
+  } catch {
+    return false;
   }
-  main().catch((err) => {
-    console.error("Stdio transport error:", err);
-  });
-} else {
-  console.error("Stdio transport skipped (HTTP-only mode)");
+}
+
+if (isMainModule()) {
+  // ── Start HTTP + SSE ──────────────────────────────────────────────────
+  const apiPort = Number(process.env.API_PORT || process.env.PORT || 8787);
+  startOpenAIProxy({ port: apiPort, createMCPServer });
+
+  // ── Optionally start stdio transport (only when stdin is piped) ───────
+  if (process.env.MCP_STDIO === "1" || (!process.stdin.isTTY && process.env.MCP_STDIO !== "0")) {
+    async function main() {
+      const transport = new StdioServerTransport();
+      const server = createMCPServer();
+      await server.connect(transport);
+      console.error("E-commerce MCP Server running on stdio");
+    }
+    main().catch((err) => {
+      console.error("Stdio transport error:", err);
+    });
+  } else {
+    console.error("Stdio transport skipped (HTTP-only mode)");
+  }
 }
