@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "updatedAt": "2026-02-28",
+  "notes": "Map Figma variable names to stable CSS custom properties when names differ.",
+  "nameMap": {},
+  "requiredTokens": [
+    "--sds-color-background-default-default",
+    "--sds-color-text-default-default",
+    "--sds-color-border-default-default",
+    "--sds-size-padding-lg",
+    "--sds-size-space-400",
+    "--sds-typo-body-font-family",
+    "--sds-typo-body-font-weight-regular",
+    "--sds-typo-heading-size-base"
+  ]
+}

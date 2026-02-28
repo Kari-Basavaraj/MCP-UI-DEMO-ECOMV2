@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "components": [
+    { "id": "product-grid", "componentName": "ProductGridWidget", "required": true },
+    { "id": "product-card", "componentName": "ProductCardWidget", "required": true },
+    { "id": "product-detail", "componentName": "ProductDetailWidget", "required": true },
+    { "id": "cart-view", "componentName": "CartViewWidget", "required": true },
+    { "id": "cart-summary", "componentName": "CartSummaryWidget", "required": true },
+    { "id": "wishlist", "componentName": "WishlistWidget", "required": true },
+    { "id": "search-bar", "componentName": "SearchBarWidget", "required": true },
+    { "id": "category-filter", "componentName": "CategoryFilterWidget", "required": true },
+    { "id": "checkout-form", "componentName": "CheckoutFormWidget", "required": true },
+    { "id": "order-confirmation", "componentName": "OrderConfirmationWidget", "required": true },
+    { "id": "price-tag", "componentName": "PriceTagWidget", "required": true },
+    { "id": "review-rating", "componentName": "ReviewRatingWidget", "required": true }
+  ]
+}

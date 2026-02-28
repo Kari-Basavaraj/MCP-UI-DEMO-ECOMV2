@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-28T17:25:08.092Z",
+  "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+  "requiredCount": 12,
+  "generatedCount": 12,
+  "missing": [],
+  "mappings": [
+    {
+      "id": "product-grid",
+      "componentName": "ProductGridWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/product-grid.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "product-card",
+      "componentName": "ProductCardWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/product-card.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "product-detail",
+      "componentName": "ProductDetailWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/product-detail.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "cart-view",
+      "componentName": "CartViewWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/cart-view.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "cart-summary",
+      "componentName": "CartSummaryWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/cart-summary.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "wishlist",
+      "componentName": "WishlistWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/wishlist.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "search-bar",
+      "componentName": "SearchBarWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/search-bar.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "category-filter",
+      "componentName": "CategoryFilterWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/category-filter.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "checkout-form",
+      "componentName": "CheckoutFormWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/checkout-form.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "order-confirmation",
+      "componentName": "OrderConfirmationWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/order-confirmation.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "price-tag",
+      "componentName": "PriceTagWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/price-tag.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    },
+    {
+      "id": "review-rating",
+      "componentName": "ReviewRatingWidget",
+      "label": "HTML",
+      "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+      "nodeId": "TODO_NODE_ID",
+      "source": "mcp-server/widgets/review-rating.html",
+      "sourceExists": true,
+      "required": true,
+      "notes": ""
+    }
+  ]
+}

@@ -1,157 +1,157 @@
-# Figma Sync Workflow (MCP + Code Connect + Variables API)
+# Figma Sync Workflow (Implemented)
 
-## Objective
+This runbook defines how this repository keeps Figma variables and Code Connect mappings synchronized with code, using a hybrid execution model.
 
-Keep ecommerce widget design and implementation synchronized in both directions:
+Detailed office execution playbook:
+- `docs/code reports/office-copilot-figma-codeconnect-cicd-playbook.md`
 
-- Design → Code: Variables/tokens and component intent flow into the codebase.
-- Code → Design: Component mappings and implementation parity are visible in Figma workflows.
+## Scope
 
-## Prerequisites
+- Repository: `MCP-UI-DEMO-ECOMV2`
+- Primary file key: configured in `figma/sync.config.json` (`primaryFileKey`)
+- Canonical token outputs:
+  - `mcp-server/tokens/figma-tokens-light.css`
+  - `mcp-server/tokens/figma-tokens-dark.css`
+- Mirror token outputs:
+  - `web-client/tokens/figma-tokens-light.css`
+  - `web-client/tokens/figma-tokens-dark.css`
+- Code Connect contracts:
+  - `figma/code-connect/mappings.source.json`
+  - `figma/code-connect/required-components.json`
+  - `figma/code-connect/mappings.generated.json`
 
-- Figma file with widget components and variables collections.
-- Figma access token (or OAuth app) for REST API usage.
-- Figma desktop/web access for manual board review when required.
-- Code Connect CLI installed in the project toolchain.
-- MCP host configured to use Figma MCP capabilities.
+## Route Matrix
 
-## VS Code MCP list setup
+| Route | Pull/Verify | Push Variables | Publish Code Connect | When used |
+| --- | --- | --- | --- | --- |
+| Route A | CI/local | Office fallback | Office fallback | Default rollout route |
+| Route B | CI/local | CI allowed | CI allowed | All probes pass |
+| Route C | CI/local verify-only | Office/manual only | Office/manual only | CI auth/capability constrained |
 
-To make Figma appear in VS Code MCP server lists for this workspace, add a root `/.mcp.json` file:
+Route selection is produced by `npm run figma:probe` and saved to:
+- `docs/code reports/figma-capability-probe.json`
+- `docs/code reports/figma-capability-probe.md`
 
-```json
-{
-  "mcpServers": {
-    "figma": {
-      "url": "https://mcp.figma.com/mcp",
-      "bearer_token_env_var": "FIGMA_OAUTH_TOKEN",
-      "http_headers": {
-        "X-Figma-Region": "us-east-1"
-      }
-    }
-  }
-}
+## Required Probes
+
+1. Variables read probe: `GET /v1/files/:file_key/variables/local`
+2. Code Connect parse probe (`npx figma connect parse`)
+3. Code Connect publish command probe
+4. Variables write probe (`POST /v1/files/:file_key/variables` with empty `variableModeValues`)
+
+Selection logic:
+1. Read + parse + publish + write pass -> Route B
+2. Read + parse pass but publish/write fail -> Route A
+3. Otherwise -> Route C
+
+## Commands
+
+### Capability + verification
+
+```bash
+npm run figma:probe
+npm run figma:verify
 ```
 
-Then ensure your shell/VS Code process has:
+### Pull flow (Figma -> code)
 
-- `FIGMA_OAUTH_TOKEN=<your-token>`
+```bash
+npm run figma:pull:variables
+npm run figma:normalize:variables
+npm run figma:generate:tokens
+npm run tokens:sync
+npm run figma:verify
+```
 
-After setting env vars, reload VS Code and re-open the MCP list.
+Shortcut:
 
-## Source of Truth Rules
+```bash
+npm run figma:sync:pull
+```
 
-- Variables/tokens: Figma is source of truth.
-- Component behavior/runtime logic: code is source of truth.
-- Public component contract (props/variants): agreed contract shared by both.
+### Push flow (code -> Figma)
 
-## Workflow A — Design to Code (Daily)
+Default is dry-run:
 
-1. Designer updates variables/components in Figma.
-2. Engineer runs variable sync pull.
-3. Sync job updates token artifacts in repo.
-4. Widget styles consume generated token artifacts.
-5. Engineer validates widget render in chat host.
+```bash
+npm run figma:push:variables
+npm run figma:sync:push
+```
 
-### Suggested token artifacts
+Apply mode (guarded by config + context):
 
+```bash
+FIGMA_WRITE_CONTEXT=office npm run figma:push:variables -- --apply
+FIGMA_WRITE_CONTEXT=office npm run figma:sync:push -- --apply
+```
+
+### Code Connect flow
+
+```bash
+npm run figma:codeconnect:generate
+npm run figma:codeconnect:verify
+npm run figma:codeconnect:publish
+```
+
+Apply publish (requires publish-enabled mode and office context when configured):
+
+```bash
+FIGMA_WRITE_CONTEXT=office npm run figma:codeconnect:publish -- --apply
+```
+
+### End-to-end orchestration
+
+```bash
+npm run figma:sync:full
+npm run figma:sync:full -- --apply-publish
+npm run figma:sync:full -- --apply-push --apply-publish
+```
+
+`figma:sync:full` always runs probe first and follows selected route safeguards.
+
+## Configuration Contract
+
+File: `figma/sync.config.json`
+
+Required keys:
+1. `primaryFileKey`
+2. `region`
+3. `writeMode` (`office-only` | `ci-allowed` | `disabled`)
+4. `codeConnectMode` (`verify-only` | `publish-enabled`)
+5. `routes.pull`, `routes.push`, `routes.publish`
+6. `canary.enabled`, `canary.collectionNames`, `canary.maxVariables`
+7. `requiredComponentsPath`
+8. `mappingSourcePath`
+
+## Artifact Contract
+
+Generated artifacts:
 - `tokens/figma/variables.raw.json`
 - `tokens/figma/variables.normalized.json`
-- `src/styles/tokens.css` (or TS token map)
+- `tokens/figma/.variable-ids.json`
+- `docs/code reports/figma-sync-verification.json`
+- `docs/code reports/figma-sync-verification.md`
+- `docs/code reports/figma-cicd-rollout-log.md`
 
-## Workflow B — Code to Design (Component parity)
+Optional apply artifacts:
+- `tokens/figma/rollback-*.json`
+- `docs/code reports/figma-push-report-*.json`
+- `docs/code reports/figma-codeconnect-publish-*.json`
 
-1. Engineer updates widget component code and props.
-2. Run Code Connect mapping command.
-3. Publish/refresh mappings to Figma context.
-4. Designer reviews mapped component contracts against variants.
+## CI Workflows
 
-## Workflow C — MCP-assisted design context
+- `.github/workflows/ci-core.yml`
+- `.github/workflows/figma-pull-variables.yml`
+- `.github/workflows/figma-codeconnect-sync.yml`
+- `.github/workflows/figma-push-variables.yml`
 
-Use Figma MCP in agent sessions to:
+## Safety Rules
 
-- Retrieve component metadata and naming conventions.
-- Validate token naming consistency.
-- Cross-check Figma node/component IDs referenced by code mappings.
-
-Note: Some board/file URLs may require an authenticated browser session/WebGL and are not always machine-fetchable in headless tooling.
-
-## Variables API Integration
-
-Use Figma REST API endpoints for variables lifecycle:
-
-- Query variables/collections/modes
-- Create/update/delete variables when needed by automation
-
-### Captured workflow from FigJam (Variables API guide)
-
-The pasted FigJam content describes two valid source-of-truth patterns:
-
-1. **Figma as source of truth (pull into codebase)**
-  - Trigger from GitHub Actions (schedule or manual dispatch).
-  - Step 1: call **GET local variables** API from your workflow/app.
-  - Step 2: map Figma variables to your code system names.
-  - Step 3: commit generated token changes back to the repo.
-  - Use this when design tokens are primarily authored in Figma.
-
-2. **Codebase as source of truth (push into Figma)**
-  - Trigger from your app CI job or GitHub Actions.
-  - Step 1: call **GET local variables** and **GET local variable collections**.
-  - Step 2: map code-side names to existing Figma variable IDs.
-  - Step 3: call **POST variables** API to upsert values back into Figma.
-  - Use this when tokens are primarily authored in the repository.
-
-Implementation note from the guide: keep a stable mapping table between code token keys and Figma variable IDs to avoid accidental duplicate variable creation.
-
-General API constraints:
-
-- Base URL: `https://api.figma.com`
-- Auth: personal access token or OAuth2
-- Keep variable IDs, collection IDs, and mode IDs in managed metadata files
-
-## CI/CD Recommendation
-
-- Pull-only sync in CI on schedule (e.g. nightly) and on manual dispatch.
-- Open PR with token diff for review.
-- Block merge if token schema contract breaks.
-
-If you choose codebase-as-source-of-truth for some collections, use a separate push workflow and require explicit approval before POST updates to Figma.
-
-## Branching + Review Policy
-
-- Designers can change token values freely.
-- Token naming/schema changes require engineering approval.
-- Component variant removals require migration note in PR.
-
-## Minimal Command Surface (to add in project)
-
-- `npm run figma:pull:variables`
-- `npm run figma:normalize:variables`
-- `npm run figma:codeconnect:sync`
-- `npm run figma:verify`
-
-## Secrets and Config
-
-Store in `.env.local` or CI secrets:
-
-- `FIGMA_ACCESS_TOKEN`
-- `FIGMA_FILE_KEY`
-- `FIGMA_TEAM_ID` (optional)
-- `FIGMA_PROJECT_ID` (optional)
-
-Never commit raw secrets to repo.
-
-## Manual Steps Required Today
-
-1. Open the shared board in a logged-in Figma browser session.
-2. Confirm variable collections/modes and component naming.
-3. Record stable IDs/file key in secure env.
-4. Run sync commands and review generated token diff.
-
-## Definition of Done
-
-- Token pull updates code artifacts reproducibly.
-- Widget components consume synced tokens only (no hard-coded visual values).
-- Code Connect mapping exists for all ecommerce widgets.
-- At least one successful round-trip change has been demonstrated:
-  - Figma variable change → code update visible in widget render.
+1. `writeMode=office-only` blocks apply operations unless `FIGMA_WRITE_CONTEXT=office`.
+2. Canary limits push scope to configured collections and count threshold.
+3. Verification fails on:
+   - token drift,
+   - missing required tokens,
+   - invalid typography units (e.g. `font-weight: 400px`),
+   - missing/unresolved Code Connect mapping contracts.
+4. No secrets are stored in repo; use environment variables and GitHub secrets.

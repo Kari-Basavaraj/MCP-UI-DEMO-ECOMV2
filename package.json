@@ -15,7 +15,19 @@
     "tokens:check": "node scripts/sync-tokens.mjs check",
     "parity:capture": "node scripts/capture-widgets-actual.mjs",
     "parity:compare": "node scripts/compare-widget-parity.mjs",
-    "parity:run": "npm --prefix mcp-server run build && npm run parity:capture && npm run parity:compare"
+    "parity:run": "npm --prefix mcp-server run build && npm run parity:capture && npm run parity:compare",
+    "figma:probe": "node scripts/figma-probe.mjs",
+    "figma:pull:variables": "node scripts/figma-pull-variables.mjs",
+    "figma:normalize:variables": "node scripts/figma-normalize-variables.mjs",
+    "figma:generate:tokens": "node scripts/figma-generate-tokens.mjs",
+    "figma:push:variables": "node scripts/figma-push-variables.mjs",
+    "figma:codeconnect:generate": "node scripts/figma-codeconnect-generate.mjs",
+    "figma:codeconnect:verify": "node scripts/figma-codeconnect-verify.mjs",
+    "figma:codeconnect:publish": "node scripts/figma-codeconnect-publish.mjs",
+    "figma:verify": "node scripts/figma-verify.mjs",
+    "figma:sync:pull": "node scripts/figma-sync-pull.mjs",
+    "figma:sync:push": "node scripts/figma-sync-push.mjs",
+    "figma:sync:full": "node scripts/figma-sync-full.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

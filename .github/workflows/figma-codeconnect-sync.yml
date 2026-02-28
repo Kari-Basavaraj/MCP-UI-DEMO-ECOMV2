@@ -1,0 +1,53 @@
+name: Figma Code Connect Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 3 * * *'
+  push:
+    paths:
+      - 'figma/code-connect/**'
+      - 'web-client/components/**'
+      - 'mcp-server/src/widgets/**'
+      - 'scripts/figma-codeconnect-*.mjs'
+
+jobs:
+  codeconnect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+      FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+      FIGMA_REGION: ${{ secrets.FIGMA_REGION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Generate Code Connect mappings
+        run: npm run figma:codeconnect:generate
+
+      - name: Verify required mappings and paths
+        run: npm run figma:codeconnect:verify
+
+      - name: Optional publish in CI route
+        if: ${{ vars.FIGMA_CODECONNECT_PUBLISH == 'true' }}
+        run: npm run figma:codeconnect:publish -- --apply
+
+      - name: Upload codeconnect artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-codeconnect-artifacts
+          path: |
+            figma/code-connect/mappings.generated.json
+            docs/code reports/figma-codeconnect-publish-*.json
+          if-no-files-found: ignore

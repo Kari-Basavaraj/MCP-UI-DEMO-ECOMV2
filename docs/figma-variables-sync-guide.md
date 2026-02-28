@@ -1,548 +1,246 @@
-# Figma Variables ↔ Code Sync Guide
+# Figma Variables Sync Guide (Implemented Contracts)
 
-> Comprehensive two-way sync workflow for the **MCP-UI Ecommerce** codebase.
->
-> References:
-> - [mcpui.dev](https://mcpui.dev/)
-> - [MCP-UI-Org/mcp-ui](https://github.com/MCP-UI-Org/mcp-ui)
-> - [modelcontextprotocol/ext-apps](https://github.com/modelcontextprotocol/ext-apps)
-> - [Figma Variables REST API](https://www.figma.com/developers/api#variables)
+This guide documents the concrete script contracts used by this repository for two-way token sync.
 
----
+## 1) Architecture
 
-## Table of Contents
+Canonical token source:
+- `mcp-server/tokens/figma-tokens-light.css`
+- `mcp-server/tokens/figma-tokens-dark.css`
 
-1. [Codebase Token Architecture](#1-codebase-token-architecture)
-2. [Flow A — Figma Variables → Code in GitHub](#2-flow-a--figma-variables--code-in-github)
-3. [Flow B — Code in GitHub → Figma Variables](#3-flow-b--code-in-github--figma-variables)
-4. [Shared Infrastructure](#4-shared-infrastructure)
-5. [Variable Rename Warnings](#5-variable-rename-warnings)
-6. [Quick Reference — API Endpoints](#6-quick-reference--api-endpoints)
+Mirror token source:
+- `web-client/tokens/figma-tokens-light.css`
+- `web-client/tokens/figma-tokens-dark.css`
 
----
+Normalization artifacts:
+- `tokens/figma/variables.raw.json`
+- `tokens/figma/variables.normalized.json`
+- `tokens/figma/.variable-ids.json`
+- `tokens/figma/token-name-map.json`
 
-## 1. Codebase Token Architecture
+## 2) Environment Variables
 
-### Where tokens live today
+Required for Figma API calls:
+- `FIGMA_ACCESS_TOKEN`
+- `FIGMA_FILE_KEY` (or `figma/sync.config.json -> primaryFileKey`)
 
-| Layer | File | Token style | Example |
-|-------|------|------------|---------|
-| Canonical token source | `mcp-server/tokens/figma-tokens-*.css` | `--sds-color-*`, `--sds-size-*`, `--sds-typo-*` | `--sds-color-background-brand-default` |
-| Web-client token mirror | `web-client/tokens/figma-tokens-*.css` | Synced copy of canonical files | `--sds-color-text-default-default` |
-| Web-client consumption | `web-client/app/globals.css` | Tailwind bridge via CSS vars | `--color-background: var(--sds-color-background-default-default)` |
-| Widget consumption | `mcp-server/src/widgets/shared.css` | Direct token imports | `@import '../../tokens/figma-tokens-light.css'` |
-| Shared catalog | `shared/catalog.mjs` | Product data (no tokens) | — |
+Recommended:
+- `FIGMA_REGION`
 
-### Current tokenization status
+Required for guarded apply modes:
+- `FIGMA_WRITE_CONTEXT=office` when `writeMode=office-only`
 
-All widget styles are tokenized and consume `--sds-*` variables from `mcp-server/tokens/figma-tokens-*.css`.
-Primary remaining governance risk is drift between canonical and mirrored token files.
+## 3) Script Contracts
 
-### Historical hardcoded mapping reference
+## `npm run figma:pull:variables`
 
-| Hardcoded value | Semantic meaning | Target token |
-|----------------|------------------|-------------|
-| `#4361ee` | Brand / accent | `--sds-color-background-brand-default` |
-| `#1a1a2e` | Text heading | `--sds-color-text-default-default` |
-| `#666` | Text secondary | `--sds-color-text-default-secondary` |
-| `#fff` | Surface card | `--sds-color-background-default-default` |
-| `#ff6b6b` | Danger / remove | `--danger` → map to Figma `color/red/*` |
-| `#f8f9fa` | Surface subtle | `--sds-color-background-default-secondary` |
+Purpose:
+- Pull raw variables payload from Figma.
+- Persist normalized representation and variable ID index.
 
-### MCP-UI rendering context
+Input:
+- Figma API `GET /v1/files/{file_key}/variables/local`
 
-Tools in `mcp-server/src/index.js` declare `_meta.ui.resourceUri` (e.g. `ui://ecommerce/product-grid.html`).
-The `web-client` renders them via `@mcp-ui/client`'s `UIResourceRenderer`.
-Widget HTML is built as self-contained files by Vite and already includes shared token imports through `shared.css`.
-Recommended governance path:
-- Keep canonical source in `mcp-server/tokens`.
-- Sync into `web-client/tokens` with `npm run tokens:sync`.
-- Enforce drift checks with `npm run tokens:check`.
+Output:
+- `tokens/figma/variables.raw.json`
+- `tokens/figma/variables.normalized.json`
+- `tokens/figma/.variable-ids.json`
 
----
+Exit:
+- `0` on success
+- non-zero on API/auth errors
 
-## 2. Flow A — Figma Variables → Code in GitHub
+## `npm run figma:normalize:variables`
 
-> **Use when: Figma is the design system source of truth.**
-> Designers change tokens in Figma; code stays in sync automatically.
+Purpose:
+- Rebuild normalized artifacts from existing raw payload.
 
-### Architecture
+Input:
+- `tokens/figma/variables.raw.json`
 
-```
-┌─────────────┐     Step 1: Trigger      ┌─────────────┐
-│  Your users  │ ──────────────────────► │  GitHub      │
-│  (designers) │  manual dispatch or      │  Actions     │
-└─────────────┘  schedule                 │  workflow    │
-                                          └──────┬──────┘
-                                                 │
-                                  Step 2: GET    │    Step 4: Commit
-                                  /variables     │    token files
-                                                 │
-                                          ┌──────▼──────┐
-                                          │   Figma     │
-                                          │   REST API  │
-                                          └─────────────┘
-                                                 │
-                                  Step 3: Map    │
-                                  & translate    │
-                                                 ▼
-                                          ┌─────────────┐
-                                          │  Your       │
-                                          │  codebase   │
-                                          └─────────────┘
-```
+Output:
+- `tokens/figma/variables.normalized.json`
+- `tokens/figma/.variable-ids.json`
 
-### Step 1 — Trigger workflow when design system changes
+Exit:
+- non-zero if raw payload missing/invalid
 
-Use a manually-triggered GitHub Actions workflow. Add `on: workflow_dispatch` with a `file_key` input so you can target specific Figma files.
+## `npm run figma:generate:tokens`
 
-```yaml
-# .github/workflows/figma-pull-variables.yml
-name: Sync Figma variables to tokens
-on:
-  workflow_dispatch:
-    inputs:
-      file_key:
-        description: 'The file key of the Figma file to pull from'
-        required: true
+Purpose:
+- Generate canonical light/dark CSS token files from normalized payload.
+- Preserve component alias compatibility block.
+
+Input:
+- `tokens/figma/variables.normalized.json`
+
+Output:
+- `mcp-server/tokens/figma-tokens-light.css`
+- `mcp-server/tokens/figma-tokens-dark.css`
+
+## `npm run figma:push:variables`
+
+Purpose:
+- Build `variableModeValues` payload from canonical CSS + ID map.
+- Dry-run by default.
+- Apply only when explicitly requested.
+
+Command forms:
+
+```bash
+npm run figma:push:variables
+npm run figma:push:variables -- --apply
 ```
 
-### Step 2 — Get variables from Figma
+Apply safeguards:
+1. `writeMode` must not be `disabled`
+2. if `writeMode=office-only`, requires `FIGMA_WRITE_CONTEXT=office`
+3. canary constraints (`collectionNames`, `maxVariables`) enforced
 
-Call the **GET local variables API** with the file key. This returns all **variable collections** and all **variables** in the file.
+Apply behavior:
+- captures rollback snapshot as `tokens/figma/rollback-*.json`
+- sends `POST /v1/files/{file_key}/variables`
+- writes report `docs/code reports/figma-push-report-*.json`
 
-```
-GET https://api.figma.com/v1/files/{file_key}/variables/local
-Authorization: Bearer {FIGMA_ACCESS_TOKEN}
-```
+## `npm run figma:probe`
 
-Response shape (relevant fields):
+Purpose:
+- Determine route (A/B/C) from capabilities.
 
-```jsonc
-{
-  "variableCollections": {
-    "VariableCollectionId:11:2": {
-      "id": "VariableCollectionId:11:2",
-      "name": "Semantics",       // collection name
-      "defaultModeId": "11:0",
-      "modes": [
-        { "modeId": "11:0", "name": "Light" },
-        { "modeId": "11:14", "name": "Dark" }
-      ]
-    }
-  },
-  "variables": {
-    "VariableId:302:3354": {
-      "id": "VariableId:302:3354",
-      "name": "text/text-on-success",   // slash-delimited path
-      "resolvedType": "COLOR",
-      "valuesByMode": {
-        "11:0": { "type": "VARIABLE_ALIAS", "id": "VariableId:5:11" },
-        "11:14": { "type": "VARIABLE_ALIAS", "id": "VariableId:5:25" }
-      },
-      "scopes": ["ALL_SCOPES"]
-    }
-  }
-}
-```
+Probes:
+1. variables read probe
+2. Code Connect parse probe
+3. Code Connect publish command probe
+4. variables write probe
 
-**Key concepts visible in the Figma UI:**
-- **Semantics** = a collection
-- **Light** and **Dark** = modes
-- **text-on-success** = a variable
-- Variable values can be direct RGBA or `VARIABLE_ALIAS` references (follow the chain to resolve)
+Output:
+- `docs/code reports/figma-capability-probe.json`
+- `docs/code reports/figma-capability-probe.md`
 
-### Step 3 — Connect the dots (map + translate)
+## `npm run figma:verify`
 
-Map Figma variable names to this project's CSS custom property names and translate RGBA floats to hex.
+Purpose:
+- Repo-level parity gate.
 
-**Mapping rules for this codebase:**
+Checks:
+1. `npm run tokens:check`
+2. required token presence from `tokens/figma/token-name-map.json`
+3. typography unit sanity (`font-weight` must not use `px`)
+4. Code Connect mapping generation + verification
 
-| Figma variable path | CSS custom property | Notes |
-|---------------------|-------------------|-------|
-| `text/text-on-success` | `--sds-color-text-on-success` | SDS naming |
-| `text/text-on-brand` | `--sds-color-text-on-brand` | |
-| `text/text-primary` | `--sds-color-text-default-default` | Semantic alias |
-| `surface/*` | `--sds-color-background-*` | |
-| `border/*` | `--sds-color-border-*` | |
-| `color/green/100` | `--color-green-100` | Primitive, resolved via alias chain |
+Output:
+- `docs/code reports/figma-sync-verification.json`
+- `docs/code reports/figma-sync-verification.md`
 
-**Translation: RGBA floats → hex**
+Fails when any gate fails.
 
-Figma returns colors as `{ r: 0.85, g: 0.91, b: 0.98, a: 1 }`.
-Convert: `r × 255 → hex`, `g × 255 → hex`, `b × 255 → hex`.
+## 4) Code Connect Contracts
 
-```js
-// scripts/figma-pull-variables.mjs (to be created)
-function figmaRgbaToHex({ r, g, b, a }) {
-  const toHex = (v) => Math.round(v * 255).toString(16).padStart(2, '0');
-  const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-  return a < 1 ? `${hex}${toHex(a)}` : hex;
-}
+## `npm run figma:codeconnect:generate`
+
+Input:
+- `figma/code-connect/mappings.source.json`
+- `figma/code-connect/required-components.json`
+
+Output:
+- `figma/code-connect/mappings.generated.json`
+
+Behavior:
+- ensures required IDs exist in source mapping
+- resolves source file existence
+
+## `npm run figma:codeconnect:verify`
+
+Checks:
+- required component coverage
+- source path existence
+- placeholder node IDs (warning unless strict)
+
+Strict mode:
+
+```bash
+npm run figma:codeconnect:verify -- --strict
 ```
 
-**Alias resolution:**
+## `npm run figma:codeconnect:publish`
 
-If a variable's value is `{ "type": "VARIABLE_ALIAS", "id": "VariableId:5:11" }`, look up that ID in the variables map and resolve recursively until you get a concrete RGBA/number value.
+Default:
+- dry-run parse/publish capability validation only
 
-**Output files for this codebase:**
+Apply mode:
 
-| Output file | Purpose | Consumed by |
-|-------------|---------|------------|
-| `tokens/figma/variables.raw.json` | Raw API response (cache) | Scripts |
-| `tokens/figma/variables.normalized.json` | Flattened name→value map per mode | Scripts |
-| `mcp-server/tokens/figma-tokens-light.css` | Canonical CSS custom properties (Light mode default) | Imported by widget shared CSS and synced to web-client mirror |
-| `tokens/figma-tokens-dark.css` | Dark mode overrides | Optional `prefers-color-scheme` |
-
-Example generated `tokens/figma-tokens.css`:
-
-```css
-/* Auto-generated from Figma — DO NOT EDIT MANUALLY */
-/* Collection: Semantics, Mode: Light */
-:root {
-  --sds-color-text-on-success: #14ae5c;
-  --sds-color-text-on-info: #4361ee;
-  --sds-color-text-on-critical: #ec221f;
-  --sds-color-text-on-warning: #e5a000;
-  --sds-color-text-on-brand: #ffffff;
-  --sds-color-text-default-default: #111111;
-  --sds-color-text-default-secondary: #757575;
-  /* ... */
-}
+```bash
+FIGMA_WRITE_CONTEXT=office npm run figma:codeconnect:publish -- --apply
 ```
 
-### Step 4 — Write variables to codebase (commit)
+Apply safeguards:
+1. `codeConnectMode` must be `publish-enabled`
+2. route publish policy honored (`office` requires office context)
+3. unresolved node IDs block apply
 
-Use a GitHub Actions step or `git` to commit the generated token files and optionally open a PR.
+Report:
+- `docs/code reports/figma-codeconnect-publish-*.json`
 
-```yaml
-# .github/workflows/figma-pull-variables.yml (continued)
-jobs:
-  sync-variables-to-code:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Sync variables
-        run: node scripts/figma-pull-variables.mjs
-        env:
-          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-          FIGMA_FILE_KEY: ${{ github.event.inputs.file_key }}
-      - name: Commit report
-        run: |
-          git config --global user.name 'figma-sync-bot'
-          git config --global user.email 'bot@users.noreply.github.com'
-          git add tokens/
-          git commit -am "Update design tokens from Figma" || echo "No changes"
-          git push
+## 5) Orchestrators
+
+## Pull orchestrator
+
+```bash
+npm run figma:sync:pull
 ```
 
-### How this connects to MCP-UI rendering
+Sequence:
+1. pull
+2. normalize
+3. generate tokens
+4. sync mirrors
+5. verify
 
-After tokens are committed:
+## Push orchestrator
 
-1. `mcp-server/tokens/figma-tokens-*.css` remains the canonical source of truth.
-2. `web-client/tokens/figma-tokens-*.css` is synced from canonical files (`npm run tokens:sync`).
-3. `web-client/app/globals.css` and `mcp-server/src/widgets/shared.css` consume the same `--sds-*` variables.
-3. The `@mcp-ui/client` / `@mcp-ui/server` handshake is unaffected — only visual tokens change.
-
----
-
-## 3. Flow B — Code in GitHub → Figma Variables
-
-> **Use when: codebase is the design system source of truth.**
-> Engineers change tokens in code; Figma stays in sync automatically.
-
-### Architecture
-
-```
-┌─────────────┐     Step 1: Trigger      ┌─────────────┐
-│  GitHub      │ ──────────────────────► │  GitHub      │
-│  (push to    │  on: push               │  Actions     │
-│  token paths)│  paths filter            │  workflow    │
-└─────────────┘                           └──────┬──────┘
-                                                 │
-                                  Step 2: GET    │    Step 4: POST
-                                  /variables     │    /variables
-                                  (read IDs)     │    (write values)
-                                                 │
-                                          ┌──────▼──────┐
-                                          │   Figma     │
-                                          │   REST API  │
-                                          └─────────────┘
-                                                 │
-                                  Step 3: Map    │    Step 5: Publish
-                                  code tokens    │    library updates
-                                  to Figma IDs   │    (manual in Figma)
-                                                 ▼
-                                          ┌─────────────┐
-                                          │  Your       │
-                                          │  codebase   │
-                                          └─────────────┘
+```bash
+npm run figma:sync:push
+npm run figma:sync:push -- --apply
 ```
 
-### Step 1 — Trigger workflow when design system changes
+## Full orchestrator
 
-Use `on: push` with a `paths` filter so the workflow only runs when token files change.
-
-```yaml
-# .github/workflows/figma-push-variables.yml
-name: Sync tokens to Figma
-on:
-  push:
-    paths:
-      - 'tokens/**'
-      - 'web-client/app/globals.css'
+```bash
+npm run figma:sync:full
+npm run figma:sync:full -- --apply-publish
+npm run figma:sync:full -- --apply-push --apply-publish
 ```
 
-For this codebase, the relevant token source paths are:
-- `tokens/figma-tokens.css` (if generated tokens are manually edited)
-- `mcp-server/tokens/figma-tokens-light.css` and `mcp-server/tokens/figma-tokens-dark.css` (canonical source)
+Sequence:
+1. probe
+2. pull pipeline
+3. codeconnect generate/verify/publish (dry-run unless apply)
+4. push pipeline (apply only when route allows)
 
-### Step 2 — Get variables from Figma (read current state)
+## 6) CI Alignment
 
-Same API call as Flow A — you need the current variable IDs, collection IDs, and mode IDs to construct the POST body.
+Workflows:
+- `ci-core.yml`: continuous gate, includes `figma:verify`
+- `figma-pull-variables.yml`: scheduled pull + PR
+- `figma-codeconnect-sync.yml`: mapping generation/verify + optional publish
+- `figma-push-variables.yml`: scheduled dry-run push, guarded apply path
 
-```
-GET https://api.figma.com/v1/files/{file_key}/variables/local
-```
+## 7) Troubleshooting
 
-Unless you've stored these IDs in a local metadata file (recommended), you must GET them every time.
+1. 401/403 on pull:
+   - validate token scope and file access
+   - verify file key value
 
-**Recommended: maintain a mapping file**
+2. push blocked in office-only mode:
+   - set `FIGMA_WRITE_CONTEXT=office`
 
-```jsonc
-// tokens/figma/.variable-ids.json
-{
-  "collectionId": "VariableCollectionId:11:2",
-  "modes": {
-    "Light": "11:0",
-    "Dark": "11:14"
-  },
-  "variables": {
-    "--sds-color-text-on-success": "VariableId:302:3354",
-    "--sds-color-text-default-default": "VariableId:302:3360",
-    "--sds-color-background-brand-default": "VariableId:302:3370"
-    // ...
-  }
-}
-```
+3. codeconnect parse failure:
+   - validate `figma/figma.config.json`
+   - run `npx figma connect parse --config figma/figma.config.json`
 
-### Step 3 — Connect the dots (code → Figma mapping)
+4. verify fails for `font-weight` units:
+   - remove `px` from weight values in generated source path before apply
 
-Start with the file(s) that were changed in your code. Map code token names back to Figma variable IDs, and translate hex values to Figma RGBA floats.
-
-**Mapping rules for this codebase (reverse of Flow A):**
-
-| CSS custom property | Figma variable path | Translation |
-|-------------------|---------------------|-------------|
-| `--primary: #111111` | `text/text-primary` | hex → RGBA floats |
-| `--success: #14ae5c` | `text/text-on-success` | hex → RGBA floats |
-| `--danger: #ec221f` | `text/text-on-critical` | hex → RGBA floats |
-
-**Translation: hex → RGBA floats**
-
-```js
-// scripts/figma-push-variables.mjs (to be created)
-function hexToFigmaRgba(hex) {
-  const h = hex.replace('#', '');
-  const r = parseInt(h.substring(0, 2), 16) / 255;
-  const g = parseInt(h.substring(2, 4), 16) / 255;
-  const b = parseInt(h.substring(4, 6), 16) / 255;
-  const a = h.length === 8 ? parseInt(h.substring(6, 8), 16) / 255 : 1;
-  return { r, g, b, a };
-}
-```
-
-**Connect themes/variants to Figma modes:**
-
-In this codebase, the Tailwind-like config maps to Figma modes:
-- `Light` theme → Figma mode `11:0` (default)
-- `Dark` theme → Figma mode `11:14`
-
-Each CSS class like `.theme-light .text-on-success { color: var(--green-100); }` corresponds to setting the value for variable `text/text-on-success` in mode `Light` to the resolved RGBA of `--green-100`.
-
-### Step 4 — Write variables to Figma (POST)
-
-Call the **POST variables API** to upsert values back to Figma.
-
-```
-POST https://api.figma.com/v1/files/{file_key}/variables
-Authorization: Bearer {FIGMA_ACCESS_TOKEN}
-Content-Type: application/json
-```
-
-Request body:
-
-```json
-{
-  "variableModeValues": [
-    {
-      "variableId": "VariableId:302:3354",
-      "modeId": "11:0",
-      "value": {
-        "r": 0.0784313725490196,
-        "g": 0.6823529411764706,
-        "b": 0.3607843137254902,
-        "a": 1
-      }
-    }
-  ]
-}
-```
-
-Each entry targets one variable + one mode. Batch all changed values into a single POST.
-
-**GitHub Actions step:**
-
-```yaml
-jobs:
-  sync-tokens-to-figma:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Push tokens to Figma
-        run: node scripts/figma-push-variables.mjs
-        env:
-          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-          FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
-```
-
-### Step 5 — Publish library updates (manual)
-
-After the design file is updated via API, go into the **Figma UI** to:
-
-1. **Publish your libraries** to make the updates available to other files.
-2. Figma makes the updates available in every file where the variable is used.
-3. Individual file owners can **accept the design system changes** whenever they're ready.
-
-> This step cannot be automated — it requires a human with publish permissions in Figma.
-
----
-
-## 4. Shared Infrastructure
-
-### npm scripts (to add to root `package.json`)
-
-```jsonc
-{
-  "scripts": {
-    "figma:pull": "node scripts/figma-pull-variables.mjs",
-    "figma:push": "node scripts/figma-push-variables.mjs",
-    "figma:verify": "node scripts/figma-verify-tokens.mjs"
-  }
-}
-```
-
-### File structure after setup
-
-```
-tokens/
-  figma/
-    variables.raw.json          # Cached GET response
-    variables.normalized.json   # Flattened name→value per mode
-    .variable-ids.json          # Stable ID mapping (gitignored: no)
-  figma-tokens.css              # Generated CSS custom properties (Light)
-  figma-tokens-dark.css         # Generated CSS custom properties (Dark)
-scripts/
-  figma-pull-variables.mjs      # Flow A script
-  figma-push-variables.mjs      # Flow B script
-  figma-verify-tokens.mjs       # Drift detection
-.github/
-  workflows/
-    figma-pull-variables.yml    # Flow A workflow
-    figma-push-variables.yml    # Flow B workflow
-```
-
-### Environment / secrets
-
-| Secret | Used by | Where to store |
-|--------|---------|----------------|
-| `FIGMA_ACCESS_TOKEN` | Both flows | GitHub Actions secret + `.env.local` for local dev |
-| `FIGMA_FILE_KEY` | Both flows | GitHub Actions secret or workflow input |
-
-### Consuming tokens in MCP-UI server HTML
-
-Widgets are built as single-file HTML and rendered via `UIResourceRenderer`. Token consumption is already centralized:
-
-```js
-// mcp-server/src/widgets/shared.css
-@import '../../tokens/figma-tokens-light.css';
-@import '../../tokens/figma-tokens-dark.css';
-
-// web-client/app/globals.css
-@import '../tokens/figma-tokens-light.css';
-@import '../tokens/figma-tokens-dark.css';
-
-// Governance commands
-// npm run tokens:sync  -> sync canonical mcp-server/tokens into web-client/tokens
-// npm run tokens:check -> fail on drift
-```
-
----
-
-## 5. Variable Rename Warnings
-
-> **Renaming variables can break your integration.**
-
-### Value updates — safe ✅
-
-Syncing a new value for an existing variable name is straightforward. The sync code matches by name and updates the value.
-
-```
-Original:  color.gray.50  →  value: "#f3f4f6"
-Modified:  color.gray.50  →  value: "new_color"
-Result:    ✅ Detected as update, synced correctly
-```
-
-### Name renames — dangerous ⚠️
-
-If there is no stable identifier in the tokens file, your sync code **cannot tell the difference** between a rename and a deletion + addition.
-
-```
-Original:  color.gray.50      →  value: "#f3f4f6"
-Modified:  color.gray.50_new  →  value: "#f3f4f6"
-Result:    ❌ Interpreted as NEW variable; old references orphaned
-```
-
-**Mitigation for this codebase:**
-- Always use the Figma variable **ID** (e.g. `VariableId:302:3354`) as the stable identifier in `.variable-ids.json`.
-- If a CSS custom property is renamed in code, update the mapping file in the same commit.
-- Add a CI check that flags any mapping entries whose variable IDs no longer exist in the GET response.
-
----
-
-## 6. Quick Reference — API Endpoints
-
-| Operation | Method | Endpoint | Auth |
-|-----------|--------|----------|------|
-| Get all variables + collections | GET | `https://api.figma.com/v1/files/{file_key}/variables/local` | Bearer token |
-| Upsert variable values | POST | `https://api.figma.com/v1/files/{file_key}/variables` | Bearer token |
-| Get file metadata | GET | `https://api.figma.com/v1/files/{file_key}` | Bearer token |
-
-### Figma MCP (for agent-assisted workflows in VS Code)
-
-```jsonc
-// .mcp.json (workspace root)
-{
-  "mcpServers": {
-    "figma": {
-      "url": "https://mcp.figma.com/mcp"
-    }
-  }
-}
-```
-
-Figma MCP tools available for agent sessions: `get_design_context`, `get_metadata`, `get_variable_defs`, `get_screenshot`, `get_figjam`.
-
----
-
-## Decision Summary
-
-| Question | Decision for this project |
-|----------|--------------------------|
-| Which direction is primary? | **Figma → Code** (Flow A) is the default for design tokens |
-| Token format in repo? | CSS custom properties (aligned with SDS) |
-| Where do tokens get consumed? | `web-client` via CSS import + `mcp-server` via injected `<style>` in HTML strings |
-| How to handle Dark mode? | Separate `figma-tokens-dark.css` with `@media (prefers-color-scheme: dark)` override |
-| CI automation? | GitHub Actions with `workflow_dispatch` (pull) and `push` path filter (push) |
-| Rename safety? | Stable ID mapping in `tokens/figma/.variable-ids.json` |
+5. mapping verify fails due placeholders:
+   - update `figma/code-connect/mappings.source.json` with real node IDs
+   - regenerate mappings

@@ -1,0 +1,21 @@
+{
+  "primaryFileKey": "p3SdnPiT3DYRtOu2CZs97P",
+  "region": "us-east-1",
+  "writeMode": "office-only",
+  "codeConnectMode": "verify-only",
+  "routes": {
+    "pull": "ci",
+    "push": "office",
+    "publish": "office"
+  },
+  "canary": {
+    "enabled": true,
+    "collectionNames": [
+      "Canary",
+      "MCP-UI Canary"
+    ],
+    "maxVariables": 25
+  },
+  "requiredComponentsPath": "figma/code-connect/required-components.json",
+  "mappingSourcePath": "figma/code-connect/mappings.source.json"
+}

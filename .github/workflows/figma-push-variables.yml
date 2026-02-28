@@ -1,0 +1,68 @@
+name: Figma Push Variables
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        type: boolean
+        required: false
+        default: false
+        description: 'Apply push to Figma (otherwise dry-run)'
+  schedule:
+    - cron: '0 4 * * *'
+
+jobs:
+  push-variables:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: figma-write
+    env:
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+      FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+      FIGMA_REGION: ${{ secrets.FIGMA_REGION }}
+      FIGMA_WRITE_CONTEXT: ci
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Probe capabilities
+        run: npm run figma:probe
+
+      - name: Normalize/generate/sync
+        run: |
+          npm run figma:normalize:variables
+          npm run figma:generate:tokens
+          npm run tokens:sync
+
+      - name: Push variables dry-run
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.apply }}
+        run: npm run figma:push:variables
+
+      - name: Push variables apply
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        run: npm run figma:push:variables -- --apply
+
+      - name: Verify after push
+        run: npm run figma:verify
+
+      - name: Upload push artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-push-artifacts
+          path: |
+            docs/code reports/figma-capability-probe.json
+            docs/code reports/figma-capability-probe.md
+            docs/code reports/figma-sync-verification.json
+            docs/code reports/figma-sync-verification.md
+            docs/code reports/figma-push-report-*.json
+          if-no-files-found: ignore

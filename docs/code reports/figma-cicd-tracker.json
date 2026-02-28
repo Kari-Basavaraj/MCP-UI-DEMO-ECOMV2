@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "updatedAt": "2026-02-28T16:59:00.000Z",
+  "project": "MCP-UI-DEMO-ECOMV2",
+  "figma": {
+    "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+    "designUrl": "https://www.figma.com/design/p3SdnPiT3DYRtOu2CZs97P/MCPUI-DS-V2--Copy-?node-id=3002-348&t=uaJoCobwzJmzRjym-1"
+  },
+  "parentIssue": {
+    "title": "Figma-CodeConnect CI/CD Master Program",
+    "identifier": "BAS-139",
+    "url": "https://linear.app/basavaraj-team/issue/BAS-139/figma-codeconnect-cicd-master-program",
+    "status": "In Progress"
+  },
+  "issues": [
+    {
+      "key": "FGC-01",
+      "title": "Capability probes and route selection engine",
+      "status": "in_progress",
+      "linear": "BAS-140",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-140/fgc-01-capability-probes-and-route-selection-engine",
+      "artifacts": [
+        "scripts/figma-probe.mjs",
+        "docs/code reports/figma-capability-probe.json",
+        "docs/code reports/figma-capability-probe.md"
+      ]
+    },
+    {
+      "key": "FGC-02",
+      "title": "Pull + normalize + token generation pipeline",
+      "status": "in_progress",
+      "linear": "BAS-141",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-141/fgc-02-pull-normalize-token-generation-pipeline",
+      "artifacts": [
+        "scripts/figma-pull-variables.mjs",
+        "scripts/figma-normalize-variables.mjs",
+        "scripts/figma-generate-tokens.mjs",
+        "tokens/figma/variables.normalized.json"
+      ]
+    },
+    {
+      "key": "FGC-03",
+      "title": "Push pipeline with canary and rollback guards",
+      "status": "in_progress",
+      "linear": "BAS-142",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-142/fgc-03-push-pipeline-with-canary-and-rollback-guards",
+      "artifacts": [
+        "scripts/figma-push-variables.mjs",
+        "tokens/figma/rollback-*.json"
+      ]
+    },
+    {
+      "key": "FGC-04",
+      "title": "Code Connect generate/verify contracts",
+      "status": "in_progress",
+      "linear": "BAS-143",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-143/fgc-04-code-connect-generateverify-contracts",
+      "artifacts": [
+        "scripts/figma-codeconnect-generate.mjs",
+        "scripts/figma-codeconnect-verify.mjs",
+        "figma/code-connect/mappings.generated.json"
+      ]
+    },
+    {
+      "key": "FGC-05",
+      "title": "Code Connect publish path with office fallback",
+      "status": "in_progress",
+      "linear": "BAS-144",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-144/fgc-05-code-connect-publish-path-with-office-fallback",
+      "artifacts": [
+        "scripts/figma-codeconnect-publish.mjs",
+        "docs/code reports/figma-codeconnect-office-handoff.md"
+      ]
+    },
+    {
+      "key": "FGC-06",
+      "title": "Core CI workflow and parity gates",
+      "status": "in_progress",
+      "linear": "BAS-145",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-145/fgc-06-core-ci-workflow-and-parity-gates",
+      "artifacts": [
+        ".github/workflows/ci-core.yml"
+      ]
+    },
+    {
+      "key": "FGC-07",
+      "title": "Scheduled pull workflow with PR automation",
+      "status": "in_progress",
+      "linear": "BAS-146",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-146/fgc-07-scheduled-pull-workflow-with-pr-automation",
+      "artifacts": [
+        ".github/workflows/figma-pull-variables.yml"
+      ]
+    },
+    {
+      "key": "FGC-08",
+      "title": "Scheduled push workflow with protected apply path",
+      "status": "in_progress",
+      "linear": "BAS-147",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-147/fgc-08-scheduled-push-workflow-with-protected-apply-path",
+      "artifacts": [
+        ".github/workflows/figma-push-variables.yml"
+      ]
+    },
+    {
+      "key": "FGC-09",
+      "title": "Office laptop handoff and execution bundle",
+      "status": "in_progress",
+      "linear": "BAS-148",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-148/fgc-09-office-laptop-handoff-and-execution-bundle",
+      "artifacts": [
+        "docs/code reports/figma-codeconnect-office-handoff.md",
+        "docs/code reports/office-copilot-figma-codeconnect-cicd-playbook.md"
+      ]
+    },
+    {
+      "key": "FGC-10",
+      "title": "Baseline run, audit, and closure report",
+      "status": "in_progress",
+      "linear": "BAS-149",
+      "url": "https://linear.app/basavaraj-team/issue/BAS-149/fgc-10-baseline-run-audit-and-closure-report",
+      "artifacts": [
+        "docs/code reports/figma-sync-verification.json",
+        "docs/code reports/figma-sync-verification.md",
+        "docs/code reports/figma-cicd-rollout-log.md"
+      ]
+    }
+  ]
+}

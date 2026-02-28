@@ -33,6 +33,16 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 
 ---
 
+## [2026-02-28] Adopt Hybrid Figma CI/CD Route With Probe-Gated Writes
+
+- Status: Accepted
+- Context: The repository needed deterministic Figma parity automation without depending on a single auth context, while avoiding unsafe writes from CI.
+- Decision: Implemented probe-gated route selection (Route A/B/C), with default office-only write/publish gates, scripted pull/normalize/generate/push/codeconnect workflows, and CI verify/pull/push workflows.
+- Rationale: Keeps read/verify fully automated in CI while preserving enterprise-sensitive publish/write operations in office context until CI capabilities are proven.
+- Impact: New script surface (`figma:*`), workflow automation (`ci-core`, `figma-pull-variables`, `figma-codeconnect-sync`, `figma-push-variables`), and tracker/report artifacts in `docs/code reports/`.
+- Rollback: Revert added workflows/scripts/configs and keep `tokens:sync`/`tokens:check` only; disable scheduled figma workflows in GitHub Actions.
+- Related: `scripts/figma-*.mjs`, `.github/workflows/*.yml`, `figma/sync.config.json`, `figma/code-connect/*`, `tokens/figma/*`.
+
 ## [2026-02-24] Use server as single source of tool truth
 
 - Status: Accepted

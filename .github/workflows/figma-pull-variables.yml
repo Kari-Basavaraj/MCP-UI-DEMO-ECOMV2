@@ -1,0 +1,79 @@
+name: Figma Pull Variables
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
+
+jobs:
+  pull-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+      FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+      FIGMA_REGION: ${{ secrets.FIGMA_REGION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Run pull/normalize/generate/sync/verify
+        run: |
+          npm run figma:pull:variables
+          npm run figma:normalize:variables
+          npm run figma:generate:tokens
+          npm run tokens:sync
+          npm run figma:verify
+
+      - name: Upload verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-pull-artifacts
+          path: |
+            tokens/figma/variables.raw.json
+            tokens/figma/variables.normalized.json
+            tokens/figma/.variable-ids.json
+            docs/code reports/figma-sync-verification.json
+            docs/code reports/figma-sync-verification.md
+          if-no-files-found: ignore
+
+      - name: Create PR for token changes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore(figma): sync variables from figma'
+          branch: codex/figma-pull-variables
+          title: 'chore(figma): sync variables from figma'
+          body: |
+            Automated Figma variable pull run.
+
+            - pull variables
+            - normalize payload
+            - generate canonical CSS tokens
+            - sync web-client mirror
+            - run figma verify
+          labels: |
+            automation
+            figma
+          add-paths: |
+            mcp-server/tokens/figma-tokens-light.css
+            mcp-server/tokens/figma-tokens-dark.css
+            web-client/tokens/figma-tokens-light.css
+            web-client/tokens/figma-tokens-dark.css
+            tokens/figma/variables.raw.json
+            tokens/figma/variables.normalized.json
+            tokens/figma/.variable-ids.json
+            docs/code reports/figma-sync-verification.json
+            docs/code reports/figma-sync-verification.md

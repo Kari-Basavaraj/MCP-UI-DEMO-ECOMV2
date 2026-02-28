@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-02-28T17:01:53.471Z",
+  "dryRun": true,
+  "applyRequested": false,
+  "route": "office",
+  "codeConnectMode": "verify-only",
+  "parseCheck": {
+    "ok": true,
+    "status": 0,
+    "stdout": "[]",
+    "stderr": "Config file found, parsing /Users/basavarajkm/code/MCP-UI-DEMO-ECOMV2 using specified include globs"
+  },
+  "publish": null,
+  "unresolvedNodeIds": [
+    {
+      "id": "product-grid",
+      "componentName": "ProductGridWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "product-card",
+      "componentName": "ProductCardWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "product-detail",
+      "componentName": "ProductDetailWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "cart-view",
+      "componentName": "CartViewWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "cart-summary",
+      "componentName": "CartSummaryWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "wishlist",
+      "componentName": "WishlistWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "search-bar",
+      "componentName": "SearchBarWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "category-filter",
+      "componentName": "CategoryFilterWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "checkout-form",
+      "componentName": "CheckoutFormWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "order-confirmation",
+      "componentName": "OrderConfirmationWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "price-tag",
+      "componentName": "PriceTagWidget",
+      "nodeId": "TODO_NODE_ID"
+    },
+    {
+      "id": "review-rating",
+      "componentName": "ReviewRatingWidget",
+      "nodeId": "TODO_NODE_ID"
+    }
+  ]
+}

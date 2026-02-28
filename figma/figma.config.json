@@ -1,0 +1,15 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": [
+      "web-client/components/**/*.{ts,tsx}",
+      "web-client/app/**/*.{ts,tsx}",
+      "mcp-server/src/widgets/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.test.*",
+      "**/*.spec.*",
+      "**/node_modules/**"
+    ]
+  }
+}
