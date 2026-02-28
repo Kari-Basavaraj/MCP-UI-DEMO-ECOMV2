@@ -157,6 +157,10 @@ async function run() {
   for (const widget of WIDGETS) {
     const htmlFile = path.join(DIST_DIR, `${widget.name}.html`);
     const outFile = path.join(OUT_DIR, `${widget.name}.png`);
+    if (!fs.existsSync(htmlFile)) {
+      summary.push({ name: widget.name, status: 'missing-built-widget', htmlFile });
+      continue;
+    }
 
     const context = await browser.newContext({
       viewport: { width: widget.width, height: widget.height },
@@ -171,7 +175,18 @@ async function run() {
     }
 
     await page.goto(`file://${htmlFile}`, { waitUntil: 'load', timeout: 20000 });
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(300);
+    await page.evaluate(async () => {
+      await document.fonts?.ready;
+      const images = Array.from(document.images || []);
+      await Promise.all(images.map((img) => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.addEventListener('load', resolve, { once: true });
+          img.addEventListener('error', resolve, { once: true });
+        });
+      }));
+    });
 
     const contentHeight = await page.evaluate(() => {
       const body = document.body;
@@ -190,12 +205,14 @@ async function run() {
       clip: { x: 0, y: 0, width: widget.width, height: clipH },
     });
 
-    summary.push({ name: widget.name, width: widget.width, height: clipH });
+    summary.push({ name: widget.name, status: 'ok', width: widget.width, height: clipH, outFile });
     await context.close();
   }
 
   await browser.close();
-  console.log(JSON.stringify({ generated: summary.length, summary }, null, 2));
+  const okCount = summary.filter((s) => s.status === 'ok').length;
+  const missingCount = summary.filter((s) => s.status !== 'ok').length;
+  console.log(JSON.stringify({ generated: okCount, missing: missingCount, summary }, null, 2));
 }
 
 run().catch((err) => {

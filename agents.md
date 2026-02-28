@@ -266,9 +266,8 @@ https://images.unsplash.com/photo-{ID}?w={WIDTH}&h={HEIGHT}&fit=crop&q=80
 
 ### Commands
 ```bash
-cd /Users/kari.basavaraj.k.m/Documents/code/MCP-UI-Demo-EcomV1
-node scripts/capture-widgets-actual.mjs
-node scripts/compare-widget-parity.mjs
+cd /Users/basavarajkm/code/MCP-UI-DEMO-ECOMV2
+npm run parity:run
 ```
 
 ### Figma Visual Diff Board

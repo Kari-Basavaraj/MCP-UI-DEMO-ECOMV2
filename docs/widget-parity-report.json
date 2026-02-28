@@ -1,245 +1,398 @@
 {
-  "generatedAt": "2026-02-26T12:51:32.239Z",
-  "report": [
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-02-28T05:57:50.578Z",
+  "thresholds": {
+    "critical": 0.3,
+    "high": 0.2,
+    "medium": 0.1,
+    "low": 0.05
+  },
+  "summary": {
+    "totalWidgets": 12,
+    "comparedWidgets": 12,
+    "missingWidgets": 0,
+    "avgParityScore": 70.81,
+    "severityCounts": {
+      "critical": 6,
+      "high": 1,
+      "medium": 3,
+      "low": 2,
+      "pass": 0
+    },
+    "topOffenders": [
+      {
+        "widget": "price-tag",
+        "status": "ok",
+        "severity": "critical",
+        "parityScore": 19.05,
+        "diffRatio": 0.8095355383532723
+      },
+      {
+        "widget": "product-grid",
+        "status": "ok",
+        "severity": "critical",
+        "parityScore": 52.61,
+        "diffRatio": 0.4738984302862419
+      },
+      {
+        "widget": "product-card",
+        "status": "ok",
+        "severity": "critical",
+        "parityScore": 56.89,
+        "diffRatio": 0.43106177606177604
+      },
+      {
+        "widget": "category-filter",
+        "status": "ok",
+        "severity": "critical",
+        "parityScore": 58.91,
+        "diffRatio": 0.41090507726269315
+      },
+      {
+        "widget": "wishlist",
+        "status": "ok",
+        "severity": "critical",
+        "parityScore": 63.52,
+        "diffRatio": 0.36480173035328045
+      }
+    ]
+  },
+  "widgets": [
+    {
+      "widget": "price-tag",
+      "status": "ok",
+      "severity": "critical",
+      "parityScore": 19.05,
+      "diffRatio": 0.8095355383532723,
+      "diffPixels": 69021,
+      "sizes": {
+        "ref": {
+          "width": 420,
+          "height": 203
+        },
+        "actual": {
+          "width": 420,
+          "height": 500
+        },
+        "compared": {
+          "width": 420,
+          "height": 203
+        }
+      },
+      "artifacts": {
+        "reference": "screenshots/price-tag.png",
+        "actual": "screenshots/actual/price-tag.png",
+        "diff": "screenshots/diff/price-tag.png"
+      },
+      "remediation": "Inspect price-tag spacing/typography/layout against reference and patch widget source before rerun."
+    },
     {
       "widget": "product-grid",
       "status": "ok",
-      "ref": {
-        "width": 950,
-        "height": 855
+      "severity": "critical",
+      "parityScore": 52.61,
+      "diffRatio": 0.4738984302862419,
+      "diffPixels": 384924,
+      "sizes": {
+        "ref": {
+          "width": 950,
+          "height": 855
+        },
+        "actual": {
+          "width": 950,
+          "height": 990
+        },
+        "compared": {
+          "width": 950,
+          "height": 855
+        }
       },
-      "act": {
-        "width": 950,
-        "height": 879
+      "artifacts": {
+        "reference": "screenshots/product-grid.png",
+        "actual": "screenshots/actual/product-grid.png",
+        "diff": "screenshots/diff/product-grid.png"
       },
-      "compared": {
-        "width": 950,
-        "height": 855
-      },
-      "diffPixels": 328551,
-      "diffRatio": 0.4044949215143121,
-      "parityScore": 59.55,
-      "diffImage": "screenshots/diff/product-grid.png"
-    },
-    {
-      "widget": "category-filter",
-      "status": "ok",
-      "ref": {
-        "width": 950,
-        "height": 453
-      },
-      "act": {
-        "width": 950,
-        "height": 727
-      },
-      "compared": {
-        "width": 950,
-        "height": 453
-      },
-      "diffPixels": 173551,
-      "diffRatio": 0.4032787266178692,
-      "parityScore": 59.67,
-      "diffImage": "screenshots/diff/category-filter.png"
+      "remediation": "Inspect product-grid spacing/typography/layout against reference and patch widget source before rerun."
     },
     {
       "widget": "product-card",
       "status": "ok",
-      "ref": {
-        "width": 420,
-        "height": 449
+      "severity": "critical",
+      "parityScore": 56.89,
+      "diffRatio": 0.43106177606177604,
+      "diffPixels": 66987,
+      "sizes": {
+        "ref": {
+          "width": 420,
+          "height": 449
+        },
+        "actual": {
+          "width": 420,
+          "height": 370
+        },
+        "compared": {
+          "width": 420,
+          "height": 370
+        }
       },
-      "act": {
-        "width": 420,
-        "height": 489
+      "artifacts": {
+        "reference": "screenshots/product-card.png",
+        "actual": "screenshots/actual/product-card.png",
+        "diff": "screenshots/diff/product-card.png"
       },
-      "compared": {
-        "width": 420,
-        "height": 449
+      "remediation": "Inspect product-card spacing/typography/layout against reference and patch widget source before rerun."
+    },
+    {
+      "widget": "category-filter",
+      "status": "ok",
+      "severity": "critical",
+      "parityScore": 58.91,
+      "diffRatio": 0.41090507726269315,
+      "diffPixels": 176833,
+      "sizes": {
+        "ref": {
+          "width": 950,
+          "height": 453
+        },
+        "actual": {
+          "width": 950,
+          "height": 728
+        },
+        "compared": {
+          "width": 950,
+          "height": 453
+        }
       },
-      "diffPixels": 69188,
-      "diffRatio": 0.36688938381588715,
-      "parityScore": 63.31,
-      "diffImage": "screenshots/diff/product-card.png"
+      "artifacts": {
+        "reference": "screenshots/category-filter.png",
+        "actual": "screenshots/actual/category-filter.png",
+        "diff": "screenshots/diff/category-filter.png"
+      },
+      "remediation": "Inspect category-filter spacing/typography/layout against reference and patch widget source before rerun."
     },
     {
       "widget": "wishlist",
       "status": "ok",
-      "ref": {
-        "width": 950,
-        "height": 438
+      "severity": "critical",
+      "parityScore": 63.52,
+      "diffRatio": 0.36480173035328045,
+      "diffPixels": 151794,
+      "sizes": {
+        "ref": {
+          "width": 950,
+          "height": 438
+        },
+        "actual": {
+          "width": 950,
+          "height": 475
+        },
+        "compared": {
+          "width": 950,
+          "height": 438
+        }
       },
-      "act": {
-        "width": 950,
-        "height": 478
+      "artifacts": {
+        "reference": "screenshots/wishlist.png",
+        "actual": "screenshots/actual/wishlist.png",
+        "diff": "screenshots/diff/wishlist.png"
       },
-      "compared": {
-        "width": 950,
-        "height": 438
-      },
-      "diffPixels": 136497,
-      "diffRatio": 0.32803893294881037,
-      "parityScore": 67.2,
-      "diffImage": "screenshots/diff/wishlist.png"
+      "remediation": "Inspect wishlist spacing/typography/layout against reference and patch widget source before rerun."
     },
     {
       "widget": "product-detail",
       "status": "ok",
-      "ref": {
-        "width": 860,
-        "height": 570
+      "severity": "critical",
+      "parityScore": 68.14,
+      "diffRatio": 0.31859533019527425,
+      "diffPixels": 136722,
+      "sizes": {
+        "ref": {
+          "width": 860,
+          "height": 570
+        },
+        "actual": {
+          "width": 860,
+          "height": 499
+        },
+        "compared": {
+          "width": 860,
+          "height": 499
+        }
       },
-      "act": {
-        "width": 860,
-        "height": 499
+      "artifacts": {
+        "reference": "screenshots/product-detail.png",
+        "actual": "screenshots/actual/product-detail.png",
+        "diff": "screenshots/diff/product-detail.png"
       },
-      "compared": {
-        "width": 860,
-        "height": 499
-      },
-      "diffPixels": 136995,
-      "diffRatio": 0.31923148622827047,
-      "parityScore": 68.08,
-      "diffImage": "screenshots/diff/product-detail.png"
+      "remediation": "Inspect product-detail spacing/typography/layout against reference and patch widget source before rerun."
     },
     {
       "widget": "cart-view",
       "status": "ok",
-      "ref": {
-        "width": 520,
-        "height": 426
+      "severity": "high",
+      "parityScore": 75.79,
+      "diffRatio": 0.2420594077284218,
+      "diffPixels": 53621,
+      "sizes": {
+        "ref": {
+          "width": 520,
+          "height": 426
+        },
+        "actual": {
+          "width": 520,
+          "height": 459
+        },
+        "compared": {
+          "width": 520,
+          "height": 426
+        }
       },
-      "act": {
-        "width": 520,
-        "height": 461
+      "artifacts": {
+        "reference": "screenshots/cart-view.png",
+        "actual": "screenshots/actual/cart-view.png",
+        "diff": "screenshots/diff/cart-view.png"
       },
-      "compared": {
-        "width": 520,
-        "height": 426
-      },
-      "diffPixels": 55805,
-      "diffRatio": 0.2519185626579993,
-      "parityScore": 74.81,
-      "diffImage": "screenshots/diff/cart-view.png"
+      "remediation": "Inspect cart-view spacing/typography/layout against reference and patch widget source before rerun."
     },
     {
       "widget": "checkout-form",
       "status": "ok",
-      "ref": {
-        "width": 520,
-        "height": 900
+      "severity": "medium",
+      "parityScore": 88.93,
+      "diffRatio": 0.11069759170815974,
+      "diffPixels": 43575,
+      "sizes": {
+        "ref": {
+          "width": 520,
+          "height": 900
+        },
+        "actual": {
+          "width": 520,
+          "height": 757
+        },
+        "compared": {
+          "width": 520,
+          "height": 757
+        }
       },
-      "act": {
-        "width": 520,
-        "height": 761
+      "artifacts": {
+        "reference": "screenshots/checkout-form.png",
+        "actual": "screenshots/actual/checkout-form.png",
+        "diff": "screenshots/diff/checkout-form.png"
       },
-      "compared": {
-        "width": 520,
-        "height": 761
-      },
-      "diffPixels": 43183,
-      "diffRatio": 0.10912513898716264,
-      "parityScore": 89.09,
-      "diffImage": "screenshots/diff/checkout-form.png"
-    },
-    {
-      "widget": "price-tag",
-      "status": "ok",
-      "ref": {
-        "width": 420,
-        "height": 203
-      },
-      "act": {
-        "width": 420,
-        "height": 350
-      },
-      "compared": {
-        "width": 420,
-        "height": 203
-      },
-      "diffPixels": 8970,
-      "diffRatio": 0.10520760028149191,
-      "parityScore": 89.48,
-      "diffImage": "screenshots/diff/price-tag.png"
-    },
-    {
-      "widget": "search-bar",
-      "status": "ok",
-      "ref": {
-        "width": 520,
-        "height": 120
-      },
-      "act": {
-        "width": 520,
-        "height": 372
-      },
-      "compared": {
-        "width": 520,
-        "height": 120
-      },
-      "diffPixels": 6537,
-      "diffRatio": 0.10475961538461538,
-      "parityScore": 89.52,
-      "diffImage": "screenshots/diff/search-bar.png"
-    },
-    {
-      "widget": "order-confirmation",
-      "status": "ok",
-      "ref": {
-        "width": 540,
-        "height": 747
-      },
-      "act": {
-        "width": 540,
-        "height": 706
-      },
-      "compared": {
-        "width": 540,
-        "height": 706
-      },
-      "diffPixels": 38662,
-      "diffRatio": 0.10141118455566048,
-      "parityScore": 89.86,
-      "diffImage": "screenshots/diff/order-confirmation.png"
+      "remediation": "Tighten dimensions and token usage for checkout-form; rerun parity check."
     },
     {
       "widget": "review-rating",
       "status": "ok",
-      "ref": {
-        "width": 520,
-        "height": 762
+      "severity": "medium",
+      "parityScore": 89.78,
+      "diffRatio": 0.10217838196286472,
+      "diffPixels": 30817,
+      "sizes": {
+        "ref": {
+          "width": 520,
+          "height": 762
+        },
+        "actual": {
+          "width": 520,
+          "height": 580
+        },
+        "compared": {
+          "width": 520,
+          "height": 580
+        }
       },
-      "act": {
-        "width": 520,
-        "height": 600
+      "artifacts": {
+        "reference": "screenshots/review-rating.png",
+        "actual": "screenshots/actual/review-rating.png",
+        "diff": "screenshots/diff/review-rating.png"
       },
-      "compared": {
-        "width": 520,
-        "height": 600
+      "remediation": "Tighten dimensions and token usage for review-rating; rerun parity check."
+    },
+    {
+      "widget": "order-confirmation",
+      "status": "ok",
+      "severity": "medium",
+      "parityScore": 89.81,
+      "diffRatio": 0.10185975449133344,
+      "diffPixels": 38668,
+      "sizes": {
+        "ref": {
+          "width": 540,
+          "height": 747
+        },
+        "actual": {
+          "width": 540,
+          "height": 703
+        },
+        "compared": {
+          "width": 540,
+          "height": 703
+        }
       },
-      "diffPixels": 30647,
-      "diffRatio": 0.0982275641025641,
-      "parityScore": 90.18,
-      "diffImage": "screenshots/diff/review-rating.png"
+      "artifacts": {
+        "reference": "screenshots/order-confirmation.png",
+        "actual": "screenshots/actual/order-confirmation.png",
+        "diff": "screenshots/diff/order-confirmation.png"
+      },
+      "remediation": "Tighten dimensions and token usage for order-confirmation; rerun parity check."
     },
     {
       "widget": "cart-summary",
       "status": "ok",
-      "ref": {
-        "width": 420,
-        "height": 100
+      "severity": "low",
+      "parityScore": 92.68,
+      "diffRatio": 0.07316666666666667,
+      "diffPixels": 3073,
+      "sizes": {
+        "ref": {
+          "width": 420,
+          "height": 100
+        },
+        "actual": {
+          "width": 420,
+          "height": 400
+        },
+        "compared": {
+          "width": 420,
+          "height": 100
+        }
       },
-      "act": {
-        "width": 420,
-        "height": 401
+      "artifacts": {
+        "reference": "screenshots/cart-summary.png",
+        "actual": "screenshots/actual/cart-summary.png",
+        "diff": "screenshots/diff/cart-summary.png"
       },
-      "compared": {
-        "width": 420,
-        "height": 100
+      "remediation": "Review minor visual drift for cart-summary; fix if user-visible."
+    },
+    {
+      "widget": "search-bar",
+      "status": "ok",
+      "severity": "low",
+      "parityScore": 93.62,
+      "diffRatio": 0.06378205128205128,
+      "diffPixels": 3980,
+      "sizes": {
+        "ref": {
+          "width": 520,
+          "height": 120
+        },
+        "actual": {
+          "width": 520,
+          "height": 408
+        },
+        "compared": {
+          "width": 520,
+          "height": 120
+        }
       },
-      "diffPixels": 3137,
-      "diffRatio": 0.0746904761904762,
-      "parityScore": 92.53,
-      "diffImage": "screenshots/diff/cart-summary.png"
+      "artifacts": {
+        "reference": "screenshots/search-bar.png",
+        "actual": "screenshots/actual/search-bar.png",
+        "diff": "screenshots/diff/search-bar.png"
+      },
+      "remediation": "Review minor visual drift for search-bar; fix if user-visible."
     }
   ]
 }
