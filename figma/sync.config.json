@@ -2,7 +2,7 @@
   "primaryFileKey": "p3SdnPiT3DYRtOu2CZs97P",
   "region": "us-east-1",
   "writeMode": "office-only",
-  "codeConnectMode": "verify-only",
+  "codeConnectMode": "publish-enabled",
   "routes": {
     "pull": "ci",
     "push": "office",

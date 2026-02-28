@@ -2,6 +2,7 @@
   "codeConnect": {
     "parser": "react",
     "include": [
+      "figma/code-connect/components/**/*.figma.tsx",
       "web-client/components/**/*.{ts,tsx}",
       "web-client/app/**/*.{ts,tsx}",
       "mcp-server/src/widgets/**/*.ts"

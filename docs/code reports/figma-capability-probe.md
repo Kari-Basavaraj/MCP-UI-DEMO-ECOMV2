@@ -1,6 +1,6 @@
 # Figma Capability Probe
 
-- Generated: 2026-02-28T17:18:36.446Z
+- Generated: 2026-02-28T18:01:11.751Z
 - Selected route: **Route C**
 
 | Probe | Status | Details |

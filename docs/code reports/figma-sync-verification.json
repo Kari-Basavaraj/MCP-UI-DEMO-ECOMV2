@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-02-28T17:25:08.250Z",
-  "startedAt": "2026-02-28T17:25:07.820Z",
+  "generatedAt": "2026-02-28T18:23:27.917Z",
+  "startedAt": "2026-02-28T18:23:25.280Z",
   "ok": true,
   "failures": [],
   "findings": [],
@@ -14,13 +14,13 @@
     "codeconnectGenerate": {
       "ok": true,
       "status": 0,
-      "stdout": "> mcp-ecommerce-app@1.0.0 figma:codeconnect:generate\n> node scripts/figma-codeconnect-generate.mjs\n\n{\n  \"ok\": true,\n  \"generatedPath\": \"/Users/basavarajkm/code/MCP-UI-DEMO-ECOMV2/figma/code-connect/mappings.generated.json\",\n  \"requiredCount\": 12,\n  \"generatedCount\": 12,\n  \"missing\": []\n}",
+      "stdout": "> mcp-ecommerce-app@1.0.0 figma:codeconnect:generate\n> node scripts/figma-codeconnect-generate.mjs\n\n{\n  \"ok\": true,\n  \"generatedPath\": \"/Users/kari.basavaraj.k.m/code/MCP-UI-DEMO-ECOMV2/figma/code-connect/mappings.generated.json\",\n  \"requiredCount\": 12,\n  \"generatedCount\": 12,\n  \"missing\": []\n}",
       "stderr": ""
     },
     "codeconnectVerify": {
       "ok": true,
       "status": 0,
-      "stdout": "> mcp-ecommerce-app@1.0.0 figma:codeconnect:verify\n> node scripts/figma-codeconnect-verify.mjs\n\n{\n  \"ok\": true,\n  \"strict\": false,\n  \"summary\": {\n    \"mappings\": 12,\n    \"required\": 12,\n    \"missingRequired\": 0,\n    \"missingSourceFiles\": 0,\n    \"placeholderNodeIds\": 12\n  },\n  \"findings\": {\n    \"missingRequired\": [],\n    \"missingSourceFiles\": [],\n    \"placeholderNodeIds\": [\n      {\n        \"id\": \"product-grid\",\n        \"componentName\": \"ProductGridWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"product-card\",\n        \"componentName\": \"ProductCardWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"product-detail\",\n        \"componentName\": \"ProductDetailWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"cart-view\",\n        \"componentName\": \"CartViewWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"cart-summary\",\n        \"componentName\": \"CartSummaryWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"wishlist\",\n        \"componentName\": \"WishlistWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"search-bar\",\n        \"componentName\": \"SearchBarWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"category-filter\",\n        \"componentName\": \"CategoryFilterWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"checkout-form\",\n        \"componentName\": \"CheckoutFormWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"order-confirmation\",\n        \"componentName\": \"OrderConfirmationWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"price-tag\",\n        \"componentName\": \"PriceTagWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      },\n      {\n        \"id\": \"review-rating\",\n        \"componentName\": \"ReviewRatingWidget\",\n        \"nodeId\": \"TODO_NODE_ID\"\n      }\n    ]\n  }\n}",
+      "stdout": "> mcp-ecommerce-app@1.0.0 figma:codeconnect:verify\n> node scripts/figma-codeconnect-verify.mjs\n\n{\n  \"ok\": true,\n  \"strict\": false,\n  \"summary\": {\n    \"mappings\": 12,\n    \"required\": 12,\n    \"missingRequired\": 0,\n    \"missingSourceFiles\": 0,\n    \"placeholderNodeIds\": 0\n  },\n  \"findings\": {\n    \"missingRequired\": [],\n    \"missingSourceFiles\": [],\n    \"placeholderNodeIds\": []\n  }\n}",
       "stderr": ""
     },
     "missingRequiredTokens": [],
