@@ -51,26 +51,6 @@ const WIDGET_TOOLS = new Set([
   "get_wishlist", "add_to_wishlist", "remove_from_wishlist",
 ]);
 
-/* Per-tool initial min-heights (px) — used before autoResize kicks in */
-const TOOL_MIN_HEIGHTS: Record<string, number> = {
-  get_products: 520,
-  search_products: 520,
-  filter_products: 520,
-  get_product_detail: 480,
-  get_cart: 360,
-  get_cart_summary: 220,
-  add_to_cart: 360,
-  remove_from_cart: 360,
-  checkout: 480,
-  place_order: 350,
-  get_reviews: 380,
-  get_wishlist: 400,
-  add_to_wishlist: 400,
-  remove_from_wishlist: 400,
-  get_price_info: 180,
-  get_categories: 320,
-};
-
 /* Human-readable status labels for each tool */
 const TOOL_STATUS_LABELS: Record<string, { loading: string; done: string }> = {
   get_products: { loading: "Fetching products...", done: "Products loaded" },
@@ -559,9 +539,14 @@ export const ToolInvocation = memo(function ToolInvocation({
     [append]
   );
 
-  const resourceStyle = useMemo(() => ({
-    minHeight: TOOL_MIN_HEIGHTS[toolName] ?? 380,
-  }), [toolName]);
+  const resourceStyle = useMemo(
+    () => ({
+      // Keep a low floor and let autoResizeIframe determine final height.
+      minHeight: 220,
+      width: "100%",
+    }),
+    []
+  );
 
   const renderedHtmlResources = useMemo(() => {
     return htmlResourceContents.map((resourceData, index) => (

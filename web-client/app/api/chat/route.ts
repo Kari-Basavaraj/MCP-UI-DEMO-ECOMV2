@@ -7,37 +7,60 @@ export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
-  const {
-    messages,
-    selectedModel,
-    model,
-    mcpServers = [],
-    userId = "",
-  }: {
-    messages: UIMessage[];
-    selectedModel?: modelID;
-    model?: modelID;
-    mcpServers?: MCPServerConfig[];
-    userId?: string;
-  } = await req.json();
-
-  const requestedModel = (selectedModel || model || '').trim();
-  let resolvedModel = requestedModel;
-  if (!resolvedModel) {
-    const { defaultModel } = await fetchOpenRouterModels();
-    resolvedModel = defaultModel;
-  }
-  if (!resolvedModel) {
-    throw new Error('No model selected and no default model is available.');
-  }
-
-  const { tools, cleanup } = await initializeMCPClients(mcpServers, req.signal, userId);
-
+  const requestId = globalThis.crypto?.randomUUID?.() || `chat-${Date.now()}`;
+  let cleanup: () => Promise<void> = async () => {};
   let responseCompleted = false;
 
-  const result = streamText({
-    model: getLanguageModel(resolvedModel),
-    system: `You are a friendly e-commerce shopping assistant for an Indian fashion & lifestyle store.
+  try {
+    const payload = await req.json().catch(() => null);
+    if (!payload || typeof payload !== 'object') {
+      return Response.json(
+        { error: 'Invalid request payload', requestId },
+        { status: 400 },
+      );
+    }
+
+    const {
+      messages,
+      selectedModel,
+      model,
+      mcpServers = [],
+      userId = "",
+    }: {
+      messages: UIMessage[];
+      selectedModel?: modelID;
+      model?: modelID;
+      mcpServers?: MCPServerConfig[];
+      userId?: string;
+    } = payload;
+
+    if (!Array.isArray(messages)) {
+      return Response.json(
+        { error: 'Invalid payload: messages must be an array', requestId },
+        { status: 400 },
+      );
+    }
+
+    const requestedModel = (selectedModel || model || '').trim();
+    let resolvedModel = requestedModel;
+    if (!resolvedModel) {
+      const { defaultModel } = await fetchOpenRouterModels();
+      resolvedModel = defaultModel;
+    }
+    if (!resolvedModel) {
+      return Response.json(
+        { error: 'No model selected and no default model is available.', requestId },
+        { status: 400 },
+      );
+    }
+
+    const normalizedMcpServers = Array.isArray(mcpServers) ? mcpServers : [];
+    const mcpClient = await initializeMCPClients(normalizedMcpServers, req.signal, userId);
+    cleanup = mcpClient.cleanup;
+
+    const result = streamText({
+      model: getLanguageModel(resolvedModel),
+      system: `You are a friendly e-commerce shopping assistant for an Indian fashion & lifestyle store.
 Today is ${new Date().toISOString().split('T')[0]}.
 
 ## Product Catalog
@@ -100,40 +123,58 @@ Tool results render as rich visual widgets — the widget IS your answer.
 - Suggest natural next steps: "Want to see reviews?" / "Shall I add it to your cart?"
 - If the user's intent is ambiguous, make your best guess and act — don't ask clarifying questions unless truly necessary
 - If tools are unavailable, tell the user to add an MCP server from the sidebar`,
-    messages,
-    tools,
-    maxSteps: 20,
-    onError: (error) => {
-      console.error('Stream error:', JSON.stringify(error, null, 2));
-    },
-    async onFinish() {
-      responseCompleted = true;
-      await cleanup();
-    },
-  });
+      messages,
+      tools: mcpClient.tools,
+      maxSteps: 20,
+      onError: (error) => {
+        console.error(`Stream error [${requestId}]:`, JSON.stringify(error, null, 2));
+      },
+      async onFinish() {
+        responseCompleted = true;
+        await cleanup();
+      },
+    });
 
-  req.signal.addEventListener('abort', async () => {
-    if (!responseCompleted) {
-      console.log('Request aborted, cleaning up');
-      try { await cleanup(); } catch (e) {
-        console.error('Cleanup error on abort:', e);
-      }
-    }
-  });
-
-  result.consumeStream();
-
-  return result.toDataStreamResponse({
-    sendReasoning: true,
-    getErrorMessage: (error) => {
-      if (error instanceof Error) {
-        if (error.message.includes('Rate limit')) {
-          return 'Rate limit exceeded. Please try again later.';
+    req.signal.addEventListener('abort', async () => {
+      if (!responseCompleted) {
+        console.log(`Request aborted [${requestId}], cleaning up`);
+        try {
+          await cleanup();
+        } catch (e) {
+          console.error(`Cleanup error on abort [${requestId}]:`, e);
         }
-        return error.message;
       }
-      console.error(error);
-      return 'An error occurred.';
-    },
-  });
+    });
+
+    result.consumeStream();
+
+    return result.toDataStreamResponse({
+      sendReasoning: true,
+      getErrorMessage: (error) => {
+        if (error instanceof Error) {
+          if (error.message.includes('Rate limit')) {
+            return 'Rate limit exceeded. Please try again later.';
+          }
+          return `${error.message} (request: ${requestId})`;
+        }
+        console.error(`Unknown stream error [${requestId}]:`, error);
+        return `An error occurred. (request: ${requestId})`;
+      },
+    });
+  } catch (error) {
+    try {
+      await cleanup();
+    } catch (cleanupError) {
+      console.error(`Cleanup error after failure [${requestId}]:`, cleanupError);
+    }
+    const message = error instanceof Error ? error.message : 'Unexpected server error';
+    console.error(`Chat route failure [${requestId}]:`, error);
+    return Response.json(
+      {
+        error: message,
+        requestId,
+      },
+      { status: 500 },
+    );
+  }
 }

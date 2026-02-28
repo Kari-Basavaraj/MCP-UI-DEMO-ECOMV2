@@ -11,6 +11,18 @@ import { getUserId } from "@/lib/user-id";
 import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { useMCP } from "@/lib/context/mcp-context";
 
+const FALLBACK_MODELS = [
+  "openai/gpt-4o-mini",
+  "anthropic/claude-3.5-sonnet",
+  "google/gemini-2.0-flash-001",
+];
+
+const FALLBACK_MODEL_DETAILS: Record<string, ModelInfo> = {
+  "openai/gpt-4o-mini": { provider: "OpenAI", name: "GPT-4o Mini", description: "Fast & affordable" },
+  "anthropic/claude-3.5-sonnet": { provider: "Anthropic", name: "Claude 3.5 Sonnet", description: "Balanced performance" },
+  "google/gemini-2.0-flash-001": { provider: "Google", name: "Gemini 2.0 Flash", description: "Google fast model" },
+};
+
 export default function Chat() {
   const [selectedModel, setSelectedModel] = useLocalStorage<string>("selectedModel", "");
   const [userId, setUserId] = useState("");
@@ -20,17 +32,67 @@ export default function Chat() {
 
   // Fetch available models from the API
   useEffect(() => {
-    fetch("/api/models")
-      .then(r => r.json())
-      .then(data => {
-        setModels(data.models || []);
-        setModelDetails(data.details || {});
-        // Set default model if none selected yet
-        if (!selectedModel && data.defaultModel) {
-          setSelectedModel(data.defaultModel);
+    let cancelled = false;
+
+    const applyModelPayload = (data: any) => {
+      const modelsFromApi = Array.isArray(data?.models) ? data.models : [];
+      const detailsFromApi = data?.details && typeof data.details === "object" ? data.details : {};
+      const defaultFromApi = typeof data?.defaultModel === "string" ? data.defaultModel : "";
+
+      if (modelsFromApi.length > 0) {
+        setModels(modelsFromApi);
+        setModelDetails(detailsFromApi);
+        if (!selectedModel && defaultFromApi) {
+          setSelectedModel(defaultFromApi);
         }
-      })
-      .catch(() => {});
+        return true;
+      }
+      return false;
+    };
+
+    const loadModels = async () => {
+      const maxAttempts = 2;
+      let lastError = "";
+
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+          const response = await fetch("/api/models", { cache: "no-store" });
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(data?.error || `Model API failed (${response.status})`);
+          }
+
+          if (cancelled) return;
+          if (applyModelPayload(data)) return;
+
+          const explicitError = typeof data?.error === "string" ? data.error : "No models returned";
+          throw new Error(explicitError);
+        } catch (error) {
+          lastError = error instanceof Error ? error.message : "Failed to load models";
+          if (attempt < maxAttempts) {
+            await new Promise((resolve) => setTimeout(resolve, 350));
+          }
+        }
+      }
+
+      if (cancelled) return;
+      // Last-resort client fallback so model picker never collapses to 0 models.
+      setModels(FALLBACK_MODELS);
+      setModelDetails(FALLBACK_MODEL_DETAILS);
+      if (!selectedModel) {
+        setSelectedModel(FALLBACK_MODELS[0]);
+      }
+      toast.error(`Model list degraded to fallback (${lastError})`, {
+        position: "top-center",
+        richColors: true,
+      });
+    };
+
+    loadModels();
+    return () => {
+      cancelled = true;
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

@@ -8,6 +8,30 @@ export interface ModelInfo {
   pricing?: { prompt: string; completion: string };
 }
 
+const OPENROUTER_FALLBACK_MODELS = [
+  'openai/gpt-4o-mini',
+  'anthropic/claude-3.5-sonnet',
+  'google/gemini-2.0-flash-001',
+] as const;
+
+const OPENROUTER_FALLBACK_DETAILS: Record<string, ModelInfo> = {
+  'openai/gpt-4o-mini': { provider: 'OpenAI', name: 'GPT-4o Mini', description: 'Fast & affordable' },
+  'anthropic/claude-3.5-sonnet': { provider: 'Anthropic', name: 'Claude 3.5 Sonnet', description: 'Balanced performance' },
+  'google/gemini-2.0-flash-001': { provider: 'Google', name: 'Gemini 2.0 Flash', description: 'Google fast model' },
+};
+
+export function getFallbackOpenRouterModels(): {
+  models: string[];
+  details: Record<string, ModelInfo>;
+  defaultModel: string;
+} {
+  return {
+    models: [...OPENROUTER_FALLBACK_MODELS],
+    details: { ...OPENROUTER_FALLBACK_DETAILS },
+    defaultModel: OPENROUTER_FALLBACK_MODELS[0],
+  };
+}
+
 /**
  * Create an OpenRouter-backed language model instance for any model ID.
  * This is called per-request in the chat route so we don't need to
@@ -55,7 +79,7 @@ export async function fetchOpenRouterModels(): Promise<{
 
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    return { models: [], details: {}, defaultModel: '' };
+    return getFallbackOpenRouterModels();
   }
 
   try {
@@ -109,13 +133,6 @@ export async function fetchOpenRouterModels(): Promise<{
     return _modelsCache;
   } catch (err) {
     console.error('Failed to fetch OpenRouter models:', err);
-    // Fallback to a few known models
-    const fallback = ['openai/gpt-4o-mini', 'anthropic/claude-3.5-sonnet', 'google/gemini-2.0-flash-001'];
-    const details: Record<string, ModelInfo> = {
-      'openai/gpt-4o-mini': { provider: 'OpenAI', name: 'GPT-4o Mini', description: 'Fast & affordable' },
-      'anthropic/claude-3.5-sonnet': { provider: 'Anthropic', name: 'Claude 3.5 Sonnet', description: 'Balanced performance' },
-      'google/gemini-2.0-flash-001': { provider: 'Google', name: 'Gemini 2.0 Flash', description: 'Google fast model' },
-    };
-    return { models: fallback, details, defaultModel: fallback[0] };
+    return getFallbackOpenRouterModels();
   }
 }
