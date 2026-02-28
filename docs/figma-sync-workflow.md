@@ -5,6 +5,9 @@ This runbook defines how this repository keeps Figma variables and Code Connect 
 Detailed office execution playbook:
 - `docs/code reports/office-copilot-figma-codeconnect-cicd-playbook.md`
 
+Consolidated docs hub:
+- `docs/figma-cicd/README.md`
+
 ## Scope
 
 - Repository: `MCP-UI-DEMO-ECOMV2`
