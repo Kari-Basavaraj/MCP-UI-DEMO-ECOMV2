@@ -18,6 +18,9 @@ export interface MCPServer {
   headers?: KeyValuePair[];
   status?: ServerStatus;
   errorMessage?: string;
+  lastCheckAt?: string;
+  lastSuccessfulCheckAt?: string;
+  lastCheckLatencyMs?: number;
 }
 
 export interface MCPServerApi {
@@ -34,7 +37,12 @@ interface MCPContextType {
   mcpServersForApi: MCPServerApi[];
   startServer: (id: string) => Promise<boolean>;
   stopServer: (id: string) => Promise<boolean>;
-  updateServerStatus: (id: string, status: ServerStatus, error?: string) => void;
+  updateServerStatus: (
+    id: string,
+    status: ServerStatus,
+    error?: string,
+    meta?: Pick<MCPServer, 'lastCheckAt' | 'lastSuccessfulCheckAt' | 'lastCheckLatencyMs'>
+  ) => void;
 }
 
 const MCPContext = createContext<MCPContextType | undefined>(undefined);
@@ -53,11 +61,75 @@ export function MCPProvider({ children }: { children: React.ReactNode }) {
   const activeRef = useRef<Record<string, boolean>>({});
   const [didAutoConnect, setDidAutoConnect] = useState(false);
 
-  const updateServerStatus = useCallback((id: string, status: ServerStatus, error?: string) => {
+  const updateServerStatus = useCallback((
+    id: string,
+    status: ServerStatus,
+    error?: string,
+    meta: Pick<MCPServer, 'lastCheckAt' | 'lastSuccessfulCheckAt' | 'lastCheckLatencyMs'> = {}
+  ) => {
     setMcpServers((servers: MCPServer[]) =>
-      servers.map(s => s.id === id ? { ...s, status, errorMessage: error } : s)
+      servers.map((s) => {
+        if (s.id !== id) return s;
+        return {
+          ...s,
+          status,
+          errorMessage: error,
+          ...meta,
+        };
+      })
     );
   }, [setMcpServers]);
+
+  const getBaseUrl = (sseUrl: string) => sseUrl.replace(/\/sse\/?$/, "");
+
+  const probeServer = useCallback(async (server: MCPServer) => {
+    const headers: Record<string, string> = {};
+    if (server.headers) {
+      for (const h of server.headers) {
+        if (h.key) headers[h.key] = h.value || "";
+      }
+    }
+    const baseUrl = getBaseUrl(server.url);
+    const retries = [0, 300, 900];
+    let lastError = "Unknown connection failure";
+
+    for (const delayMs of retries) {
+      if (delayMs > 0) {
+        await new Promise((r) => setTimeout(r, delayMs));
+      }
+
+      const startedAt = Date.now();
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+        const healthRes = await fetch(`${baseUrl}/api/health`, { headers, signal: controller.signal });
+        if (!healthRes.ok) {
+          clearTimeout(timeout);
+          throw new Error(`Health check failed (${healthRes.status})`);
+        }
+
+        const toolsRes = await fetch(`${baseUrl}/api/mcp/tools`, { headers, signal: controller.signal });
+        clearTimeout(timeout);
+        if (!toolsRes.ok) {
+          throw new Error(`Tool probe failed (${toolsRes.status})`);
+        }
+        const body = await toolsRes.json();
+        if (!Array.isArray(body.tools)) {
+          throw new Error("Tool probe returned invalid response");
+        }
+
+        return {
+          ok: true,
+          latencyMs: Date.now() - startedAt,
+          checkedAt: new Date().toISOString(),
+        };
+      } catch (error) {
+        lastError = error instanceof Error ? error.message : "Connection probe failed";
+      }
+    }
+
+    return { ok: false, error: lastError };
+  }, []);
 
   const startServer = useCallback(async (id: string): Promise<boolean> => {
     const server = mcpServers.find(s => s.id === id);
@@ -65,27 +137,25 @@ export function MCPProvider({ children }: { children: React.ReactNode }) {
 
     updateServerStatus(id, 'connecting');
 
-    try {
-      // For SSE servers, try to probe the endpoint
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 5000);
-
-      try {
-        await fetch(server.url, { signal: controller.signal });
-        clearTimeout(timeout);
-      } catch {
-        clearTimeout(timeout);
-        // SSE endpoints may behave differently — assume connected if we can reach the server at all
+    try {      
+      const probe = await probeServer(server);
+      if (!probe.ok) {
+        updateServerStatus(id, 'error', probe.error || 'Connection failed');
+        return false;
       }
 
-      updateServerStatus(id, 'connected');
+      updateServerStatus(id, 'connected', undefined, {
+        lastCheckAt: probe.checkedAt,
+        lastSuccessfulCheckAt: probe.checkedAt,
+        lastCheckLatencyMs: probe.latencyMs,
+      });
       activeRef.current[id] = true;
       return true;
     } catch (error) {
       updateServerStatus(id, 'error', error instanceof Error ? error.message : 'Connection failed');
       return false;
     }
-  }, [mcpServers, updateServerStatus]);
+  }, [mcpServers, probeServer, updateServerStatus]);
 
   const stopServer = useCallback(async (id: string): Promise<boolean> => {
     updateServerStatus(id, 'disconnected');

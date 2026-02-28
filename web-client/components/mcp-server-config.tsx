@@ -63,6 +63,15 @@ export function MCPServerConfig({ onClose }: { onClose: () => void }) {
     setSelectedMcpServers([]);
   };
 
+  const formatCheckTime = (iso?: string) => {
+    if (!iso) return null;
+    try {
+      return new Date(iso).toLocaleTimeString();
+    } catch {
+      return null;
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
@@ -167,7 +176,12 @@ export function MCPServerConfig({ onClose }: { onClose: () => void }) {
                             />
                           </button>
                           <button
-                            onClick={() => startServer(server.id)}
+                            onClick={async () => {
+                              const ok = await startServer(server.id);
+                              if (ok && !selectedMcpServers.includes(server.id)) {
+                                setSelectedMcpServers([...selectedMcpServers, server.id]);
+                              }
+                            }}
                             className="p-1 hover:bg-muted rounded transition-colors"
                             title="Reconnect"
                           >
@@ -185,6 +199,21 @@ export function MCPServerConfig({ onClose }: { onClose: () => void }) {
                       <div className="text-xs text-muted-foreground mt-1.5 truncate">
                         {server.url}
                       </div>
+                      <div className="text-[10px] text-muted-foreground mt-1">
+                        {server.lastCheckAt ? (
+                          <>
+                            Last check: {formatCheckTime(server.lastCheckAt)}
+                            {typeof server.lastCheckLatencyMs === "number" ? ` · ${server.lastCheckLatencyMs}ms` : ""}
+                          </>
+                        ) : (
+                          <>Last check: never</>
+                        )}
+                      </div>
+                      {server.status === "error" && server.errorMessage && (
+                        <div className="text-[10px] text-destructive mt-1 break-words">
+                          {server.errorMessage}
+                        </div>
+                      )}
                       {server.status !== "connected" && (
                         <button
                           onClick={() => handleToggle(server)}
