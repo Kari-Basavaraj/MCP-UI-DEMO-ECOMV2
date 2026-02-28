@@ -11,13 +11,15 @@ export async function POST(req: Request) {
     messages,
     selectedModel,
     mcpServers = [],
+    userId = "",
   }: {
     messages: UIMessage[];
     selectedModel: modelID;
     mcpServers?: MCPServerConfig[];
+    userId?: string;
   } = await req.json();
 
-  const { tools, cleanup } = await initializeMCPClients(mcpServers, req.signal);
+  const { tools, cleanup } = await initializeMCPClients(mcpServers, req.signal, userId);
 
   let responseCompleted = false;
 
