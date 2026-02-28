@@ -3,6 +3,40 @@ import cors from "cors";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 
 const DEFAULT_MODEL = "gpt-4o-mini";
+const DEFAULT_MUTATING_TOOLS = [
+  "add_to_cart",
+  "remove_from_cart",
+  "checkout",
+  "place_order",
+  "add_to_wishlist",
+  "remove_from_wishlist",
+];
+
+const asBool = (value, fallback = false) => {
+  if (value == null) return fallback;
+  const normalized = String(value).trim().toLowerCase();
+  if (["1", "true", "yes", "on"].includes(normalized)) return true;
+  if (["0", "false", "no", "off"].includes(normalized)) return false;
+  return fallback;
+};
+
+const parseList = (value, fallback = []) => {
+  if (!value) return fallback;
+  return String(value)
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+};
+
+const getAuthToken = (req) => {
+  const mcpHeader = req.get("x-mcp-auth");
+  if (mcpHeader) return mcpHeader.trim();
+  const authHeader = req.get("authorization") || "";
+  if (authHeader.toLowerCase().startsWith("bearer ")) {
+    return authHeader.slice(7).trim();
+  }
+  return "";
+};
 
 const pickModelOptions = (body) => {
   const allowedKeys = [
@@ -32,8 +66,28 @@ export const startOpenAIProxy = ({
   createMCPServer = null,
 } = {}) => {
   const app = express();
+  const securityMode = process.env.MCP_SECURITY_MODE || "local";
+  const allowedOrigins = parseList(process.env.MCP_ALLOWED_ORIGINS);
+  const authEnabled = asBool(process.env.MCP_BRIDGE_AUTH_ENABLED, false);
+  const bridgeToken = process.env.MCP_BRIDGE_AUTH_TOKEN || "";
+  const mutatingAllowlist = new Set(parseList(process.env.MCP_MUTATING_TOOL_ALLOWLIST, DEFAULT_MUTATING_TOOLS));
+  const maxArgBytes = Number(process.env.MCP_MAX_ARGUMENT_BYTES || 8192);
+  const rateLimitEnabled = asBool(process.env.MCP_RATE_LIMIT_ENABLED, true);
+  const rateLimitWindowMs = Number(process.env.MCP_RATE_LIMIT_WINDOW_MS || 60000);
+  const rateLimitMax = Number(process.env.MCP_RATE_LIMIT_MAX_REQUESTS || 120);
+  const requestCounters = new Map();
 
-  app.use(cors({ origin: true }));
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (securityMode !== "strict" || allowedOrigins.length === 0 || !origin) {
+        return callback(null, true);
+      }
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+  }));
   app.use(express.json({ limit: "1mb" }));
 
   app.get("/api/health", (_req, res) => {
@@ -190,8 +244,48 @@ export const startOpenAIProxy = ({
     app.post("/api/mcp/call", async (req, res) => {
       try {
         const { name, arguments: args } = req.body;
+        if (typeof name !== "string" || name.trim() === "") {
+          return res.status(400).json({ error: "Invalid tool name" });
+        }
+        if (args != null && (typeof args !== "object" || Array.isArray(args))) {
+          return res.status(400).json({ error: "Invalid tool arguments: expected object" });
+        }
+        const argSize = Buffer.byteLength(JSON.stringify(args || {}), "utf8");
+        if (argSize > maxArgBytes) {
+          return res.status(413).json({ error: `Tool arguments too large (${argSize} bytes)` });
+        }
+
+        const toolName = name.trim();
+        const isMutatingTool = DEFAULT_MUTATING_TOOLS.includes(toolName);
+        if (isMutatingTool && !mutatingAllowlist.has(toolName)) {
+          return res.status(403).json({ error: `Tool not allowlisted: ${toolName}` });
+        }
+        if (authEnabled && isMutatingTool) {
+          if (!bridgeToken) {
+            return res.status(500).json({ error: "Bridge auth enabled but MCP_BRIDGE_AUTH_TOKEN is not set" });
+          }
+          const incomingToken = getAuthToken(req);
+          if (!incomingToken || incomingToken !== bridgeToken) {
+            return res.status(401).json({ error: "Unauthorized MCP tool call" });
+          }
+        }
+        if (rateLimitEnabled && isMutatingTool) {
+          const bucketKey = req.ip || req.socket.remoteAddress || "unknown";
+          const now = Date.now();
+          const current = requestCounters.get(bucketKey) || { count: 0, windowStart: now };
+          if (now - current.windowStart >= rateLimitWindowMs) {
+            current.count = 0;
+            current.windowStart = now;
+          }
+          current.count += 1;
+          requestCounters.set(bucketKey, current);
+          if (current.count > rateLimitMax) {
+            return res.status(429).json({ error: "Rate limit exceeded for mutable MCP tool calls" });
+          }
+        }
+
         const client = await getBridgeClient();
-        const result = await client.callTool({ name, arguments: args || {} });
+        const result = await client.callTool({ name: toolName, arguments: args || {} });
         return res.json(result);
       } catch (error) {
         return res.status(500).json({ error: error?.message || "Failed to call tool" });
