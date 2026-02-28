@@ -1,6 +1,6 @@
 # Widget Parity Report
 
-Generated: 2026-02-28T05:57:50.578Z
+Generated: 2026-02-28T06:16:45.736Z
 Schema: 1.1.0
 
 ## Summary
