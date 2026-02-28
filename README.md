@@ -103,6 +103,29 @@ To use the AI assistant with OpenAI:
 
 The application still works in demo mode without an API key, using fallback responses.
 
+### Secure Run Mode (recommended for shared/staging environments)
+
+The MCP HTTP bridge now supports env-gated guardrails for mutable tools.
+
+Add these to `mcp-server/.env` when running outside local development:
+
+```bash
+MCP_SECURITY_MODE=strict
+MCP_ALLOWED_ORIGINS=https://your-app.example.com
+MCP_BRIDGE_AUTH_ENABLED=true
+MCP_BRIDGE_AUTH_TOKEN=strong-random-token
+MCP_MUTATING_TOOL_ALLOWLIST=add_to_cart,remove_from_cart,checkout,place_order,add_to_wishlist,remove_from_wishlist
+MCP_MAX_ARGUMENT_BYTES=8192
+MCP_RATE_LIMIT_ENABLED=true
+MCP_RATE_LIMIT_WINDOW_MS=60000
+MCP_RATE_LIMIT_MAX_REQUESTS=120
+```
+
+Notes:
+- Auth and rate limit checks apply to mutable `/api/mcp/call` tool invocations.
+- Keep `MCP_BRIDGE_AUTH_ENABLED=false` in local dev unless your client sends auth headers.
+- `MCP_SECURITY_MODE=strict` enforces the `MCP_ALLOWED_ORIGINS` CORS allowlist.
+
 ## MCP Tools
 
 The server provides the following tools:
