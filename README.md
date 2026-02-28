@@ -126,6 +126,20 @@ Notes:
 - Keep `MCP_BRIDGE_AUTH_ENABLED=false` in local dev unless your client sends auth headers.
 - `MCP_SECURITY_MODE=strict` enforces the `MCP_ALLOWED_ORIGINS` CORS allowlist.
 
+### Token Governance
+
+Canonical token source is `mcp-server/tokens`. Keep `web-client/tokens` in sync with:
+
+```bash
+npm run tokens:sync
+```
+
+Validate no drift before commits/CI:
+
+```bash
+npm run tokens:check
+```
+
 ## MCP Tools
 
 The server provides the following tools:

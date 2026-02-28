@@ -7,7 +7,9 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd mcp-server && npm run dev",
     "dev:client": "cd web-client && npm run dev",
-    "install:all": "npm install && cd mcp-server && npm install && cd ../web-client && npm install"
+    "install:all": "npm install && cd mcp-server && npm install && cd ../web-client && npm install",
+    "tokens:sync": "node scripts/sync-tokens.mjs sync",
+    "tokens:check": "node scripts/sync-tokens.mjs check"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
