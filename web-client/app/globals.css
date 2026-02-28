@@ -1,41 +1,24 @@
 @import 'tailwindcss';
+@import '../tokens/figma-tokens-light.css';
+@import '../tokens/figma-tokens-dark.css';
 
 /* ── Figma SDS Tokens → Tailwind bridge ─────────────────────────────── */
-/* Light mode (default) — values from figma-tokens-light.css */
 @theme {
-  --color-background: #ffffff;
-  --color-foreground: #1e1e1e;
-  --color-card: #ffffff;
-  --color-muted: #f5f5f5;
-  --color-muted-foreground: #757575;
-  --color-border: #d9d9d9;
-  --color-primary: #2c2c2c;
-  --color-primary-foreground: #f5f5f5;
-  --color-secondary: #f5f5f5;
-  --color-secondary-foreground: #1e1e1e;
-  --color-accent: #14ae5c;
-  --color-destructive: #eb221e;
-  --color-positive: #14ae5c;
-  --color-warning: #e8b931;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
-/* Dark mode (data-theme="dark") */
-[data-theme="dark"] {
-  --color-background: #1e1e1e;
-  --color-foreground: #ffffff;
-  --color-card: #262626;
-  --color-muted: #2c2c2c;
-  --color-muted-foreground: rgba(255, 255, 255, 0.70);
-  --color-border: #444444;
-  --color-primary: #f5f5f5;
-  --color-primary-foreground: #1e1e1e;
-  --color-secondary: #2c2c2c;
-  --color-secondary-foreground: #ffffff;
-  --color-accent: #14ae5c;
-  --color-destructive: #eb221e;
-  --color-positive: #009951;
-  --color-warning: #e8b931;
+  --color-background: var(--sds-color-background-default-default);
+  --color-foreground: var(--sds-color-text-default-default);
+  --color-card: var(--sds-color-background-default-default);
+  --color-muted: var(--sds-color-background-default-secondary);
+  --color-muted-foreground: var(--sds-color-text-default-secondary);
+  --color-border: var(--sds-color-border-default-default);
+  --color-primary: var(--sds-color-background-brand-default);
+  --color-primary-foreground: var(--sds-color-text-brand-on-brand);
+  --color-secondary: var(--sds-color-background-default-secondary);
+  --color-secondary-foreground: var(--sds-color-text-default-default);
+  --color-accent: var(--sds-color-background-positive-default);
+  --color-destructive: var(--sds-color-background-danger-default);
+  --color-positive: var(--sds-color-background-positive-default);
+  --color-warning: var(--sds-color-background-warning-default);
+  --font-sans: var(--sds-typo-body-font-family), system-ui, -apple-system, sans-serif;
 }
 
 body {
@@ -70,30 +53,40 @@ body {
   100% { background-position: 200% 0; }
 }
 .skeleton-shimmer {
-  background: linear-gradient(90deg, #e5e5e5 25%, #d4d4d4 50%, #e5e5e5 75%);
+  background: linear-gradient(
+    90deg,
+    var(--sds-color-background-default-secondary-hover) 25%,
+    var(--sds-color-background-default-tertiary) 50%,
+    var(--sds-color-background-default-secondary-hover) 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
 [data-theme="dark"] .skeleton-shimmer {
-  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background: linear-gradient(
+    90deg,
+    var(--sds-color-background-default-secondary) 25%,
+    var(--sds-color-background-default-tertiary) 50%,
+    var(--sds-color-background-default-secondary) 75%
+  );
   background-size: 200% 100%;
 }
 .skeleton-block {
-  background-color: #d4d4d4;
+  background-color: var(--sds-color-background-default-tertiary);
   border-radius: 6px;
 }
 [data-theme="dark"] .skeleton-block {
-  background-color: #404040;
+  background-color: var(--sds-color-background-default-tertiary);
 }
 .skeleton-container {
-  background-color: #f5f5f5;
-  border: 1px solid #e5e5e5;
+  background-color: var(--sds-color-background-default-secondary);
+  border: 1px solid var(--sds-color-border-default-default);
   border-radius: 16px;
   padding: 16px;
 }
 [data-theme="dark"] .skeleton-container {
-  background-color: #262626;
-  border-color: #404040;
+  background-color: var(--sds-color-background-default-secondary);
+  border-color: var(--sds-color-border-default-default);
 }
 
 /* Widget appear animation */

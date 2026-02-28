@@ -103,6 +103,20 @@ To use the AI assistant with OpenAI:
 
 The application still works in demo mode without an API key, using fallback responses.
 
+### Token Governance
+
+Canonical token source is `mcp-server/tokens`. Keep `web-client/tokens` in sync with:
+
+```bash
+npm run tokens:sync
+```
+
+Validate no drift before commits/CI:
+
+```bash
+npm run tokens:check
+```
+
 ## MCP Tools
 
 The server provides the following tools:

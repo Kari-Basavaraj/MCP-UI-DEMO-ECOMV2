@@ -189,6 +189,11 @@
   --sds-size-space-negative-600: -24px;
   --sds-size-stroke-border: 1px;
   --sds-size-stroke-focus-ring: 2px;
+  --sds-size-space-500: 20px;
+  --sds-size-height-button-sm: 36px;
+  --sds-size-height-button-md: 44px;
+  --sds-size-height-button-lg: 48px;
+  --sds-size-height-input: 48px;
 
   /* Typography tokens */
   --sds-typo-body-font-family: Inter;
@@ -226,4 +231,42 @@
   --sds-typo-title-page-size-base: 48px;
   --sds-typo-title-page-size-large: 64px;
   --sds-typo-title-page-size-small: 40px;
+
+  /* ── Component Aliases (derived from DS tokens — syncs with Figma variables) */
+  /* Card — maps to Figma Card component */
+  --sds-comp-card-bg: var(--sds-color-background-default-default);
+  --sds-comp-card-border: var(--sds-color-border-default-default);
+  --sds-comp-card-radius: var(--sds-size-radius-400);
+  --sds-comp-card-padding: var(--sds-size-padding-lg);
+  --sds-comp-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.10);
+  --sds-comp-card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.10);
+
+  /* Button — maps to Figma Button component */
+  --sds-comp-button-radius: var(--sds-size-radius-200);
+  --sds-comp-button-radius-full: var(--sds-size-radius-full);
+  --sds-comp-button-height-sm: var(--sds-size-height-button-sm);
+  --sds-comp-button-height-md: var(--sds-size-height-button-md);
+  --sds-comp-button-height-lg: var(--sds-size-height-button-lg);
+
+  /* Input — maps to Figma Input component */
+  --sds-comp-input-radius: var(--sds-size-radius-200);
+  --sds-comp-input-height: var(--sds-size-height-input);
+  --sds-comp-input-bg: var(--sds-color-background-default-default);
+  --sds-comp-input-border: var(--sds-color-border-default-default);
+  --sds-comp-input-border-focus: var(--sds-color-border-brand-default);
+
+  /* Badge — maps to Figma Tag component */
+  --sds-comp-badge-radius: var(--sds-size-radius-full);
+  --sds-comp-badge-bg: var(--sds-color-background-positive-tertiary);
+  --sds-comp-badge-text: var(--sds-color-text-positive-default);
+
+  /* Image */
+  --sds-comp-image-radius: var(--sds-size-radius-200);
+  --sds-comp-image-bg: var(--sds-color-background-default-secondary);
+
+  /* Container */
+  --sds-comp-container-radius: var(--sds-size-radius-400);
+  --sds-comp-container-padding: var(--sds-size-padding-xl);
+  --sds-comp-container-bg: var(--sds-color-background-default-secondary);
+  --sds-comp-container-border: var(--sds-color-border-default-default);
 }
