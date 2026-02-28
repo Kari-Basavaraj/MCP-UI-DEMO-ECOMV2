@@ -38,33 +38,34 @@ export function openLink(url: string): void {
 /** Post current content dimensions to the parent so the iframe resizes. */
 function postSize(): void {
   const body = document.body;
-  const html = document.documentElement;
-  // Avoid viewport-locked measurements (e.g. html.scrollHeight in 100% iframes)
-  // and report actual rendered content bounds instead.
+  // Measure content bounds only. Including viewport-bound values like
+  // clientHeight/clientWidth can lock iframe size and prevent shrinking.
   const bodyRect = body.getBoundingClientRect();
-  const htmlRect = html.getBoundingClientRect();
+
+  let deepestBottom = bodyRect.top;
+  let widestRight = bodyRect.left;
+  const children = body.children;
+  for (let i = 0; i < children.length; i += 1) {
+    const rect = children[i].getBoundingClientRect();
+    if (rect.bottom > deepestBottom) deepestBottom = rect.bottom;
+    if (rect.right > widestRight) widestRight = rect.right;
+  }
+
+  const contentHeightFromRects = Math.max(0, deepestBottom - bodyRect.top);
+  const contentWidthFromRects = Math.max(0, widestRight - bodyRect.left);
+
   const height = Math.ceil(
-    Math.max(
-      body.scrollHeight,
-      body.offsetHeight,
-      body.clientHeight,
-      bodyRect.height,
-      html.clientHeight,
-      htmlRect.height
-    )
+    Math.max(body.scrollHeight, body.offsetHeight, contentHeightFromRects)
   );
   const width = Math.ceil(
-    Math.max(
-      body.scrollWidth,
-      body.offsetWidth,
-      body.clientWidth,
-      bodyRect.width,
-      html.clientWidth,
-      htmlRect.width
-    )
+    Math.max(body.scrollWidth, body.offsetWidth, contentWidthFromRects)
   );
+
+  // Keep a practical floor to avoid accidental zero-height collapse while loading.
+  const clampedHeight = Math.max(120, height);
+  const clampedWidth = Math.max(1, width);
   window.parent.postMessage(
-    { type: "ui-size-change", payload: { width, height } },
+    { type: "ui-size-change", payload: { width: clampedWidth, height: clampedHeight } },
     "*"
   );
 }

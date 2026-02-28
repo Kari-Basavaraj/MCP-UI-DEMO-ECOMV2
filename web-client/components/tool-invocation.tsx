@@ -42,6 +42,86 @@ interface ToolInvocationProps {
   append?: UseChatHelpers["append"];
 }
 
+const RESIZE_RUNTIME_MARKER = "mcp-ui-resize-runtime-v1";
+
+function injectWidgetRuntime(html: string, theme: string, dataJson?: string): string {
+  if (!html || html.includes(RESIZE_RUNTIME_MARKER)) return html;
+
+  const dataSnippet = dataJson ? `window.__MCP_TOOL_RESULT__=${dataJson};` : "";
+  const runtimeScript = `
+<script id="${RESIZE_RUNTIME_MARKER}">
+(() => {
+  ${dataSnippet}
+  const sendSize = () => {
+    const doc = document.documentElement;
+    const body = document.body;
+    const width = Math.ceil(Math.max(
+      doc?.scrollWidth ?? 0,
+      body?.scrollWidth ?? 0,
+      doc?.offsetWidth ?? 0,
+      body?.offsetWidth ?? 0
+    ));
+    const height = Math.ceil(Math.max(
+      doc?.scrollHeight ?? 0,
+      body?.scrollHeight ?? 0,
+      doc?.offsetHeight ?? 0,
+      body?.offsetHeight ?? 0
+    ));
+    window.parent?.postMessage({ type: "ui-size-change", payload: { width, height } }, "*");
+  };
+
+  let rafId = 0;
+  const scheduleSize = () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      rafId = 0;
+      sendSize();
+    });
+  };
+
+  document.documentElement.setAttribute("data-theme", ${JSON.stringify(theme)});
+  window.addEventListener("message", (e) => {
+    if (e.data && e.data.type === "theme-change") {
+      document.documentElement.setAttribute("data-theme", e.data.theme);
+      scheduleSize();
+    }
+  });
+
+  const mutationObserver = new MutationObserver(scheduleSize);
+  mutationObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    characterData: true,
+  });
+
+  const resizeObserver = new ResizeObserver(scheduleSize);
+  resizeObserver.observe(document.documentElement);
+  if (document.body) resizeObserver.observe(document.body);
+
+  document.addEventListener("load", (event) => {
+    if (event.target instanceof HTMLImageElement) scheduleSize();
+  }, true);
+
+  window.addEventListener("load", scheduleSize);
+  window.addEventListener("resize", scheduleSize);
+  document.addEventListener("DOMContentLoaded", scheduleSize);
+
+  setTimeout(scheduleSize, 0);
+  setTimeout(scheduleSize, 150);
+  setTimeout(scheduleSize, 600);
+})();
+</script>`;
+
+  if (html.includes("</head>")) {
+    return html.replace("</head>", `${runtimeScript}</head>`);
+  }
+  if (html.includes("</body>")) {
+    return html.replace("</body>", `${runtimeScript}</body>`);
+  }
+  return `${html}${runtimeScript}`;
+}
+
 /* Tools that produce UI widgets */
 const WIDGET_TOOLS = new Set([
   "get_products", "search_products", "filter_products",
@@ -337,6 +417,7 @@ export const ToolInvocation = memo(function ToolInvocation({
   const [htmlResourceContents, setHtmlResourceContents] = useState<HtmlResourceData[]>([]);
   const [isLoadingWidget, setIsLoadingWidget] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const widgetScopeRef = useRef<HTMLDivElement | null>(null);
   const skeletonMinRef = useRef<number>(0);
   const { theme } = useTheme();
 
@@ -406,23 +487,8 @@ export const ToolInvocation = memo(function ToolInvocation({
             );
             if (resp.ok) {
               let html = await resp.text();
-              // Inject tool result data, current theme, and theme listener into the widget
-              const injections: string[] = [];
-              if (dataJson) {
-                injections.push(`window.__MCP_TOOL_RESULT__=${dataJson};`);
-              }
-              injections.push(`document.documentElement.setAttribute('data-theme','${theme}');`);
-              // Listen for live theme changes from the parent
-              injections.push(
-                `window.addEventListener('message',function(e){` +
-                `if(e.data&&e.data.type==='theme-change'){` +
-                `document.documentElement.setAttribute('data-theme',e.data.theme);` +
-                `}});`
-              );
-              html = html.replace(
-                "</head>",
-                `<script>${injections.join("\n")}</script></head>`
-              );
+              // Inject shared runtime for theme + robust auto-resize signaling.
+              html = injectWidgetRuntime(html, theme, dataJson);
               const normalizedMime = res.mimeType.startsWith('text/html') ? 'text/html' : res.mimeType;
               fetched.push({ uri: res.uri, mimeType: normalizedMime, text: html });
             }
@@ -469,7 +535,7 @@ export const ToolInvocation = memo(function ToolInvocation({
             return {
               uri: item.resource.uri,
               mimeType: normalizedMime,
-              text: item.resource._html || item.resource.text,
+              text: injectWidgetRuntime(item.resource._html || item.resource.text || "", theme),
             } as HtmlResourceData;
           });
 
@@ -486,10 +552,10 @@ export const ToolInvocation = memo(function ToolInvocation({
     }
   }, [result]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Broadcast theme changes to all widget iframes
+  // Broadcast theme changes only to iframes rendered by this invocation.
   useEffect(() => {
     if (!hasWidget) return;
-    const iframes = document.querySelectorAll('iframe');
+    const iframes = widgetScopeRef.current?.querySelectorAll('iframe') ?? [];
     iframes.forEach((iframe) => {
       try {
         iframe.contentWindow?.postMessage({ type: 'theme-change', theme }, '*');
@@ -584,7 +650,7 @@ export const ToolInvocation = memo(function ToolInvocation({
   // 1. Widget loaded — always render it first (prevents flicker on re-render)
   if (hasWidget) {
     return (
-      <div className="mb-2 space-y-1">
+      <div ref={widgetScopeRef} className="mb-2 space-y-1">
         <div className="rounded-2xl border border-border/40 bg-card shadow-md overflow-hidden animate-widget-appear">
           {renderedHtmlResources}
         </div>
