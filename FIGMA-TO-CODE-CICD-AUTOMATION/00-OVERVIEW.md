@@ -11,7 +11,7 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 **Bidirectional** means:
 
 | Direction | What happens | When |
-|---|---|---|
+| --- | --- | --- |
 | **Figma → Code** | A designer changes a color, spacing value, or typography token in Figma. CI detects the change, pulls variables, normalizes them, generates canonical CSS custom properties, mirrors them across workspaces, and opens a PR. | Nightly schedule or manual trigger |
 | **Code → Figma** | An engineer edits a CSS token file directly. CI reads the diff, converts CSS values back to Figma's Variable format, takes a rollback snapshot, and pushes the update to the Figma file via the REST API. | Manual trigger with `--apply` flag |
 
@@ -20,7 +20,7 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 ## Playbook Structure
 
 | Document | Purpose |
-|---|---|
+| --- | --- |
 | [00-OVERVIEW.md](./00-OVERVIEW.md) | This file — executive summary and navigation |
 | [01-ONE-TIME-SETUP.md](./01-ONE-TIME-SETUP.md) | First-time setup: PAT, secrets, config, dependencies |
 | [02-ARCHITECTURE.md](./02-ARCHITECTURE.md) | System architecture, pipeline flow, file dependency map |
@@ -39,11 +39,13 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 ## Key Principles
 
 ### 1. Tokens Are the Source of Truth — In Both Directions
+
 - Figma variables are the **design** source of truth.
 - CSS custom properties (`--sds-*`) are the **code** source of truth.
 - The pipeline guarantees **convergence**: whichever side changes, the other side is updated.
 
 ### 2. Safety First
+
 The pipeline has **11 independent safety guards** that prevent accidental overwrites, data loss, or scope leaks:
 
 1. **Secret guard** — No operation runs without `FIGMA_ACCESS_TOKEN`
@@ -59,16 +61,19 @@ The pipeline has **11 independent safety guards** that prevent accidental overwr
 11. **Alias cycle detection** — Prevents circular variable references
 
 ### 3. Auditable
+
 Every operation writes:
+
 - A **JSON report** in `docs/code reports/`
 - An entry in the **rollout log** (`docs/code reports/figma-cicd-rollout-log.md`)
 - GitHub Actions **artifacts** downloadable from each workflow run
 
 ### 4. Incremental Adoption
+
 The route system lets teams ramp up safely:
 
 | Route | Description | Risk |
-|---|---|---|
+| --- | --- | --- |
 | **Route C** | Manual only — all operations run locally | Lowest |
 | **Route A** | CI does read + verify; writes remain manual/office | Medium |
 | **Route B** | Full CI — reads, writes, and publish all automated | Highest (but guarded) |
@@ -77,7 +82,7 @@ The route system lets teams ramp up safely:
 
 ## Pipeline at a Glance
 
-```
+```text
 ┌─────────────┐     ┌─────────────────┐     ┌────────────────────┐
 │  Figma File  │────▶│  Variables API   │────▶│  Pull Pipeline     │
 │  (Variables) │     │  GET /v1/files/  │     │  pull → normalize  │
@@ -111,7 +116,7 @@ The route system lets teams ramp up safely:
 ## Technology Stack
 
 | Component | Technology | Version |
-|---|---|---|
+| --- | --- | --- |
 | Runtime | Node.js | 22+ |
 | Scripts | Pure ESM (`*.mjs`) | — |
 | Figma API | REST v1 Variables + Code Connect CLI | Latest |
@@ -125,7 +130,7 @@ The route system lets teams ramp up safely:
 ## Who Is This For?
 
 | Role | Start Here |
-|---|---|
+| --- | --- |
 | **New engineer** wants to set up locally | [README.md](./README.md) → [01-ONE-TIME-SETUP.md](./01-ONE-TIME-SETUP.md) |
 | **Designer** wants to understand the sync | [03-FIGMA-TO-CODE.md](./03-FIGMA-TO-CODE.md) |
 | **DevOps engineer** needs to configure CI | [05-CICD-PIPELINES.md](./05-CICD-PIPELINES.md) → [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) |
@@ -134,4 +139,4 @@ The route system lets teams ramp up safely:
 
 ---
 
-*Last updated: 2026-02-28*
+Last updated: 2026-02-28

@@ -54,7 +54,7 @@ npm run figma:verify         # Verify everything works
 ## Playbook Contents
 
 | # | Document | What You'll Learn |
-|---|---|---|
+| --- | --- | --- |
 | [00](./00-OVERVIEW.md) | **Overview** | Architecture diagram, principles, pipeline summary |
 | [01](./01-ONE-TIME-SETUP.md) | **One-Time Setup** | PAT creation, GitHub secrets, environment config |
 | [02](./02-ARCHITECTURE.md) | **Architecture** | Script inventory, file dependency map, data flows |
@@ -71,7 +71,7 @@ npm run figma:verify         # Verify everything works
 ## Essential Commands
 
 | Command | What It Does |
-|---|---|
+| --- | --- |
 | `npm run figma:sync:pull` | Pull Figma → CSS tokens (safe, read-only) |
 | `npm run figma:sync:push` | Push CSS → Figma (dry-run, shows what would change) |
 | `npm run figma:sync:push -- --apply` | Push CSS → Figma (writes for real) |
@@ -87,7 +87,7 @@ npm run figma:verify         # Verify everything works
 
 Every write operation passes through multiple guards before reaching the Figma API:
 
-```
+```text
 Your code change
     │
     ├── Write Mode Guard ──── Is writeMode "ci-enabled"?
