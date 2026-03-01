@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-01T13:49:35.828Z",
+  "fetchedAt": "2026-03-01T15:37:21.325Z",
   "request": {
     "status": 200,
     "url": "https://api.figma.com/v1/files/dbPjFeLfAFp8Sz9YGPs0CZ/variables/local"
@@ -161,43 +161,6 @@
             "VariableID:66:10184"
           ]
         },
-        "VariableCollectionId:3012:1204": {
-          "defaultModeId": "3012:0",
-          "id": "VariableCollectionId:3012:1204",
-          "name": "MCP UI Widgets",
-          "remote": false,
-          "modes": [
-            {
-              "modeId": "3012:0",
-              "name": "Mode 1"
-            }
-          ],
-          "key": "4192696f563fd3c1a2f84399ffa7a7ed66d96c94",
-          "hiddenFromPublishing": false,
-          "isExtension": false,
-          "variableIds": []
-        },
-        "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341": {
-          "defaultModeId": "7:3",
-          "id": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "name": "Typography",
-          "remote": true,
-          "modes": [
-            {
-              "modeId": "7:3",
-              "name": "Value"
-            }
-          ],
-          "key": "aac9fe8a555f693a158f5153db142e4afaa06e41",
-          "hiddenFromPublishing": true,
-          "isExtension": false,
-          "variableIds": [
-            "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
-            "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
-            "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
-            "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310"
-          ]
-        },
         "VariableCollectionId:3919:36422": {
           "defaultModeId": "3919:21",
           "id": "VariableCollectionId:3919:36422",
@@ -356,6 +319,88 @@
             "VariableID:3919:36533"
           ]
         },
+        "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243": {
+          "defaultModeId": "9:7",
+          "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+          "name": "Size",
+          "remote": true,
+          "modes": [
+            {
+              "modeId": "9:7",
+              "name": "Default"
+            }
+          ],
+          "key": "ddf73292379387a92da82f20b70e3a84062cdbac",
+          "hiddenFromPublishing": true,
+          "isExtension": false,
+          "variableIds": [
+            "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
+          ]
+        },
+        "VariableCollectionId:3012:1204": {
+          "defaultModeId": "3012:0",
+          "id": "VariableCollectionId:3012:1204",
+          "name": "MCP UI Widgets",
+          "remote": false,
+          "modes": [
+            {
+              "modeId": "3012:0",
+              "name": "Mode 1"
+            }
+          ],
+          "key": "4192696f563fd3c1a2f84399ffa7a7ed66d96c94",
+          "hiddenFromPublishing": false,
+          "isExtension": false,
+          "variableIds": []
+        },
+        "VariableCollectionId:9:11179": {
+          "defaultModeId": "9:2",
+          "id": "VariableCollectionId:9:11179",
+          "name": "Typography Primitives",
+          "remote": false,
+          "modes": [
+            {
+              "modeId": "9:2",
+              "name": "Default"
+            }
+          ],
+          "key": "89d99d6172dc461ed8f63a72fce3289031c0772d",
+          "hiddenFromPublishing": false,
+          "isExtension": false,
+          "variableIds": [
+            "VariableID:9:11199",
+            "VariableID:9:11200",
+            "VariableID:9:11201",
+            "VariableID:9:11198",
+            "VariableID:9:11197",
+            "VariableID:9:11196",
+            "VariableID:9:11195",
+            "VariableID:9:11194",
+            "VariableID:9:11193",
+            "VariableID:9:11192",
+            "VariableID:9:11191",
+            "VariableID:9:11190",
+            "VariableID:9:11189",
+            "VariableID:9:11180",
+            "VariableID:66:10200",
+            "VariableID:9:11181",
+            "VariableID:66:10201",
+            "VariableID:9:11182",
+            "VariableID:56:8551",
+            "VariableID:9:11183",
+            "VariableID:56:8552",
+            "VariableID:9:11184",
+            "VariableID:66:10202",
+            "VariableID:9:11185",
+            "VariableID:66:10203",
+            "VariableID:9:11186",
+            "VariableID:56:8553",
+            "VariableID:9:11187",
+            "VariableID:66:10204",
+            "VariableID:9:11188",
+            "VariableID:66:10208"
+          ]
+        },
         "VariableCollectionId:3919:36421": {
           "defaultModeId": "3919:19",
           "id": "VariableCollectionId:3919:36421",
@@ -473,6 +518,27 @@
             "VariableID:4317:10400"
           ]
         },
+        "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341": {
+          "defaultModeId": "7:3",
+          "id": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "name": "Typography",
+          "remote": true,
+          "modes": [
+            {
+              "modeId": "7:3",
+              "name": "Value"
+            }
+          ],
+          "key": "aac9fe8a555f693a158f5153db142e4afaa06e41",
+          "hiddenFromPublishing": true,
+          "isExtension": false,
+          "variableIds": [
+            "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
+            "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
+            "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
+            "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310"
+          ]
+        },
         "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526": {
           "defaultModeId": "28:2",
           "id": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
@@ -489,72 +555,6 @@
           "isExtension": false,
           "variableIds": [
             "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
-          ]
-        },
-        "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243": {
-          "defaultModeId": "9:7",
-          "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
-          "name": "Size",
-          "remote": true,
-          "modes": [
-            {
-              "modeId": "9:7",
-              "name": "Default"
-            }
-          ],
-          "key": "ddf73292379387a92da82f20b70e3a84062cdbac",
-          "hiddenFromPublishing": true,
-          "isExtension": false,
-          "variableIds": [
-            "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
-          ]
-        },
-        "VariableCollectionId:9:11179": {
-          "defaultModeId": "9:2",
-          "id": "VariableCollectionId:9:11179",
-          "name": "Typography Primitives",
-          "remote": false,
-          "modes": [
-            {
-              "modeId": "9:2",
-              "name": "Default"
-            }
-          ],
-          "key": "89d99d6172dc461ed8f63a72fce3289031c0772d",
-          "hiddenFromPublishing": false,
-          "isExtension": false,
-          "variableIds": [
-            "VariableID:9:11199",
-            "VariableID:9:11200",
-            "VariableID:9:11201",
-            "VariableID:9:11198",
-            "VariableID:9:11197",
-            "VariableID:9:11196",
-            "VariableID:9:11195",
-            "VariableID:9:11194",
-            "VariableID:9:11193",
-            "VariableID:9:11192",
-            "VariableID:9:11191",
-            "VariableID:9:11190",
-            "VariableID:9:11189",
-            "VariableID:9:11180",
-            "VariableID:66:10200",
-            "VariableID:9:11181",
-            "VariableID:66:10201",
-            "VariableID:9:11182",
-            "VariableID:56:8551",
-            "VariableID:9:11183",
-            "VariableID:56:8552",
-            "VariableID:9:11184",
-            "VariableID:66:10202",
-            "VariableID:9:11185",
-            "VariableID:66:10203",
-            "VariableID:9:11186",
-            "VariableID:56:8553",
-            "VariableID:9:11187",
-            "VariableID:66:10204",
-            "VariableID:9:11188",
-            "VariableID:66:10208"
           ]
         }
       },
@@ -2335,74 +2335,6 @@
           "codeSyntax": {
             "WEB": "var(--sds-typography-code-font-weight)"
           }
-        },
-        "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338": {
-          "name": "Fonts/Font Sans",
-          "id": "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
-          "remote": true,
-          "key": "520df334cab4a661754635dfd314a82392808da1",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": "Geist"
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322": {
-          "name": "Size/Text Sm",
-          "id": "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
-          "remote": true,
-          "key": "18d32dc5bcd2b6371ce62be80d6e873cfed5403d",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": 14
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:d95ac742478162f2066908d221df13b199407521/117:326": {
-          "name": "Weight/Font Normal",
-          "id": "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
-          "remote": true,
-          "key": "d95ac742478162f2066908d221df13b199407521",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": 400
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310": {
-          "name": "Leading/Leading Tight",
-          "id": "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310",
-          "remote": true,
-          "key": "f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": 20
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
         },
         "VariableID:3919:36423": {
           "name": "Background/Default/Default",
@@ -6634,6 +6566,594 @@
           },
           "deletedButReferenced": true
         },
+        "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259": {
+          "name": "Stroke/Border",
+          "id": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
+          "remote": true,
+          "key": "394d05bc08ab0cf40ac4b4130446b8141106372e",
+          "variableCollectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "9:7": 1
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-size-stroke-border)"
+          }
+        },
+        "VariableID:9:11199": {
+          "name": "Family Sans",
+          "id": "VariableID:9:11199",
+          "remote": false,
+          "key": "c000ac9d2c9c4a8cfcdfad8f6f5214ddbea7b5ae",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-family-sans)"
+          }
+        },
+        "VariableID:9:11200": {
+          "name": "Family Serif",
+          "id": "VariableID:9:11200",
+          "remote": false,
+          "key": "759a405b64e9d5d55ba2e4e311238a855ca7c952",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Noto Serif"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-family-serif)"
+          }
+        },
+        "VariableID:9:11201": {
+          "name": "Family Mono",
+          "id": "VariableID:9:11201",
+          "remote": false,
+          "key": "d375ca2c249746d8da420c005e661d5b829a578b",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Roboto Mono"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-family-mono)"
+          }
+        },
+        "VariableID:9:11198": {
+          "name": "Scale 01",
+          "id": "VariableID:9:11198",
+          "remote": false,
+          "key": "9a88023f7c41a159ee67251534589fc4cfbbbbc0",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 12
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-01)"
+          }
+        },
+        "VariableID:9:11197": {
+          "name": "Scale 02",
+          "id": "VariableID:9:11197",
+          "remote": false,
+          "key": "54496ef488d57c8a403b060b95269fb1712098c0",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 14
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-02)"
+          }
+        },
+        "VariableID:9:11196": {
+          "name": "Scale 03",
+          "id": "VariableID:9:11196",
+          "remote": false,
+          "key": "3199e927a669e536b89f85a21a5ffbed09fb02e0",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 16
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-03)"
+          }
+        },
+        "VariableID:9:11195": {
+          "name": "Scale 04",
+          "id": "VariableID:9:11195",
+          "remote": false,
+          "key": "c16128bff40cdc0d7c3a941e3a32f05f1014d196",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 20
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-04)"
+          }
+        },
+        "VariableID:9:11194": {
+          "name": "Scale 05",
+          "id": "VariableID:9:11194",
+          "remote": false,
+          "key": "a6f57586341682d511b3649229b1103f1ad4fe36",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 24
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-05)"
+          }
+        },
+        "VariableID:9:11193": {
+          "name": "Scale 06",
+          "id": "VariableID:9:11193",
+          "remote": false,
+          "key": "03ed6170a55168103cac93921278fdc5103c816c",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 32
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-06)"
+          }
+        },
+        "VariableID:9:11192": {
+          "name": "Scale 07",
+          "id": "VariableID:9:11192",
+          "remote": false,
+          "key": "b8769d360060cc542b9bcf53b4c24d3a1e05822b",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 40
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-07)"
+          }
+        },
+        "VariableID:9:11191": {
+          "name": "Scale 08",
+          "id": "VariableID:9:11191",
+          "remote": false,
+          "key": "8917cd5919d1afe33cf2edbe34474880ad19cf05",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 48
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-08)"
+          }
+        },
+        "VariableID:9:11190": {
+          "name": "Scale 09",
+          "id": "VariableID:9:11190",
+          "remote": false,
+          "key": "723dd76836f6f661200eb95b07a1d32a01dce1f0",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 64
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-09)"
+          }
+        },
+        "VariableID:9:11189": {
+          "name": "Scale 10",
+          "id": "VariableID:9:11189",
+          "remote": false,
+          "key": "3d75091889b4000bc980fe33c806879ebda6496a",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 72
+          },
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-scale-10)"
+          }
+        },
+        "VariableID:9:11180": {
+          "name": "Weight Thin",
+          "id": "VariableID:9:11180",
+          "remote": false,
+          "key": "51edcf2b91547c4add20ae6a49d64f62e084dcfa",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 100
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-thin)"
+          }
+        },
+        "VariableID:66:10200": {
+          "name": "Weight Thin Italic",
+          "id": "VariableID:66:10200",
+          "remote": false,
+          "key": "a242147fdcedbda281b810cf7255357b6314c573",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Thin Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-thin-italic)"
+          }
+        },
+        "VariableID:9:11181": {
+          "name": "Weight Extra Light",
+          "id": "VariableID:9:11181",
+          "remote": false,
+          "key": "7975e142d481d438f6400cc508a666c6f060d19a",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 200
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-extra-light)"
+          }
+        },
+        "VariableID:66:10201": {
+          "name": "Weight Extralight Italic",
+          "id": "VariableID:66:10201",
+          "remote": false,
+          "key": "28738cf5de438da3ce4b78b56f5ed1a2beaedf03",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Extra Light Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-extralight-italic)"
+          }
+        },
+        "VariableID:9:11182": {
+          "name": "Weight Light",
+          "id": "VariableID:9:11182",
+          "remote": false,
+          "key": "6d7620a4367d53cc7c21686f7b60f8fcfd1af348",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 300
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-light)"
+          }
+        },
+        "VariableID:56:8551": {
+          "name": "Weight Light Italic",
+          "id": "VariableID:56:8551",
+          "remote": false,
+          "key": "c6ecf29b7a02fd355fedfc7ef26cc8dd3cc11b58",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Light Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-light-italic)"
+          }
+        },
+        "VariableID:9:11183": {
+          "name": "Weight Regular",
+          "id": "VariableID:9:11183",
+          "remote": false,
+          "key": "6a078dd8f9a7f5c8067b1b415ad2f30f77ee647a",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 400
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-regular)"
+          }
+        },
+        "VariableID:56:8552": {
+          "name": "Weight Regular Italic",
+          "id": "VariableID:56:8552",
+          "remote": false,
+          "key": "4dbc8b84297613a01b00b3d49cf77581b84c13b8",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-regular-italic)"
+          }
+        },
+        "VariableID:9:11184": {
+          "name": "Weight Medium",
+          "id": "VariableID:9:11184",
+          "remote": false,
+          "key": "d4b00891adfd3180f15896130d6524820c99eb7f",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 500
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-medium)"
+          }
+        },
+        "VariableID:66:10202": {
+          "name": "Weight Medium Italic",
+          "id": "VariableID:66:10202",
+          "remote": false,
+          "key": "b01a847b4285fdf36d5144b7bfa92bc7751f6bd6",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Medium Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-medium-italic)"
+          }
+        },
+        "VariableID:9:11185": {
+          "name": "Weight Semibold",
+          "id": "VariableID:9:11185",
+          "remote": false,
+          "key": "63d3125d4615de6505826e321a5029a354c9733f",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 600
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-semibold)"
+          }
+        },
+        "VariableID:66:10203": {
+          "name": "Weight Semibold Italic",
+          "id": "VariableID:66:10203",
+          "remote": false,
+          "key": "53cc4e52e70cf90632b650b9709dc6fd25c3e1b5",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Semi Bold Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-semibold-italic)"
+          }
+        },
+        "VariableID:9:11186": {
+          "name": "Weight Bold",
+          "id": "VariableID:9:11186",
+          "remote": false,
+          "key": "3ff69b9c96ac1d7902164411cc42eab74285adae",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 700
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-bold)"
+          }
+        },
+        "VariableID:56:8553": {
+          "name": "Weight Bold Italic",
+          "id": "VariableID:56:8553",
+          "remote": false,
+          "key": "9cd83ee5707b3fb1925b25dd69a4ab9b446a72eb",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Bold Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-bold-italic)"
+          }
+        },
+        "VariableID:9:11187": {
+          "name": "Weight Extra Bold",
+          "id": "VariableID:9:11187",
+          "remote": false,
+          "key": "1d32a7335ed95c3cd8ce9b86d74cf7868b219cf1",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 800
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-extra-bold)"
+          }
+        },
+        "VariableID:66:10204": {
+          "name": "Weight Extra Bold Italic",
+          "id": "VariableID:66:10204",
+          "remote": false,
+          "key": "1752e904be0ebc794367ed2f39b2ef4d72d7c7f7",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Extra Bold Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-extra-bold-italic)"
+          }
+        },
+        "VariableID:9:11188": {
+          "name": "Weight Black",
+          "id": "VariableID:9:11188",
+          "remote": false,
+          "key": "99223c06b2afd3c8300c1c593c91e2cd80906e79",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": 900
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-black)"
+          }
+        },
+        "VariableID:66:10208": {
+          "name": "Weight Black Italic",
+          "id": "VariableID:66:10208",
+          "remote": false,
+          "key": "98fc428d9768be46abc356e9c71c1d13215ae6de",
+          "variableCollectionId": "VariableCollectionId:9:11179",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "9:2": "Black Italic"
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-weight-black-italic)"
+          }
+        },
         "VariableID:3919:36614": {
           "name": "Brand/100",
           "id": "VariableID:3919:36614",
@@ -8834,6 +9354,74 @@
             "WEB": "var(--sds-color-pink-1000)"
           }
         },
+        "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338": {
+          "name": "Fonts/Font Sans",
+          "id": "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
+          "remote": true,
+          "key": "520df334cab4a661754635dfd314a82392808da1",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": "Geist"
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
+        "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322": {
+          "name": "Size/Text Sm",
+          "id": "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
+          "remote": true,
+          "key": "18d32dc5bcd2b6371ce62be80d6e873cfed5403d",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": 14
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
+        "VariableID:d95ac742478162f2066908d221df13b199407521/117:326": {
+          "name": "Weight/Font Normal",
+          "id": "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
+          "remote": true,
+          "key": "d95ac742478162f2066908d221df13b199407521",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": 400
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
+        "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310": {
+          "name": "Leading/Leading Tight",
+          "id": "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310",
+          "remote": true,
+          "key": "f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": 20
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
         "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528": {
           "name": "black/100",
           "id": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
@@ -8855,594 +9443,6 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {}
-        },
-        "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259": {
-          "name": "Stroke/Border",
-          "id": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
-          "remote": true,
-          "key": "394d05bc08ab0cf40ac4b4130446b8141106372e",
-          "variableCollectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "9:7": 1
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-size-stroke-border)"
-          }
-        },
-        "VariableID:9:11199": {
-          "name": "Family Sans",
-          "id": "VariableID:9:11199",
-          "remote": false,
-          "key": "c000ac9d2c9c4a8cfcdfad8f6f5214ddbea7b5ae",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-family-sans)"
-          }
-        },
-        "VariableID:9:11200": {
-          "name": "Family Serif",
-          "id": "VariableID:9:11200",
-          "remote": false,
-          "key": "759a405b64e9d5d55ba2e4e311238a855ca7c952",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Noto Serif"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-family-serif)"
-          }
-        },
-        "VariableID:9:11201": {
-          "name": "Family Mono",
-          "id": "VariableID:9:11201",
-          "remote": false,
-          "key": "d375ca2c249746d8da420c005e661d5b829a578b",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Roboto Mono"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-family-mono)"
-          }
-        },
-        "VariableID:9:11198": {
-          "name": "Scale 01",
-          "id": "VariableID:9:11198",
-          "remote": false,
-          "key": "9a88023f7c41a159ee67251534589fc4cfbbbbc0",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 12
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-01)"
-          }
-        },
-        "VariableID:9:11197": {
-          "name": "Scale 02",
-          "id": "VariableID:9:11197",
-          "remote": false,
-          "key": "54496ef488d57c8a403b060b95269fb1712098c0",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 14
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-02)"
-          }
-        },
-        "VariableID:9:11196": {
-          "name": "Scale 03",
-          "id": "VariableID:9:11196",
-          "remote": false,
-          "key": "3199e927a669e536b89f85a21a5ffbed09fb02e0",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 16
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-03)"
-          }
-        },
-        "VariableID:9:11195": {
-          "name": "Scale 04",
-          "id": "VariableID:9:11195",
-          "remote": false,
-          "key": "c16128bff40cdc0d7c3a941e3a32f05f1014d196",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 20
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-04)"
-          }
-        },
-        "VariableID:9:11194": {
-          "name": "Scale 05",
-          "id": "VariableID:9:11194",
-          "remote": false,
-          "key": "a6f57586341682d511b3649229b1103f1ad4fe36",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 24
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-05)"
-          }
-        },
-        "VariableID:9:11193": {
-          "name": "Scale 06",
-          "id": "VariableID:9:11193",
-          "remote": false,
-          "key": "03ed6170a55168103cac93921278fdc5103c816c",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 32
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-06)"
-          }
-        },
-        "VariableID:9:11192": {
-          "name": "Scale 07",
-          "id": "VariableID:9:11192",
-          "remote": false,
-          "key": "b8769d360060cc542b9bcf53b4c24d3a1e05822b",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 40
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-07)"
-          }
-        },
-        "VariableID:9:11191": {
-          "name": "Scale 08",
-          "id": "VariableID:9:11191",
-          "remote": false,
-          "key": "8917cd5919d1afe33cf2edbe34474880ad19cf05",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 48
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-08)"
-          }
-        },
-        "VariableID:9:11190": {
-          "name": "Scale 09",
-          "id": "VariableID:9:11190",
-          "remote": false,
-          "key": "723dd76836f6f661200eb95b07a1d32a01dce1f0",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 64
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-09)"
-          }
-        },
-        "VariableID:9:11189": {
-          "name": "Scale 10",
-          "id": "VariableID:9:11189",
-          "remote": false,
-          "key": "3d75091889b4000bc980fe33c806879ebda6496a",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 72
-          },
-          "scopes": [],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-scale-10)"
-          }
-        },
-        "VariableID:9:11180": {
-          "name": "Weight Thin",
-          "id": "VariableID:9:11180",
-          "remote": false,
-          "key": "51edcf2b91547c4add20ae6a49d64f62e084dcfa",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 100
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-thin)"
-          }
-        },
-        "VariableID:66:10200": {
-          "name": "Weight Thin Italic",
-          "id": "VariableID:66:10200",
-          "remote": false,
-          "key": "a242147fdcedbda281b810cf7255357b6314c573",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Thin Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-thin-italic)"
-          }
-        },
-        "VariableID:9:11181": {
-          "name": "Weight Extra Light",
-          "id": "VariableID:9:11181",
-          "remote": false,
-          "key": "7975e142d481d438f6400cc508a666c6f060d19a",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 200
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-extra-light)"
-          }
-        },
-        "VariableID:66:10201": {
-          "name": "Weight Extralight Italic",
-          "id": "VariableID:66:10201",
-          "remote": false,
-          "key": "28738cf5de438da3ce4b78b56f5ed1a2beaedf03",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Extra Light Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-extralight-italic)"
-          }
-        },
-        "VariableID:9:11182": {
-          "name": "Weight Light",
-          "id": "VariableID:9:11182",
-          "remote": false,
-          "key": "6d7620a4367d53cc7c21686f7b60f8fcfd1af348",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 300
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-light)"
-          }
-        },
-        "VariableID:56:8551": {
-          "name": "Weight Light Italic",
-          "id": "VariableID:56:8551",
-          "remote": false,
-          "key": "c6ecf29b7a02fd355fedfc7ef26cc8dd3cc11b58",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Light Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-light-italic)"
-          }
-        },
-        "VariableID:9:11183": {
-          "name": "Weight Regular",
-          "id": "VariableID:9:11183",
-          "remote": false,
-          "key": "6a078dd8f9a7f5c8067b1b415ad2f30f77ee647a",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 400
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-regular)"
-          }
-        },
-        "VariableID:56:8552": {
-          "name": "Weight Regular Italic",
-          "id": "VariableID:56:8552",
-          "remote": false,
-          "key": "4dbc8b84297613a01b00b3d49cf77581b84c13b8",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-regular-italic)"
-          }
-        },
-        "VariableID:9:11184": {
-          "name": "Weight Medium",
-          "id": "VariableID:9:11184",
-          "remote": false,
-          "key": "d4b00891adfd3180f15896130d6524820c99eb7f",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 500
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-medium)"
-          }
-        },
-        "VariableID:66:10202": {
-          "name": "Weight Medium Italic",
-          "id": "VariableID:66:10202",
-          "remote": false,
-          "key": "b01a847b4285fdf36d5144b7bfa92bc7751f6bd6",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Medium Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-medium-italic)"
-          }
-        },
-        "VariableID:9:11185": {
-          "name": "Weight Semibold",
-          "id": "VariableID:9:11185",
-          "remote": false,
-          "key": "63d3125d4615de6505826e321a5029a354c9733f",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 600
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-semibold)"
-          }
-        },
-        "VariableID:66:10203": {
-          "name": "Weight Semibold Italic",
-          "id": "VariableID:66:10203",
-          "remote": false,
-          "key": "53cc4e52e70cf90632b650b9709dc6fd25c3e1b5",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Semi Bold Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-semibold-italic)"
-          }
-        },
-        "VariableID:9:11186": {
-          "name": "Weight Bold",
-          "id": "VariableID:9:11186",
-          "remote": false,
-          "key": "3ff69b9c96ac1d7902164411cc42eab74285adae",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 700
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-bold)"
-          }
-        },
-        "VariableID:56:8553": {
-          "name": "Weight Bold Italic",
-          "id": "VariableID:56:8553",
-          "remote": false,
-          "key": "9cd83ee5707b3fb1925b25dd69a4ab9b446a72eb",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Bold Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-bold-italic)"
-          }
-        },
-        "VariableID:9:11187": {
-          "name": "Weight Extra Bold",
-          "id": "VariableID:9:11187",
-          "remote": false,
-          "key": "1d32a7335ed95c3cd8ce9b86d74cf7868b219cf1",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 800
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-extra-bold)"
-          }
-        },
-        "VariableID:66:10204": {
-          "name": "Weight Extra Bold Italic",
-          "id": "VariableID:66:10204",
-          "remote": false,
-          "key": "1752e904be0ebc794367ed2f39b2ef4d72d7c7f7",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Extra Bold Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-extra-bold-italic)"
-          }
-        },
-        "VariableID:9:11188": {
-          "name": "Weight Black",
-          "id": "VariableID:9:11188",
-          "remote": false,
-          "key": "99223c06b2afd3c8300c1c593c91e2cd80906e79",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": 900
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-black)"
-          }
-        },
-        "VariableID:66:10208": {
-          "name": "Weight Black Italic",
-          "id": "VariableID:66:10208",
-          "remote": false,
-          "key": "98fc428d9768be46abc356e9c71c1d13215ae6de",
-          "variableCollectionId": "VariableCollectionId:9:11179",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "9:2": "Black Italic"
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-weight-black-italic)"
-          }
         }
       }
     }
