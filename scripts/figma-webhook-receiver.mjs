@@ -22,6 +22,41 @@
 // ============================================================================
 
 import { createServer } from 'node:http';
+import { readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// ── Auto-load .env.local from project root ───────────────────────────────────
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '..');
+
+function loadEnvFile(filename) {
+  try {
+    const filepath = resolve(ROOT, filename);
+    const content = readFileSync(filepath, 'utf-8');
+    for (const line of content.split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eqIdx = trimmed.indexOf('=');
+      if (eqIdx === -1) continue;
+      const key = trimmed.slice(0, eqIdx).trim();
+      let val = trimmed.slice(eqIdx + 1).trim();
+      // Strip surrounding quotes
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      // Only set if not already in env (explicit env vars take precedence)
+      if (!process.env[key]) {
+        process.env[key] = val;
+      }
+    }
+  } catch {
+    // File not found — that's fine, use env vars directly
+  }
+}
+
+loadEnvFile('.env.local');
+loadEnvFile('.env');
 
 const PORT = parseInt(process.env.WEBHOOK_PORT || '4848', 10);
 const FIGMA_PASSCODE = process.env.FIGMA_WEBHOOK_PASSCODE || '';

@@ -46,6 +46,62 @@ Expected probe output:
 
 ---
 
+## Starting Local Dev — One Command
+
+Run **everything** (MCP server + web client + webhook receiver) with a single command:
+
+```bash
+npm run dev
+```
+
+This starts 3 processes in parallel with color-coded output:
+
+| Service | Port | Color |
+|---------|------|-------|
+| MCP Server | `:8787` | Blue |
+| Web Client (Next.js) | `:3000` | Green |
+| Webhook Receiver | `:4848` | Magenta |
+
+### First-Time Setup
+
+Before running `npm run dev` for the first time, create your local env file:
+
+```bash
+# 1. Copy the template
+cp .env.example .env.local
+
+# 2. Fill in your values (the file is gitignored — safe for secrets)
+#    Required:
+#      FIGMA_ACCESS_TOKEN  — Your Figma personal access token
+#      FIGMA_WEBHOOK_PASSCODE — Passcode from webhook registration
+#      GITHUB_TOKEN — GitHub PAT with repo scope
+```
+
+The webhook receiver auto-loads `.env.local` from the project root — no need to manually export variables.
+
+### What Happens When You Save in Figma
+
+With `npm run dev` running:
+
+```
+Designer saves in Figma
+  → Figma fires webhook to localhost:4848
+  → Receiver validates passcode + file key
+  → Dispatches repository_dispatch to GitHub
+  → GitHub Actions: pull → normalize → generate → build → PR → auto-merge
+  → git pull locally to get the changes
+```
+
+For **instant local updates** without waiting for the GitHub round-trip (~47s), run:
+
+```bash
+npm run figma:sync:local
+```
+
+This pulls tokens from Figma and rebuilds widgets locally in ~10 seconds.
+
+---
+
 ## Workflow A — Pull Tokens from Figma (Read-Only)
 
 **Use when**: A designer changed colors, typography, or spacing in Figma, and you want to update your code.
