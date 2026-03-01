@@ -1,0 +1,152 @@
+# ─────────────────────────────────────────────────────────────
+# Webhook Health Monitor
+# ─────────────────────────────────────────────────────────────
+# Runs daily to verify Figma webhooks are ACTIVE and the
+# webhook receiver endpoint is reachable.
+#
+# Alerts via GitHub Issues if any check fails.
+# ─────────────────────────────────────────────────────────────
+name: Webhook Health Monitor
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 06:00 UTC
+  workflow_dispatch:       # Manual trigger
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check Figma webhooks are ACTIVE
+        id: figma
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+          TEAM_ID: '1609792196781393010'
+        run: |
+          echo "Fetching webhooks for team $TEAM_ID..."
+          RESPONSE=$(curl -sS -w "\n%{http_code}" \
+            -H "X-Figma-Token: $FIGMA_ACCESS_TOKEN" \
+            "https://api.figma.com/v2/teams/$TEAM_ID/webhooks")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "::error::Figma API returned HTTP $HTTP_CODE"
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "message=Figma API returned HTTP $HTTP_CODE" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Count active webhooks
+          TOTAL=$(echo "$BODY" | jq '.webhooks | length')
+          ACTIVE=$(echo "$BODY" | jq '[.webhooks[] | select(.status == "ACTIVE")] | length')
+          INACTIVE=$(echo "$BODY" | jq '[.webhooks[] | select(.status != "ACTIVE")] | length')
+
+          echo "Total: $TOTAL, Active: $ACTIVE, Inactive: $INACTIVE"
+
+          if [ "$ACTIVE" -lt 2 ]; then
+            echo "::warning::Expected 2 active webhooks, found $ACTIVE"
+            # List webhook details
+            echo "$BODY" | jq -r '.webhooks[] | "  ID: \(.id) | Event: \(.event_type) | Status: \(.status)"'
+            echo "status=degraded" >> $GITHUB_OUTPUT
+            echo "message=Only $ACTIVE of 2 webhooks active (inactive: $INACTIVE)" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All $ACTIVE webhooks are ACTIVE"
+            echo "status=healthy" >> $GITHUB_OUTPUT
+            echo "message=All $ACTIVE webhooks healthy" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check webhook endpoint reachability
+        id: endpoint
+        env:
+          WEBHOOK_URL: ${{ vars.FIGMA_WEBHOOK_URL || '' }}
+        run: |
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "::notice::FIGMA_WEBHOOK_URL not configured — skipping endpoint check"
+            echo "status=skip" >> $GITHUB_OUTPUT
+            echo "message=FIGMA_WEBHOOK_URL not configured" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Health check GET request
+          HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" \
+            --max-time 10 \
+            "$WEBHOOK_URL")
+
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Webhook endpoint reachable (HTTP $HTTP_CODE)"
+            echo "status=healthy" >> $GITHUB_OUTPUT
+            echo "message=Endpoint reachable (HTTP $HTTP_CODE)" >> $GITHUB_OUTPUT
+          else
+            echo "::error::Webhook endpoint returned HTTP $HTTP_CODE"
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "message=Endpoint returned HTTP $HTTP_CODE" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Test GitHub dispatch connectivity
+        id: dispatch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Verify the workflow exists and is enabled
+          WORKFLOW=$(gh workflow view figma-webhook-sync.yml --json state -q '.state' 2>&1) || true
+          if [ "$WORKFLOW" = "active" ]; then
+            echo "✅ figma-webhook-sync workflow is active"
+            echo "status=healthy" >> $GITHUB_OUTPUT
+          else
+            echo "::warning::figma-webhook-sync workflow state: $WORKFLOW"
+            echo "status=degraded" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create alert issue if unhealthy
+        if: steps.figma.outputs.status == 'fail' || steps.figma.outputs.status == 'degraded' || steps.endpoint.outputs.status == 'fail'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="⚠️ Webhook Health Alert — $(date -u +%Y-%m-%d)"
+          BODY="## Webhook Health Check Failed
+
+          **Date:** $(date -u +%Y-%m-%dT%H:%M:%SZ)
+          **Run:** [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          ### Results
+
+          | Check | Status | Details |
+          |-------|--------|---------|
+          | Figma Webhooks | ${{ steps.figma.outputs.status }} | ${{ steps.figma.outputs.message }} |
+          | Endpoint | ${{ steps.endpoint.outputs.status }} | ${{ steps.endpoint.outputs.message || 'N/A' }} |
+          | Dispatch | ${{ steps.dispatch.outputs.status }} | N/A |
+
+          ### Remediation
+          1. Check Figma webhook status: \`npm run webhook:manage -- list\`
+          2. Re-register if needed: \`npm run webhook:manage -- create\`
+          3. Verify endpoint deployment is healthy
+          4. Check GitHub Actions workflow is enabled
+          "
+
+          # Check if an open alert already exists today
+          EXISTING=$(gh issue list --label "webhook-alert" --state open --json number -q '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing alert issue #$EXISTING"
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            echo "Creating new alert issue"
+            gh issue create --title "$TITLE" --body "$BODY" --label "webhook-alert,automation"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## Webhook Health Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Figma Webhooks | ${{ steps.figma.outputs.status }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Endpoint | ${{ steps.endpoint.outputs.status || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Dispatch | ${{ steps.dispatch.outputs.status }} |" >> $GITHUB_STEP_SUMMARY

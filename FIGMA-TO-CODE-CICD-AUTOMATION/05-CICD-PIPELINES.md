@@ -1,22 +1,24 @@
 # 05 — CI/CD Pipelines
 
-> All 4 GitHub Actions workflows explained step-by-step. Complete YAML reference.
+> All 5 GitHub Actions workflows explained step-by-step. Complete YAML reference.
 
 ---
 
 ## Pipeline Overview
 
-| Workflow                    | File                         | Trigger                                               | Purpose                            | Writes to Figma?     |
-| --------------------------- | ---------------------------- | ----------------------------------------------------- | ---------------------------------- | -------------------- |
-| **CI Core**                 | `ci-core.yml`                | Push to `main` + PRs                                  | Build, test, verify, drift check   | No                   |
-| **Figma Pull Variables**    | `figma-pull-variables.yml`   | Daily 03:00 UTC + manual                              | Pull → normalize → generate → PR   | No                   |
-| **Figma Push Variables**    | `figma-push-variables.yml`   | Daily 04:00 UTC + manual                              | Push CSS values → Figma            | Yes (with `--apply`) |
-| **Figma Code Connect Sync** | `figma-codeconnect-sync.yml` | Push to code-connect paths + daily 03:30 UTC + manual | Generate, verify, publish mappings | Yes (publish)        |
+| Workflow                     | File                         | Trigger                                               | Purpose                                    | Writes to Figma?     |
+| ---------------------------- | ---------------------------- | ----------------------------------------------------- | ------------------------------------------ | -------------------- |
+| **CI Core**                  | `ci-core.yml`                | Push to `main` + PRs                                  | Build, test, verify, drift check           | No                   |
+| **Figma Pull Variables**     | `figma-pull-variables.yml`   | Daily 03:00 UTC + manual                              | Pull → normalize → generate → PR           | No                   |
+| **Figma Push Variables**     | `figma-push-variables.yml`   | Daily 04:00 UTC + manual                              | Push CSS values → Figma                    | Yes (with `--apply`) |
+| **Figma Code Connect Sync**  | `figma-codeconnect-sync.yml` | Push to code-connect paths + daily 03:30 UTC + manual | Generate, verify, publish mappings         | Yes (publish)        |
+| **Figma Webhook Sync** ⚡    | `figma-webhook-sync.yml`     | Figma webhook → `repository_dispatch` + manual        | Pull + build widgets + PR + auto-merge     | No                   |
 
-### Execution Timeline (Daily Schedule)
+### Execution Timeline (Daily Schedule + Webhook)
 
 ```text
-03:00 UTC ─── Figma Pull Variables ──── Pull + normalize + generate + PR
+Real-time ─── Figma Webhook Sync ────── Webhook → pull → build → PR → auto-merge  ⚡ NEW
+03:00 UTC ─── Figma Pull Variables ──── Pull + normalize + generate + PR (safety net)
 03:30 UTC ─── Figma Code Connect Sync ─ Generate + verify + publish
 04:00 UTC ─── Figma Push Variables ──── Dry-run push (daily)
 On push  ──── CI Core ───────────────── Build + test + drift check + verify
@@ -254,16 +256,90 @@ gh variable set FIGMA_CODECONNECT_PUBLISH --body "false"
 
 ---
 
+## Workflow 5: Figma Webhook Sync ⚡
+
+**File**: `.github/workflows/figma-webhook-sync.yml`  
+**Purpose**: Real-time webhook-triggered sync. Designer saves in Figma → PR with updated tokens + rebuilt widgets in ~60 seconds. Fully automatic.
+
+### Trigger — Webhook Sync
+
+```yaml
+on:
+  repository_dispatch:
+    types:
+      - figma_file_update       # From FILE_UPDATE webhook
+      - figma_library_publish   # From LIBRARY_PUBLISH webhook
+
+  workflow_dispatch:            # Manual trigger for testing
+    inputs:
+      reason: { type: string, default: 'Manual test' }
+      auto_merge: { type: boolean, default: true }
+```
+
+### Concurrency — Webhook Sync
+
+```yaml
+concurrency:
+  group: figma-webhook-sync
+  cancel-in-progress: true    # Latest webhook wins
+```
+
+### Steps — Webhook Sync
+
+| Step                  | Command                                  | What it does                                    |
+| --------------------- | ---------------------------------------- | ----------------------------------------------- |
+| Log trigger context   | —                                        | Record event type, file key, timestamp          |
+| Validate file key     | —                                        | Reject webhooks for non-matching files          |
+| Checkout              | `actions/checkout@v4`                    | Clone repo                                      |
+| Setup Node            | `actions/setup-node@v4` (22)             | Install Node.js with npm cache                  |
+| Install dependencies  | `npm ci` (root + mcp-server + web-client) | Install all deps                               |
+| Check secrets         | —                                        | Fail early if FIGMA_ACCESS_TOKEN missing        |
+| Pull variables        | `npm run figma:pull:variables`           | Fetch from Figma API                            |
+| Normalize             | `npm run figma:normalize:variables`      | Flatten, resolve modes                          |
+| Generate CSS          | `npm run figma:generate:tokens`          | Produce light + dark token files                |
+| Sync tokens           | `npm run tokens:sync`                    | Mirror to web-client/                           |
+| **Build widgets**     | `npm --prefix mcp-server run build`      | Vite rebuild all 12 widgets *(unique to this workflow)* |
+| Verify                | `npm run figma:verify`                   | 5-check validation suite                        |
+| Diff summary          | `git add -A && git diff --cached`         | Stage all + detect actual changes               |
+| **Create PR**         | `peter-evans/create-pull-request@v6`     | Open/update PR on `codex/figma-webhook-sync`    |
+| **Auto-merge**        | `gh pr merge --auto --squash`            | Squash-merge when CI passes                     |
+| No changes summary    | —                                        | Log success if tokens already match             |
+
+### Key Differences from Workflow 2 (Pull Variables)
+
+| Aspect | Pull Variables (Workflow 2) | Webhook Sync (Workflow 5) |
+|--------|---------------------------|--------------------------|
+| Trigger | Daily cron + manual | Figma webhook + manual |
+| Widget rebuild | ❌ Not included | ✅ Rebuilds all 12 widgets |
+| Auto-merge | ❌ Manual review | ✅ Auto-squash-merge |
+| Concurrency | None | Cancel-in-progress |
+| Branch | `codex/figma-pull-variables` | `codex/figma-webhook-sync` |
+| Diff detection | Standard `add-paths` | Staged `git add -A` + `--cached` |
+
+### Infrastructure Required
+
+| Component | Purpose | Setup |
+|-----------|---------|-------|
+| Webhook receiver | Converts Figma webhooks → GitHub dispatch | `scripts/figma-webhook-receiver.mjs` |
+| Figma webhooks | Fire on file save / library publish | Created via `scripts/figma-webhook-manage.mjs` |
+| GitHub PAT | Receiver needs `repo` scope to dispatch | Fine-grained PAT |
+| Auto-merge | Must be enabled on the repository | `gh api repos/OWNER/REPO -X PATCH -f allow_auto_merge=true` |
+
+See [10-WEBHOOK-SETUP.md](./10-WEBHOOK-SETUP.md) for webhook receiver deployment and [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md) for the complete production guide.
+
+---
+
 ## Artifact Downloads
 
 Every workflow uploads artifacts that can be downloaded from the GitHub Actions run page:
 
-| Workflow          | Artifact Name                 | Contents                                             |
-| ----------------- | ----------------------------- | ---------------------------------------------------- |
-| CI Core           | `figma-verify-artifacts`      | Verification JSON + MD, probe reports                |
-| Pull Variables    | `figma-pull-artifacts`        | Raw variables, normalized, IDs, verification reports |
-| Push Variables    | `figma-push-artifacts`        | Probe report, push report, verification reports      |
-| Code Connect Sync | `figma-codeconnect-artifacts` | Generated mappings, publish report                   |
+| Workflow           | Artifact Name                 | Contents                                             |
+| ------------------ | ----------------------------- | ---------------------------------------------------- |
+| CI Core            | `figma-verify-artifacts`      | Verification JSON + MD, probe reports                |
+| Pull Variables     | `figma-pull-artifacts`        | Raw variables, normalized, IDs, verification reports |
+| Push Variables     | `figma-push-artifacts`        | Probe report, push report, verification reports      |
+| Code Connect Sync  | `figma-codeconnect-artifacts` | Generated mappings, publish report                   |
+| Webhook Sync       | *(no artifact upload)*        | Changes captured in PR diff                          |
 
 ### Download via CLI
 
@@ -281,11 +357,11 @@ gh run download <RUN_ID>
 
 ### Secrets (Repository level)
 
-| Secret               | Example                  | Used by             |
-| -------------------- | ------------------------ | ------------------- |
-| `FIGMA_ACCESS_TOKEN` | `figd_...`               | All Figma workflows |
-| `FIGMA_FILE_KEY`     | `dbPjFeLfAFp8Sz9YGPs0CZ` | All Figma workflows |
-| `FIGMA_REGION`       | `us-east-1`              | All Figma workflows |
+| Secret               | Example                  | Used by              |
+| -------------------- | ------------------------ | -------------------- |
+| `FIGMA_ACCESS_TOKEN` | `figd_...`               | All Figma workflows  |
+| `FIGMA_FILE_KEY`     | `dbPjFeLfAFp8Sz9YGPs0CZ` | All Figma workflows  |
+| `FIGMA_REGION`       | `us`                     | All Figma workflows  |
 
 ### Variables (Repository level)
 
@@ -299,6 +375,12 @@ gh run download <RUN_ID>
 | ------------- | -------------------- | --------------------------------- |
 | `figma-write` | Same 3 Figma secrets | Push Variables, Code Connect Sync |
 
+### Repository Settings
+
+| Setting | Value | Required by |
+|---------|-------|------------|
+| `allow_auto_merge` | `true` | Webhook Sync auto-merge |
+
 ---
 
 ## Monitoring
@@ -311,7 +393,7 @@ gh run list --limit 10
 
 # Specific workflow
 gh run list --workflow "CI Core" --limit 5
-gh run list --workflow "Figma Pull Variables" --limit 5
+gh run list --workflow "Figma Webhook Sync" --limit 5
 
 # View a failed run's logs
 gh run view <RUN_ID> --log-failed
@@ -322,7 +404,7 @@ gh run view <RUN_ID> --log-failed
 Go to **GitHub → Settings → Notifications** and enable email alerts for:
 
 - Workflow failures
-- Pull request creation (for automated PRs from the pull workflow)
+- Pull request creation (for automated PRs)
 
 ---
 

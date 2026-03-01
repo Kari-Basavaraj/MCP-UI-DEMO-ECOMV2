@@ -13,7 +13,7 @@ A complete, production-tested CI/CD pipeline that:
 - **Syncs** Code Connect metadata so Figma Dev Mode shows live code snippets
 - **Automates** everything via GitHub Actions with rollback, drift detection, and canary controls
 
-**Stack**: Node.js 22 · ESM Scripts · Figma REST API · GitHub Actions · CSS Custom Properties
+**Stack**: Node.js 22 · ESM Scripts · Figma REST API · GitHub Actions · Figma Webhooks · CSS Custom Properties
 
 ---
 
@@ -65,6 +65,9 @@ npm run figma:verify         # Verify everything works
 | [07](./07-TROUBLESHOOTING.md) | **Troubleshooting** | 15+ error scenarios with fixes |
 | [08](./08-CONFIGURATION-REFERENCE.md) | **Configuration** | Every config file, key, and value documented |
 | [09](./09-SAFETY-PATTERNS.md) | **Safety Patterns** | All 11 guards that prevent accidental damage |
+| [10](./10-WEBHOOK-SETUP.md) | **Webhook Setup** | Real-time webhook-triggered sync: Figma save → PR in seconds |
+| [11](./11-MANUAL-DEVELOPER-GUIDE.md) | **Manual Developer Guide** | Step-by-step local workflow — no deployment required |
+| [12](./12-PRODUCTION-AUTOMATION.md) | **Production Automation** | Zero-touch deployed pipeline: webhook → PR → auto-merge |
 
 ---
 
@@ -80,6 +83,23 @@ npm run figma:verify         # Verify everything works
 | `npm run figma:probe` | Test API capabilities, recommend route |
 | `npm run tokens:sync` | Copy tokens mcp-server → web-client |
 | `npm run tokens:check` | Check for token drift between apps |
+| `npm run webhook:start` | Start local webhook receiver (port 4848) |
+| `npm run webhook:manage -- list` | List registered Figma webhooks |
+| `npm run webhook:manage -- create` | Register new Figma webhooks |
+| `npm run webhook:test` | Send test payload to local receiver |
+
+---
+
+## Two Modes of Operation
+
+This pipeline supports **both** manual and fully-automated workflows:
+
+| Mode | Guide | Who it's for |
+|------|-------|--------------|
+| **Manual** | [11-MANUAL-DEVELOPER-GUIDE.md](./11-MANUAL-DEVELOPER-GUIDE.md) | Developers who want to run syncs locally, review diffs before committing, or don't have deployment infrastructure. No server needed. |
+| **Production Automation** | [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md) | Teams wanting zero-touch automation: Figma save → webhook → GitHub Actions → PR → auto-merge. Requires deploying the web-client (e.g. Vercel). |
+
+Both modes use the same underlying scripts and safety guards. Start with Manual to learn the pipeline, graduate to Production when ready.
 
 ---
 
@@ -112,6 +132,8 @@ Details: [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md)
 3. **Something broke?** → [07-TROUBLESHOOTING.md](./07-TROUBLESHOOTING.md)
 4. **Adding a new component?** → [06-CODE-CONNECT.md](./06-CODE-CONNECT.md)
 5. **Understanding token flow?** → [03-FIGMA-TO-CODE.md](./03-FIGMA-TO-CODE.md) then [04-CODE-TO-FIGMA.md](./04-CODE-TO-FIGMA.md)
+6. **Want manual control?** → [11-MANUAL-DEVELOPER-GUIDE.md](./11-MANUAL-DEVELOPER-GUIDE.md)
+7. **Going full automation?** → [10-WEBHOOK-SETUP.md](./10-WEBHOOK-SETUP.md) then [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md)
 
 ---
 

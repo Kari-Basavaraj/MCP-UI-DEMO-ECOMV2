@@ -1,18 +1,10 @@
 # ============================================================================
-# Figma Webhook → Auto-Sync
+# Figma Webhook → Auto-Sync (Production)
 # ============================================================================
-# Triggered by a Figma webhook via GitHub repository_dispatch.
-# When a designer changes variables in Figma, this workflow:
-#   1. Pulls the latest variables from Figma API
-#   2. Generates CSS token files
-#   3. Rebuilds all 12 widgets
-#   4. Opens a PR with the changes
+# Fully automated: Figma save → webhook → GitHub dispatch → this workflow
+#   → pull tokens → generate CSS → rebuild widgets → PR → auto-merge
 #
-# Trigger chain:
-#   Figma file_update webhook
-#     → webhook receiver (Cloudflare Worker / Vercel Edge / local)
-#       → GitHub API: POST /repos/{owner}/{repo}/dispatches
-#         → this workflow
+# Zero manual steps. Concurrency-safe. Self-healing.
 # ============================================================================
 
 name: Figma Webhook Sync
@@ -23,7 +15,6 @@ on:
       - figma_file_update
       - figma_library_publish
 
-  # Also allow manual trigger for testing
   workflow_dispatch:
     inputs:
       reason:
@@ -31,6 +22,16 @@ on:
         required: false
         default: 'Manual test'
         type: string
+      auto_merge:
+        description: 'Auto-merge the PR if checks pass'
+        required: false
+        default: true
+        type: boolean
+
+# Prevent concurrent sync runs — latest wins
+concurrency:
+  group: figma-webhook-sync
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -136,9 +137,11 @@ jobs:
 
       # ── Create PR ──────────────────────────────────────────────
       - name: Create PR for token changes
+        id: pr
         if: steps.diff.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: |
             chore(figma): auto-sync variables from webhook
 
@@ -154,6 +157,7 @@ jobs:
 
             **Trigger:** `${{ github.event.action || inputs.reason || 'manual' }}`
             **Changed files:** ${{ steps.diff.outputs.changed_files }}
+            **Request ID:** `${{ github.event.client_payload.request_id || 'N/A' }}`
 
             ### Pipeline executed:
             1. ✅ Pull variables from Figma API
@@ -163,14 +167,23 @@ jobs:
             5. ✅ Rebuild all 12 widgets
             6. ✅ Verify pipeline
 
-            ### Review checklist:
-            - [ ] Token changes look correct
-            - [ ] Widget builds are healthy
-            - [ ] No unintended color/spacing regressions
+            > This PR was created automatically and will auto-merge when CI passes.
           labels: |
             automation
             figma
             webhook
+
+      # ── Auto-merge ─────────────────────────────────────────────
+      - name: Enable auto-merge
+        if: steps.pr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Enabling auto-merge for PR #${{ steps.pr.outputs.pull-request-number }}..."
+          gh pr merge "${{ steps.pr.outputs.pull-request-number }}" \
+            --auto --squash \
+            --subject "chore(figma): auto-sync variables from Figma webhook" || \
+          echo "::warning::Auto-merge not available — enable branch protection + require status checks to use auto-merge. PR was created successfully."
 
       - name: No changes summary
         if: steps.diff.outputs.has_changes == 'false'

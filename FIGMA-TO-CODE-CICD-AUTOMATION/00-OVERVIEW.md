@@ -12,7 +12,7 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 
 | Direction | What happens | When |
 | --- | --- | --- |
-| **Figma → Code** | A designer changes a color, spacing value, or typography token in Figma. CI detects the change, pulls variables, normalizes them, generates canonical CSS custom properties, mirrors them across workspaces, and opens a PR. | Nightly schedule or manual trigger |
+| **Figma → Code** | A designer changes a color, spacing value, or typography token in Figma. CI detects the change, pulls variables, normalizes them, generates canonical CSS custom properties, mirrors them across workspaces, and opens a PR. | Nightly schedule, manual trigger, or **real-time via Figma webhooks** |
 | **Code → Figma** | An engineer edits a CSS token file directly. CI reads the diff, converts CSS values back to Figma's Variable format, takes a rollback snapshot, and pushes the update to the Figma file via the REST API. | Manual trigger with `--apply` flag |
 
 ---
@@ -32,6 +32,8 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 | [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) | Every config file, key, and value documented |
 | [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) | All 11 safety guards and how they protect production |
 | [10-WEBHOOK-SETUP.md](./10-WEBHOOK-SETUP.md) | Real-time webhook-triggered sync: Figma save → PR in seconds |
+| [11-MANUAL-DEVELOPER-GUIDE.md](./11-MANUAL-DEVELOPER-GUIDE.md) | Step-by-step manual local workflow — no deployment required |
+| [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md) | Zero-touch deployed pipeline: webhook → PR → auto-merge |
 | [scripts/setup.sh](./scripts/setup.sh) | One-click bootstrap for new team members |
 | [README.md](./README.md) | Quick-start for engineers who just want to get going |
 
@@ -137,7 +139,9 @@ The route system lets teams ramp up safely:
 | **DevOps engineer** needs to configure CI | [05-CICD-PIPELINES.md](./05-CICD-PIPELINES.md) → [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) |
 | **Team lead** evaluating safety | [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) |
 | **Debugging a CI failure** | [07-TROUBLESHOOTING.md](./07-TROUBLESHOOTING.md) |
+| **Want manual mode** (no deploy) | [11-MANUAL-DEVELOPER-GUIDE.md](./11-MANUAL-DEVELOPER-GUIDE.md) |
+| **Full production automation** | [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md) |
 
 ---
 
-Last updated: 2026-02-28
+Last updated: 2026-03-01
