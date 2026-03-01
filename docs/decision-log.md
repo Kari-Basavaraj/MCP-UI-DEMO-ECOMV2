@@ -33,6 +33,16 @@ Tracks architecture and implementation decisions so changes remain reversible, a
 
 ---
 
+## [2026-03-01] Expand Code Connect to Light and Dark Widget Sections
+
+- Status: Accepted
+- Context: Only the Code-Match section (3036:15014) had Code Connect bindings. The Light (3036:15728) and Dark (3036:15729) composition sections contained FRAMEs that could not be published.
+- Decision: Promoted all 20 remaining FRAMEs to COMPONENTs via Figma Plugin API (`figma_execute`), created 24 new `.figma.tsx` connector files (12 Light + 12 Dark), updated `mappings.source.json`, and published all 36 connectors.
+- Rationale: Dev Mode should show code snippets regardless of which theme section a designer is inspecting.
+- Impact: Designers now see widget code examples on all 36 components across 3 sections. `figma.config.json` excludes `Icons.figma.tsx` and `Library.figma.tsx` which have unresolvable node IDs.
+- Rollback: Run `npx @figma/code-connect connect unpublish --config figma/figma.config.json` for the Light/Dark node IDs. Delete `figma/code-connect/components/light/` and `dark/` directories. Remove the 24 Light/Dark entries from `mappings.source.json`.
+- Related: `figma/code-connect/components/light/*.figma.tsx`, `figma/code-connect/components/dark/*.figma.tsx`, `figma/code-connect/mappings.source.json`, `figma/figma.config.json`.
+
 ## [2026-02-28] Adopt Hybrid Figma CI/CD Route With Probe-Gated Writes
 
 - Status: Accepted

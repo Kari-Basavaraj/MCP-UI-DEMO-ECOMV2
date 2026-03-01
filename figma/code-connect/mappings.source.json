@@ -85,6 +85,176 @@
       "label": "HTML",
       "nodeId": "5007:4614",
       "source": "mcp-server/widgets/review-rating.html"
+    },
+
+    {
+      "id": "light-product-grid",
+      "componentName": "ProductGridWidget",
+      "label": "Light",
+      "nodeId": "5014:1624",
+      "source": "mcp-server/widgets/product-grid.html"
+    },
+    {
+      "id": "light-product-card",
+      "componentName": "ProductCardWidget",
+      "label": "Light",
+      "nodeId": "5014:1623",
+      "source": "mcp-server/widgets/product-card.html"
+    },
+    {
+      "id": "light-product-detail",
+      "componentName": "ProductDetailWidget",
+      "label": "Light",
+      "nodeId": "5014:1625",
+      "source": "mcp-server/widgets/product-detail.html"
+    },
+    {
+      "id": "light-cart-view",
+      "componentName": "CartViewWidget",
+      "label": "Light",
+      "nodeId": "5014:1626",
+      "source": "mcp-server/widgets/cart-view.html"
+    },
+    {
+      "id": "light-cart-summary",
+      "componentName": "CartSummaryWidget",
+      "label": "Light",
+      "nodeId": "5014:1629",
+      "source": "mcp-server/widgets/cart-summary.html"
+    },
+    {
+      "id": "light-search-bar",
+      "componentName": "SearchBarWidget",
+      "label": "Light",
+      "nodeId": "5014:1632",
+      "source": "mcp-server/widgets/search-bar.html"
+    },
+    {
+      "id": "light-category-filter",
+      "componentName": "CategoryFilterWidget",
+      "label": "Light",
+      "nodeId": "5014:1633",
+      "source": "mcp-server/widgets/category-filter.html"
+    },
+    {
+      "id": "light-checkout-form",
+      "componentName": "CheckoutFormWidget",
+      "label": "Light",
+      "nodeId": "5014:1634",
+      "source": "mcp-server/widgets/checkout-form.html"
+    },
+    {
+      "id": "light-price-tag",
+      "componentName": "PriceTagWidget",
+      "label": "Light",
+      "nodeId": "5014:1637",
+      "source": "mcp-server/widgets/price-tag.html"
+    },
+    {
+      "id": "light-review-rating",
+      "componentName": "ReviewRatingWidget",
+      "label": "Light",
+      "nodeId": "5014:1638",
+      "source": "mcp-server/widgets/review-rating.html"
+    },
+    {
+      "id": "light-order-confirmation",
+      "componentName": "OrderConfirmationWidget",
+      "label": "Light",
+      "nodeId": "5014:1639",
+      "source": "mcp-server/widgets/order-confirmation.html"
+    },
+    {
+      "id": "light-wishlist",
+      "componentName": "WishlistWidget",
+      "label": "Light",
+      "nodeId": "5014:1640",
+      "source": "mcp-server/widgets/wishlist.html"
+    },
+
+    {
+      "id": "dark-product-grid",
+      "componentName": "ProductGridWidget",
+      "label": "Dark",
+      "nodeId": "5014:1642",
+      "source": "mcp-server/widgets/product-grid.html"
+    },
+    {
+      "id": "dark-product-card",
+      "componentName": "ProductCardWidget",
+      "label": "Dark",
+      "nodeId": "5014:1641",
+      "source": "mcp-server/widgets/product-card.html"
+    },
+    {
+      "id": "dark-product-detail",
+      "componentName": "ProductDetailWidget",
+      "label": "Dark",
+      "nodeId": "5014:1658",
+      "source": "mcp-server/widgets/product-detail.html"
+    },
+    {
+      "id": "dark-cart-view",
+      "componentName": "CartViewWidget",
+      "label": "Dark",
+      "nodeId": "5014:1643",
+      "source": "mcp-server/widgets/cart-view.html"
+    },
+    {
+      "id": "dark-cart-summary",
+      "componentName": "CartSummaryWidget",
+      "label": "Dark",
+      "nodeId": "5014:1646",
+      "source": "mcp-server/widgets/cart-summary.html"
+    },
+    {
+      "id": "dark-search-bar",
+      "componentName": "SearchBarWidget",
+      "label": "Dark",
+      "nodeId": "5014:1649",
+      "source": "mcp-server/widgets/search-bar.html"
+    },
+    {
+      "id": "dark-category-filter",
+      "componentName": "CategoryFilterWidget",
+      "label": "Dark",
+      "nodeId": "5014:1650",
+      "source": "mcp-server/widgets/category-filter.html"
+    },
+    {
+      "id": "dark-checkout-form",
+      "componentName": "CheckoutFormWidget",
+      "label": "Dark",
+      "nodeId": "5014:1651",
+      "source": "mcp-server/widgets/checkout-form.html"
+    },
+    {
+      "id": "dark-price-tag",
+      "componentName": "PriceTagWidget",
+      "label": "Dark",
+      "nodeId": "5014:1654",
+      "source": "mcp-server/widgets/price-tag.html"
+    },
+    {
+      "id": "dark-review-rating",
+      "componentName": "ReviewRatingWidget",
+      "label": "Dark",
+      "nodeId": "5014:1655",
+      "source": "mcp-server/widgets/review-rating.html"
+    },
+    {
+      "id": "dark-order-confirmation",
+      "componentName": "OrderConfirmationWidget",
+      "label": "Dark",
+      "nodeId": "5014:1656",
+      "source": "mcp-server/widgets/order-confirmation.html"
+    },
+    {
+      "id": "dark-wishlist",
+      "componentName": "WishlistWidget",
+      "label": "Dark",
+      "nodeId": "5014:1657",
+      "source": "mcp-server/widgets/wishlist.html"
     }
   ]
 }

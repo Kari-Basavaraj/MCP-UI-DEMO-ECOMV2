@@ -67,3 +67,18 @@
 - 2026-03-01T05:34:28.116Z figma:generate:tokens ok light=3919:21 dark=3919:22 merged=7 file=dbPjFeLfAFp8Sz9YGPs0CZ
 - 2026-03-01T05:35:27.574Z figma:push:variables apply updates=0 skipped=19
 - 2026-03-01T05:37:22.377Z figma:push:variables apply updates=496 skipped=19
+- 2026-03-01T09:02:06.233Z figma:codeconnect:generate mappings=12 missing=0
+- 2026-03-01T09:02:22.249Z figma:codeconnect:verify strict=true missingRequired=0 missingSourceFiles=0 placeholderNodeIds=0
+- 2026-03-01T09:03:29.781Z figma:codeconnect:publish apply unresolved=0
+- 2026-03-01T09:04:53.836Z figma:codeconnect:generate mappings=12 missing=0
+- 2026-03-01T09:04:56.116Z figma:codeconnect:verify strict=true missingRequired=0 missingSourceFiles=0 placeholderNodeIds=0
+- 2026-03-01T09:05:18.433Z figma:codeconnect:publish apply unresolved=0
+- 2026-03-01T09:37:03.524Z figma:codeconnect:generate mappings=12 missing=0
+- 2026-03-01T09:37:12.672Z figma:codeconnect:verify strict=true missingRequired=0 missingSourceFiles=0 placeholderNodeIds=0
+- 2026-03-01T09:38:39.744Z figma:codeconnect:generate mappings=12 missing=0
+- 2026-03-01T09:38:41.665Z figma:codeconnect:verify strict=true missingRequired=0 missingSourceFiles=0 placeholderNodeIds=0
+- 2026-03-01T10:00:00.000Z figma:frame-promotion Light=7 Dark=12 CodeMatch=1 total=20 method=figma_execute
+- 2026-03-01T10:10:00.000Z figma:codeconnect:create light-connectors=12 dark-connectors=12 dir=figma/code-connect/components/{light,dark}/
+- 2026-03-01T10:15:00.000Z figma:codeconnect:mappings updated entries=36 (12 CodeMatch + 12 Light + 12 Dark)
+- 2026-03-01T10:20:00.000Z figma:config:exclude added Icons.figma.tsx Library.figma.tsx
+- 2026-03-01T10:25:00.000Z figma:codeconnect:publish apply connectors=36 validated=36 errors=0

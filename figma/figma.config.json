@@ -10,7 +10,9 @@
     "exclude": [
       "**/*.test.*",
       "**/*.spec.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/Icons.figma.tsx",
+      "**/Library.figma.tsx"
     ]
   }
 }

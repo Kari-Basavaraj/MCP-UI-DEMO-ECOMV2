@@ -449,3 +449,66 @@ Using /Users/basavarajkm/.codex/skills/pm-master-orchestrator/SKILL.md:
 - Use project MCP config `.mcp.json` (not `.cursor/mcp.json`) for Agentation server registration.
 - For browser-driven critique/self-driving flows, use available Codex browser tooling (Playwright) when `agent-browser` is unavailable.
 - Always confirm selected mode before execution; if unclear, default to **Manual**.
+
+---
+
+## 13. Code Connect — Full Light/Dark Widget Coverage (Added 2026-03-01)
+
+### Objective
+Connect every widget in all three Figma composition sections to Code Connect so devs see code snippets in Dev Mode for Light, Dark, and Code-Match themes.
+
+### What Changed
+
+#### Figma Frame → Component Promotions (via MCP Figma Console)
+20 frames were promoted to COMPONENTs using `figma_execute` with `figma.getNodeByIdAsync()`:
+- **Light section** (3036:15728): 7 frames promoted (Search Bar, Category Filter, Checkout Form, Price Tag, Review Rating, Order Confirmation, Wishlist) — 5 were already components
+- **Dark section** (3036:15729): 12 frames promoted (all widgets)
+- **Code-Match section** (3036:15014): 1 frame promoted (Product Detail) — 11 were already components
+
+Promotion preserved all children, visual properties, layout modes, padding, and spacing.
+
+#### New Connector Files
+- `figma/code-connect/components/light/*.figma.tsx` — 12 files (one per widget)
+- `figma/code-connect/components/dark/*.figma.tsx` — 12 files (one per widget)
+
+Each connector uses same `example()` JSX as the Code-Match connectors but points to the section-specific Figma component node IDs.
+
+#### Updated Files
+- `figma/code-connect/mappings.source.json` — added 24 new entries (12 Light + 12 Dark) with labels `"Light"` and `"Dark"`
+- `figma/figma.config.json` — added `**/Icons.figma.tsx` and `**/Library.figma.tsx` to exclude list (contain invalid non-component node IDs from prior inventory-based generation)
+
+### Node ID Reference
+
+| Widget | Code-Match | Light | Dark |
+|--------|-----------|-------|------|
+| Product Card | 5007:4605 | 5014:1623 | 5014:1641 |
+| Product Grid | 5007:4606 | 5014:1624 | 5014:1642 |
+| Product Detail | 5014:1659 | 5014:1625 | 5014:1658 |
+| Cart View | 5007:4608 | 5014:1626 | 5014:1643 |
+| Cart Summary | 5007:4609 | 5014:1629 | 5014:1646 |
+| Search Bar | 5007:4610 | 5014:1632 | 5014:1649 |
+| Category Filter | 5007:4611 | 5014:1633 | 5014:1650 |
+| Checkout Form | 5007:4612 | 5014:1634 | 5014:1651 |
+| Price Tag | 5007:4613 | 5014:1637 | 5014:1654 |
+| Review Rating | 5007:4614 | 5014:1638 | 5014:1655 |
+| Order Confirmation | 5007:4615 | 5014:1639 | 5014:1656 |
+| Wishlist | 5007:4667 | 5014:1640 | 5014:1657 |
+
+### Scaffolding Added (Earlier in Session)
+- `web-client/components/icons/Icon.tsx` + `index.ts` — lucide-react wrapper for icon Code Connect bindings
+- `web-client/components/primitives/FigmaStub.tsx` + `index.ts` — placeholder for non-widget library Code Connect bindings
+- `scripts/generate-icons-connectors.mjs` — generates `Icons.figma.tsx` from Figma inventory (currently excluded from publish due to node ID issues)
+- `scripts/generate-library-connectors.mjs` — generates `Library.figma.tsx` from inventory (currently excluded)
+- `docs/code reports/figma-components-inventory.json` — full Figma API component inventory (2064 components)
+- `docs/code reports/figma-variables-local.json` — variables endpoint snapshot
+- `docs/code reports/figma-codeconnect-publish-*.json` — publish run reports
+
+### Publish Status
+- **36 connectors published** to Figma (12 Code-Match + 12 Light + 12 Dark) — all validated, zero errors
+- Icons/Library connectors (491 total) are generated but **excluded from publish** — many Figma node IDs point to variants/nested frames, not top-level components
+
+### Known Limitations
+1. `Icons.figma.tsx` and `Library.figma.tsx` cannot be published until their referenced Figma nodes are promoted to components or the generators are updated to skip non-component nodes.
+2. Figma component promotions are local to the current Figma session — they need to be saved/published in Figma to persist for API consumers.
+
+*Last updated: 2026-03-01*
