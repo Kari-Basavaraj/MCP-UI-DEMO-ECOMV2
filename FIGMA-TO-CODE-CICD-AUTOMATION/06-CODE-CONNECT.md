@@ -8,7 +8,7 @@
 
 [Figma Code Connect](https://www.figma.com/developers/code-connect) links Figma design components to their source code implementations. When a developer selects a component in Figma's **Dev Mode**, they see the actual code that implements it — not auto-generated CSS/HTML.
 
-```
+```text
 Figma Dev Mode:
 ┌──────────────────────────────────────────┐
 │  ProductGrid (selected)                  │
@@ -32,7 +32,7 @@ Figma Dev Mode:
 
 ### File Structure
 
-```
+```text
 figma/
   figma.config.json             ← Code Connect CLI configuration
   code-connect/
@@ -56,20 +56,20 @@ figma/
 
 ### 12 Components
 
-| Component | Node ID | Source File |
-|---|---|---|
-| ProductGrid | `5007:4606` | `figma/code-connect/components/ProductGrid.figma.tsx` |
-| ProductCard | `5007:4605` | `figma/code-connect/components/ProductCard.figma.tsx` |
-| ProductDetail | `5007:4607` | `figma/code-connect/components/ProductDetail.figma.tsx` |
-| CartView | `5007:4608` | `figma/code-connect/components/CartView.figma.tsx` |
-| CartSummary | `5007:4609` | `figma/code-connect/components/CartSummary.figma.tsx` |
-| SearchBar | `5007:4610` | `figma/code-connect/components/SearchBar.figma.tsx` |
-| CategoryFilter | `5007:4611` | `figma/code-connect/components/CategoryFilter.figma.tsx` |
-| CheckoutForm | `5007:4612` | `figma/code-connect/components/CheckoutForm.figma.tsx` |
-| PriceTag | `5007:4613` | `figma/code-connect/components/PriceTag.figma.tsx` |
-| ReviewRating | `5007:4614` | `figma/code-connect/components/ReviewRating.figma.tsx` |
+| Component         | Node ID     | Source File                                                 |
+| ----------------- | ----------- | ----------------------------------------------------------- |
+| ProductGrid       | `5007:4606` | `figma/code-connect/components/ProductGrid.figma.tsx`       |
+| ProductCard       | `5007:4605` | `figma/code-connect/components/ProductCard.figma.tsx`       |
+| ProductDetail     | `5007:4607` | `figma/code-connect/components/ProductDetail.figma.tsx`     |
+| CartView          | `5007:4608` | `figma/code-connect/components/CartView.figma.tsx`          |
+| CartSummary       | `5007:4609` | `figma/code-connect/components/CartSummary.figma.tsx`       |
+| SearchBar         | `5007:4610` | `figma/code-connect/components/SearchBar.figma.tsx`         |
+| CategoryFilter    | `5007:4611` | `figma/code-connect/components/CategoryFilter.figma.tsx`    |
+| CheckoutForm      | `5007:4612` | `figma/code-connect/components/CheckoutForm.figma.tsx`      |
+| PriceTag          | `5007:4613` | `figma/code-connect/components/PriceTag.figma.tsx`          |
+| ReviewRating      | `5007:4614` | `figma/code-connect/components/ReviewRating.figma.tsx`      |
 | OrderConfirmation | `5007:4615` | `figma/code-connect/components/OrderConfirmation.figma.tsx` |
-| Wishlist | `5007:4667` | `figma/code-connect/components/Wishlist.figma.tsx` |
+| Wishlist          | `5007:4667` | `figma/code-connect/components/Wishlist.figma.tsx`          |
 
 ---
 
@@ -91,13 +91,13 @@ figma.connect(
         onViewDetails={handleViewDetails}
       />
     ),
-  }
+  },
 );
 ```
 
 ### Anatomy of the URL
 
-```
+```text
 https://www.figma.com/design/{FILE_KEY}/{FILE_NAME}?node-id={NODE_ID}
                               ▲                              ▲
                               │                              │
@@ -122,6 +122,7 @@ https://www.figma.com/design/{FILE_KEY}/{FILE_NAME}?node-id={NODE_ID}
 **Script**: `scripts/figma-codeconnect-generate.mjs`
 
 Reads `mappings.source.json` and `required-components.json`, then generates `mappings.generated.json` with:
+
 - Resolved file key
 - Source file existence check
 - Missing component detection
@@ -133,11 +134,11 @@ Reads `mappings.source.json` and `required-components.json`, then generates `map
 
 Runs 3 checks:
 
-| Check | What it validates | Flag |
-|---|---|---|
-| Missing required | All required components have a mapping entry | Always checked |
-| Missing source files | `.figma.tsx` files exist on disk | Always checked |
-| Placeholder node IDs | No `TODO` or empty node IDs | `--strict` flag |
+| Check                | What it validates                            | Flag            |
+| -------------------- | -------------------------------------------- | --------------- |
+| Missing required     | All required components have a mapping entry | Always checked  |
+| Missing source files | `.figma.tsx` files exist on disk             | Always checked  |
+| Placeholder node IDs | No `TODO` or empty node IDs                  | `--strict` flag |
 
 ### Step 3: Publish (Optional)
 
@@ -145,6 +146,7 @@ Runs 3 checks:
 **Script**: `scripts/figma-codeconnect-publish.mjs`
 
 What it does:
+
 1. Checks `codeConnectMode` guard (must be `publish-enabled`)
 2. Checks `routes.publish` guard (must match `FIGMA_WRITE_CONTEXT`)
 3. Checks for unresolved node IDs (blocks publish if any found)
@@ -153,7 +155,7 @@ What it does:
 
 ### Safety Guards for Publish
 
-```
+```text
 codeConnectMode: "publish-enabled"    ← Must be set in sync.config.json
 routes.publish: "ci"                  ← Must match FIGMA_WRITE_CONTEXT
 No TODO node IDs                      ← All 12 components must have real node IDs
@@ -210,13 +212,8 @@ import figma from "@figma/code-connect";
 figma.connect(
   "https://www.figma.com/design/YOUR_FILE_KEY/YOUR_FILE_NAME?node-id=1234-5678",
   {
-    example: () => (
-      <MyNewWidget
-        prop1={value1}
-        prop2={value2}
-      />
-    ),
-  }
+    example: () => <MyNewWidget prop1={value1} prop2={value2} />,
+  },
 );
 ```
 
@@ -264,15 +261,15 @@ NEW_FILE_KEY = "new_key"
 
 ## Troubleshooting
 
-| Issue | Cause | Fix |
-|---|---|---|
-| `Missing generated mappings` | Didn't run generate first | `npm run figma:codeconnect:generate` |
-| `missingSourceFiles` | `.figma.tsx` file doesn't exist | Create the file |
-| `placeholderNodeIds` | Node ID is `TODO` or empty | Fill in the real node ID from Figma |
-| `Code Connect parse failed` | Invalid `.figma.tsx` syntax | Check file for syntax errors |
-| `Code Connect publish failed` | Wrong PAT scopes or file key | Re-check PAT has Code Connect write scope |
-| `Cannot publish with unresolved node IDs` | Some node IDs are still `TODO` | Update `mappings.source.json` and regenerate |
+| Issue                                     | Cause                           | Fix                                          |
+| ----------------------------------------- | ------------------------------- | -------------------------------------------- |
+| `Missing generated mappings`              | Didn't run generate first       | `npm run figma:codeconnect:generate`         |
+| `missingSourceFiles`                      | `.figma.tsx` file doesn't exist | Create the file                              |
+| `placeholderNodeIds`                      | Node ID is `TODO` or empty      | Fill in the real node ID from Figma          |
+| `Code Connect parse failed`               | Invalid `.figma.tsx` syntax     | Check file for syntax errors                 |
+| `Code Connect publish failed`             | Wrong PAT scopes or file key    | Re-check PAT has Code Connect write scope    |
+| `Cannot publish with unresolved node IDs` | Some node IDs are still `TODO`  | Update `mappings.source.json` and regenerate |
 
 ---
 
-*Next: [07-TROUBLESHOOTING.md](./07-TROUBLESHOOTING.md) — Comprehensive error resolution guide*
+_Next: [07-TROUBLESHOOTING.md](./07-TROUBLESHOOTING.md) — Comprehensive error resolution guide_

@@ -46,6 +46,7 @@ npm run tokens:check
 **Cause**: Environment variable not set.
 
 **Fix**:
+
 ```bash
 export FIGMA_ACCESS_TOKEN="figd_YOUR_TOKEN_HERE"
 ```
@@ -61,6 +62,7 @@ For CI: Ensure `FIGMA_ACCESS_TOKEN` is set in GitHub Secrets (repo level) and in
 **Cause**: PAT doesn't have the required scopes, or token has expired.
 
 **Fix**:
+
 1. Go to [Figma Settings → Personal access tokens](https://www.figma.com/settings)
 2. Check the token has **File content (read)** and **Variables (read + write)** scopes
 3. If expired, generate a new token and update both the local env and GitHub secret
@@ -74,6 +76,7 @@ For CI: Ensure `FIGMA_ACCESS_TOKEN` is set in GitHub Secrets (repo level) and in
 **Cause**: Wrong file key or file has been deleted/moved.
 
 **Fix**:
+
 ```bash
 # Verify the file key
 curl -s -H "Authorization: Bearer $FIGMA_ACCESS_TOKEN" \
@@ -81,6 +84,7 @@ curl -s -H "Authorization: Bearer $FIGMA_ACCESS_TOKEN" \
 ```
 
 If the file has a new key, update:
+
 - `figma/sync.config.json` → `primaryFileKey`
 - `FIGMA_FILE_KEY` in GitHub Secrets
 - All `.figma.tsx` URLs
@@ -94,6 +98,7 @@ If the file has a new key, update:
 **Cause**: Attempting to write remote/library variables that belong to another file.
 
 **Fix**: The library variable filter should handle this automatically. If you still see it:
+
 ```bash
 # Check which variables have '/' in their ID (remote vars)
 cat tokens/figma/.variable-ids.json | jq '[.variables | to_entries[] | select(.value.variableId | contains("/")) | .key]'
@@ -114,6 +119,7 @@ These variables are read-only because they're imported from another Figma librar
 **Cause**: `mcp-server/tokens/` and `web-client/tokens/` are out of sync. Usually happens when you regenerate tokens but forget to sync.
 
 **Fix**:
+
 ```bash
 npm run tokens:sync
 git add mcp-server/tokens/ web-client/tokens/
@@ -130,6 +136,7 @@ git push
 **Cause**: The normalized variables don't contain a mode auto-detected as "Light".
 
 **Fix**: Check what modes exist in your Figma file:
+
 ```bash
 cat tokens/figma/variables.normalized.json | jq '.modeSelection'
 cat tokens/figma/variables.normalized.json | jq '.modeMeta'
@@ -146,6 +153,7 @@ If the mode is named something other than "Light" (e.g., "Default"), the normali
 **Cause**: A token listed in `tokens/figma/token-name-map.json` as required doesn't exist in the generated CSS.
 
 **Fix**: Either:
+
 1. Add the missing variable in Figma, then re-pull
 2. Remove the token from `token-name-map.json`'s `requiredTokens` array
 3. Add a manual override in `token-name-map.json`
@@ -159,6 +167,7 @@ If the mode is named something other than "Light" (e.g., "Default"), the normali
 **Cause**: A font-weight CSS variable has `px` suffix (e.g., `--sds-typo-body-weight: 400px`).
 
 **Fix**: The `formatCssValue()` function in `figma-lib.mjs` has `shouldBeUnitless()` logic that should prevent this. If it still happens:
+
 1. Check if the variable name contains `font-weight` or ends with `-weight`
 2. The normalizer may need the name pattern added to `shouldBeUnitless()`
 
@@ -175,6 +184,7 @@ If the mode is named something other than "Light" (e.g., "Default"), the normali
 **Cause**: `sync.config.json` has `writeMode: "disabled"`.
 
 **Fix**: Change `writeMode` in `figma/sync.config.json`:
+
 ```json
 { "writeMode": "ci-enabled" }
 ```
@@ -188,6 +198,7 @@ If the mode is named something other than "Light" (e.g., "Default"), the normali
 **Cause**: `writeMode` is `office-only` but `FIGMA_WRITE_CONTEXT` is not set to `office`.
 
 **Fix**: Either:
+
 ```bash
 # Option A: Set the context
 export FIGMA_WRITE_CONTEXT=office
@@ -205,6 +216,7 @@ export FIGMA_WRITE_CONTEXT=office
 **Cause**: The canary filter limited to specific collections, but those collections have more variables than `maxVariables`.
 
 **Fix**: Either:
+
 1. Increase `maxVariables` in `sync.config.json`
 2. Disable canary: `"canary": { "enabled": false }`
 3. Narrow the collection scope
@@ -218,6 +230,7 @@ export FIGMA_WRITE_CONTEXT=office
 **Cause**: Canary filter is enabled and no variables match the allowed collection names.
 
 **Fix**: Check the collection names:
+
 ```bash
 # What collections exist?
 cat tokens/figma/variables.normalized.json | jq '[.variables[].collectionName] | unique'
@@ -239,6 +252,7 @@ Ensure the collection names in `canary.collectionNames` exactly match (case-inse
 **Symptom**: Verify or publish fails because `mappings.generated.json` doesn't exist.
 
 **Fix**:
+
 ```bash
 npm run figma:codeconnect:generate
 ```
@@ -250,7 +264,9 @@ npm run figma:codeconnect:generate
 **Symptom**: Publish blocked because some components have `TODO` or empty node IDs.
 
 **Fix**:
+
 1. Check which components have placeholder IDs:
+
 ```bash
 cat figma/code-connect/mappings.generated.json | jq '[.mappings[] | select(.nodeId == "" or .nodeId == "TODO") | .componentName]'
 ```
@@ -275,6 +291,7 @@ cat figma/code-connect/mappings.generated.json | jq '[.mappings[] | select(.node
 **Cause**: Usually PAT scope issues or network problems.
 
 **Fix**:
+
 ```bash
 # Test CLI directly
 npx -y @figma/code-connect connect parse --config figma/figma.config.json
@@ -375,14 +392,14 @@ npm run figma:codeconnect:verify
 
 ## Log Files
 
-| File | Contents | Updated By |
-|---|---|---|
-| `docs/code reports/figma-cicd-rollout-log.md` | One-line log of every pipeline operation | All scripts via `appendRolloutLog()` |
-| `docs/code reports/figma-sync-verification.json` | Last verification result | `figma:verify` |
-| `docs/code reports/figma-capability-probe.json` | Last probe result | `figma:probe` |
-| `docs/code reports/figma-push-report-*.json` | Push operation reports (timestamped) | `figma:push:variables` |
-| `docs/code reports/figma-codeconnect-publish-*.json` | Publish operation reports (timestamped) | `figma:codeconnect:publish` |
+| File                                                 | Contents                                 | Updated By                           |
+| ---------------------------------------------------- | ---------------------------------------- | ------------------------------------ |
+| `docs/code reports/figma-cicd-rollout-log.md`        | One-line log of every pipeline operation | All scripts via `appendRolloutLog()` |
+| `docs/code reports/figma-sync-verification.json`     | Last verification result                 | `figma:verify`                       |
+| `docs/code reports/figma-capability-probe.json`      | Last probe result                        | `figma:probe`                        |
+| `docs/code reports/figma-push-report-*.json`         | Push operation reports (timestamped)     | `figma:push:variables`               |
+| `docs/code reports/figma-codeconnect-publish-*.json` | Publish operation reports (timestamped)  | `figma:codeconnect:publish`          |
 
 ---
 
-*Next: [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) — Every config file, key, and value*
+_Next: [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) — Every config file, key, and value_
