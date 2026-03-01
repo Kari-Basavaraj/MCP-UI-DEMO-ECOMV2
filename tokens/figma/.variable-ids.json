@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-02-28T19:04:54.019Z",
-  "fileKey": "p3SdnPiT3DYRtOu2CZs97P",
+  "generatedAt": "2026-03-01T04:43:31.394Z",
+  "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "modeSelection": {
     "lightModeId": "3919:21",
     "lightModeName": "SDS Light",
@@ -2793,9 +2793,9 @@
       }
     },
     "--sds-size-stroke-border": {
-      "variableId": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
+      "variableId": "VariableID:197:17450",
       "figmaName": "Stroke/Border",
-      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "collectionId": "VariableCollectionId:9:11257",
       "collectionName": "Size",
       "modes": {
         "Default": "9:7"

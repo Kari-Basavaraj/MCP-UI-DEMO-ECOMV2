@@ -1,8 +1,8 @@
 # Figma CI/CD Tracker
 
 - Project: `MCP-UI-DEMO-ECOMV2`
-- Figma file: `p3SdnPiT3DYRtOu2CZs97P`
-- Figma URL: https://www.figma.com/design/p3SdnPiT3DYRtOu2CZs97P/MCPUI-DS-V2--Copy-?node-id=3002-348&t=uaJoCobwzJmzRjym-1
+- Figma file: `dbPjFeLfAFp8Sz9YGPs0CZ`
+- Figma URL: https://www.figma.com/design/dbPjFeLfAFp8Sz9YGPs0CZ/MCPUI-DS-V2--Copy-?node-id=3002-348&t=uaJoCobwzJmzRjym-1
 - Parent issue: `BAS-139` (In Progress)
 - Last updated: 2026-02-28
 

@@ -38,7 +38,7 @@
 | MCP Server | Express + `@modelcontextprotocol/sdk`, SSE transport | `mcp-server/` | 8787 |
 | Widget Build | Vite + `vite-plugin-singlefile` → self-contained HTML | `mcp-server/widgets/` (HTML), `mcp-server/src/widgets/` (TS+CSS) | — |
 | Built Widgets | Single-file HTML with all JS/CSS inlined | `mcp-server/dist/widgets/` | — |
-| Design Tokens | CSS custom properties from Figma MCPUI-DS-V1 | `mcp-server/tokens/figma-tokens-{light,dark}.css` | — |
+| Design Tokens | CSS custom properties from Figma MCPUI-DS-V2 | `mcp-server/tokens/figma-tokens-{light,dark}.css` | — |
 | Shared Catalog | 8 products, 3 categories | `shared/catalog.mjs` | — |
 
 ### How It All Connects
@@ -424,7 +424,7 @@ useEffect(() => {
 ### Token Sources
 - **Light**: `mcp-server/tokens/figma-tokens-light.css` (273 custom properties)
 - **Dark**: `mcp-server/tokens/figma-tokens-dark.css` (overrides)
-- **Origin**: Synced from Figma MCPUI-DS-V1 design system
+- **Origin**: Synced from Figma MCPUI-DS-V2 design system
 
 ### Token Categories
 - `--sds-color-background-*` — backgrounds (default, brand, danger, positive, warning, neutral)

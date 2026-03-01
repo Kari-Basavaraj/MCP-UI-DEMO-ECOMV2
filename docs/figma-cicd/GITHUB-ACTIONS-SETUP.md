@@ -20,7 +20,7 @@ Go to **Settings → Secrets and variables → Actions → Secrets**:
 | Secret | Value | Used By |
 |--------|-------|---------|
 | `FIGMA_ACCESS_TOKEN` | Figma personal access token (`figd_...`) | Pull, Push, Code Connect |
-| `FIGMA_FILE_KEY` | `p3SdnPiT3DYRtOu2CZs97P` | Pull, Push, Code Connect |
+| `FIGMA_FILE_KEY` | `dbPjFeLfAFp8Sz9YGPs0CZ` | Pull, Push, Code Connect |
 | `FIGMA_REGION` | _(blank for US, `eu` for EU)_ | Pull, Push, Code Connect |
 
 ### 2. Repository Variables

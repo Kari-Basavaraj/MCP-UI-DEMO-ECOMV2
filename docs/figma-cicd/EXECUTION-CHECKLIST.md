@@ -4,7 +4,7 @@
 
 1. Set env vars:
    - `FIGMA_ACCESS_TOKEN`
-   - `FIGMA_FILE_KEY=p3SdnPiT3DYRtOu2CZs97P`
+   - `FIGMA_FILE_KEY=dbPjFeLfAFp8Sz9YGPs0CZ`
    - `FIGMA_REGION=us-east-1`
    - `FIGMA_WRITE_CONTEXT=office`
 2. Install deps:
@@ -24,7 +24,7 @@ Expected:
 
 ## Phase C: Figma File Preparation
 
-1. Open Figma file `p3SdnPiT3DYRtOu2CZs97P`.
+1. Open Figma file `dbPjFeLfAFp8Sz9YGPs0CZ`.
 2. For each required component ID, capture real node ID.
 3. Update `figma/code-connect/mappings.source.json`.
 4. Re-run strict verify.
@@ -46,7 +46,7 @@ Expected:
 
 1. Set GitHub secrets:
    - `FIGMA_ACCESS_TOKEN`
-   - `FIGMA_FILE_KEY=p3SdnPiT3DYRtOu2CZs97P`
+   - `FIGMA_FILE_KEY=dbPjFeLfAFp8Sz9YGPs0CZ`
    - `FIGMA_REGION`
 2. Validate workflows:
    - `.github/workflows/ci-core.yml`

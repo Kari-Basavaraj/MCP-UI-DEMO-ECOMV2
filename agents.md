@@ -14,7 +14,7 @@
 | **MCP Server** | Express + @modelcontextprotocol/sdk, port 8787 | `mcp-server/` |
 | **Widget Build** | Vite + vite-plugin-singlefile → self-contained HTML | `mcp-server/widgets/` (source HTML), `mcp-server/src/widgets/` (TS + CSS) |
 | **Built Widgets** | Single-file HTML with all JS/CSS inlined | `mcp-server/dist/widgets/` |
-| **Design Tokens** | CSS custom properties from Figma MCPUI-DS-V1 | `mcp-server/tokens/figma-tokens-{light,dark}.css` |
+| **Design Tokens** | CSS custom properties from Figma MCPUI-DS-V2 | `mcp-server/tokens/figma-tokens-{light,dark}.css` |
 
 ### Widget Communication Protocol
 - Widgets use `bridge.ts` (NOT ext-apps SDK) to talk to the host

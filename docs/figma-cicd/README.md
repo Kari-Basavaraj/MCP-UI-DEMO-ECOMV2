@@ -10,7 +10,7 @@ Use this folder as the single entry point for all Figma automation work in this 
 
 ## Confirmed Primary Figma File
 
-- File key: `p3SdnPiT3DYRtOu2CZs97P`
+- File key: `dbPjFeLfAFp8Sz9YGPs0CZ`
 - Source of truth in repo: `figma/sync.config.json` (`primaryFileKey`)
 
 ## Existing Canonical Runbooks (linked)

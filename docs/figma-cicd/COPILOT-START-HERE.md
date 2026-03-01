@@ -7,7 +7,7 @@ Use this document as the first prompt context in VS Code Copilot Chat.
 Prepare the live Figma file and complete Code Connect + CI/CD readiness for this repo.
 
 - Repo: `MCP-UI-DEMO-ECOMV2`
-- Figma file key: `p3SdnPiT3DYRtOu2CZs97P`
+- Figma file key: `dbPjFeLfAFp8Sz9YGPs0CZ`
 - Primary config file: `figma/sync.config.json`
 
 ## What Copilot Should Read First

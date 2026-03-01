@@ -9,10 +9,10 @@ Connect the real Figma design system file to repository automation so that:
 2. Code Connect mappings are complete and publish-ready.
 3. CI/CD workflows run continuously with proper guardrails.
 
-Primary file key (confirmed): `p3SdnPiT3DYRtOu2CZs97P`
+Primary file key (confirmed): `dbPjFeLfAFp8Sz9YGPs0CZ`
 
 Suggested file URL:
-`https://www.figma.com/design/p3SdnPiT3DYRtOu2CZs97P/`
+`https://www.figma.com/design/dbPjFeLfAFp8Sz9YGPs0CZ/`
 
 ## What Is Already Prepared In Repo
 
@@ -56,7 +56,7 @@ Set these in your shell or `.env.local` (do not commit secrets):
 
 ```bash
 export FIGMA_ACCESS_TOKEN="<office-token>"
-export FIGMA_FILE_KEY="p3SdnPiT3DYRtOu2CZs97P"
+export FIGMA_FILE_KEY="dbPjFeLfAFp8Sz9YGPs0CZ"
 export FIGMA_REGION="us-east-1"
 export FIGMA_WRITE_CONTEXT="office"
 ```
@@ -130,7 +130,7 @@ Edit:
 For each entry:
 1. Replace `"nodeId": "TODO_NODE_ID"` with actual `"nodeId": "<x:y>"`.
 2. Keep `source` paths aligned to the actual code/widget file.
-3. Keep `fileKey` as `p3SdnPiT3DYRtOu2CZs97P`.
+3. Keep `fileKey` as `dbPjFeLfAFp8Sz9YGPs0CZ`.
 
 ## Phase 4: Validate Mappings Locally
 
@@ -218,7 +218,7 @@ npm run figma:verify
 
 Set repository secrets:
 1. `FIGMA_ACCESS_TOKEN`
-2. `FIGMA_FILE_KEY` = `p3SdnPiT3DYRtOu2CZs97P`
+2. `FIGMA_FILE_KEY` = `dbPjFeLfAFp8Sz9YGPs0CZ`
 3. `FIGMA_REGION` (if needed)
 
 Optional variable:
@@ -249,7 +249,7 @@ Use this repository's figma code connect contracts.
 Task: update figma/code-connect/mappings.source.json by replacing TODO_NODE_ID with actual node IDs from my provided table.
 Rules:
 1) do not change mapping ids/component names/source paths unless inconsistent.
-2) keep fileKey as p3SdnPiT3DYRtOu2CZs97P.
+2) keep fileKey as dbPjFeLfAFp8Sz9YGPs0CZ.
 3) after edit run npm run figma:codeconnect:generate and npm run figma:codeconnect:verify -- --strict.
 4) show a diff-style summary and list any remaining gaps.
 ```

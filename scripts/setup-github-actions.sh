@@ -12,7 +12,7 @@
 set -euo pipefail
 
 REPO="Kari-Basavaraj/MCP-UI-DEMO-ECOMV2"
-FIGMA_FILE_KEY="p3SdnPiT3DYRtOu2CZs97P"
+FIGMA_FILE_KEY="dbPjFeLfAFp8Sz9YGPs0CZ"
 
 echo "=== GitHub Actions CI/CD Setup for $REPO ==="
 echo ""
