@@ -6,84 +6,84 @@
       "id": "product-grid",
       "componentName": "ProductGridWidget",
       "label": "HTML",
-      "nodeId": "3068:13907",
+      "nodeId": "5007:4606",
       "source": "mcp-server/widgets/product-grid.html"
     },
     {
       "id": "product-card",
       "componentName": "ProductCardWidget",
       "label": "HTML",
-      "nodeId": "3068:14121",
+      "nodeId": "5007:4605",
       "source": "mcp-server/widgets/product-card.html"
     },
     {
       "id": "product-detail",
       "componentName": "ProductDetailWidget",
       "label": "HTML",
-      "nodeId": "3068:13922",
+      "nodeId": "5007:4607",
       "source": "mcp-server/widgets/product-detail.html"
     },
     {
       "id": "cart-view",
       "componentName": "CartViewWidget",
       "label": "HTML",
-      "nodeId": "3068:13935",
+      "nodeId": "5007:4608",
       "source": "mcp-server/widgets/cart-view.html"
     },
     {
       "id": "cart-summary",
       "componentName": "CartSummaryWidget",
       "label": "HTML",
-      "nodeId": "3068:13956",
+      "nodeId": "5007:4609",
       "source": "mcp-server/widgets/cart-summary.html"
     },
     {
       "id": "wishlist",
       "componentName": "WishlistWidget",
       "label": "HTML",
-      "nodeId": "3068:14087",
+      "nodeId": "5007:4667",
       "source": "mcp-server/widgets/wishlist.html"
     },
     {
       "id": "search-bar",
       "componentName": "SearchBarWidget",
       "label": "HTML",
-      "nodeId": "3068:13974",
+      "nodeId": "5007:4610",
       "source": "mcp-server/widgets/search-bar.html"
     },
     {
       "id": "category-filter",
       "componentName": "CategoryFilterWidget",
       "label": "HTML",
-      "nodeId": "3068:13992",
+      "nodeId": "5007:4611",
       "source": "mcp-server/widgets/category-filter.html"
     },
     {
       "id": "checkout-form",
       "componentName": "CheckoutFormWidget",
       "label": "HTML",
-      "nodeId": "3068:14012",
+      "nodeId": "5007:4612",
       "source": "mcp-server/widgets/checkout-form.html"
     },
     {
       "id": "order-confirmation",
       "componentName": "OrderConfirmationWidget",
       "label": "HTML",
-      "nodeId": "3068:14069",
+      "nodeId": "5007:4615",
       "source": "mcp-server/widgets/order-confirmation.html"
     },
     {
       "id": "price-tag",
       "componentName": "PriceTagWidget",
       "label": "HTML",
-      "nodeId": "3068:14037",
+      "nodeId": "5007:4613",
       "source": "mcp-server/widgets/price-tag.html"
     },
     {
       "id": "review-rating",
       "componentName": "ReviewRatingWidget",
       "label": "HTML",
-      "nodeId": "3068:14054",
+      "nodeId": "5007:4614",
       "source": "mcp-server/widgets/review-rating.html"
     }
   ]
