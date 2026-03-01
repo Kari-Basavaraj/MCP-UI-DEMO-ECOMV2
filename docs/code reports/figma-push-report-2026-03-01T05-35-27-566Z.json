@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-03-01T05:35:20.240Z",
+  "dryRun": false,
+  "applyRequested": true,
+  "writeMode": "ci-enabled",
+  "canary": {
+    "enabled": true,
+    "collectionNames": [
+      "Canary",
+      "MCP-UI Canary"
+    ],
+    "maxVariables": 25
+  },
+  "stats": {
+    "discoveredUpdates": 501,
+    "filteredUpdates": 0,
+    "skipped": 19
+  },
+  "skipped": [
+    {
+      "cssVar": "--sds-comp-card-bg",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-card-border",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-card-radius",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-card-padding",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-card-shadow",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-card-shadow-hover",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-button-radius",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-button-radius-full",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-button-height-sm",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-button-height-md",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-button-height-lg",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-input-radius",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-input-height",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-input-bg",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-input-border",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-input-border-focus",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-badge-radius",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-badge-bg",
+      "reason": "missing-variable-id"
+    },
+    {
+      "cssVar": "--sds-comp-badge-color",
+      "reason": "missing-variable-id"
+    }
+  ],
+  "sampleUpdates": [],
+  "response": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "data": {
+      "status": 200,
+      "error": false,
+      "meta": {
+        "tempIdToRealId": {}
+      }
+    }
+  }
+}

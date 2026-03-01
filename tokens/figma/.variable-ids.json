@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-01T04:43:31.394Z",
+  "generatedAt": "2026-03-01T05:34:27.131Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "modeSelection": {
     "lightModeId": "3919:21",
@@ -419,12 +419,12 @@
       }
     },
     "--sds-color-black-100": {
-      "variableId": "VariableID:9:11234",
-      "figmaName": "Black/100",
-      "collectionId": "VariableCollectionId:3919:36421",
-      "collectionName": "Color Primitives",
+      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+      "figmaName": "black/100",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
       "modes": {
-        "Value": "3919:19"
+        "Mode 1": "28:2"
       }
     },
     "--sds-color-black-1000": {

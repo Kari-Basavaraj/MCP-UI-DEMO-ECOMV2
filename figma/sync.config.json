@@ -1,12 +1,12 @@
 {
   "primaryFileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "region": "us-east-1",
-  "writeMode": "office-only",
+  "writeMode": "ci-enabled",
   "codeConnectMode": "publish-enabled",
   "routes": {
     "pull": "ci",
-    "push": "office",
-    "publish": "office"
+    "push": "ci",
+    "publish": "ci"
   },
   "canary": {
     "enabled": true,

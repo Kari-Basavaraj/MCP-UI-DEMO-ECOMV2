@@ -153,6 +153,10 @@ async function main() {
   const { updates, skipped } = buildVariableModeValues({ ids, normalized, lightVars, darkVars });
 
   let filteredUpdates = updates;
+
+  // Filter out remote/library variables (they have '/' in their variableId)
+  filteredUpdates = filteredUpdates.filter((u) => !String(u.variableId).includes('/'));
+
   if (config.canary.enabled && config.canary.collectionNames.length > 0) {
     const allowed = new Set(config.canary.collectionNames.map((name) => name.toLowerCase()));
     filteredUpdates = updates.filter((update) => allowed.has(String(update.collectionName || '').toLowerCase()));

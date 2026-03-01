@@ -1,9 +1,5 @@
 {
-  "fetchedAt": "2026-03-01T05:34:20.617Z",
-  "request": {
-    "status": 200,
-    "url": "https://api.figma.com/v1/files/dbPjFeLfAFp8Sz9YGPs0CZ/variables/local"
-  },
+  "capturedAt": "2026-03-01T05:35:23.738Z",
   "payload": {
     "status": 200,
     "error": false,
@@ -104,22 +100,6 @@
           "variableIds": [
             "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
           ]
-        },
-        "VariableCollectionId:3012:1204": {
-          "defaultModeId": "3012:0",
-          "id": "VariableCollectionId:3012:1204",
-          "name": "MCP UI Widgets",
-          "remote": false,
-          "modes": [
-            {
-              "modeId": "3012:0",
-              "name": "Mode 1"
-            }
-          ],
-          "key": "4192696f563fd3c1a2f84399ffa7a7ed66d96c94",
-          "hiddenFromPublishing": false,
-          "isExtension": false,
-          "variableIds": []
         },
         "VariableCollectionId:3919:36422": {
           "defaultModeId": "3919:21",
@@ -278,6 +258,22 @@
             "VariableID:3919:36513",
             "VariableID:3919:36533"
           ]
+        },
+        "VariableCollectionId:3012:1204": {
+          "defaultModeId": "3012:0",
+          "id": "VariableCollectionId:3012:1204",
+          "name": "MCP UI Widgets",
+          "remote": false,
+          "modes": [
+            {
+              "modeId": "3012:0",
+              "name": "Mode 1"
+            }
+          ],
+          "key": "4192696f563fd3c1a2f84399ffa7a7ed66d96c94",
+          "hiddenFromPublishing": false,
+          "isExtension": false,
+          "variableIds": []
         },
         "VariableCollectionId:3919:36421": {
           "defaultModeId": "3919:19",
