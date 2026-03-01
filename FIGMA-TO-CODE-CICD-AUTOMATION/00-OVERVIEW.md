@@ -31,6 +31,7 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 | [07-TROUBLESHOOTING.md](./07-TROUBLESHOOTING.md) | Common errors, diagnostic commands, recovery procedures |
 | [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) | Every config file, key, and value documented |
 | [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) | All 11 safety guards and how they protect production |
+| [10-WEBHOOK-SETUP.md](./10-WEBHOOK-SETUP.md) | Real-time webhook-triggered sync: Figma save → PR in seconds |
 | [scripts/setup.sh](./scripts/setup.sh) | One-click bootstrap for new team members |
 | [README.md](./README.md) | Quick-start for engineers who just want to get going |
 

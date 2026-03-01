@@ -1,0 +1,192 @@
+# ============================================================================
+# Figma Webhook → Auto-Sync
+# ============================================================================
+# Triggered by a Figma webhook via GitHub repository_dispatch.
+# When a designer changes variables in Figma, this workflow:
+#   1. Pulls the latest variables from Figma API
+#   2. Generates CSS token files
+#   3. Rebuilds all 12 widgets
+#   4. Opens a PR with the changes
+#
+# Trigger chain:
+#   Figma file_update webhook
+#     → webhook receiver (Cloudflare Worker / Vercel Edge / local)
+#       → GitHub API: POST /repos/{owner}/{repo}/dispatches
+#         → this workflow
+# ============================================================================
+
+name: Figma Webhook Sync
+
+on:
+  repository_dispatch:
+    types:
+      - figma_file_update
+      - figma_library_publish
+
+  # Also allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual trigger'
+        required: false
+        default: 'Manual test'
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  webhook-sync:
+    name: Pull → Generate → Build → PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+      FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+      FIGMA_REGION: ${{ secrets.FIGMA_REGION }}
+
+    steps:
+      - name: Log trigger context
+        run: |
+          echo "═══════════════════════════════════════════"
+          echo "  Figma Webhook Sync Triggered"
+          echo "═══════════════════════════════════════════"
+          echo "Event type: ${{ github.event.action }}"
+          echo "Triggered by: ${{ github.event.client_payload.triggered_by || inputs.reason || 'webhook' }}"
+          echo "File key: ${{ github.event.client_payload.file_key || env.FIGMA_FILE_KEY }}"
+          echo "Timestamp: ${{ github.event.client_payload.timestamp || 'N/A' }}"
+          echo "Webhook event: ${{ github.event.client_payload.webhook_event || 'N/A' }}"
+          echo "═══════════════════════════════════════════"
+
+      - name: Validate file key matches
+        run: |
+          WEBHOOK_FILE_KEY="${{ github.event.client_payload.file_key }}"
+          if [ -n "$WEBHOOK_FILE_KEY" ] && [ "$WEBHOOK_FILE_KEY" != "$FIGMA_FILE_KEY" ]; then
+            echo "::warning::Webhook file_key ($WEBHOOK_FILE_KEY) doesn't match configured FIGMA_FILE_KEY ($FIGMA_FILE_KEY). Skipping."
+            exit 0
+          fi
+          echo "File key validated (or no file_key in payload — proceeding)."
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            mcp-server/package-lock.json
+            web-client/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm --prefix mcp-server ci
+          npm --prefix web-client ci
+
+      - name: Check Figma secrets
+        run: |
+          if [ -z "$FIGMA_ACCESS_TOKEN" ]; then
+            echo "::error::FIGMA_ACCESS_TOKEN secret is not set."
+            exit 1
+          fi
+          echo "✓ Figma secrets configured"
+
+      # ── Full sync pipeline ──────────────────────────────────────
+      - name: Pull variables from Figma
+        run: npm run figma:pull:variables
+
+      - name: Normalize variables
+        run: npm run figma:normalize:variables
+
+      - name: Generate CSS token files
+        run: npm run figma:generate:tokens
+
+      - name: Sync tokens to web-client
+        run: npm run tokens:sync
+
+      - name: Rebuild all widgets
+        run: npm --prefix mcp-server run build
+
+      - name: Verify pipeline
+        run: npm run figma:verify
+
+      # ── Diff summary ───────────────────────────────────────────
+      - name: Generate diff summary
+        id: diff
+        run: |
+          CHANGED=$(git diff --name-only | wc -l | tr -d ' ')
+          echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
+
+          if [ "$CHANGED" -eq 0 ]; then
+            echo "No token changes detected — Figma variables match code."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Token changes detected in $CHANGED files:"
+            git diff --stat
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── Create PR ──────────────────────────────────────────────
+      - name: Create PR for token changes
+        if: steps.diff.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: |
+            chore(figma): auto-sync variables from webhook
+
+            Triggered by: ${{ github.event.action || 'manual' }}
+            File key: ${{ github.event.client_payload.file_key || 'N/A' }}
+          branch: codex/figma-webhook-sync
+          title: 'chore(figma): auto-sync variables from Figma webhook'
+          body: |
+            ## Figma Webhook Auto-Sync
+
+            A design change was detected in Figma and automatically synced.
+
+            **Trigger:** `${{ github.event.action || inputs.reason || 'manual' }}`
+            **Changed files:** ${{ steps.diff.outputs.changed_files }}
+
+            ### Pipeline executed:
+            1. ✅ Pull variables from Figma API
+            2. ✅ Normalize variable payload
+            3. ✅ Generate CSS token files
+            4. ✅ Sync tokens to web-client
+            5. ✅ Rebuild all 12 widgets
+            6. ✅ Verify pipeline
+
+            ### Review checklist:
+            - [ ] Token changes look correct
+            - [ ] Widget builds are healthy
+            - [ ] No unintended color/spacing regressions
+          labels: |
+            automation
+            figma
+            webhook
+          add-paths: |
+            mcp-server/tokens/figma-tokens-light.css
+            mcp-server/tokens/figma-tokens-dark.css
+            web-client/tokens/figma-tokens-light.css
+            web-client/tokens/figma-tokens-dark.css
+            tokens/figma/variables.raw.json
+            tokens/figma/variables.normalized.json
+            tokens/figma/.variable-ids.json
+            mcp-server/dist/widgets/*.html
+
+      # ── Artifacts ──────────────────────────────────────────────
+      - name: Upload sync artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-webhook-sync-artifacts
+          path: |
+            tokens/figma/variables.raw.json
+            tokens/figma/variables.normalized.json
+            docs/code reports/figma-sync-verification.json
+            docs/code reports/figma-sync-verification.md
+          if-no-files-found: ignore
+          retention-days: 14

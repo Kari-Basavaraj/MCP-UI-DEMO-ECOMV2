@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-01T05:34:27.113Z",
+  "generatedAt": "2026-03-01T13:49:35.843Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "id": "VariableCollectionId:9:11257",
       "name": "Size",
       "defaultModeId": "9:7",
       "modes": [
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "id": "VariableCollectionId:9:11257",
+      "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
       "name": "Size",
       "defaultModeId": "9:7",
       "modes": [
@@ -126,13 +126,6 @@
     }
   ],
   "modeMeta": {
-    "9:2": {
-      "modeId": "9:2",
-      "modeName": "Default",
-      "collectionId": "VariableCollectionId:9:11179",
-      "collectionName": "Typography Primitives",
-      "isDefault": true
-    },
     "9:4": {
       "modeId": "9:4",
       "modeName": "Desktop",
@@ -157,8 +150,15 @@
     "9:7": {
       "modeId": "9:7",
       "modeName": "Default",
-      "collectionId": "VariableCollectionId:9:11257",
+      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
       "collectionName": "Size",
+      "isDefault": true
+    },
+    "58:0": {
+      "modeId": "58:0",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:58:8567",
+      "collectionName": "Typography",
       "isDefault": true
     },
     "3012:0": {
@@ -166,6 +166,13 @@
       "modeName": "Mode 1",
       "collectionId": "VariableCollectionId:3012:1204",
       "collectionName": "MCP UI Widgets",
+      "isDefault": true
+    },
+    "7:3": {
+      "modeId": "7:3",
+      "modeName": "Value",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
       "isDefault": true
     },
     "3919:21": {
@@ -189,25 +196,18 @@
       "collectionName": "Color Primitives",
       "isDefault": true
     },
-    "58:0": {
-      "modeId": "58:0",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:58:8567",
-      "collectionName": "Typography",
-      "isDefault": true
-    },
-    "7:3": {
-      "modeId": "7:3",
-      "modeName": "Value",
-      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-      "collectionName": "Typography",
-      "isDefault": true
-    },
     "28:2": {
       "modeId": "28:2",
       "modeName": "Mode 1",
       "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
       "collectionName": "Colors",
+      "isDefault": true
+    },
+    "9:2": {
+      "modeId": "9:2",
+      "modeName": "Default",
+      "collectionId": "VariableCollectionId:9:11179",
+      "collectionName": "Typography Primitives",
       "isDefault": true
     }
   },
@@ -218,39 +218,6 @@
     "darkModeName": "SDS Dark"
   },
   "byMode": {
-    "9:2": {
-      "--sds-typo-family-mono": "Roboto Mono",
-      "--sds-typo-family-sans": "Inter",
-      "--sds-typo-family-serif": "Noto Serif",
-      "--sds-typo-scale-01": "12px",
-      "--sds-typo-scale-02": "14px",
-      "--sds-typo-scale-03": "16px",
-      "--sds-typo-scale-04": "20px",
-      "--sds-typo-scale-05": "24px",
-      "--sds-typo-scale-06": "32px",
-      "--sds-typo-scale-07": "40px",
-      "--sds-typo-scale-08": "48px",
-      "--sds-typo-scale-09": "64px",
-      "--sds-typo-scale-10": "72px",
-      "--sds-typo-weight-black": "900px",
-      "--sds-typo-weight-black-italic": "Black Italic",
-      "--sds-typo-weight-bold": "700px",
-      "--sds-typo-weight-bold-italic": "Bold Italic",
-      "--sds-typo-weight-extra-bold": "800px",
-      "--sds-typo-weight-extra-bold-italic": "Extra Bold Italic",
-      "--sds-typo-weight-extra-light": "200px",
-      "--sds-typo-weight-extralight-italic": "Extra Light Italic",
-      "--sds-typo-weight-light": "300px",
-      "--sds-typo-weight-light-italic": "Light Italic",
-      "--sds-typo-weight-medium": "500px",
-      "--sds-typo-weight-medium-italic": "Medium Italic",
-      "--sds-typo-weight-regular": "400px",
-      "--sds-typo-weight-regular-italic": "Italic",
-      "--sds-typo-weight-semibold": "600px",
-      "--sds-typo-weight-semibold-italic": "Semi Bold Italic",
-      "--sds-typo-weight-thin": "100px",
-      "--sds-typo-weight-thin-italic": "Thin Italic"
-    },
     "9:4": {
       "--sds-responsive-border-width": "1px",
       "--sds-responsive-device": "desktop",
@@ -326,8 +293,51 @@
       "--sds-size-stroke-border": "1px",
       "--sds-size-stroke-focus-ring": "2px"
     },
+    "58:0": {
+      "--sds-typo-body-font-family": "Inter",
+      "--sds-typo-body-font-style-italic": "Italic",
+      "--sds-typo-body-font-weight-regular": "400",
+      "--sds-typo-body-font-weight-strong": "600",
+      "--sds-typo-body-size-large": "20px",
+      "--sds-typo-body-size-medium": "16px",
+      "--sds-typo-body-size-small": "14px",
+      "--sds-typo-code-font-family": "Roboto Mono",
+      "--sds-typo-code-font-weight": "400",
+      "--sds-typo-code-size-base": "16px",
+      "--sds-typo-code-size-large": "20px",
+      "--sds-typo-code-size-small": "14px",
+      "--sds-typo-heading-font-family": "Inter",
+      "--sds-typo-heading-font-weight": "600",
+      "--sds-typo-heading-size-base": "24px",
+      "--sds-typo-heading-size-large": "32px",
+      "--sds-typo-heading-size-small": "20px",
+      "--sds-typo-subheading-font-family": "Inter",
+      "--sds-typo-subheading-font-weight": "400",
+      "--sds-typo-subheading-size-large": "24px",
+      "--sds-typo-subheading-size-medium": "20px",
+      "--sds-typo-subheading-size-small": "16px",
+      "--sds-typo-subtitle-font-family": "Inter",
+      "--sds-typo-subtitle-font-weight": "400",
+      "--sds-typo-subtitle-size-base": "32px",
+      "--sds-typo-subtitle-size-large": "40px",
+      "--sds-typo-subtitle-size-small": "24px",
+      "--sds-typo-title-hero-font-family": "Inter",
+      "--sds-typo-title-hero-font-weight": "700",
+      "--sds-typo-title-hero-size": "72px",
+      "--sds-typo-title-page-font-family": "Inter",
+      "--sds-typo-title-page-font-weight": "700",
+      "--sds-typo-title-page-size-base": "48px",
+      "--sds-typo-title-page-size-large": "64px",
+      "--sds-typo-title-page-size-small": "40px"
+    },
+    "7:3": {
+      "--sds-typo-fonts-font-sans": "Geist",
+      "--sds-typo-leading-leading-tight": "20px",
+      "--sds-typo-size-text-sm": "14px",
+      "--sds-typo-weight-font-normal": "400px"
+    },
     "3919:21": {
-      "--sds-color-background-brand-default": "#1a56db",
+      "--sds-color-background-brand-default": "#0066ff",
       "--sds-color-background-brand-hover": "#1e1e1e",
       "--sds-color-background-brand-secondary": "#e6e6e6",
       "--sds-color-background-brand-secondary-hover": "#d9d9d9",
@@ -368,7 +378,7 @@
       "--sds-color-background-warning-secondary-hover": "#ffe8a3",
       "--sds-color-background-warning-tertiary": "#fffbeb",
       "--sds-color-background-warning-tertiary-hover": "#fff1c2",
-      "--sds-color-border-brand-default": "#1a56db",
+      "--sds-color-border-brand-default": "#2c2c2c",
       "--sds-color-border-brand-secondary": "#444444",
       "--sds-color-border-brand-tertiary": "#757575",
       "--sds-color-border-danger-default": "#900b09",
@@ -390,10 +400,10 @@
       "--sds-color-border-warning-default": "#522504",
       "--sds-color-border-warning-secondary": "#975102",
       "--sds-color-border-warning-tertiary": "#bf6a02",
-      "--sds-color-icon-brand-default": "#1a56db",
+      "--sds-color-icon-brand-default": "#2c2c2c",
       "--sds-color-icon-brand-on-brand": "#f5f5f5",
       "--sds-color-icon-brand-on-brand-secondary": "#1e1e1e",
-      "--sds-color-icon-brand-on-brand-tertiary": "#1a56db",
+      "--sds-color-icon-brand-on-brand-tertiary": "#2c2c2c",
       "--sds-color-icon-brand-secondary": "#444444",
       "--sds-color-icon-brand-tertiary": "#757575",
       "--sds-color-icon-danger-default": "#900b09",
@@ -427,10 +437,10 @@
       "--sds-color-icon-warning-on-warning-tertiary": "#522504",
       "--sds-color-icon-warning-secondary": "#975102",
       "--sds-color-icon-warning-tertiary": "#bf6a02",
-      "--sds-color-text-brand-default": "#1a56db",
+      "--sds-color-text-brand-default": "#2c2c2c",
       "--sds-color-text-brand-on-brand": "#f5f5f5",
       "--sds-color-text-brand-on-brand-secondary": "#1e1e1e",
-      "--sds-color-text-brand-on-brand-tertiary": "#1a56db",
+      "--sds-color-text-brand-on-brand-tertiary": "#2c2c2c",
       "--sds-color-text-brand-secondary": "#444444",
       "--sds-color-text-brand-tertiary": "#757575",
       "--sds-color-text-danger-default": "#900b09",
@@ -633,7 +643,7 @@
       "--sds-color-brand-500": "#757575",
       "--sds-color-brand-600": "#444444",
       "--sds-color-brand-700": "#383838",
-      "--sds-color-brand-800": "#1a56db",
+      "--sds-color-brand-800": "#0066ff",
       "--sds-color-brand-900": "#1e1e1e",
       "--sds-color-gray-100": "#f5f5f5",
       "--sds-color-gray-1000": "#111111",
@@ -706,51 +716,41 @@
       "--sds-color-yellow-800": "#682d03",
       "--sds-color-yellow-900": "#522504"
     },
-    "58:0": {
-      "--sds-typo-body-font-family": "Inter",
-      "--sds-typo-body-font-style-italic": "Italic",
-      "--sds-typo-body-font-weight-regular": "400",
-      "--sds-typo-body-font-weight-strong": "600",
-      "--sds-typo-body-size-large": "20px",
-      "--sds-typo-body-size-medium": "16px",
-      "--sds-typo-body-size-small": "14px",
-      "--sds-typo-code-font-family": "Roboto Mono",
-      "--sds-typo-code-font-weight": "400",
-      "--sds-typo-code-size-base": "16px",
-      "--sds-typo-code-size-large": "20px",
-      "--sds-typo-code-size-small": "14px",
-      "--sds-typo-heading-font-family": "Inter",
-      "--sds-typo-heading-font-weight": "600",
-      "--sds-typo-heading-size-base": "24px",
-      "--sds-typo-heading-size-large": "32px",
-      "--sds-typo-heading-size-small": "20px",
-      "--sds-typo-subheading-font-family": "Inter",
-      "--sds-typo-subheading-font-weight": "400",
-      "--sds-typo-subheading-size-large": "24px",
-      "--sds-typo-subheading-size-medium": "20px",
-      "--sds-typo-subheading-size-small": "16px",
-      "--sds-typo-subtitle-font-family": "Inter",
-      "--sds-typo-subtitle-font-weight": "400",
-      "--sds-typo-subtitle-size-base": "32px",
-      "--sds-typo-subtitle-size-large": "40px",
-      "--sds-typo-subtitle-size-small": "24px",
-      "--sds-typo-title-hero-font-family": "Inter",
-      "--sds-typo-title-hero-font-weight": "700",
-      "--sds-typo-title-hero-size": "72px",
-      "--sds-typo-title-page-font-family": "Inter",
-      "--sds-typo-title-page-font-weight": "700",
-      "--sds-typo-title-page-size-base": "48px",
-      "--sds-typo-title-page-size-large": "64px",
-      "--sds-typo-title-page-size-small": "40px"
-    },
-    "7:3": {
-      "--sds-typo-fonts-font-sans": "Geist",
-      "--sds-typo-leading-leading-tight": "20px",
-      "--sds-typo-size-text-sm": "14px",
-      "--sds-typo-weight-font-normal": "400px"
-    },
     "28:2": {
       "--sds-color-black-100": "#000000"
+    },
+    "9:2": {
+      "--sds-typo-family-mono": "Roboto Mono",
+      "--sds-typo-family-sans": "Inter",
+      "--sds-typo-family-serif": "Noto Serif",
+      "--sds-typo-scale-01": "12px",
+      "--sds-typo-scale-02": "14px",
+      "--sds-typo-scale-03": "16px",
+      "--sds-typo-scale-04": "20px",
+      "--sds-typo-scale-05": "24px",
+      "--sds-typo-scale-06": "32px",
+      "--sds-typo-scale-07": "40px",
+      "--sds-typo-scale-08": "48px",
+      "--sds-typo-scale-09": "64px",
+      "--sds-typo-scale-10": "72px",
+      "--sds-typo-weight-black": "900px",
+      "--sds-typo-weight-black-italic": "Black Italic",
+      "--sds-typo-weight-bold": "700px",
+      "--sds-typo-weight-bold-italic": "Bold Italic",
+      "--sds-typo-weight-extra-bold": "800px",
+      "--sds-typo-weight-extra-bold-italic": "Extra Bold Italic",
+      "--sds-typo-weight-extra-light": "200px",
+      "--sds-typo-weight-extralight-italic": "Extra Light Italic",
+      "--sds-typo-weight-light": "300px",
+      "--sds-typo-weight-light-italic": "Light Italic",
+      "--sds-typo-weight-medium": "500px",
+      "--sds-typo-weight-medium-italic": "Medium Italic",
+      "--sds-typo-weight-regular": "400px",
+      "--sds-typo-weight-regular-italic": "Italic",
+      "--sds-typo-weight-semibold": "600px",
+      "--sds-typo-weight-semibold-italic": "Semi Bold Italic",
+      "--sds-typo-weight-thin": "100px",
+      "--sds-typo-weight-thin-italic": "Thin Italic"
     }
   },
   "variables": [
@@ -763,11 +763,10 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#1a56db",
+          "value": "#0066ff",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36428",
-            "VariableID:3919:36621"
+            "VariableID:3919:36428"
           ],
           "reason": "resolved"
         },
@@ -775,8 +774,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36428",
-            "VariableID:3919:36614"
+            "VariableID:3919:36428"
           ],
           "reason": "resolved"
         }
@@ -794,8 +792,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36431",
-            "VariableID:3919:36622"
+            "VariableID:3919:36431"
           ],
           "reason": "resolved"
         },
@@ -803,8 +800,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36431",
-            "VariableID:3919:36616"
+            "VariableID:3919:36431"
           ],
           "reason": "resolved"
         }
@@ -822,8 +818,7 @@
           "value": "#e6e6e6",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36430",
-            "VariableID:3919:36615"
+            "VariableID:3919:36430"
           ],
           "reason": "resolved"
         },
@@ -831,8 +826,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36430",
-            "VariableID:3919:36619"
+            "VariableID:3919:36430"
           ],
           "reason": "resolved"
         }
@@ -850,8 +844,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:4035:5558",
-            "VariableID:3919:36616"
+            "VariableID:4035:5558"
           ],
           "reason": "resolved"
         },
@@ -859,8 +852,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:4035:5558",
-            "VariableID:3919:36618"
+            "VariableID:4035:5558"
           ],
           "reason": "resolved"
         }
@@ -878,8 +870,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9670:11772",
-            "VariableID:3919:36614"
+            "VariableID:9670:11772"
           ],
           "reason": "resolved"
         },
@@ -887,8 +878,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9670:11772",
-            "VariableID:3919:36619"
+            "VariableID:9670:11772"
           ],
           "reason": "resolved"
         }
@@ -906,8 +896,7 @@
           "value": "#e6e6e6",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9670:12886",
-            "VariableID:3919:36615"
+            "VariableID:9670:12886"
           ],
           "reason": "resolved"
         },
@@ -915,8 +904,7 @@
           "value": "#1a56db",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9670:12886",
-            "VariableID:3919:36621"
+            "VariableID:9670:12886"
           ],
           "reason": "resolved"
         }
@@ -934,8 +922,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36443",
-            "VariableID:3919:36628"
+            "VariableID:3919:36443"
           ],
           "reason": "resolved"
         },
@@ -943,8 +930,7 @@
           "value": "#c00f0c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36443",
-            "VariableID:3919:36629"
+            "VariableID:3919:36443"
           ],
           "reason": "resolved"
         }
@@ -962,8 +948,7 @@
           "value": "#c00f0c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36446",
-            "VariableID:3919:36629"
+            "VariableID:3919:36446"
           ],
           "reason": "resolved"
         },
@@ -971,8 +956,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36446",
-            "VariableID:3919:36630"
+            "VariableID:3919:36446"
           ],
           "reason": "resolved"
         }
@@ -990,8 +974,7 @@
           "value": "#fdd3d0",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36445",
-            "VariableID:3919:36625"
+            "VariableID:3919:36445"
           ],
           "reason": "resolved"
         },
@@ -999,8 +982,7 @@
           "value": "#690807",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36445",
-            "VariableID:3919:36631"
+            "VariableID:3919:36445"
           ],
           "reason": "resolved"
         }
@@ -1018,8 +1000,7 @@
           "value": "#fcb3ad",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9909",
-            "VariableID:3919:36626"
+            "VariableID:56:9909"
           ],
           "reason": "resolved"
         },
@@ -1027,8 +1008,7 @@
           "value": "#4d0b0a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9909",
-            "VariableID:3919:36632"
+            "VariableID:56:9909"
           ],
           "reason": "resolved"
         }
@@ -1046,8 +1026,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7450",
-            "VariableID:3919:36624"
+            "VariableID:2002:7450"
           ],
           "reason": "resolved"
         },
@@ -1055,8 +1034,7 @@
           "value": "#4d0b0a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7450",
-            "VariableID:3919:36632"
+            "VariableID:2002:7450"
           ],
           "reason": "resolved"
         }
@@ -1074,8 +1052,7 @@
           "value": "#fdd3d0",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7451",
-            "VariableID:3919:36625"
+            "VariableID:2002:7451"
           ],
           "reason": "resolved"
         },
@@ -1083,8 +1060,7 @@
           "value": "#300603",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7451",
-            "VariableID:3919:36633"
+            "VariableID:2002:7451"
           ],
           "reason": "resolved"
         }
@@ -1102,8 +1078,7 @@
           "value": "#ffffff",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36423",
-            "VariableID:3919:36553"
+            "VariableID:3919:36423"
           ],
           "reason": "resolved"
         },
@@ -1111,8 +1086,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36423",
-            "VariableID:611:26732"
+            "VariableID:3919:36423"
           ],
           "reason": "resolved"
         }
@@ -1130,8 +1104,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36426",
-            "VariableID:611:26724"
+            "VariableID:3919:36426"
           ],
           "reason": "resolved"
         },
@@ -1139,8 +1112,7 @@
           "value": "#383838",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36426",
-            "VariableID:611:26730"
+            "VariableID:3919:36426"
           ],
           "reason": "resolved"
         }
@@ -1158,8 +1130,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36424",
-            "VariableID:611:26724"
+            "VariableID:3919:36424"
           ],
           "reason": "resolved"
         },
@@ -1167,8 +1138,7 @@
           "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36424",
-            "VariableID:611:26731"
+            "VariableID:3919:36424"
           ],
           "reason": "resolved"
         }
@@ -1186,8 +1156,7 @@
           "value": "#e6e6e6",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9309",
-            "VariableID:611:26725"
+            "VariableID:56:9309"
           ],
           "reason": "resolved"
         },
@@ -1195,8 +1164,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9309",
-            "VariableID:611:26732"
+            "VariableID:56:9309"
           ],
           "reason": "resolved"
         }
@@ -1214,8 +1182,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36425",
-            "VariableID:611:26726"
+            "VariableID:3919:36425"
           ],
           "reason": "resolved"
         },
@@ -1223,8 +1190,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36425",
-            "VariableID:611:26729"
+            "VariableID:3919:36425"
           ],
           "reason": "resolved"
         }
@@ -1242,8 +1208,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9310",
-            "VariableID:611:26727"
+            "VariableID:56:9310"
           ],
           "reason": "resolved"
         },
@@ -1251,8 +1216,7 @@
           "value": "#383838",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9310",
-            "VariableID:611:26730"
+            "VariableID:56:9310"
           ],
           "reason": "resolved"
         }
@@ -1270,8 +1234,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36448",
-            "VariableID:611:26726"
+            "VariableID:3919:36448"
           ],
           "reason": "resolved"
         },
@@ -1279,8 +1242,7 @@
           "value": "#383838",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36448",
-            "VariableID:611:26730"
+            "VariableID:3919:36448"
           ],
           "reason": "resolved"
         }
@@ -1298,8 +1260,7 @@
           "value": "#5a5a5a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12464",
-            "VariableID:3919:36540"
+            "VariableID:106:12464"
           ],
           "reason": "resolved"
         },
@@ -1307,8 +1268,7 @@
           "value": "#b2b2b2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12464",
-            "VariableID:3919:36537"
+            "VariableID:106:12464"
           ],
           "reason": "resolved"
         }
@@ -1326,8 +1286,7 @@
           "value": "#434343",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12465",
-            "VariableID:3919:36541"
+            "VariableID:106:12465"
           ],
           "reason": "resolved"
         },
@@ -1335,8 +1294,7 @@
           "value": "#949494",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12465",
-            "VariableID:3919:36538"
+            "VariableID:106:12465"
           ],
           "reason": "resolved"
         }
@@ -1354,8 +1312,7 @@
           "value": "#cdcdcd",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12466",
-            "VariableID:3919:36536"
+            "VariableID:106:12466"
           ],
           "reason": "resolved"
         },
@@ -1363,8 +1320,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12466",
-            "VariableID:3919:36542"
+            "VariableID:106:12466"
           ],
           "reason": "resolved"
         }
@@ -1382,8 +1338,7 @@
           "value": "#b2b2b2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12467",
-            "VariableID:3919:36537"
+            "VariableID:106:12467"
           ],
           "reason": "resolved"
         },
@@ -1391,8 +1346,7 @@
           "value": "#242424",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12467",
-            "VariableID:3919:36543"
+            "VariableID:106:12467"
           ],
           "reason": "resolved"
         }
@@ -1410,8 +1364,7 @@
           "value": "#e3e3e3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12468",
-            "VariableID:3919:36535"
+            "VariableID:106:12468"
           ],
           "reason": "resolved"
         },
@@ -1419,8 +1372,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12468",
-            "VariableID:3919:36542"
+            "VariableID:106:12468"
           ],
           "reason": "resolved"
         }
@@ -1438,8 +1390,7 @@
           "value": "#cdcdcd",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12469",
-            "VariableID:3919:36536"
+            "VariableID:106:12469"
           ],
           "reason": "resolved"
         },
@@ -1447,8 +1398,7 @@
           "value": "#242424",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12469",
-            "VariableID:3919:36543"
+            "VariableID:106:12469"
           ],
           "reason": "resolved"
         }
@@ -1466,8 +1416,7 @@
           "value": "#14ae5c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36433",
-            "VariableID:3919:36658"
+            "VariableID:3919:36433"
           ],
           "reason": "resolved"
         },
@@ -1475,8 +1424,7 @@
           "value": "#008043",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36433",
-            "VariableID:3919:36660"
+            "VariableID:3919:36433"
           ],
           "reason": "resolved"
         }
@@ -1494,8 +1442,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36436",
-            "VariableID:3919:36659"
+            "VariableID:3919:36436"
           ],
           "reason": "resolved"
         },
@@ -1503,8 +1450,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36436",
-            "VariableID:3919:36661"
+            "VariableID:3919:36436"
           ],
           "reason": "resolved"
         }
@@ -1522,8 +1468,7 @@
           "value": "#cff7d3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36435",
-            "VariableID:3919:36655"
+            "VariableID:3919:36435"
           ],
           "reason": "resolved"
         },
@@ -1531,8 +1476,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36435",
-            "VariableID:3919:36661"
+            "VariableID:3919:36435"
           ],
           "reason": "resolved"
         }
@@ -1550,8 +1494,7 @@
           "value": "#aff4c6",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9907",
-            "VariableID:3919:36656"
+            "VariableID:56:9907"
           ],
           "reason": "resolved"
         },
@@ -1559,8 +1502,7 @@
           "value": "#024023",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9907",
-            "VariableID:3919:36662"
+            "VariableID:56:9907"
           ],
           "reason": "resolved"
         }
@@ -1578,8 +1520,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7433",
-            "VariableID:3919:36654"
+            "VariableID:2002:7433"
           ],
           "reason": "resolved"
         },
@@ -1587,8 +1528,7 @@
           "value": "#024023",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7433",
-            "VariableID:3919:36662"
+            "VariableID:2002:7433"
           ],
           "reason": "resolved"
         }
@@ -1606,8 +1546,7 @@
           "value": "#cff7d3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7447",
-            "VariableID:3919:36655"
+            "VariableID:2002:7447"
           ],
           "reason": "resolved"
         },
@@ -1615,8 +1554,7 @@
           "value": "#062d1b",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7447",
-            "VariableID:3919:36663"
+            "VariableID:2002:7447"
           ],
           "reason": "resolved"
         }
@@ -1660,8 +1598,7 @@
           "value": "#fae1fa",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:72:9197",
-            "VariableID:280:16482"
+            "VariableID:72:9197"
           ],
           "reason": "resolved"
         },
@@ -1669,8 +1606,7 @@
           "value": "#8a226f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:72:9197",
-            "VariableID:280:16494"
+            "VariableID:72:9197"
           ],
           "reason": "resolved"
         }
@@ -1740,8 +1676,7 @@
           "value": "#e8b931",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36438",
-            "VariableID:3919:36647"
+            "VariableID:3919:36438"
           ],
           "reason": "resolved"
         },
@@ -1749,8 +1684,7 @@
           "value": "#e8b931",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36438",
-            "VariableID:3919:36647"
+            "VariableID:3919:36438"
           ],
           "reason": "resolved"
         }
@@ -1768,8 +1702,7 @@
           "value": "#e5a000",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36441",
-            "VariableID:3919:36648"
+            "VariableID:3919:36441"
           ],
           "reason": "resolved"
         },
@@ -1777,8 +1710,7 @@
           "value": "#e5a000",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36441",
-            "VariableID:3919:36648"
+            "VariableID:3919:36441"
           ],
           "reason": "resolved"
         }
@@ -1796,8 +1728,7 @@
           "value": "#fff1c2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36440",
-            "VariableID:3919:36645"
+            "VariableID:3919:36440"
           ],
           "reason": "resolved"
         },
@@ -1805,8 +1736,7 @@
           "value": "#682d03",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36440",
-            "VariableID:3919:36651"
+            "VariableID:3919:36440"
           ],
           "reason": "resolved"
         }
@@ -1824,8 +1754,7 @@
           "value": "#ffe8a3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9908",
-            "VariableID:3919:36646"
+            "VariableID:56:9908"
           ],
           "reason": "resolved"
         },
@@ -1833,8 +1762,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:56:9908",
-            "VariableID:3919:36652"
+            "VariableID:56:9908"
           ],
           "reason": "resolved"
         }
@@ -1852,8 +1780,7 @@
           "value": "#fffbeb",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7448",
-            "VariableID:3919:36644"
+            "VariableID:2002:7448"
           ],
           "reason": "resolved"
         },
@@ -1861,8 +1788,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7448",
-            "VariableID:3919:36652"
+            "VariableID:2002:7448"
           ],
           "reason": "resolved"
         }
@@ -1880,8 +1806,7 @@
           "value": "#fff1c2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7449",
-            "VariableID:3919:36645"
+            "VariableID:2002:7449"
           ],
           "reason": "resolved"
         },
@@ -1889,8 +1814,7 @@
           "value": "#401b01",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7449",
-            "VariableID:3919:36653"
+            "VariableID:2002:7449"
           ],
           "reason": "resolved"
         }
@@ -2283,11 +2207,10 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#1a56db",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36516",
-            "VariableID:3919:36621"
+            "VariableID:3919:36516"
           ],
           "reason": "resolved"
         },
@@ -2295,8 +2218,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36516",
-            "VariableID:3919:36614"
+            "VariableID:3919:36516"
           ],
           "reason": "resolved"
         }
@@ -2314,8 +2236,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36517",
-            "VariableID:3919:36619"
+            "VariableID:3919:36517"
           ],
           "reason": "resolved"
         },
@@ -2323,8 +2244,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36517",
-            "VariableID:3919:36616"
+            "VariableID:3919:36517"
           ],
           "reason": "resolved"
         }
@@ -2342,8 +2262,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12725",
-            "VariableID:3919:36618"
+            "VariableID:159:12725"
           ],
           "reason": "resolved"
         },
@@ -2351,8 +2270,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12725",
-            "VariableID:3919:36617"
+            "VariableID:159:12725"
           ],
           "reason": "resolved"
         }
@@ -2370,8 +2288,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36528",
-            "VariableID:3919:36630"
+            "VariableID:3919:36528"
           ],
           "reason": "resolved"
         },
@@ -2379,8 +2296,7 @@
           "value": "#fdd3d0",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36528",
-            "VariableID:3919:36625"
+            "VariableID:3919:36528"
           ],
           "reason": "resolved"
         }
@@ -2398,8 +2314,7 @@
           "value": "#c00f0c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36529",
-            "VariableID:3919:36629"
+            "VariableID:3919:36529"
           ],
           "reason": "resolved"
         },
@@ -2407,8 +2322,7 @@
           "value": "#f4776a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36529",
-            "VariableID:3919:36627"
+            "VariableID:3919:36529"
           ],
           "reason": "resolved"
         }
@@ -2426,8 +2340,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12728",
-            "VariableID:3919:36628"
+            "VariableID:159:12728"
           ],
           "reason": "resolved"
         },
@@ -2435,8 +2348,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12728",
-            "VariableID:3919:36628"
+            "VariableID:159:12728"
           ],
           "reason": "resolved"
         }
@@ -2454,8 +2366,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36514",
-            "VariableID:611:26726"
+            "VariableID:3919:36514"
           ],
           "reason": "resolved"
         },
@@ -2463,8 +2374,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36514",
-            "VariableID:611:26729"
+            "VariableID:3919:36514"
           ],
           "reason": "resolved"
         }
@@ -2482,8 +2392,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36515",
-            "VariableID:611:26728"
+            "VariableID:3919:36515"
           ],
           "reason": "resolved"
         },
@@ -2491,8 +2400,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36515",
-            "VariableID:611:26728"
+            "VariableID:3919:36515"
           ],
           "reason": "resolved"
         }
@@ -2510,8 +2418,7 @@
           "value": "#383838",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12723",
-            "VariableID:611:26730"
+            "VariableID:159:12723"
           ],
           "reason": "resolved"
         },
@@ -2519,8 +2426,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12723",
-            "VariableID:611:26727"
+            "VariableID:159:12723"
           ],
           "reason": "resolved"
         }
@@ -2538,8 +2444,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36532",
-            "VariableID:611:26727"
+            "VariableID:3919:36532"
           ],
           "reason": "resolved"
         },
@@ -2547,8 +2452,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36532",
-            "VariableID:611:26729"
+            "VariableID:3919:36532"
           ],
           "reason": "resolved"
         }
@@ -2566,8 +2470,7 @@
           "value": "#b2b2b2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36533",
-            "VariableID:3919:36537"
+            "VariableID:3919:36533"
           ],
           "reason": "resolved"
         },
@@ -2575,8 +2478,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36533",
-            "VariableID:3919:36619"
+            "VariableID:3919:36533"
           ],
           "reason": "resolved"
         }
@@ -2594,8 +2496,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12485",
-            "VariableID:3919:36542"
+            "VariableID:106:12485"
           ],
           "reason": "resolved"
         },
@@ -2603,8 +2504,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12485",
-            "VariableID:3919:36534"
+            "VariableID:106:12485"
           ],
           "reason": "resolved"
         }
@@ -2622,8 +2522,7 @@
           "value": "#767676",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12486",
-            "VariableID:3919:36539"
+            "VariableID:106:12486"
           ],
           "reason": "resolved"
         },
@@ -2631,8 +2530,7 @@
           "value": "#949494",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12486",
-            "VariableID:3919:36538"
+            "VariableID:106:12486"
           ],
           "reason": "resolved"
         }
@@ -2650,8 +2548,7 @@
           "value": "#b2b2b2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12724",
-            "VariableID:3919:36537"
+            "VariableID:159:12724"
           ],
           "reason": "resolved"
         },
@@ -2659,8 +2556,7 @@
           "value": "#767676",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12724",
-            "VariableID:3919:36539"
+            "VariableID:159:12724"
           ],
           "reason": "resolved"
         }
@@ -2678,8 +2574,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36520",
-            "VariableID:3919:36661"
+            "VariableID:3919:36520"
           ],
           "reason": "resolved"
         },
@@ -2687,8 +2582,7 @@
           "value": "#cff7d3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36520",
-            "VariableID:3919:36655"
+            "VariableID:3919:36520"
           ],
           "reason": "resolved"
         }
@@ -2706,8 +2600,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36521",
-            "VariableID:3919:36659"
+            "VariableID:3919:36521"
           ],
           "reason": "resolved"
         },
@@ -2715,8 +2608,7 @@
           "value": "#85e0a3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36521",
-            "VariableID:3919:36657"
+            "VariableID:3919:36521"
           ],
           "reason": "resolved"
         }
@@ -2734,8 +2626,7 @@
           "value": "#14ae5c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12726",
-            "VariableID:3919:36658"
+            "VariableID:159:12726"
           ],
           "reason": "resolved"
         },
@@ -2743,8 +2634,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12726",
-            "VariableID:3919:36659"
+            "VariableID:159:12726"
           ],
           "reason": "resolved"
         }
@@ -2762,8 +2652,7 @@
           "value": "#f19edc",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:72:10154",
-            "VariableID:280:16486"
+            "VariableID:72:10154"
           ],
           "reason": "resolved"
         },
@@ -2771,8 +2660,7 @@
           "value": "#d732a8",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:72:10154",
-            "VariableID:280:16491"
+            "VariableID:72:10154"
           ],
           "reason": "resolved"
         }
@@ -2816,8 +2704,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36524",
-            "VariableID:3919:36652"
+            "VariableID:3919:36524"
           ],
           "reason": "resolved"
         },
@@ -2825,8 +2712,7 @@
           "value": "#fff1c2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36524",
-            "VariableID:3919:36645"
+            "VariableID:3919:36524"
           ],
           "reason": "resolved"
         }
@@ -2844,8 +2730,7 @@
           "value": "#975102",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36525",
-            "VariableID:3919:36650"
+            "VariableID:3919:36525"
           ],
           "reason": "resolved"
         },
@@ -2853,8 +2738,7 @@
           "value": "#e8b931",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36525",
-            "VariableID:3919:36647"
+            "VariableID:3919:36525"
           ],
           "reason": "resolved"
         }
@@ -2872,8 +2756,7 @@
           "value": "#bf6a02",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12727",
-            "VariableID:3919:36649"
+            "VariableID:159:12727"
           ],
           "reason": "resolved"
         },
@@ -2881,8 +2764,7 @@
           "value": "#bf6a02",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:159:12727",
-            "VariableID:3919:36649"
+            "VariableID:159:12727"
           ],
           "reason": "resolved"
         }
@@ -3041,7 +2923,7 @@
       "collectionName": "Color Primitives",
       "modes": {
         "3919:19": {
-          "value": "#1a56db",
+          "value": "#0066ff",
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:3919:36621"
@@ -3437,11 +3319,10 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#1a56db",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36488",
-            "VariableID:3919:36621"
+            "VariableID:3919:36488"
           ],
           "reason": "resolved"
         },
@@ -3449,8 +3330,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36488",
-            "VariableID:3919:36614"
+            "VariableID:3919:36488"
           ],
           "reason": "resolved"
         }
@@ -3468,8 +3348,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36491",
-            "VariableID:3919:36614"
+            "VariableID:3919:36491"
           ],
           "reason": "resolved"
         },
@@ -3477,8 +3356,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36491",
-            "VariableID:3919:36622"
+            "VariableID:3919:36491"
           ],
           "reason": "resolved"
         }
@@ -3496,8 +3374,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36493",
-            "VariableID:3919:36622"
+            "VariableID:3919:36493"
           ],
           "reason": "resolved"
         },
@@ -3505,8 +3382,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36493",
-            "VariableID:3919:36614"
+            "VariableID:3919:36493"
           ],
           "reason": "resolved"
         }
@@ -3521,11 +3397,10 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#1a56db",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5932",
-            "VariableID:3919:36621"
+            "VariableID:106:5932"
           ],
           "reason": "resolved"
         },
@@ -3533,8 +3408,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5932",
-            "VariableID:3919:36614"
+            "VariableID:106:5932"
           ],
           "reason": "resolved"
         }
@@ -3552,8 +3426,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36489",
-            "VariableID:3919:36619"
+            "VariableID:3919:36489"
           ],
           "reason": "resolved"
         },
@@ -3561,8 +3434,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36489",
-            "VariableID:3919:36616"
+            "VariableID:3919:36489"
           ],
           "reason": "resolved"
         }
@@ -3580,8 +3452,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36490",
-            "VariableID:3919:36618"
+            "VariableID:3919:36490"
           ],
           "reason": "resolved"
         },
@@ -3589,8 +3460,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36490",
-            "VariableID:3919:36617"
+            "VariableID:3919:36490"
           ],
           "reason": "resolved"
         }
@@ -3608,8 +3478,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36506",
-            "VariableID:3919:36630"
+            "VariableID:3919:36506"
           ],
           "reason": "resolved"
         },
@@ -3617,8 +3486,7 @@
           "value": "#fdd3d0",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36506",
-            "VariableID:3919:36625"
+            "VariableID:3919:36506"
           ],
           "reason": "resolved"
         }
@@ -3636,8 +3504,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36509",
-            "VariableID:3919:36624"
+            "VariableID:3919:36509"
           ],
           "reason": "resolved"
         },
@@ -3645,8 +3512,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36509",
-            "VariableID:3919:36624"
+            "VariableID:3919:36509"
           ],
           "reason": "resolved"
         }
@@ -3664,8 +3530,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36510",
-            "VariableID:3919:36630"
+            "VariableID:3919:36510"
           ],
           "reason": "resolved"
         },
@@ -3673,8 +3538,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36510",
-            "VariableID:3919:36624"
+            "VariableID:3919:36510"
           ],
           "reason": "resolved"
         }
@@ -3692,8 +3556,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5934",
-            "VariableID:3919:36630"
+            "VariableID:106:5934"
           ],
           "reason": "resolved"
         },
@@ -3701,8 +3564,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5934",
-            "VariableID:3919:36624"
+            "VariableID:106:5934"
           ],
           "reason": "resolved"
         }
@@ -3720,8 +3582,7 @@
           "value": "#c00f0c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36507",
-            "VariableID:3919:36629"
+            "VariableID:3919:36507"
           ],
           "reason": "resolved"
         },
@@ -3729,8 +3590,7 @@
           "value": "#f4776a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36507",
-            "VariableID:3919:36627"
+            "VariableID:3919:36507"
           ],
           "reason": "resolved"
         }
@@ -3748,8 +3608,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36508",
-            "VariableID:3919:36628"
+            "VariableID:3919:36508"
           ],
           "reason": "resolved"
         },
@@ -3757,8 +3616,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36508",
-            "VariableID:3919:36628"
+            "VariableID:3919:36508"
           ],
           "reason": "resolved"
         }
@@ -3776,8 +3634,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36482",
-            "VariableID:611:26732"
+            "VariableID:3919:36482"
           ],
           "reason": "resolved"
         },
@@ -3785,8 +3642,7 @@
           "value": "#ffffff",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36482",
-            "VariableID:3919:36553"
+            "VariableID:3919:36482"
           ],
           "reason": "resolved"
         }
@@ -3804,8 +3660,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36483",
-            "VariableID:611:26728"
+            "VariableID:3919:36483"
           ],
           "reason": "resolved"
         },
@@ -3813,8 +3668,7 @@
           "value": "rgba(255, 255, 255, 0.70)",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36483",
-            "VariableID:3919:36548"
+            "VariableID:3919:36483"
           ],
           "reason": "resolved"
         }
@@ -3832,8 +3686,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36484",
-            "VariableID:611:26727"
+            "VariableID:3919:36484"
           ],
           "reason": "resolved"
         },
@@ -3841,8 +3694,7 @@
           "value": "rgba(255, 255, 255, 0.40)",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36484",
-            "VariableID:3919:36547"
+            "VariableID:3919:36484"
           ],
           "reason": "resolved"
         }
@@ -3860,8 +3712,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36512",
-            "VariableID:611:26727"
+            "VariableID:3919:36512"
           ],
           "reason": "resolved"
         },
@@ -3869,8 +3720,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36512",
-            "VariableID:611:26728"
+            "VariableID:3919:36512"
           ],
           "reason": "resolved"
         }
@@ -3888,8 +3738,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36513",
-            "VariableID:611:26727"
+            "VariableID:3919:36513"
           ],
           "reason": "resolved"
         },
@@ -3897,8 +3746,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36513",
-            "VariableID:611:26727"
+            "VariableID:3919:36513"
           ],
           "reason": "resolved"
         }
@@ -3916,8 +3764,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12479",
-            "VariableID:3919:36542"
+            "VariableID:106:12479"
           ],
           "reason": "resolved"
         },
@@ -3925,8 +3772,7 @@
           "value": "#e3e3e3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12479",
-            "VariableID:3919:36535"
+            "VariableID:106:12479"
           ],
           "reason": "resolved"
         }
@@ -3944,8 +3790,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12482",
-            "VariableID:3919:36534"
+            "VariableID:106:12482"
           ],
           "reason": "resolved"
         },
@@ -3953,8 +3798,7 @@
           "value": "#242424",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12482",
-            "VariableID:3919:36543"
+            "VariableID:106:12482"
           ],
           "reason": "resolved"
         }
@@ -3972,8 +3816,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12483",
-            "VariableID:3919:36542"
+            "VariableID:106:12483"
           ],
           "reason": "resolved"
         },
@@ -3981,8 +3824,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12483",
-            "VariableID:3919:36534"
+            "VariableID:106:12483"
           ],
           "reason": "resolved"
         }
@@ -4000,8 +3842,7 @@
           "value": "#434343",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12484",
-            "VariableID:3919:36541"
+            "VariableID:106:12484"
           ],
           "reason": "resolved"
         },
@@ -4009,8 +3850,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12484",
-            "VariableID:3919:36534"
+            "VariableID:106:12484"
           ],
           "reason": "resolved"
         }
@@ -4028,8 +3868,7 @@
           "value": "#5a5a5a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12480",
-            "VariableID:3919:36540"
+            "VariableID:106:12480"
           ],
           "reason": "resolved"
         },
@@ -4037,8 +3876,7 @@
           "value": "#cdcdcd",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12480",
-            "VariableID:3919:36536"
+            "VariableID:106:12480"
           ],
           "reason": "resolved"
         }
@@ -4056,8 +3894,7 @@
           "value": "#767676",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12481",
-            "VariableID:3919:36539"
+            "VariableID:106:12481"
           ],
           "reason": "resolved"
         },
@@ -4065,8 +3902,7 @@
           "value": "#b2b2b2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12481",
-            "VariableID:3919:36537"
+            "VariableID:106:12481"
           ],
           "reason": "resolved"
         }
@@ -4084,8 +3920,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36494",
-            "VariableID:3919:36661"
+            "VariableID:3919:36494"
           ],
           "reason": "resolved"
         },
@@ -4093,8 +3928,7 @@
           "value": "#cff7d3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36494",
-            "VariableID:3919:36655"
+            "VariableID:3919:36494"
           ],
           "reason": "resolved"
         }
@@ -4112,8 +3946,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36497",
-            "VariableID:3919:36654"
+            "VariableID:3919:36497"
           ],
           "reason": "resolved"
         },
@@ -4121,8 +3954,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36497",
-            "VariableID:3919:36654"
+            "VariableID:3919:36497"
           ],
           "reason": "resolved"
         }
@@ -4140,8 +3972,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36498",
-            "VariableID:3919:36661"
+            "VariableID:3919:36498"
           ],
           "reason": "resolved"
         },
@@ -4149,8 +3980,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36498",
-            "VariableID:3919:36654"
+            "VariableID:3919:36498"
           ],
           "reason": "resolved"
         }
@@ -4168,8 +3998,7 @@
           "value": "#024023",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5935",
-            "VariableID:3919:36662"
+            "VariableID:106:5935"
           ],
           "reason": "resolved"
         },
@@ -4177,8 +4006,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5935",
-            "VariableID:3919:36654"
+            "VariableID:106:5935"
           ],
           "reason": "resolved"
         }
@@ -4196,8 +4024,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36495",
-            "VariableID:3919:36659"
+            "VariableID:3919:36495"
           ],
           "reason": "resolved"
         },
@@ -4205,8 +4032,7 @@
           "value": "#85e0a3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36495",
-            "VariableID:3919:36657"
+            "VariableID:3919:36495"
           ],
           "reason": "resolved"
         }
@@ -4224,8 +4050,7 @@
           "value": "#14ae5c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36496",
-            "VariableID:3919:36658"
+            "VariableID:3919:36496"
           ],
           "reason": "resolved"
         },
@@ -4233,8 +4058,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36496",
-            "VariableID:3919:36659"
+            "VariableID:3919:36496"
           ],
           "reason": "resolved"
         }
@@ -4252,8 +4076,7 @@
           "value": "#d732a8",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:320:298",
-            "VariableID:280:16491"
+            "VariableID:320:298"
           ],
           "reason": "resolved"
         },
@@ -4261,8 +4084,7 @@
           "value": "#f19edc",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:320:298",
-            "VariableID:280:16486"
+            "VariableID:320:298"
           ],
           "reason": "resolved"
         }
@@ -4280,8 +4102,7 @@
           "value": "#8a226f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:280:16549",
-            "VariableID:280:16494"
+            "VariableID:280:16549"
           ],
           "reason": "resolved"
         },
@@ -4289,8 +4110,7 @@
           "value": "#fae1fa",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:280:16549",
-            "VariableID:280:16482"
+            "VariableID:280:16549"
           ],
           "reason": "resolved"
         }
@@ -4308,8 +4128,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36500",
-            "VariableID:3919:36652"
+            "VariableID:3919:36500"
           ],
           "reason": "resolved"
         },
@@ -4317,8 +4136,7 @@
           "value": "#fff1c2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36500",
-            "VariableID:3919:36645"
+            "VariableID:3919:36500"
           ],
           "reason": "resolved"
         }
@@ -4336,8 +4154,7 @@
           "value": "#401b01",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36503",
-            "VariableID:3919:36653"
+            "VariableID:3919:36503"
           ],
           "reason": "resolved"
         },
@@ -4345,8 +4162,7 @@
           "value": "#401b01",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36503",
-            "VariableID:3919:36653"
+            "VariableID:3919:36503"
           ],
           "reason": "resolved"
         }
@@ -4364,8 +4180,7 @@
           "value": "#682d03",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36504",
-            "VariableID:3919:36651"
+            "VariableID:3919:36504"
           ],
           "reason": "resolved"
         },
@@ -4373,8 +4188,7 @@
           "value": "#fffbeb",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36504",
-            "VariableID:3919:36644"
+            "VariableID:3919:36504"
           ],
           "reason": "resolved"
         }
@@ -4392,8 +4206,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5933",
-            "VariableID:3919:36652"
+            "VariableID:106:5933"
           ],
           "reason": "resolved"
         },
@@ -4401,8 +4214,7 @@
           "value": "#fffbeb",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:5933",
-            "VariableID:3919:36644"
+            "VariableID:106:5933"
           ],
           "reason": "resolved"
         }
@@ -4420,8 +4232,7 @@
           "value": "#975102",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36501",
-            "VariableID:3919:36650"
+            "VariableID:3919:36501"
           ],
           "reason": "resolved"
         },
@@ -4429,8 +4240,7 @@
           "value": "#e8b931",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36501",
-            "VariableID:3919:36647"
+            "VariableID:3919:36501"
           ],
           "reason": "resolved"
         }
@@ -4448,8 +4258,7 @@
           "value": "#bf6a02",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36502",
-            "VariableID:3919:36649"
+            "VariableID:3919:36502"
           ],
           "reason": "resolved"
         },
@@ -4457,8 +4266,7 @@
           "value": "#bf6a02",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36502",
-            "VariableID:3919:36649"
+            "VariableID:3919:36502"
           ],
           "reason": "resolved"
         }
@@ -5013,11 +4821,10 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#1a56db",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36456",
-            "VariableID:3919:36621"
+            "VariableID:3919:36456"
           ],
           "reason": "resolved"
         },
@@ -5025,8 +4832,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36456",
-            "VariableID:3919:36614"
+            "VariableID:3919:36456"
           ],
           "reason": "resolved"
         }
@@ -5044,8 +4850,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36459",
-            "VariableID:3919:36614"
+            "VariableID:3919:36459"
           ],
           "reason": "resolved"
         },
@@ -5053,8 +4858,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36459",
-            "VariableID:3919:36622"
+            "VariableID:3919:36459"
           ],
           "reason": "resolved"
         }
@@ -5072,8 +4876,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36461",
-            "VariableID:3919:36622"
+            "VariableID:3919:36461"
           ],
           "reason": "resolved"
         },
@@ -5081,8 +4884,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36461",
-            "VariableID:3919:36614"
+            "VariableID:3919:36461"
           ],
           "reason": "resolved"
         }
@@ -5097,11 +4899,10 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#1a56db",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9670:11773",
-            "VariableID:3919:36621"
+            "VariableID:9670:11773"
           ],
           "reason": "resolved"
         },
@@ -5109,8 +4910,7 @@
           "value": "#f5f5f5",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9670:11773",
-            "VariableID:3919:36614"
+            "VariableID:9670:11773"
           ],
           "reason": "resolved"
         }
@@ -5128,8 +4928,7 @@
           "value": "#444444",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36457",
-            "VariableID:3919:36619"
+            "VariableID:3919:36457"
           ],
           "reason": "resolved"
         },
@@ -5137,8 +4936,7 @@
           "value": "#d9d9d9",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36457",
-            "VariableID:3919:36616"
+            "VariableID:3919:36457"
           ],
           "reason": "resolved"
         }
@@ -5156,8 +4954,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36458",
-            "VariableID:3919:36618"
+            "VariableID:3919:36458"
           ],
           "reason": "resolved"
         },
@@ -5165,8 +4962,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36458",
-            "VariableID:3919:36617"
+            "VariableID:3919:36458"
           ],
           "reason": "resolved"
         }
@@ -5184,8 +4980,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36474",
-            "VariableID:3919:36630"
+            "VariableID:3919:36474"
           ],
           "reason": "resolved"
         },
@@ -5193,8 +4988,7 @@
           "value": "#fdd3d0",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36474",
-            "VariableID:3919:36625"
+            "VariableID:3919:36474"
           ],
           "reason": "resolved"
         }
@@ -5212,8 +5006,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36477",
-            "VariableID:3919:36624"
+            "VariableID:3919:36477"
           ],
           "reason": "resolved"
         },
@@ -5221,8 +5014,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36477",
-            "VariableID:3919:36624"
+            "VariableID:3919:36477"
           ],
           "reason": "resolved"
         }
@@ -5240,8 +5032,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36479",
-            "VariableID:3919:36630"
+            "VariableID:3919:36479"
           ],
           "reason": "resolved"
         },
@@ -5249,8 +5040,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36479",
-            "VariableID:3919:36624"
+            "VariableID:3919:36479"
           ],
           "reason": "resolved"
         }
@@ -5268,8 +5058,7 @@
           "value": "#900b09",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7454",
-            "VariableID:3919:36630"
+            "VariableID:2002:7454"
           ],
           "reason": "resolved"
         },
@@ -5277,8 +5066,7 @@
           "value": "#fee9e7",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7454",
-            "VariableID:3919:36624"
+            "VariableID:2002:7454"
           ],
           "reason": "resolved"
         }
@@ -5296,8 +5084,7 @@
           "value": "#c00f0c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36475",
-            "VariableID:3919:36629"
+            "VariableID:3919:36475"
           ],
           "reason": "resolved"
         },
@@ -5305,8 +5092,7 @@
           "value": "#f4776a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36475",
-            "VariableID:3919:36627"
+            "VariableID:3919:36475"
           ],
           "reason": "resolved"
         }
@@ -5324,8 +5110,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36476",
-            "VariableID:3919:36628"
+            "VariableID:3919:36476"
           ],
           "reason": "resolved"
         },
@@ -5333,8 +5118,7 @@
           "value": "#ec221f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36476",
-            "VariableID:3919:36628"
+            "VariableID:3919:36476"
           ],
           "reason": "resolved"
         }
@@ -5352,8 +5136,7 @@
           "value": "#1e1e1e",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36450",
-            "VariableID:611:26732"
+            "VariableID:3919:36450"
           ],
           "reason": "resolved"
         },
@@ -5361,8 +5144,7 @@
           "value": "#ffffff",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36450",
-            "VariableID:3919:36553"
+            "VariableID:3919:36450"
           ],
           "reason": "resolved"
         }
@@ -5380,8 +5162,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36451",
-            "VariableID:611:26728"
+            "VariableID:3919:36451"
           ],
           "reason": "resolved"
         },
@@ -5389,8 +5170,7 @@
           "value": "rgba(255, 255, 255, 0.70)",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36451",
-            "VariableID:3919:36548"
+            "VariableID:3919:36451"
           ],
           "reason": "resolved"
         }
@@ -5408,8 +5188,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36452",
-            "VariableID:611:26727"
+            "VariableID:3919:36452"
           ],
           "reason": "resolved"
         },
@@ -5417,8 +5196,7 @@
           "value": "rgba(255, 255, 255, 0.40)",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36452",
-            "VariableID:3919:36547"
+            "VariableID:3919:36452"
           ],
           "reason": "resolved"
         }
@@ -5436,8 +5214,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36480",
-            "VariableID:611:26727"
+            "VariableID:3919:36480"
           ],
           "reason": "resolved"
         },
@@ -5445,8 +5222,7 @@
           "value": "#757575",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36480",
-            "VariableID:611:26728"
+            "VariableID:3919:36480"
           ],
           "reason": "resolved"
         }
@@ -5464,8 +5240,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36481",
-            "VariableID:611:26727"
+            "VariableID:3919:36481"
           ],
           "reason": "resolved"
         },
@@ -5473,8 +5248,7 @@
           "value": "#b3b3b3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36481",
-            "VariableID:611:26727"
+            "VariableID:3919:36481"
           ],
           "reason": "resolved"
         }
@@ -5492,8 +5266,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12473",
-            "VariableID:3919:36542"
+            "VariableID:106:12473"
           ],
           "reason": "resolved"
         },
@@ -5501,8 +5274,7 @@
           "value": "#e3e3e3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12473",
-            "VariableID:3919:36535"
+            "VariableID:106:12473"
           ],
           "reason": "resolved"
         }
@@ -5520,8 +5292,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12476",
-            "VariableID:3919:36534"
+            "VariableID:106:12476"
           ],
           "reason": "resolved"
         },
@@ -5529,8 +5300,7 @@
           "value": "#242424",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12476",
-            "VariableID:3919:36543"
+            "VariableID:106:12476"
           ],
           "reason": "resolved"
         }
@@ -5548,8 +5318,7 @@
           "value": "#303030",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12477",
-            "VariableID:3919:36542"
+            "VariableID:106:12477"
           ],
           "reason": "resolved"
         },
@@ -5557,8 +5326,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12477",
-            "VariableID:3919:36534"
+            "VariableID:106:12477"
           ],
           "reason": "resolved"
         }
@@ -5576,8 +5344,7 @@
           "value": "#434343",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12478",
-            "VariableID:3919:36541"
+            "VariableID:106:12478"
           ],
           "reason": "resolved"
         },
@@ -5585,8 +5352,7 @@
           "value": "#f3f3f3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12478",
-            "VariableID:3919:36534"
+            "VariableID:106:12478"
           ],
           "reason": "resolved"
         }
@@ -5604,8 +5370,7 @@
           "value": "#5a5a5a",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12474",
-            "VariableID:3919:36540"
+            "VariableID:106:12474"
           ],
           "reason": "resolved"
         },
@@ -5613,8 +5378,7 @@
           "value": "#cdcdcd",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12474",
-            "VariableID:3919:36536"
+            "VariableID:106:12474"
           ],
           "reason": "resolved"
         }
@@ -5632,8 +5396,7 @@
           "value": "#767676",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12475",
-            "VariableID:3919:36539"
+            "VariableID:106:12475"
           ],
           "reason": "resolved"
         },
@@ -5641,8 +5404,7 @@
           "value": "#b2b2b2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:106:12475",
-            "VariableID:3919:36537"
+            "VariableID:106:12475"
           ],
           "reason": "resolved"
         }
@@ -5660,8 +5422,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36462",
-            "VariableID:3919:36661"
+            "VariableID:3919:36462"
           ],
           "reason": "resolved"
         },
@@ -5669,8 +5430,7 @@
           "value": "#cff7d3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36462",
-            "VariableID:3919:36655"
+            "VariableID:3919:36462"
           ],
           "reason": "resolved"
         }
@@ -5688,8 +5448,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36465",
-            "VariableID:3919:36654"
+            "VariableID:3919:36465"
           ],
           "reason": "resolved"
         },
@@ -5697,8 +5456,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36465",
-            "VariableID:3919:36654"
+            "VariableID:3919:36465"
           ],
           "reason": "resolved"
         }
@@ -5716,8 +5474,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36467",
-            "VariableID:3919:36661"
+            "VariableID:3919:36467"
           ],
           "reason": "resolved"
         },
@@ -5725,8 +5482,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36467",
-            "VariableID:3919:36654"
+            "VariableID:3919:36467"
           ],
           "reason": "resolved"
         }
@@ -5744,8 +5500,7 @@
           "value": "#02542d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7455",
-            "VariableID:3919:36661"
+            "VariableID:2002:7455"
           ],
           "reason": "resolved"
         },
@@ -5753,8 +5508,7 @@
           "value": "#ebffee",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7455",
-            "VariableID:3919:36654"
+            "VariableID:2002:7455"
           ],
           "reason": "resolved"
         }
@@ -5772,8 +5526,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36463",
-            "VariableID:3919:36659"
+            "VariableID:3919:36463"
           ],
           "reason": "resolved"
         },
@@ -5781,8 +5534,7 @@
           "value": "#85e0a3",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36463",
-            "VariableID:3919:36657"
+            "VariableID:3919:36463"
           ],
           "reason": "resolved"
         }
@@ -5800,8 +5552,7 @@
           "value": "#14ae5c",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36464",
-            "VariableID:3919:36658"
+            "VariableID:3919:36464"
           ],
           "reason": "resolved"
         },
@@ -5809,8 +5560,7 @@
           "value": "#009951",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36464",
-            "VariableID:3919:36659"
+            "VariableID:3919:36464"
           ],
           "reason": "resolved"
         }
@@ -5828,8 +5578,7 @@
           "value": "#8a226f",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:72:10153",
-            "VariableID:280:16494"
+            "VariableID:72:10153"
           ],
           "reason": "resolved"
         },
@@ -5837,8 +5586,7 @@
           "value": "#fae1fa",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:72:10153",
-            "VariableID:280:16482"
+            "VariableID:72:10153"
           ],
           "reason": "resolved"
         }
@@ -5856,8 +5604,7 @@
           "value": "#0c0c0d",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9643:10770",
-            "VariableID:9:11243"
+            "VariableID:9643:10770"
           ],
           "reason": "resolved"
         },
@@ -5865,8 +5612,7 @@
           "value": "#ffffff",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:9643:10770",
-            "VariableID:3919:36553"
+            "VariableID:9643:10770"
           ],
           "reason": "resolved"
         }
@@ -5884,8 +5630,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36468",
-            "VariableID:3919:36652"
+            "VariableID:3919:36468"
           ],
           "reason": "resolved"
         },
@@ -5893,8 +5638,7 @@
           "value": "#fff1c2",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36468",
-            "VariableID:3919:36645"
+            "VariableID:3919:36468"
           ],
           "reason": "resolved"
         }
@@ -5912,8 +5656,7 @@
           "value": "#401b01",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36471",
-            "VariableID:3919:36653"
+            "VariableID:3919:36471"
           ],
           "reason": "resolved"
         },
@@ -5921,8 +5664,7 @@
           "value": "#401b01",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36471",
-            "VariableID:3919:36653"
+            "VariableID:3919:36471"
           ],
           "reason": "resolved"
         }
@@ -5940,8 +5682,7 @@
           "value": "#682d03",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36473",
-            "VariableID:3919:36651"
+            "VariableID:3919:36473"
           ],
           "reason": "resolved"
         },
@@ -5949,8 +5690,7 @@
           "value": "#fffbeb",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36473",
-            "VariableID:3919:36644"
+            "VariableID:3919:36473"
           ],
           "reason": "resolved"
         }
@@ -5968,8 +5708,7 @@
           "value": "#522504",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7453",
-            "VariableID:3919:36652"
+            "VariableID:2002:7453"
           ],
           "reason": "resolved"
         },
@@ -5977,8 +5716,7 @@
           "value": "#fffbeb",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:2002:7453",
-            "VariableID:3919:36644"
+            "VariableID:2002:7453"
           ],
           "reason": "resolved"
         }
@@ -5996,8 +5734,7 @@
           "value": "#975102",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36469",
-            "VariableID:3919:36650"
+            "VariableID:3919:36469"
           ],
           "reason": "resolved"
         },
@@ -6005,8 +5742,7 @@
           "value": "#e8b931",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36469",
-            "VariableID:3919:36647"
+            "VariableID:3919:36469"
           ],
           "reason": "resolved"
         }
@@ -6024,8 +5760,7 @@
           "value": "#bf6a02",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36470",
-            "VariableID:3919:36649"
+            "VariableID:3919:36470"
           ],
           "reason": "resolved"
         },
@@ -6033,8 +5768,7 @@
           "value": "#bf6a02",
           "resolvedType": "COLOR",
           "aliasChain": [
-            "VariableID:3919:36470",
-            "VariableID:3919:36649"
+            "VariableID:3919:36470"
           ],
           "reason": "resolved"
         }
@@ -6514,8 +6248,7 @@
           "value": "16px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:9:11224",
-            "VariableID:9:11196"
+            "VariableID:9:11224"
           ],
           "reason": "resolved"
         },
@@ -7493,24 +7226,6 @@
       }
     },
     {
-      "variableId": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
-      "figmaName": "Stroke/Border",
-      "cssVar": "--sds-size-stroke-border",
-      "resolvedType": "FLOAT",
-      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
-      "collectionName": "Size",
-      "modes": {
-        "9:7": {
-          "value": "1px",
-          "resolvedType": "FLOAT",
-          "aliasChain": [
-            "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:197:17450",
       "figmaName": "Stroke/Border",
       "cssVar": "--sds-size-stroke-border",
@@ -7523,6 +7238,24 @@
           "resolvedType": "FLOAT",
           "aliasChain": [
             "VariableID:197:17450"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
+      "figmaName": "Stroke/Border",
+      "cssVar": "--sds-size-stroke-border",
+      "resolvedType": "FLOAT",
+      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "collectionName": "Size",
+      "modes": {
+        "9:7": {
+          "value": "1px",
+          "resolvedType": "FLOAT",
+          "aliasChain": [
+            "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
           ],
           "reason": "resolved"
         }
@@ -7558,8 +7291,7 @@
           "value": "Inter",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:66:10179",
-            "VariableID:9:11199"
+            "VariableID:66:10179"
           ],
           "reason": "resolved"
         }
@@ -7577,8 +7309,7 @@
           "value": "Italic",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:66:14846",
-            "VariableID:56:8552"
+            "VariableID:66:14846"
           ],
           "reason": "resolved"
         }
@@ -7596,8 +7327,7 @@
           "value": "400",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10181",
-            "VariableID:9:11183"
+            "VariableID:66:10181"
           ],
           "reason": "resolved"
         }
@@ -7615,8 +7345,7 @@
           "value": "600",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:14844",
-            "VariableID:9:11185"
+            "VariableID:66:14844"
           ],
           "reason": "resolved"
         }
@@ -7634,8 +7363,7 @@
           "value": "20px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10215",
-            "VariableID:9:11195"
+            "VariableID:66:10215"
           ],
           "reason": "resolved"
         }
@@ -7653,8 +7381,7 @@
           "value": "16px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10180",
-            "VariableID:9:11196"
+            "VariableID:66:10180"
           ],
           "reason": "resolved"
         }
@@ -7672,8 +7399,7 @@
           "value": "14px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10216",
-            "VariableID:9:11197"
+            "VariableID:66:10216"
           ],
           "reason": "resolved"
         }
@@ -7691,8 +7417,7 @@
           "value": "Roboto Mono",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:66:10182",
-            "VariableID:9:11201"
+            "VariableID:66:10182"
           ],
           "reason": "resolved"
         }
@@ -7710,9 +7435,7 @@
           "value": "400",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10184",
-            "VariableID:66:10181",
-            "VariableID:9:11183"
+            "VariableID:66:10184"
           ],
           "reason": "resolved"
         }
@@ -7730,9 +7453,7 @@
           "value": "16px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10183",
-            "VariableID:66:10180",
-            "VariableID:9:11196"
+            "VariableID:66:10183"
           ],
           "reason": "resolved"
         }
@@ -7750,9 +7471,7 @@
           "value": "20px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10217",
-            "VariableID:66:10215",
-            "VariableID:9:11195"
+            "VariableID:66:10217"
           ],
           "reason": "resolved"
         }
@@ -7770,9 +7489,7 @@
           "value": "14px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10218",
-            "VariableID:66:10216",
-            "VariableID:9:11197"
+            "VariableID:66:10218"
           ],
           "reason": "resolved"
         }
@@ -7862,8 +7579,7 @@
           "value": "Inter",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:66:10185",
-            "VariableID:9:11199"
+            "VariableID:66:10185"
           ],
           "reason": "resolved"
         }
@@ -7881,8 +7597,7 @@
           "value": "600",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10187",
-            "VariableID:9:11185"
+            "VariableID:66:10187"
           ],
           "reason": "resolved"
         }
@@ -7900,8 +7615,7 @@
           "value": "24px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10186",
-            "VariableID:9:11194"
+            "VariableID:66:10186"
           ],
           "reason": "resolved"
         }
@@ -7919,8 +7633,7 @@
           "value": "32px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10211",
-            "VariableID:9:11193"
+            "VariableID:66:10211"
           ],
           "reason": "resolved"
         }
@@ -7938,8 +7651,7 @@
           "value": "20px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10212",
-            "VariableID:9:11195"
+            "VariableID:66:10212"
           ],
           "reason": "resolved"
         }
@@ -8173,8 +7885,7 @@
           "value": "Inter",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:2103:22306",
-            "VariableID:9:11199"
+            "VariableID:2103:22306"
           ],
           "reason": "resolved"
         }
@@ -8192,8 +7903,7 @@
           "value": "400",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:2103:22310",
-            "VariableID:9:11183"
+            "VariableID:2103:22310"
           ],
           "reason": "resolved"
         }
@@ -8211,8 +7921,7 @@
           "value": "24px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:2103:22309",
-            "VariableID:9:11194"
+            "VariableID:2103:22309"
           ],
           "reason": "resolved"
         }
@@ -8230,8 +7939,7 @@
           "value": "20px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:2103:22308",
-            "VariableID:9:11195"
+            "VariableID:2103:22308"
           ],
           "reason": "resolved"
         }
@@ -8249,8 +7957,7 @@
           "value": "16px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:2103:22307",
-            "VariableID:9:11196"
+            "VariableID:2103:22307"
           ],
           "reason": "resolved"
         }
@@ -8268,8 +7975,7 @@
           "value": "Inter",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:66:10176",
-            "VariableID:9:11199"
+            "VariableID:66:10176"
           ],
           "reason": "resolved"
         }
@@ -8287,8 +7993,7 @@
           "value": "400",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10178",
-            "VariableID:9:11183"
+            "VariableID:66:10178"
           ],
           "reason": "resolved"
         }
@@ -8306,8 +8011,7 @@
           "value": "32px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10177",
-            "VariableID:9:11193"
+            "VariableID:66:10177"
           ],
           "reason": "resolved"
         }
@@ -8325,8 +8029,7 @@
           "value": "40px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10209",
-            "VariableID:9:11192"
+            "VariableID:66:10209"
           ],
           "reason": "resolved"
         }
@@ -8344,8 +8047,7 @@
           "value": "24px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10210",
-            "VariableID:9:11194"
+            "VariableID:66:10210"
           ],
           "reason": "resolved"
         }
@@ -8363,8 +8065,7 @@
           "value": "Inter",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:66:10188",
-            "VariableID:9:11199"
+            "VariableID:66:10188"
           ],
           "reason": "resolved"
         }
@@ -8382,8 +8083,7 @@
           "value": "700",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10190",
-            "VariableID:9:11186"
+            "VariableID:66:10190"
           ],
           "reason": "resolved"
         }
@@ -8401,8 +8101,7 @@
           "value": "72px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10189",
-            "VariableID:9:11189"
+            "VariableID:66:10189"
           ],
           "reason": "resolved"
         }
@@ -8420,8 +8119,7 @@
           "value": "Inter",
           "resolvedType": "STRING",
           "aliasChain": [
-            "VariableID:58:8569",
-            "VariableID:9:11199"
+            "VariableID:58:8569"
           ],
           "reason": "resolved"
         }
@@ -8439,8 +8137,7 @@
           "value": "700",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:58:8572",
-            "VariableID:9:11186"
+            "VariableID:58:8572"
           ],
           "reason": "resolved"
         }
@@ -8458,8 +8155,7 @@
           "value": "48px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10197",
-            "VariableID:9:11191"
+            "VariableID:66:10197"
           ],
           "reason": "resolved"
         }
@@ -8477,8 +8173,7 @@
           "value": "64px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:66:10198",
-            "VariableID:9:11190"
+            "VariableID:66:10198"
           ],
           "reason": "resolved"
         }
@@ -8496,8 +8191,7 @@
           "value": "40px",
           "resolvedType": "FLOAT",
           "aliasChain": [
-            "VariableID:58:8574",
-            "VariableID:9:11192"
+            "VariableID:58:8574"
           ],
           "reason": "resolved"
         }
@@ -8851,17 +8545,17 @@
     "variableCount": 367,
     "modeCount": 12,
     "tokenCountByMode": {
-      "9:2": 31,
       "9:4": 5,
       "9:5": 5,
       "9:6": 5,
       "9:7": 52,
+      "58:0": 35,
+      "7:3": 4,
       "3919:21": 137,
       "3919:22": 137,
       "3919:19": 100,
-      "58:0": 35,
-      "7:3": 4,
-      "28:2": 1
+      "28:2": 1,
+      "9:2": 31
     }
   }
 }

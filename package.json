@@ -27,7 +27,10 @@
     "figma:verify": "node scripts/figma-verify.mjs",
     "figma:sync:pull": "node scripts/figma-sync-pull.mjs",
     "figma:sync:push": "node scripts/figma-sync-push.mjs",
-    "figma:sync:full": "node scripts/figma-sync-full.mjs"
+    "figma:sync:full": "node scripts/figma-sync-full.mjs",
+    "webhook:start": "node scripts/figma-webhook-receiver.mjs",
+    "webhook:manage": "node scripts/figma-webhook-manage.mjs",
+    "webhook:test": "node scripts/figma-webhook-manage.mjs test"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
