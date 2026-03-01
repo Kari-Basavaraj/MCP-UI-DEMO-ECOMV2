@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-01T04:43:47.488Z",
-  "startedAt": "2026-03-01T04:43:45.419Z",
+  "generatedAt": "2026-03-01T04:47:12.153Z",
+  "startedAt": "2026-03-01T04:47:11.757Z",
   "ok": true,
   "failures": [],
   "findings": [],
@@ -14,7 +14,7 @@
     "codeconnectGenerate": {
       "ok": true,
       "status": 0,
-      "stdout": "> mcp-ecommerce-app@1.0.0 figma:codeconnect:generate\n> node scripts/figma-codeconnect-generate.mjs\n\n{\n  \"ok\": true,\n  \"generatedPath\": \"/Users/kari.basavaraj.k.m/code/MCP-UI-DEMO-ECOMV2/figma/code-connect/mappings.generated.json\",\n  \"requiredCount\": 12,\n  \"generatedCount\": 12,\n  \"missing\": []\n}",
+      "stdout": "> mcp-ecommerce-app@1.0.0 figma:codeconnect:generate\n> node scripts/figma-codeconnect-generate.mjs\n\n{\n  \"ok\": true,\n  \"generatedPath\": \"/home/runner/work/MCP-UI-DEMO-ECOMV2/MCP-UI-DEMO-ECOMV2/figma/code-connect/mappings.generated.json\",\n  \"requiredCount\": 12,\n  \"generatedCount\": 12,\n  \"missing\": []\n}",
       "stderr": ""
     },
     "codeconnectVerify": {
