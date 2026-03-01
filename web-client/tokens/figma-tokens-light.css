@@ -1,7 +1,7 @@
 /* Auto-generated from Figma Variables API — DO NOT EDIT MANUALLY */
 /* Mode: SDS Light */
-/* Generated: 2026-03-01T04:43:38.880Z */
-/* Includes base tokens from: Typography Primitives (31), Responsive (5), Size (52), Typography (35), Colors (1), Color Primitives (100), Typography (4) */
+/* Generated: 2026-03-01T05:34:28.101Z */
+/* Includes base tokens from: Typography Primitives (31), Responsive (5), Size (52), Color Primitives (100), Typography (35), Typography (4), Colors (1) */
 :root {
   --sds-color-background-brand-default: #2c2c2c;
   --sds-color-background-brand-hover: #1e1e1e;
@@ -44,7 +44,7 @@
   --sds-color-background-warning-secondary-hover: #ffe8a3;
   --sds-color-background-warning-tertiary: #fffbeb;
   --sds-color-background-warning-tertiary-hover: #fff1c2;
-  --sds-color-black-100: rgba(12, 12, 13, 0.05);
+  --sds-color-black-100: #000000;
   --sds-color-black-1000: #0c0c0d;
   --sds-color-black-200: rgba(12, 12, 13, 0.10);
   --sds-color-black-300: rgba(12, 12, 13, 0.20);
