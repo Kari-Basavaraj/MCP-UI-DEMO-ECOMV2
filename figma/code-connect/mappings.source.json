@@ -86,7 +86,6 @@
       "nodeId": "5007:4614",
       "source": "mcp-server/widgets/review-rating.html"
     },
-
     {
       "id": "light-product-grid",
       "componentName": "ProductGridWidget",
@@ -171,7 +170,6 @@
       "nodeId": "5014:1640",
       "source": "mcp-server/widgets/wishlist.html"
     },
-
     {
       "id": "dark-product-grid",
       "componentName": "ProductGridWidget",
@@ -255,6 +253,440 @@
       "label": "Dark",
       "nodeId": "5014:1657",
       "source": "mcp-server/widgets/wishlist.html"
+    },
+    {
+      "id": "button",
+      "componentName": "Button",
+      "nodeId": "4185:3778",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Button.figma.tsx"
+    },
+    {
+      "id": "buttondanger",
+      "componentName": "Button Danger",
+      "nodeId": "185:852",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/ButtonDanger.figma.tsx"
+    },
+    {
+      "id": "iconbutton",
+      "componentName": "Icon Button",
+      "nodeId": "11:11508",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/IconButton.figma.tsx"
+    },
+    {
+      "id": "buttongroup",
+      "componentName": "Button Group",
+      "nodeId": "2072:9432",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/ButtonGroup.figma.tsx"
+    },
+    {
+      "id": "card",
+      "componentName": "Card",
+      "nodeId": "2142:11380",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Card.figma.tsx"
+    },
+    {
+      "id": "pricingcard",
+      "componentName": "Pricing Card",
+      "nodeId": "1444:11846",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PricingCard.figma.tsx"
+    },
+    {
+      "id": "tag",
+      "componentName": "Tag",
+      "nodeId": "56:8830",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Tag.figma.tsx"
+    },
+    {
+      "id": "tagtoggle",
+      "componentName": "Tag Toggle",
+      "nodeId": "157:10316",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TagToggle.figma.tsx"
+    },
+    {
+      "id": "tooltip",
+      "componentName": "Tooltip",
+      "nodeId": "315:32700",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Tooltip.figma.tsx"
+    },
+    {
+      "id": "searchcomponent",
+      "componentName": "Search",
+      "nodeId": "2236:14989",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/SearchComponent.figma.tsx"
+    },
+    {
+      "id": "navigationbutton",
+      "componentName": "Navigation Button",
+      "nodeId": "515:5459",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/NavigationButton.figma.tsx"
+    },
+    {
+      "id": "navigationbuttonlist",
+      "componentName": "Navigation Button List",
+      "nodeId": "524:503",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/NavigationButtonList.figma.tsx"
+    },
+    {
+      "id": "navigationpill",
+      "componentName": "Navigation Pill",
+      "nodeId": "7768:19970",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/NavigationPill.figma.tsx"
+    },
+    {
+      "id": "navigationpilllist",
+      "componentName": "Navigation Pill List",
+      "nodeId": "2194:14984",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/NavigationPillList.figma.tsx"
+    },
+    {
+      "id": "tab",
+      "componentName": "Tab",
+      "nodeId": "3729:12963",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Tab.figma.tsx"
+    },
+    {
+      "id": "notification",
+      "componentName": "Notification",
+      "nodeId": "124:8256",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Notification.figma.tsx"
+    },
+    {
+      "id": "inputfield",
+      "componentName": "Input Field",
+      "nodeId": "2136:2263",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/InputField.figma.tsx"
+    },
+    {
+      "id": "selectfield",
+      "componentName": "Select Field",
+      "nodeId": "2136:2336",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/SelectField.figma.tsx"
+    },
+    {
+      "id": "checkboxfield",
+      "componentName": "Checkbox Field",
+      "nodeId": "9762:1441",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CheckboxField.figma.tsx"
+    },
+    {
+      "id": "radiofield",
+      "componentName": "Radio Field",
+      "nodeId": "9762:1412",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/RadioField.figma.tsx"
+    },
+    {
+      "id": "switchfield",
+      "componentName": "Switch Field",
+      "nodeId": "9762:1902",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/SwitchField.figma.tsx"
+    },
+    {
+      "id": "textareafield",
+      "componentName": "Textarea Field",
+      "nodeId": "9762:3088",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TextareaField.figma.tsx"
+    },
+    {
+      "id": "sliderfield",
+      "componentName": "Slider Field",
+      "nodeId": "589:17676",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/SliderField.figma.tsx"
+    },
+    {
+      "id": "dateinputfield",
+      "componentName": "Date Input Field",
+      "nodeId": "4302:7505",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/DateInputField.figma.tsx"
+    },
+    {
+      "id": "datepickerfield",
+      "componentName": "Date Picker Field",
+      "nodeId": "4300:6892",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/DatePickerField.figma.tsx"
+    },
+    {
+      "id": "accordionitem",
+      "componentName": "Accordion Item",
+      "nodeId": "7753:4634",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/AccordionItem.figma.tsx"
+    },
+    {
+      "id": "avatar",
+      "componentName": "Avatar",
+      "nodeId": "9762:1103",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Avatar.figma.tsx"
+    },
+    {
+      "id": "avatargroup",
+      "componentName": "Avatar Group",
+      "nodeId": "56:15608",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/AvatarGroup.figma.tsx"
+    },
+    {
+      "id": "dialogbody",
+      "componentName": "Dialog Body",
+      "nodeId": "9762:696",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/DialogBody.figma.tsx"
+    },
+    {
+      "id": "header",
+      "componentName": "Header",
+      "nodeId": "2287:22651",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Header.figma.tsx"
+    },
+    {
+      "id": "footer",
+      "componentName": "Footer",
+      "nodeId": "321:11357",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/Footer.figma.tsx"
+    },
+    {
+      "id": "headerauth",
+      "componentName": "Header Auth",
+      "nodeId": "18:9389",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/HeaderAuth.figma.tsx"
+    },
+    {
+      "id": "textcontentheading",
+      "componentName": "Text Content Heading",
+      "nodeId": "2153:7834",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TextContentHeading.figma.tsx"
+    },
+    {
+      "id": "textcontenttitle",
+      "componentName": "Text Content Title",
+      "nodeId": "2153:7838",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TextContentTitle.figma.tsx"
+    },
+    {
+      "id": "textlinklist",
+      "componentName": "Text Link List",
+      "nodeId": "322:9321",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TextLinkList.figma.tsx"
+    },
+    {
+      "id": "textlist",
+      "componentName": "Text List",
+      "nodeId": "480:6149",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TextList.figma.tsx"
+    },
+    {
+      "id": "textprice",
+      "componentName": "Text Price",
+      "nodeId": "1443:10386",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/TextPrice.figma.tsx"
+    },
+    {
+      "id": "paginationprevious",
+      "componentName": "Pagination Previous",
+      "nodeId": "9762:880",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PaginationPrevious.figma.tsx"
+    },
+    {
+      "id": "paginationpage",
+      "componentName": "Pagination Page",
+      "nodeId": "9762:890",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PaginationPage.figma.tsx"
+    },
+    {
+      "id": "paginationnext",
+      "componentName": "Pagination Next",
+      "nodeId": "9762:870",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PaginationNext.figma.tsx"
+    },
+    {
+      "id": "menuitem",
+      "componentName": "Menu Item",
+      "nodeId": "9762:743",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/MenuItem.figma.tsx"
+    },
+    {
+      "id": "calendarbutton",
+      "componentName": "Calendar Button",
+      "nodeId": "4333:9359",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CalendarButton.figma.tsx"
+    },
+    {
+      "id": "aichatbox",
+      "componentName": "AI Chat Box",
+      "nodeId": "4309:7636",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/AIChatBox.figma.tsx"
+    },
+    {
+      "id": "cardgridcontentlist",
+      "componentName": "Card Grid Content List",
+      "nodeId": "348:13407",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CardGridContentList.figma.tsx"
+    },
+    {
+      "id": "cardgridicon",
+      "componentName": "Card Grid Icon",
+      "nodeId": "348:13221",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CardGridIcon.figma.tsx"
+    },
+    {
+      "id": "cardgridimage",
+      "componentName": "Card Grid Image",
+      "nodeId": "348:14431",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CardGridImage.figma.tsx"
+    },
+    {
+      "id": "cardgridpricing",
+      "componentName": "Card Grid Pricing",
+      "nodeId": "348:14983",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CardGridPricing.figma.tsx"
+    },
+    {
+      "id": "cardgridreviews",
+      "componentName": "Card Grid Reviews",
+      "nodeId": "348:15213",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CardGridReviews.figma.tsx"
+    },
+    {
+      "id": "cardgridtestimonials",
+      "componentName": "Card Grid Testimonials",
+      "nodeId": "348:13347",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/CardGridTestimonials.figma.tsx"
+    },
+    {
+      "id": "herobasic",
+      "componentName": "Hero Basic",
+      "nodeId": "348:15896",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/HeroBasic.figma.tsx"
+    },
+    {
+      "id": "heroactions",
+      "componentName": "Hero Actions",
+      "nodeId": "348:15901",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/HeroActions.figma.tsx"
+    },
+    {
+      "id": "heronewsletter",
+      "componentName": "Hero Newsletter",
+      "nodeId": "348:15919",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/HeroNewsletter.figma.tsx"
+    },
+    {
+      "id": "heroform",
+      "componentName": "Hero Form",
+      "nodeId": "348:15933",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/HeroForm.figma.tsx"
+    },
+    {
+      "id": "heroimage",
+      "componentName": "Hero Image",
+      "nodeId": "348:15970",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/HeroImage.figma.tsx"
+    },
+    {
+      "id": "pageaccordion",
+      "componentName": "Page Accordion",
+      "nodeId": "348:13173",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PageAccordion.figma.tsx"
+    },
+    {
+      "id": "pagenewsletter",
+      "componentName": "Page Newsletter",
+      "nodeId": "348:15133",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PageNewsletter.figma.tsx"
+    },
+    {
+      "id": "pageproduct",
+      "componentName": "Page Product",
+      "nodeId": "348:15147",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PageProduct.figma.tsx"
+    },
+    {
+      "id": "pageproductresults",
+      "componentName": "Page Product Results",
+      "nodeId": "348:13517",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PageProductResults.figma.tsx"
+    },
+    {
+      "id": "panelimage",
+      "componentName": "Panel Image",
+      "nodeId": "348:15098",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PanelImage.figma.tsx"
+    },
+    {
+      "id": "panelimagecontent",
+      "componentName": "Panel Image Content",
+      "nodeId": "348:13474",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PanelImageContent.figma.tsx"
+    },
+    {
+      "id": "panelimagecontentreverse",
+      "componentName": "Panel Image Content Reverse",
+      "nodeId": "348:15101",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PanelImageContentReverse.figma.tsx"
+    },
+    {
+      "id": "panelimagedouble",
+      "componentName": "Panel Image Double",
+      "nodeId": "348:13470",
+      "label": "DS",
+      "source": "figma/code-connect/components/ds/PanelImageDouble.figma.tsx"
     }
   ]
 }
