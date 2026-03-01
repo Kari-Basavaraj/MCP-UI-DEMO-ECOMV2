@@ -100,6 +100,32 @@ Deploy the webhook receiver as a cloud function or container:
 
 The receiver is a single-file server with zero npm dependencies — it runs anywhere Node.js runs.
 
+### Option C: Use the Built-in Next.js API Route (Recommended)
+
+The web-client already includes a production-ready webhook receiver at `web-client/app/api/figma-webhook/route.ts`. This deploys automatically with your Next.js app — no separate infrastructure needed.
+
+**Setup:**
+
+1. Set environment variables on your hosting platform (Vercel, etc.):
+   ```bash
+   FIGMA_WEBHOOK_SECRET=your-passcode
+   GITHUB_DISPATCH_TOKEN=ghp_your_pat_with_repo_scope
+   GITHUB_REPO=Kari-Basavaraj/MCP-UI-DEMO-ECOMV2
+   FIGMA_FILE_KEY=dbPjFeLfAFp8Sz9YGPs0CZ
+   ```
+
+2. Your webhook URL becomes: `https://your-deployed-domain.com/api/figma-webhook`
+
+3. Health check: `GET /api/figma-webhook` returns `{ status: "healthy" }`
+
+**Advantages over Option B:**
+- Zero additional infrastructure — ships with the app
+- Shares the same deployment pipeline (Vercel, etc.)
+- Includes request ID tracking and structured error responses
+- `vercel.json` already configures `maxDuration: 30` and security headers
+
+See [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md) for the complete production deployment guide.
+
 ---
 
 ## Step 3 — Register the Figma Webhook

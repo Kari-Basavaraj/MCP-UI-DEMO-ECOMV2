@@ -1,6 +1,6 @@
 # 09 — Safety Patterns
 
-> 11 guards that prevent accidental writes, drift, and broken deployments.
+> 13 guards that prevent accidental writes, drift, and broken deployments.
 
 Every guard is **fail-closed** — if conditions aren't met, the operation aborts. This document explains each guard, where it's enforced, and how to work with it.
 
@@ -367,6 +367,68 @@ if (!condition) {
 }
 console.log('✅ [Guard Name]: passed');
 ```
+
+---
+
+## Guard 12: Webhook Passcode Validation
+
+**Where**: `web-client/app/api/figma-webhook/route.ts`, `scripts/figma-webhook-receiver.mjs`  
+**Purpose**: Reject unauthorized webhook payloads before any processing occurs.
+
+### How It Works
+
+1. Every incoming POST to the webhook endpoint must include a `passcode` field in the JSON body
+2. The receiver compares it against `FIGMA_WEBHOOK_SECRET` environment variable
+3. Mismatches return `401 Unauthorized` — no dispatch, no logging of payload contents
+
+### Implementation
+
+```typescript
+// From route.ts
+const { passcode, ...payload } = await request.json();
+if (passcode !== process.env.FIGMA_WEBHOOK_SECRET) {
+  return NextResponse.json(
+    { error: 'Invalid passcode', requestId },
+    { status: 401 }
+  );
+}
+```
+
+### Why Fail-Closed
+
+Without passcode validation, anyone who discovers the webhook URL could trigger unlimited CI runs, creating spam PRs and wasting GitHub Actions minutes.
+
+---
+
+## Guard 13: Webhook Concurrency Control
+
+**Where**: `.github/workflows/figma-webhook-sync.yml`  
+**Purpose**: Prevent parallel webhook-triggered runs from creating conflicting PRs or race conditions.
+
+### How It Works
+
+```yaml
+concurrency:
+  group: figma-webhook-sync
+  cancel-in-progress: true    # Latest webhook wins
+```
+
+1. All webhook sync runs share the concurrency group `figma-webhook-sync`
+2. If a new webhook fires while a previous run is still executing, the old run is cancelled
+3. Only the most recent Figma state is synced — intermediate saves are safely skipped
+
+### Why This Matters
+
+- Designers often save multiple times in quick succession
+- Without concurrency control, parallel runs could create duplicate PRs or merge conflicts
+- `cancel-in-progress: true` ensures only the latest token state reaches the PR
+
+### Guard Matrix Update
+
+| # | Guard | Pull | Push | CC | Verify | Webhook |
+|---|-------|------|------|----|--------|---------|
+| 12. Passcode Validation | — | — | — | — | ✅ |
+| 13. Concurrency Control | — | — | — | — | ✅ |
 
 ---
 

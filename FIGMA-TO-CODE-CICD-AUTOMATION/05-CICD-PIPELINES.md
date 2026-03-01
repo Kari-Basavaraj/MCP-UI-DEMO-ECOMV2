@@ -1,6 +1,6 @@
 # 05 — CI/CD Pipelines
 
-> All 5 GitHub Actions workflows explained step-by-step. Complete YAML reference.
+> All 6 GitHub Actions workflows explained step-by-step. Complete YAML reference.
 
 ---
 
@@ -13,6 +13,7 @@
 | **Figma Push Variables**     | `figma-push-variables.yml`   | Daily 04:00 UTC + manual                              | Push CSS values → Figma                    | Yes (with `--apply`) |
 | **Figma Code Connect Sync**  | `figma-codeconnect-sync.yml` | Push to code-connect paths + daily 03:30 UTC + manual | Generate, verify, publish mappings         | Yes (publish)        |
 | **Figma Webhook Sync** ⚡    | `figma-webhook-sync.yml`     | Figma webhook → `repository_dispatch` + manual        | Pull + build widgets + PR + auto-merge     | No                   |
+| **Webhook Health Monitor** 🩺 | `webhook-health.yml`         | Daily 06:00 UTC + manual                              | Verify webhooks alive, alert on failure    | No                   |
 
 ### Execution Timeline (Daily Schedule + Webhook)
 
@@ -329,6 +330,46 @@ See [10-WEBHOOK-SETUP.md](./10-WEBHOOK-SETUP.md) for webhook receiver deployment
 
 ---
 
+## Workflow 6: Webhook Health Monitor 🩺
+
+**File**: `.github/workflows/webhook-health.yml`  
+**Purpose**: Daily automated health check ensuring webhooks, endpoints, and dispatch connectivity remain operational. Creates GitHub Issues on failure.
+
+### Trigger — Health Monitor
+
+```yaml
+on:
+  schedule:
+    - cron: '0 6 * * *'    # Daily at 06:00 UTC
+  workflow_dispatch:         # Manual trigger
+```
+
+### Steps — Health Monitor
+
+| Step | What it does |
+|------|--------------|
+| Check Figma webhook status | Calls Figma API to verify webhooks are `ACTIVE` |
+| Check endpoint reachability | HTTP GET to webhook receiver URL |
+| Check dispatch connectivity | Verifies GitHub PAT can dispatch to this repo |
+| Create issue on failure | Opens GitHub Issue with label `webhook-alert` |
+| Close stale alerts | Auto-closes old `webhook-alert` issues when checks pass |
+
+### Required Configuration
+
+| Item | Purpose |
+|------|---------|
+| `FIGMA_ACCESS_TOKEN` secret | Query Figma webhook API |
+| `FIGMA_WEBHOOK_URL` variable | Endpoint URL to health-check |
+| Repository Issues enabled | For alert creation |
+
+### Alert Behavior
+
+- **Failure**: Creates a new GitHub Issue with title `⚠️ Webhook Health Check Failed` and label `webhook-alert`
+- **Recovery**: When all checks pass, any open `webhook-alert` issues are automatically closed with a recovery comment
+- **Deduplication**: Only one alert issue is open at a time
+
+---
+
 ## Artifact Downloads
 
 Every workflow uploads artifacts that can be downloaded from the GitHub Actions run page:
@@ -339,7 +380,8 @@ Every workflow uploads artifacts that can be downloaded from the GitHub Actions 
 | Pull Variables     | `figma-pull-artifacts`        | Raw variables, normalized, IDs, verification reports |
 | Push Variables     | `figma-push-artifacts`        | Probe report, push report, verification reports      |
 | Code Connect Sync  | `figma-codeconnect-artifacts` | Generated mappings, publish report                   |
-| Webhook Sync       | *(no artifact upload)*        | Changes captured in PR diff                          |
+| Webhook Sync       | `sync-artifacts`              | Raw + normalized variables, verification reports     |
+| Health Monitor     | *(no artifact upload)*        | Results logged in workflow output + GitHub Issues     |
 
 ### Download via CLI
 

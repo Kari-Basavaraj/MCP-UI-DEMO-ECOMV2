@@ -30,7 +30,7 @@ This playbook documents a **production-grade, bidirectional CI/CD pipeline** tha
 | [06-CODE-CONNECT.md](./06-CODE-CONNECT.md) | Figma Code Connect: component linking, publish, verify |
 | [07-TROUBLESHOOTING.md](./07-TROUBLESHOOTING.md) | Common errors, diagnostic commands, recovery procedures |
 | [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) | Every config file, key, and value documented |
-| [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) | All 11 safety guards and how they protect production |
+| [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) | All 13 safety guards and how they protect production |
 | [10-WEBHOOK-SETUP.md](./10-WEBHOOK-SETUP.md) | Real-time webhook-triggered sync: Figma save → PR in seconds |
 | [11-MANUAL-DEVELOPER-GUIDE.md](./11-MANUAL-DEVELOPER-GUIDE.md) | Step-by-step manual local workflow — no deployment required |
 | [12-PRODUCTION-AUTOMATION.md](./12-PRODUCTION-AUTOMATION.md) | Zero-touch deployed pipeline: webhook → PR → auto-merge |

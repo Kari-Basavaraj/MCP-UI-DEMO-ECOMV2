@@ -402,4 +402,42 @@ npm run figma:codeconnect:verify
 
 ---
 
+## Webhook & Automation Errors
+
+### Figma Webhook Not Firing
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| No `repository_dispatch` after Figma save | Webhook inactive or deleted | Run `node scripts/figma-webhook-manage.mjs list` to verify status is `ACTIVE` |
+| Webhook fires but wrong file | Team has multiple files | Check file key filter in webhook receiver — only matching `FIGMA_FILE_KEY` should dispatch |
+| Webhook was active, now shows `INACTIVE` | Passcode rotation or endpoint 5xx errors | Re-create webhook via `figma-webhook-manage.mjs create` |
+
+### Webhook Receiver Not Dispatching
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Receiver returns 401 | Missing or wrong `FIGMA_WEBHOOK_SECRET` | Verify env var matches the passcode used when registering the webhook |
+| Receiver returns 200 but no GitHub workflow runs | Invalid `GITHUB_DISPATCH_TOKEN` or wrong repo | Check PAT has `repo` scope, verify `GITHUB_REPO` is `owner/repo` format |
+| `fetch` to GitHub API fails | Network/firewall issue | Check outbound HTTPS from receiver host to `api.github.com` |
+
+### Webhook Sync Workflow Fails
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Workflow not triggered | Event type mismatch | Ensure dispatch sends `figma_file_update` or `figma_library_publish` (matches `repository_dispatch.types`) |
+| PR not created | No actual token changes | Expected behavior — workflow logs "No changes detected" and exits cleanly |
+| PR created but auto-merge fails | Auto-merge not enabled on repo | Run `gh api repos/OWNER/REPO -X PATCH -f allow_auto_merge=true` |
+| PR created but merge blocked | Branch protection requires reviews | Add a `CODEOWNERS` bypass or approve the PR manually |
+| Concurrent runs interfere | Multiple rapid Figma saves | Concurrency group `cancel-in-progress: true` ensures only latest runs |
+
+### Health Monitor Issues
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Daily health check always fails | `FIGMA_WEBHOOK_URL` variable not set | Set via `gh variable set FIGMA_WEBHOOK_URL --body "https://your-domain/api/figma-webhook"` |
+| Stale `webhook-alert` issues pile up | Auto-close logic not finding old issues | Check that the `webhook-alert` label exists on the repo |
+| Health check passes but webhook still broken | Endpoint returns 200 on GET but POST handling broken | Test manually: `curl -X POST your-endpoint -H 'Content-Type: application/json' -d '{}'` |
+
+---
+
 _Next: [08-CONFIGURATION-REFERENCE.md](./08-CONFIGURATION-REFERENCE.md) — Every config file, key, and value_

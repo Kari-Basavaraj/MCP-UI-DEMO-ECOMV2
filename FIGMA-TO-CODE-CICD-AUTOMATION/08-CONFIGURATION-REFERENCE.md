@@ -346,4 +346,59 @@ All paths are defined in `scripts/figma-lib.mjs`:
 
 ---
 
-_Next: [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) — All 11 safety guards explained_
+## Webhook & Production Configuration
+
+### Webhook Receiver Environment Variables
+
+These are used by the Next.js API route (`web-client/app/api/figma-webhook/route.ts`) and/or the standalone receiver (`scripts/figma-webhook-receiver.mjs`):
+
+| Variable | Purpose | Example |
+|----------|---------|---------|
+| `FIGMA_WEBHOOK_SECRET` | Passcode to validate incoming Figma webhooks | `mcpui-wh-2026-ds-test` |
+| `GITHUB_DISPATCH_TOKEN` | GitHub PAT with `repo` scope for `repository_dispatch` | `ghp_...` |
+| `GITHUB_REPO` | Target repo in `owner/repo` format | `Kari-Basavaraj/MCP-UI-DEMO-ECOMV2` |
+| `FIGMA_FILE_KEY` | Figma file key to filter webhooks | `dbPjFeLfAFp8Sz9YGPs0CZ` |
+
+### Health Monitor Variables (GitHub)
+
+| Variable | Purpose | Set via |
+|----------|---------|---------|
+| `FIGMA_WEBHOOK_URL` | Webhook receiver URL for health check pings | `gh variable set FIGMA_WEBHOOK_URL --body "https://..."` |
+
+### Vercel Configuration
+
+**File**: `web-client/vercel.json`
+
+```json
+{
+  "functions": {
+    "app/api/figma-webhook/route.ts": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/figma-webhook",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
+  ]
+}
+```
+
+### Webhook-Related Files
+
+| File | Purpose |
+|------|---------|
+| `web-client/app/api/figma-webhook/route.ts` | Production webhook receiver (deploys with Next.js app) |
+| `scripts/figma-webhook-receiver.mjs` | Standalone local/dev webhook receiver (port 4848) |
+| `scripts/figma-webhook-manage.mjs` | CLI tool for webhook CRUD (create/list/delete) |
+| `.github/workflows/figma-webhook-sync.yml` | GitHub Actions workflow triggered by webhooks |
+| `.github/workflows/webhook-health.yml` | Daily health monitor for webhook infrastructure |
+| `web-client/vercel.json` | Vercel deployment config with webhook route settings |
+
+---
+
+_Next: [09-SAFETY-PATTERNS.md](./09-SAFETY-PATTERNS.md) — All 13 safety guards explained_
