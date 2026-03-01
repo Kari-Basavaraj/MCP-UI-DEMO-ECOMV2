@@ -36,6 +36,19 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
+      - name: Check Figma secrets
+        run: |
+          if [ -z "$FIGMA_ACCESS_TOKEN" ]; then
+            echo "::error::FIGMA_ACCESS_TOKEN secret is not set. Configure in Settings > Secrets > Actions."
+            exit 1
+          fi
+          if [ -z "$FIGMA_FILE_KEY" ]; then
+            echo "::error::FIGMA_FILE_KEY secret is not set. Configure in Settings > Secrets > Actions."
+            exit 1
+          fi
+          echo "Figma secrets configured"
+
+
       - name: Generate Code Connect mappings
         run: npm run figma:codeconnect:generate
 
