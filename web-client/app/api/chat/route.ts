@@ -68,16 +68,16 @@ export async function POST(req: Request) {
 
     let mcpClient;
     if (isVercel && !hasExternalServers) {
-      // Production: use embedded bridge (no HTTP, same-origin widget URLs)
-      const origin = process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : '';
-      mcpClient = await initializeEmbeddedMCPTools(origin, userId);
+      // Production: use embedded bridge (no HTTP).
+      // IMPORTANT: Use empty string for same-origin widget fetch.
+      // VERCEL_URL is the unique deployment URL, NOT the production alias,
+      // so using it would cause cross-origin fetch failures in the browser.
+      mcpClient = await initializeEmbeddedMCPTools('', userId);
     } else if (normalizedMcpServers.length > 0) {
       // Local dev or external servers: use HTTP bridge
       mcpClient = await initializeMCPClients(normalizedMcpServers, req.signal, userId);
     } else {
-      // Fallback: try embedded bridge
+      // Fallback: try embedded bridge (same-origin)
       mcpClient = await initializeEmbeddedMCPTools('', userId);
     }
     cleanup = mcpClient.cleanup;
