@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-02T08:51:47.859Z",
+  "generatedAt": "2026-03-02T08:57:32.590Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -168,6 +168,20 @@
       "collectionName": "Typography",
       "isDefault": true
     },
+    "7:3": {
+      "modeId": "7:3",
+      "modeName": "Value",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
+      "isDefault": true
+    },
+    "3012:0": {
+      "modeId": "3012:0",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:3012:1204",
+      "collectionName": "MCP UI Widgets",
+      "isDefault": true
+    },
     "3919:21": {
       "modeId": "3919:21",
       "modeName": "SDS Light",
@@ -182,25 +196,11 @@
       "collectionName": "Color",
       "isDefault": false
     },
-    "3012:0": {
-      "modeId": "3012:0",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:3012:1204",
-      "collectionName": "MCP UI Widgets",
-      "isDefault": true
-    },
     "3919:19": {
       "modeId": "3919:19",
       "modeName": "Value",
       "collectionId": "VariableCollectionId:3919:36421",
       "collectionName": "Color Primitives",
-      "isDefault": true
-    },
-    "7:3": {
-      "modeId": "7:3",
-      "modeName": "Value",
-      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-      "collectionName": "Typography",
       "isDefault": true
     },
     "28:2": {
@@ -363,8 +363,14 @@
       "--sds-typo-title-page-size-large": "64px",
       "--sds-typo-title-page-size-small": "40px"
     },
+    "7:3": {
+      "--sds-typo-fonts-font-sans": "Geist",
+      "--sds-typo-leading-leading-tight": "20px",
+      "--sds-typo-size-text-sm": "14px",
+      "--sds-typo-weight-font-normal": "400px"
+    },
     "3919:21": {
-      "--sds-color-background-brand-default": "#2c2c2c",
+      "--sds-color-background-brand-default": "#00ffe1",
       "--sds-color-background-brand-hover": "#1e1e1e",
       "--sds-color-background-brand-secondary": "#e6e6e6",
       "--sds-color-background-brand-secondary-hover": "#d9d9d9",
@@ -743,12 +749,6 @@
       "--sds-color-yellow-800": "#682d03",
       "--sds-color-yellow-900": "#522504"
     },
-    "7:3": {
-      "--sds-typo-fonts-font-sans": "Geist",
-      "--sds-typo-leading-leading-tight": "20px",
-      "--sds-typo-size-text-sm": "14px",
-      "--sds-typo-weight-font-normal": "400px"
-    },
     "28:2": {
       "--sds-color-black-100": "#000000"
     }
@@ -763,7 +763,7 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#2c2c2c",
+          "value": "#00ffe1",
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:3919:36428"
@@ -8551,10 +8551,10 @@
       "9:6": 5,
       "9:7": 52,
       "58:0": 35,
+      "7:3": 4,
       "3919:21": 137,
       "3919:22": 137,
       "3919:19": 100,
-      "7:3": 4,
       "28:2": 1
     }
   }
