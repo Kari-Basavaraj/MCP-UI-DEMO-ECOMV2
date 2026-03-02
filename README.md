@@ -117,6 +117,51 @@ Widgets are served as MCP UI resources via `ui://ecommerce/*.html`, including:
 Canonical token source is `mcp-server/tokens`.
 Web-client token files live in `web-client/tokens` and should be kept aligned with the canonical source.
 
+## Figma → Production Pipeline (CI/CD)
+
+Design token changes in Figma are automatically synced to production. No manual steps required.
+
+### How it works
+
+```
+Figma Publish → LIBRARY_PUBLISH webhook → Vercel endpoint → GitHub Actions → Production
+```
+
+1. Designer changes a variable in Figma (e.g. brand color)
+2. Designer clicks **Publish** in the Figma Library Manager
+3. Figma sends a `LIBRARY_PUBLISH` webhook to the Vercel endpoint
+4. Endpoint deduplicates (30s window) and dispatches to GitHub Actions
+5. Workflow runs: pull variables → normalize → generate CSS → sync tokens → rebuild widgets → commit & push
+6. Vercel auto-deploys from the push
+
+**Time to production:** ~2 minutes from Figma Publish.
+
+### Key files
+
+| File | Purpose |
+|------|---------|
+| `web-client/app/api/figma-webhook/route.ts` | Webhook receiver with dedup |
+| `.github/workflows/figma-webhook-sync.yml` | Full sync workflow |
+| `scripts/figma-pull-variables.mjs` | Pull variables from Figma API |
+| `scripts/figma-normalize-variables.mjs` | Normalize the variable payload |
+| `scripts/figma-generate-tokens.mjs` | Generate CSS token files |
+| `scripts/sync-tokens.mjs` | Copy tokens to web-client |
+| `mcp-server/tokens/figma-tokens-light.css` | Generated light theme tokens |
+
+### Required secrets (GitHub Actions)
+
+- `FIGMA_ACCESS_TOKEN` — Figma API personal access token
+- `FIGMA_FILE_KEY` — Figma file key (e.g. `dbPjFeLfAFp8Sz9YGPs0CZ`)
+- `GH_PAT_TOKEN` — GitHub PAT with `repo` scope (needed to trigger Vercel from push)
+- `VERCEL_DEPLOY_HOOK` — Vercel deploy hook URL
+
+### Required env vars (Vercel)
+
+- `GITHUB_DISPATCH_TOKEN` — GitHub PAT for dispatching
+- `GITHUB_REPO` — e.g. `Kari-Basavaraj/MCP-UI-DEMO-ECOMV2`
+- `FIGMA_FILE_KEY` — Same as above
+- `FIGMA_WEBHOOK_SECRET` — Set to empty string (passcode check skipped)
+
 ## Testing
 
 Server test suite:
@@ -136,3 +181,4 @@ npx playwright test tests/visual-diff.spec.ts
 - [docs/decision-log.md](docs/decision-log.md)
 - [docs/code reports/codebase-analysis-report.md](docs/code%20reports/codebase-analysis-report.md)
 - [docs/code reports/cleanup-hardening-plan.md](docs/code%20reports/cleanup-hardening-plan.md)
+- [docs/code reports/figma-cicd-rollout-log.md](docs/code%20reports/figma-cicd-rollout-log.md)

@@ -212,3 +212,35 @@
 - 2026-03-02T09:41:34.318Z figma:codeconnect:generate mappings=12 missing=0
 - 2026-03-02T09:41:34.456Z figma:codeconnect:verify strict=false missingRequired=0 missingSourceFiles=0 placeholderNodeIds=0
 - 2026-03-02T09:41:34.468Z figma:verify pass failures=0
+
+# Pipeline Hardening Session (2026-03-02)
+
+## Timeline
+
+- 2026-03-02T08:00Z  Discovered pipeline broken: Figma color change (#FF11A8) never reached production
+- 2026-03-02T08:10Z  Root cause: webhook passcode mismatch (webhooks had empty passcode, Vercel expected non-empty)
+- 2026-03-02T08:15Z  Fix: set FIGMA_WEBHOOK_SECRET to empty on Vercel, recreated webhooks with matching passcode
+- 2026-03-02T08:20Z  Replaced expired Figma API token with new one
+- 2026-03-02T08:24Z  Orange #F5C20D test: FILE_UPDATE webhook triggered, pipeline ran, confirmed on production
+- 2026-03-02T08:40Z  Purple #5A18FF test: variable change did not trigger FILE_UPDATE; had to use Figma Library Publish
+- 2026-03-02T08:45Z  Insight: LIBRARY_PUBLISH is the only reliable trigger for variable changes
+- 2026-03-02T08:50Z  Purple confirmed on production via LIBRARY_PUBLISH webhook
+- 2026-03-02T09:00Z  Black #2C2C2C test: confirmed on production
+- 2026-03-02T09:03Z  Identified email spam from 3-5 cancelled runs per Publish
+- 2026-03-02T09:03Z  Fix: endpoint only dispatches LIBRARY_PUBLISH, deleted FILE_UPDATE webhook
+- 2026-03-02T09:05Z  Still getting 4 dispatches: Figma sends multiple LIBRARY_PUBLISH events per Publish
+- 2026-03-02T09:11Z  Run failed: git push rejected due to rebase conflicts from concurrent run
+- 2026-03-02T09:11Z  Root cause: git pull --rebase || true swallows conflicts, leaves broken tree
+- 2026-03-02T09:15Z  Fix: proper conflict handling (abort rebase, fetch origin, re-check, re-commit or exit 0)
+- 2026-03-02T09:20Z  Added GitHub API dedup (check recent runs before dispatching)
+- 2026-03-02T09:22Z  Test: 1 dispatch fired, duplicate blocked, all 20 steps passed
+- 2026-03-02T09:25Z  Still got 1 cancelled run: simultaneous webhooks both passed API check (too slow)
+- 2026-03-02T09:30Z  Fix: replaced GitHub API dedup with instant in-memory 30s timestamp lock
+- 2026-03-02T09:30Z  Fix: changed concurrency to cancel-in-progress=false (queued runs succeed with no changes)
+- 2026-03-02T09:35Z  Final test: 2 dispatches, both succeeded (no cancellations, no failures, no emails)
+
+## Outcome
+
+- Pipeline fully operational: Figma Publish to Production in ~2 minutes
+- Zero cancelled runs, zero failures, zero email spam
+- 5 colors tested end-to-end: Pink, Orange, Purple, Black, plus final test color

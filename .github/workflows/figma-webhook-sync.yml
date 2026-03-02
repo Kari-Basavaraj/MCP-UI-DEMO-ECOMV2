@@ -1,10 +1,15 @@
 # ============================================================================
 # Figma Webhook → Auto-Sync (Production)
 # ============================================================================
-# Fully automated: Figma save → webhook → GitHub dispatch → this workflow
-#   → pull tokens → generate CSS → rebuild widgets → PR → auto-merge
+# Fully automated: Figma Publish → LIBRARY_PUBLISH webhook → Vercel endpoint
+#   → GitHub repository_dispatch → this workflow → pull tokens → generate CSS
+#   → rebuild widgets → commit & push → Vercel auto-deploy
 #
-# Zero manual steps. Concurrency-safe. Self-healing.
+# Key design decisions (2026-03-02 hardening):
+#   - Only LIBRARY_PUBLISH triggers this (not FILE_UPDATE)
+#   - cancel-in-progress: false → avoids cancelled-run email spam
+#   - Push step has conflict recovery for concurrent runs
+#   - Vercel endpoint has 30s in-memory dedup lock
 # ============================================================================
 
 name: Figma Webhook Sync
@@ -12,7 +17,7 @@ name: Figma Webhook Sync
 on:
   repository_dispatch:
     types:
-      - figma_library_publish
+      - figma_library_publish  # Only event type — FILE_UPDATE is unreliable for variable changes
 
   workflow_dispatch:
     inputs:
@@ -154,7 +159,16 @@ jobs:
               -m "Request ID: ${RID}" \
               -m "Pipeline: pull > normalize > generate > sync > build > verify"
 
-            # Pull with rebase to handle any concurrent pushes
+            # ── Conflict-resilient push ──────────────────────────
+            # Figma can send 2–4 LIBRARY_PUBLISH events per Publish, so
+            # multiple workflow runs may try to push at the same time.
+            # If rebase fails (because another run already pushed), we:
+            #   1. Abort the rebase
+            #   2. Reset to origin/main
+            #   3. Re-check if our generated files differ from origin
+            #   4. If no diff → another run already pushed → exit 0 (success)
+            #   5. If still different → re-commit and push
+            # This prevents the "failed push" error that triggers failure emails.
             if ! git pull --rebase origin main 2>&1; then
               echo "::warning::Rebase conflict — checking if changes were already pushed by concurrent run"
               git rebase --abort 2>/dev/null || true

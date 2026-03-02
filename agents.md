@@ -511,4 +511,62 @@ Each connector uses same `example()` JSX as the Code-Match connectors but points
 1. `Icons.figma.tsx` and `Library.figma.tsx` cannot be published until their referenced Figma nodes are promoted to components or the generators are updated to skip non-component nodes.
 2. Figma component promotions are local to the current Figma session — they need to be saved/published in Figma to persist for API consumers.
 
-*Last updated: 2026-03-01*
+---
+
+## 14. Webhook Pipeline Hardening (Added 2026-03-02)
+
+### Context
+The Figma→Production CI/CD pipeline was built across multiple sessions but had several silent failures that only surfaced during live testing with real Figma Publish events.
+
+### Root Causes Found & Fixed
+
+| # | Problem | Root Cause | Fix | Commit |
+|---|---------|-----------|-----|--------|
+| 1 | Pipeline never triggered from Figma | Webhook passcode mismatch — webhooks created with empty passcode, Vercel expected non-empty | Set `FIGMA_WEBHOOK_SECRET=""` on Vercel so endpoint skips validation | — |
+| 2 | Variable changes didn't trigger FILE_UPDATE | Figma Variables panel edits don't reliably fire FILE_UPDATE webhooks | Use LIBRARY_PUBLISH only — user must click Publish in Library Manager | Deleted FILE_UPDATE webhook |
+| 3 | 3–5 duplicate dispatches per Publish → cancelled runs → email spam | Both FILE_UPDATE + LIBRARY_PUBLISH fired; Figma sends 2–4 events per Publish | Endpoint only dispatches LIBRARY_PUBLISH; in-memory 30s dedup lock | `b842daf`, `441bc7b`, `1d9c74d` |
+| 4 | Surviving run failed at push step | `git pull --rebase \|\| true` swallowed conflicts, left tree broken | Proper conflict handling: abort rebase → fetch origin → re-check diff → re-commit or exit 0 | `4a06d3e` |
+| 5 | Concurrency cancel-in-progress → cancelled-run emails | `cancel-in-progress: true` cancels queued runs, GitHub emails on cancellation | Changed to `cancel-in-progress: false` — second run queues, finds "no changes", exits success | `1d9c74d` |
+
+### Final Pipeline Architecture
+```
+Figma Publish (user clicks "Publish" in Library Manager)
+  → Figma sends LIBRARY_PUBLISH webhook (may send 2–4 duplicates)
+  → Vercel endpoint (/api/figma-webhook)
+    → In-memory dedup (30s window) blocks duplicates on same instance
+    → Dispatches repository_dispatch to GitHub (figma_library_publish)
+  → GitHub Actions workflow (figma-webhook-sync.yml)
+    → concurrency: queue (no cancel-in-progress)
+    → Pull variables → Normalize → Generate CSS → Sync → Build widgets → Copy → Verify
+    → Commit & push with conflict resilience
+    → Trigger Vercel deploy hook
+  → Vercel auto-deploys from push
+  → Production updated (~2 min total)
+```
+
+### Key Infrastructure
+| Component | Value |
+|-----------|-------|
+| Webhook ID | 3994706 (LIBRARY_PUBLISH only) |
+| Endpoint | `https://mcp-ui-demo-ecomv2.vercel.app/api/figma-webhook` |
+| Workflow | `.github/workflows/figma-webhook-sync.yml` |
+| Dedup | In-memory 30s lock in Vercel endpoint |
+| Concurrency | `group: figma-webhook-sync`, `cancel-in-progress: false` |
+| Push auth | `GH_PAT_TOKEN` secret (not GITHUB_TOKEN — needed to trigger Vercel) |
+| FIGMA_WEBHOOK_SECRET | Empty string — passcode check skipped |
+
+### Anti-Patterns Discovered (DO NOT REPEAT)
+1. **`git pull --rebase || true`** — Swallows merge conflicts silently. The tree is left in a broken state and `git push` fails. Always check rebase exit code and handle conflicts explicitly.
+2. **`cancel-in-progress: true`** — Causes email spam because GitHub notifies on cancelled runs. Use `false` so duplicate runs queue, find "no changes", and exit success silently.
+3. **GitHub API dedup in serverless** — Querying `/actions/runs` to check for recent dispatches is too slow; concurrent webhook requests both pass the check before either dispatch is registered. Use in-memory state instead.
+4. **FILE_UPDATE webhook** — Unreliable for variable-only changes. LIBRARY_PUBLISH is the only reliable trigger.
+5. **Trusting webhook passcode setup** — Always verify passcode delivery works end-to-end with a test POST, not just by checking config.
+
+### Color Test Scorecard
+All verified on production (`mcp-ui-demo-ecomv2.vercel.app`):
+- Pink `#FF11A8` ✅
+- Orange `#F5C20D` ✅
+- Purple `#5A18FF` ✅
+- Black `#2C2C2C` ✅ (restored to default)
+
+*Last updated: 2026-03-02*
