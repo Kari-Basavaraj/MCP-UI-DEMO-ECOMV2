@@ -21,17 +21,20 @@
 Before running any pipeline command, ensure:
 
 ```bash
-# 1. Set environment variables (or add to .env / shell profile)
+# 1. Copy the env template and fill in real values
+cp .env.example .env.local
+
+# 2. Set Figma token (or add to .env.local)
 export FIGMA_ACCESS_TOKEN="figd_YOUR_PERSONAL_ACCESS_TOKEN"
 export FIGMA_FILE_KEY="dbPjFeLfAFp8Sz9YGPs0CZ"
 export FIGMA_REGION="us"
 
-# 2. Install dependencies (if not done)
+# 3. Install dependencies (if not done)
 npm install
 npm --prefix mcp-server install
 npm --prefix web-client install
 
-# 3. Verify API connectivity
+# 4. Verify API connectivity
 npm run figma:probe
 ```
 
@@ -78,6 +81,14 @@ cp .env.example .env.local
 ```
 
 The webhook receiver auto-loads `.env.local` from the project root — no need to manually export variables.
+
+### Without Webhook Receiver
+
+If you don't need webhook automation (e.g., just testing UI):
+
+```bash
+npx concurrently "npm run dev:server" "npm run dev:client"
+```
 
 ### What Happens When You Save in Figma
 
@@ -286,17 +297,17 @@ npm run figma:codeconnect:publish -- --apply
 node scripts/figma-webhook-manage.mjs list --team-id YOUR_TEAM_ID
 
 # Create a new FILE_UPDATE webhook
-node scripts/figma-webhook-manage.mjs create \
-  --url https://your-receiver-url/webhook \
-  --team-id YOUR_TEAM_ID \
-  --passcode "your-secret-passcode" \
+node scripts/figma-webhook-manage.mjs create \\
+  --url https://your-receiver-url/webhook \\
+  --team-id YOUR_TEAM_ID \\
+  --passcode "your-secret-passcode" \\
   --event-type FILE_UPDATE
 
 # Create a LIBRARY_PUBLISH webhook
-node scripts/figma-webhook-manage.mjs create \
-  --url https://your-receiver-url/webhook \
-  --team-id YOUR_TEAM_ID \
-  --passcode "your-secret-passcode" \
+node scripts/figma-webhook-manage.mjs create \\
+  --url https://your-receiver-url/webhook \\
+  --team-id YOUR_TEAM_ID \\
+  --passcode "your-secret-passcode" \\
   --event-type LIBRARY_PUBLISH
 
 # Delete a webhook
@@ -347,9 +358,12 @@ node scripts/figma-webhook-manage.mjs test --url http://localhost:4848
 
 | Command | What It Does |
 |---------|--------------|
-| `npm --prefix mcp-server run build` | Build all 12 widgets |
-| `cd mcp-server && node src/index.js` | Start MCP server on port 8787 |
-| `cd web-client && npm run dev` | Start web client on port 3000 |
+| `npm run dev` | **Start everything** — MCP server + web client + webhook receiver |
+| `npm run figma:sync:local` | Pull from Figma + rebuild widgets locally (~10s) |
+| `npm --prefix mcp-server run build` | Build all 12 widgets only |
+| `npm run dev:server` | Start MCP server alone (port 8787) |
+| `npm run dev:client` | Start web client alone (port 3000) |
+| `npm run dev:webhook` | Start webhook receiver alone (port 4848) |
 
 ---
 
