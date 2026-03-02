@@ -38,7 +38,7 @@ function ProviderBadge({
       <img
         src={logoSrc}
         alt={`${providerName} logo`}
-        className="h-3.5 w-3.5 object-contain opacity-90"
+        className="h-3.5 w-3.5 object-contain opacity-90 dark:invert"
         loading="lazy"
         referrerPolicy="no-referrer"
       />

@@ -12,7 +12,6 @@ name: Figma Webhook Sync
 on:
   repository_dispatch:
     types:
-      - figma_file_update
       - figma_library_publish
 
   workflow_dispatch:
@@ -153,6 +152,8 @@ jobs:
               -m "File key: ${FKEY}" \
               -m "Request ID: ${RID}" \
               -m "Pipeline: pull > normalize > generate > sync > build > verify"
+            # Pull with rebase to handle any concurrent pushes
+            git pull --rebase origin main || true
             git push origin main
             echo "Pushed token changes directly to main — Vercel will auto-deploy."
           fi

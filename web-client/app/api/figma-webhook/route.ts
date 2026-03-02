@@ -28,10 +28,15 @@ interface FigmaWebhookPayload {
   deleted_components?: unknown[];
 }
 
+// Only dispatch on LIBRARY_PUBLISH — it fires reliably when you click
+// "Publish" in Figma. FILE_UPDATE also fires on publish but creates
+// duplicate dispatches that get cancelled and spam email notifications.
 const EVENT_TO_DISPATCH: Record<string, string> = {
-  FILE_UPDATE: 'figma_file_update',
   LIBRARY_PUBLISH: 'figma_library_publish',
 };
+
+// FILE_UPDATE events are acknowledged but not dispatched
+const ACKNOWLEDGED_EVENTS = new Set(['FILE_UPDATE', 'LIBRARY_PUBLISH', 'PING']);
 
 export async function POST(req: Request) {
   const requestId = crypto.randomUUID();
@@ -83,6 +88,15 @@ export async function POST(req: Request) {
   // ── Map event type ────────────────────────────────────────────
   const dispatchType = EVENT_TO_DISPATCH[body.event_type];
   if (!dispatchType) {
+    // Acknowledge known events that we intentionally skip dispatching
+    if (body.event_type === 'FILE_UPDATE') {
+      console.log(`[${requestId}] ⏭ FILE_UPDATE received but skipped (only LIBRARY_PUBLISH triggers pipeline)`);
+      return Response.json({
+        ok: true,
+        message: 'FILE_UPDATE acknowledged — pipeline only triggers on LIBRARY_PUBLISH',
+        requestId,
+      });
+    }
     return Response.json({
       ok: true,
       message: `Ignored — unhandled event type: ${body.event_type}`,

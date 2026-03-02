@@ -151,24 +151,41 @@ const TOOL_STATUS_LABELS: Record<string, { loading: string; done: string }> = {
   remove_from_wishlist: { loading: "Removing from wishlist...", done: "Removed from wishlist" },
 };
 
+/* Product name lookup for natural language messages */
+const PRODUCT_NAMES: Record<number, string> = {
+  1: "Nike Air Max 90",
+  2: "Classic Crew T-Shirt",
+  3: "Sport Flex Cap",
+  4: "Urban Bomber Jacket",
+  5: "Ultra Boost Sneakers",
+  6: "Chronograph Watch",
+  7: "Trail Utility Backpack",
+  8: "Flex Training Shorts",
+};
+
+function productLabel(id: any): string {
+  const name = PRODUCT_NAMES[Number(id)];
+  return name || `product ${id}`;
+}
+
 /* Map tool actions to natural language messages for the LLM */
 const ACTION_TO_NATURAL_LANGUAGE: Record<string, (params: any) => string> = {
-  add_to_cart: (p) => `Add ${p.quantity ? p.quantity + " of " : ""}product ${p.productId} to my cart`,
-  remove_from_cart: (p) => `Remove product ${p.productId} from my cart`,
+  add_to_cart: (p) => `Add ${p.quantity ? p.quantity + " of " : ""}${productLabel(p.productId)} to my cart`,
+  remove_from_cart: (p) => `Remove ${productLabel(p.productId)} from my cart`,
   get_cart: () => "Show me my cart",
   get_cart_summary: () => "Show me my cart summary",
   get_products: () => "Show me the products",
   search_products: (p) => `Search for "${p.query}"`,
   filter_products: (p) => `Show me products in the ${p.category} category`,
-  get_product_detail: (p) => `Show me details for product ${p.productId}`,
-  get_price_info: (p) => `What's the price of product ${p.productId}?`,
+  get_product_detail: (p) => `Show me details for ${productLabel(p.productId)}`,
+  get_price_info: (p) => `What's the price of ${productLabel(p.productId)}?`,
   get_categories: () => "Show me the product categories",
   checkout: () => "I'd like to checkout",
   place_order: (p) => `Place my order${p.shippingAddress ? " to " + p.shippingAddress : ""}`,
-  get_reviews: (p) => `Show me reviews for product ${p.productId}`,
+  get_reviews: (p) => `Show me reviews for ${productLabel(p.productId)}`,
   get_wishlist: () => "Show me my wishlist",
-  add_to_wishlist: (p) => `Add product ${p.productId} to my wishlist`,
-  remove_from_wishlist: (p) => `Remove product ${p.productId} from my wishlist`,
+  add_to_wishlist: (p) => `Add ${productLabel(p.productId)} to my wishlist`,
+  remove_from_wishlist: (p) => `Remove ${productLabel(p.productId)} from my wishlist`,
 };
 
 /* Contextual follow-up suggestions shown after a widget renders */

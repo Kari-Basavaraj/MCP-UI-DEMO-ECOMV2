@@ -22,10 +22,7 @@ function validate(): ValidationError[] {
     const input = document.getElementById(`field-${f.name}`) as HTMLInputElement | null;
     if (!input) continue;
     const value = input.value.trim();
-    if (!value) {
-      errors.push({ field: f.name, message: `${f.label} is required` });
-      continue;
-    }
+    if (!value) continue; // skip empty fields — not mandatory
     if (f.name === "pin" && !/^\d{6}$/.test(value)) {
       errors.push({ field: f.name, message: "Please enter a valid PIN code" });
     }

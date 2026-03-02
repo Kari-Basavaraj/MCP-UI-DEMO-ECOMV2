@@ -21,10 +21,15 @@
       font-family: inherit;
     }
 
+    @media (max-width: 560px) {
+      .pd-card { flex-direction: column; }
+      .pd-image { flex: none !important; max-width: 100% !important; min-height: 220px !important; }
+      .pd-info { padding: 16px !important; }
+    }
+
     /* Image half */
     .pd-image {
-      flex: 0 0 50%;
-      max-width: 430px;
+      flex: 1 1 50%;
       min-height: 350px;
       position: relative;
       background: var(--sds-color-background-default-secondary);
