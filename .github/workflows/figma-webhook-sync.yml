@@ -139,13 +139,14 @@ jobs:
             echo "Token changes detected in $CHANGED files:"
             git diff --cached --stat
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
-            git commit -m "chore(figma): auto-sync variables from webhook
-
-Triggered by: ${{ github.event.action || 'manual' }}
-File key: ${{ github.event.client_payload.file_key || 'N/A' }}
-Request ID: ${{ github.event.client_payload.request_id || 'N/A' }}
-
-Pipeline: pull → normalize → generate → sync → build → verify"
+            TRIGGER="${{ github.event.action || 'manual' }}"
+            FKEY="${{ github.event.client_payload.file_key || 'N/A' }}"
+            RID="${{ github.event.client_payload.request_id || 'N/A' }}"
+            git commit -m "chore(figma): auto-sync variables from webhook" \
+              -m "Triggered by: ${TRIGGER}" \
+              -m "File key: ${FKEY}" \
+              -m "Request ID: ${RID}" \
+              -m "Pipeline: pull > normalize > generate > sync > build > verify"
             git push origin main
             echo "✅ Pushed token changes directly to main — Vercel will auto-deploy."
           fi
