@@ -47,35 +47,40 @@ interface MCPContextType {
 
 const MCPContext = createContext<MCPContextType | undefined>(undefined);
 
-// Environment-aware default MCP server URL:
-//   - Local dev (NEXT_PUBLIC_MCP_URL or localhost:8787)
-//   - Production  (same-origin — embedded API routes)
-function getDefaultMcpUrl(): string {
-  if (typeof window === 'undefined') return 'http://localhost:8787/sse';
-  // Explicit override via env var
-  const envUrl = process.env.NEXT_PUBLIC_MCP_URL;
-  if (envUrl) return envUrl;
-  // Production: use same-origin (empty path prefix → /api/mcp/*)
-  if (window.location.hostname !== 'localhost') {
-    return `${window.location.origin}/sse`;
-  }
-  // Local dev: standalone MCP server
-  return 'http://localhost:8787/sse';
+// Detect production environment (Vercel or non-localhost hostname)
+function isProduction(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
 }
 
-const DEFAULT_SERVER: MCPServer = {
-  id: 'ecommerce-local',
-  name: 'Ecommerce MCP',
-  url: getDefaultMcpUrl(),
-  type: 'sse',
-  status: 'disconnected',
-};
+function getDefaultServer(): MCPServer {
+  if (isProduction()) {
+    // Production: same-origin embedded MCP server
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    return {
+      id: 'ecommerce-cloud',
+      name: 'Ecommerce MCP (Cloud)',
+      url: `${origin}/sse`,
+      type: 'sse',
+      status: 'disconnected',
+    };
+  }
+  // Local dev: standalone MCP server on port 8787
+  return {
+    id: 'ecommerce-local',
+    name: 'Ecommerce MCP (Local)',
+    url: 'http://localhost:8787/sse',
+    type: 'sse',
+    status: 'disconnected',
+  };
+}
 
 export function MCPProvider({ children }: { children: React.ReactNode }) {
-  const [mcpServers, setMcpServers] = useLocalStorage<MCPServer[]>('mcp-servers', [DEFAULT_SERVER]);
+  const [mcpServers, setMcpServers] = useLocalStorage<MCPServer[]>('mcp-servers', []);
   const [selectedMcpServers, setSelectedMcpServers] = useLocalStorage<string[]>('selected-mcp-servers', []);
   const activeRef = useRef<Record<string, boolean>>({});
   const [didAutoConnect, setDidAutoConnect] = useState(false);
+  const [didMigrate, setDidMigrate] = useState(false);
 
   const updateServerStatus = useCallback((
     id: string,
@@ -184,30 +189,46 @@ export function MCPProvider({ children }: { children: React.ReactNode }) {
     .filter((s): s is MCPServer => !!s && s.status === 'connected')
     .map(s => ({ type: 'sse' as const, url: s.url, headers: s.headers }));
 
-  // Auto-connect the default ecommerce server on first visit
+  // ---- Server migration & auto-connect ----
+  // On mount: ensure the correct default server exists for the current environment.
+  // Remove stale servers from the wrong environment (e.g. localhost on prod).
   useEffect(() => {
-    if (didAutoConnect) return;
-    // Ensure default server exists (even if localStorage had an empty array from a previous session)
-    const hasDefault = mcpServers.some(s => s.id === 'ecommerce-local');
-    if (!hasDefault) {
-      setMcpServers(prev => [...prev, DEFAULT_SERVER]);
-      return; // Will re-run after state updates
-    }
+    if (didMigrate) return;
+    setDidMigrate(true);
 
-    // Fix stale URL: if we're in production but the stored URL still
-    // points to localhost:8787, update it to same-origin.
-    const defaultSrv = mcpServers.find(s => s.id === 'ecommerce-local');
-    if (defaultSrv) {
-      const correctUrl = getDefaultMcpUrl();
-      if (defaultSrv.url !== correctUrl) {
-        setMcpServers(prev =>
-          prev.map(s => s.id === 'ecommerce-local' ? { ...s, url: correctUrl, status: 'disconnected' as ServerStatus } : s)
-        );
-        return; // Will re-run after state updates
+    const isProd = isProduction();
+    const correctDefault = getDefaultServer();
+    const correctId = correctDefault.id;
+    const staleId = isProd ? 'ecommerce-local' : 'ecommerce-cloud';
+
+    setMcpServers(prev => {
+      // Remove any stale server from the OTHER environment
+      let cleaned = prev.filter(s => s.id !== staleId);
+      // Also remove any server pointing to localhost in production
+      if (isProd) {
+        cleaned = cleaned.filter(s => !s.url.includes('localhost'));
       }
-    }
+      // Ensure the correct default server exists
+      const hasCorrect = cleaned.some(s => s.id === correctId);
+      if (!hasCorrect) {
+        cleaned = [correctDefault, ...cleaned];
+      }
+      return cleaned;
+    });
 
-    if (defaultSrv && defaultSrv.status !== 'connected' && !activeRef.current[defaultSrv.id]) {
+    // Also clean stale selections
+    setSelectedMcpServers(prev => prev.filter(id => id !== staleId));
+  }, [didMigrate, setMcpServers, setSelectedMcpServers]);
+
+  // Auto-connect the default server after migration
+  useEffect(() => {
+    if (!didMigrate || didAutoConnect) return;
+
+    const defaultId = isProduction() ? 'ecommerce-cloud' : 'ecommerce-local';
+    const defaultSrv = mcpServers.find(s => s.id === defaultId);
+    if (!defaultSrv) return;
+
+    if (defaultSrv.status !== 'connected' && !activeRef.current[defaultSrv.id]) {
       setDidAutoConnect(true);
       startServer(defaultSrv.id).then(ok => {
         if (ok) {
@@ -215,7 +236,7 @@ export function MCPProvider({ children }: { children: React.ReactNode }) {
         }
       });
     }
-  }, [mcpServers, didAutoConnect, startServer, setSelectedMcpServers, setMcpServers]);
+  }, [mcpServers, didMigrate, didAutoConnect, startServer, setSelectedMcpServers]);
 
   return (
     <MCPContext.Provider value={{

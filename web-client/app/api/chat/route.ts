@@ -57,27 +57,22 @@ export async function POST(req: Request) {
 
     const normalizedMcpServers = Array.isArray(mcpServers) ? mcpServers : [];
 
-    // Decide whether to use the embedded in-process MCP server or HTTP bridge.
-    // On Vercel (production), ALWAYS use the embedded bridge to avoid
-    // self-referencing HTTP requests and localhost URL issues.
-    // In local dev, use HTTP bridge to the standalone MCP server if configured.
+    // ---- MCP tool initialization strategy ----
+    // Production (Vercel): ALWAYS use the embedded in-process bridge.
+    //   The frontend may still send localhost URLs from stale storage;
+    //   we ignore them entirely and use the direct bridge.
+    // Local dev: use HTTP bridge to the standalone MCP server.
     const isVercel = !!process.env.VERCEL;
-    const hasExternalServers = normalizedMcpServers.some(
-      (s) => s.url && !s.url.includes('localhost')
-    );
 
     let mcpClient;
-    if (isVercel && !hasExternalServers) {
-      // Production: use embedded bridge (no HTTP).
-      // IMPORTANT: Use empty string for same-origin widget fetch.
-      // VERCEL_URL is the unique deployment URL, NOT the production alias,
-      // so using it would cause cross-origin fetch failures in the browser.
+    if (isVercel) {
+      // Production: embedded bridge — no HTTP, same-origin widget fetch.
       mcpClient = await initializeEmbeddedMCPTools('', userId);
     } else if (normalizedMcpServers.length > 0) {
-      // Local dev or external servers: use HTTP bridge
+      // Local dev: HTTP bridge to standalone MCP server (localhost:8787)
       mcpClient = await initializeMCPClients(normalizedMcpServers, req.signal, userId);
     } else {
-      // Fallback: try embedded bridge (same-origin)
+      // No servers configured: try embedded bridge as fallback
       mcpClient = await initializeEmbeddedMCPTools('', userId);
     }
     cleanup = mcpClient.cleanup;

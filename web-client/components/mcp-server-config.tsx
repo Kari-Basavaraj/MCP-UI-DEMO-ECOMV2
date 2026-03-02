@@ -121,7 +121,9 @@ export function MCPServerConfig({ onClose }: { onClose: () => void }) {
               <div className="flex items-center justify-between mb-3">
                 <div className="text-sm font-medium">Available Servers</div>
                 <div className="text-xs text-muted-foreground">
-                  Select multiple servers to combine their tools
+                  {typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+                    ? 'Cloud mode (embedded server)'
+                    : 'Local dev mode'}
                 </div>
               </div>
 
