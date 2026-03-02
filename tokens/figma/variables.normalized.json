@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-02T09:35:57.839Z",
+  "generatedAt": "2026-03-02T09:41:27.734Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "id": "VariableCollectionId:9:11257",
       "name": "Size",
       "defaultModeId": "9:7",
       "modes": [
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "id": "VariableCollectionId:9:11257",
+      "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
       "name": "Size",
       "defaultModeId": "9:7",
       "modes": [
@@ -133,13 +133,6 @@
       "collectionName": "Typography Primitives",
       "isDefault": true
     },
-    "9:7": {
-      "modeId": "9:7",
-      "modeName": "Default",
-      "collectionId": "VariableCollectionId:9:11257",
-      "collectionName": "Size",
-      "isDefault": true
-    },
     "9:4": {
       "modeId": "9:4",
       "modeName": "Desktop",
@@ -161,11 +154,11 @@
       "collectionName": "Responsive",
       "isDefault": false
     },
-    "28:2": {
-      "modeId": "28:2",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
+    "9:7": {
+      "modeId": "9:7",
+      "modeName": "Default",
+      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "collectionName": "Size",
       "isDefault": true
     },
     "58:0": {
@@ -209,6 +202,13 @@
       "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
       "collectionName": "Typography",
       "isDefault": true
+    },
+    "28:2": {
+      "modeId": "28:2",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
+      "isDefault": true
     }
   },
   "modeSelection": {
@@ -250,6 +250,27 @@
       "--sds-typo-weight-semibold-italic": "Semi Bold Italic",
       "--sds-typo-weight-thin": "100px",
       "--sds-typo-weight-thin-italic": "Thin Italic"
+    },
+    "9:4": {
+      "--sds-responsive-border-width": "1px",
+      "--sds-responsive-device": "desktop",
+      "--sds-responsive-device-width": "1200px",
+      "--sds-responsive-root-font-size": "16px",
+      "--sds-responsive-scale": "1px"
+    },
+    "9:5": {
+      "--sds-responsive-border-width": "1px",
+      "--sds-responsive-device": "mobile",
+      "--sds-responsive-device-width": "375px",
+      "--sds-responsive-root-font-size": "16px",
+      "--sds-responsive-scale": "1.25px"
+    },
+    "9:6": {
+      "--sds-responsive-border-width": "1px",
+      "--sds-responsive-device": "tablet",
+      "--sds-responsive-device-width": "768px",
+      "--sds-responsive-root-font-size": "16px",
+      "--sds-responsive-scale": "1px"
     },
     "9:7": {
       "--sds-size-blur-100": "4px",
@@ -305,30 +326,6 @@
       "--sds-size-stroke-border": "1px",
       "--sds-size-stroke-focus-ring": "2px"
     },
-    "9:4": {
-      "--sds-responsive-border-width": "1px",
-      "--sds-responsive-device": "desktop",
-      "--sds-responsive-device-width": "1200px",
-      "--sds-responsive-root-font-size": "16px",
-      "--sds-responsive-scale": "1px"
-    },
-    "9:5": {
-      "--sds-responsive-border-width": "1px",
-      "--sds-responsive-device": "mobile",
-      "--sds-responsive-device-width": "375px",
-      "--sds-responsive-root-font-size": "16px",
-      "--sds-responsive-scale": "1.25px"
-    },
-    "9:6": {
-      "--sds-responsive-border-width": "1px",
-      "--sds-responsive-device": "tablet",
-      "--sds-responsive-device-width": "768px",
-      "--sds-responsive-root-font-size": "16px",
-      "--sds-responsive-scale": "1px"
-    },
-    "28:2": {
-      "--sds-color-black-100": "#000000"
-    },
     "58:0": {
       "--sds-typo-body-font-family": "Inter",
       "--sds-typo-body-font-style-italic": "Italic",
@@ -367,7 +364,7 @@
       "--sds-typo-title-page-size-small": "40px"
     },
     "3919:21": {
-      "--sds-color-background-brand-default": "#00e532",
+      "--sds-color-background-brand-default": "#2c2c2c",
       "--sds-color-background-brand-hover": "#1e1e1e",
       "--sds-color-background-brand-secondary": "#e6e6e6",
       "--sds-color-background-brand-secondary-hover": "#d9d9d9",
@@ -751,6 +748,9 @@
       "--sds-typo-leading-leading-tight": "20px",
       "--sds-typo-size-text-sm": "14px",
       "--sds-typo-weight-font-normal": "400px"
+    },
+    "28:2": {
+      "--sds-color-black-100": "#000000"
     }
   },
   "variables": [
@@ -763,7 +763,7 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#00e532",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:3919:36428"
@@ -1821,24 +1821,6 @@
       }
     },
     {
-      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
-      "figmaName": "black/100",
-      "cssVar": "--sds-color-black-100",
-      "resolvedType": "COLOR",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
-      "modes": {
-        "28:2": {
-          "value": "#000000",
-          "resolvedType": "COLOR",
-          "aliasChain": [
-            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:9:11234",
       "figmaName": "Black/100",
       "cssVar": "--sds-color-black-100",
@@ -1851,6 +1833,24 @@
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:9:11234"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+      "figmaName": "black/100",
+      "cssVar": "--sds-color-black-100",
+      "resolvedType": "COLOR",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
+      "modes": {
+        "28:2": {
+          "value": "#000000",
+          "resolvedType": "COLOR",
+          "aliasChain": [
+            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
           ],
           "reason": "resolved"
         }
@@ -7226,24 +7226,6 @@
       }
     },
     {
-      "variableId": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
-      "figmaName": "Stroke/Border",
-      "cssVar": "--sds-size-stroke-border",
-      "resolvedType": "FLOAT",
-      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
-      "collectionName": "Size",
-      "modes": {
-        "9:7": {
-          "value": "1px",
-          "resolvedType": "FLOAT",
-          "aliasChain": [
-            "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:197:17450",
       "figmaName": "Stroke/Border",
       "cssVar": "--sds-size-stroke-border",
@@ -7256,6 +7238,24 @@
           "resolvedType": "FLOAT",
           "aliasChain": [
             "VariableID:197:17450"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
+      "figmaName": "Stroke/Border",
+      "cssVar": "--sds-size-stroke-border",
+      "resolvedType": "FLOAT",
+      "collectionId": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
+      "collectionName": "Size",
+      "modes": {
+        "9:7": {
+          "value": "1px",
+          "resolvedType": "FLOAT",
+          "aliasChain": [
+            "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
           ],
           "reason": "resolved"
         }
@@ -8546,16 +8546,16 @@
     "modeCount": 12,
     "tokenCountByMode": {
       "9:2": 31,
-      "9:7": 52,
       "9:4": 5,
       "9:5": 5,
       "9:6": 5,
-      "28:2": 1,
+      "9:7": 52,
       "58:0": 35,
       "3919:21": 137,
       "3919:22": 137,
       "3919:19": 100,
-      "7:3": 4
+      "7:3": 4,
+      "28:2": 1
     }
   }
 }
