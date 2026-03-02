@@ -27,10 +27,11 @@ on:
         default: true
         type: boolean
 
-# Prevent concurrent sync runs — latest wins
+# Queue concurrent runs instead of cancelling (avoids cancelled-run email spam).
+# The second run will find "no changes" and exit successfully.
 concurrency:
   group: figma-webhook-sync
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: write

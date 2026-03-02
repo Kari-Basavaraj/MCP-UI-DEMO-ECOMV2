@@ -38,6 +38,12 @@ const EVENT_TO_DISPATCH: Record<string, string> = {
 // FILE_UPDATE events are acknowledged but not dispatched
 const ACKNOWLEDGED_EVENTS = new Set(['FILE_UPDATE', 'LIBRARY_PUBLISH', 'PING']);
 
+// ── In-memory dedup (survives across warm-instance requests) ────
+// Figma fires 2–4 LIBRARY_PUBLISH webhooks per single Publish click.
+// This catches duplicates hitting the same serverless instance.
+const DEDUP_WINDOW_MS = 30_000; // 30 seconds
+let lastDispatchTime = 0;
+
 export async function POST(req: Request) {
   const requestId = crypto.randomUUID();
   const ts = new Date().toISOString();
@@ -104,35 +110,18 @@ export async function POST(req: Request) {
     });
   }
 
-  // ── Dedup: skip if a dispatch already fired in the last 60s ──
-  try {
-    const runsRes = await fetch(
-      `https://api.github.com/repos/${githubRepo}/actions/runs?event=repository_dispatch&per_page=5`,
-      {
-        headers: {
-          Authorization: `Bearer ${githubToken}`,
-          Accept: 'application/vnd.github+json',
-        },
-      },
-    );
-    if (runsRes.ok) {
-      const runsData = (await runsRes.json()) as { workflow_runs?: { created_at: string }[] };
-      const now = Date.now();
-      const recent = runsData.workflow_runs?.find(
-        (r) => now - new Date(r.created_at).getTime() < 60_000,
-      );
-      if (recent) {
-        console.log(`[${requestId}] ⏭ Skipped — dispatch already fired within 60s`);
-        return Response.json({
-          ok: true,
-          message: 'Skipped — a sync run was already dispatched within the last 60 seconds',
-          requestId,
-        });
-      }
-    }
-  } catch (dedupErr) {
-    console.warn(`[${requestId}] Dedup check failed, proceeding with dispatch:`, dedupErr);
+  // ── Dedup: in-memory lock (instant, no API call) ──────────────
+  const now = Date.now();
+  if (now - lastDispatchTime < DEDUP_WINDOW_MS) {
+    console.log(`[${requestId}] ⏭ Skipped — dispatch already fired ${now - lastDispatchTime}ms ago`);
+    return Response.json({
+      ok: true,
+      message: 'Skipped — a sync run was already dispatched within the last 30 seconds',
+      requestId,
+    });
   }
+  // Lock BEFORE dispatching so concurrent requests on the same instance block
+  lastDispatchTime = now;
 
   // ── Dispatch to GitHub Actions ────────────────────────────────
   try {
