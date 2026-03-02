@@ -113,81 +113,46 @@ jobs:
       - name: Rebuild all widgets
         run: npm --prefix mcp-server run build
 
+      - name: Copy widgets to web-client/public
+        run: |
+          mkdir -p web-client/public/widgets
+          cp mcp-server/dist/widgets/*.html web-client/public/widgets/
+          echo "✓ Copied $(ls web-client/public/widgets/*.html | wc -l | tr -d ' ') widgets to web-client/public/widgets/"
+
       - name: Verify pipeline
         run: npm run figma:verify
 
-      # ── Diff summary ───────────────────────────────────────────
-      - name: Generate diff summary
-        id: diff
+      # ── Commit & push directly to main ─────────────────────────
+      - name: Commit and push changes
+        id: push
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           CHANGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
           echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
 
           if [ "$CHANGED" -eq 0 ]; then
-            echo "No token changes detected — Figma variables match code."
+            echo "No token changes detected — Figma variables already match code."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
             echo "Token changes detected in $CHANGED files:"
             git diff --cached --stat
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
-            # Reset staging — let peter-evans handle it
-            git reset HEAD
+            git commit -m "chore(figma): auto-sync variables from webhook
+
+Triggered by: ${{ github.event.action || 'manual' }}
+File key: ${{ github.event.client_payload.file_key || 'N/A' }}
+Request ID: ${{ github.event.client_payload.request_id || 'N/A' }}
+
+Pipeline: pull → normalize → generate → sync → build → verify"
+            git push origin main
+            echo "✅ Pushed token changes directly to main — Vercel will auto-deploy."
           fi
 
-      # ── Create PR ──────────────────────────────────────────────
-      - name: Create PR for token changes
-        id: pr
-        if: steps.diff.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: |
-            chore(figma): auto-sync variables from webhook
-
-            Triggered by: ${{ github.event.action || 'manual' }}
-            File key: ${{ github.event.client_payload.file_key || 'N/A' }}
-          branch: codex/figma-webhook-sync
-          delete-branch: true
-          title: 'chore(figma): auto-sync variables from Figma webhook'
-          body: |
-            ## Figma Webhook Auto-Sync
-
-            A design change was detected in Figma and automatically synced.
-
-            **Trigger:** `${{ github.event.action || inputs.reason || 'manual' }}`
-            **Changed files:** ${{ steps.diff.outputs.changed_files }}
-            **Request ID:** `${{ github.event.client_payload.request_id || 'N/A' }}`
-
-            ### Pipeline executed:
-            1. ✅ Pull variables from Figma API
-            2. ✅ Normalize variable payload
-            3. ✅ Generate CSS token files
-            4. ✅ Sync tokens to web-client
-            5. ✅ Rebuild all 12 widgets
-            6. ✅ Verify pipeline
-
-            > This PR was created automatically and will auto-merge when CI passes.
-          labels: |
-            automation
-            figma
-            webhook
-
-      # ── Auto-merge ─────────────────────────────────────────────
-      - name: Enable auto-merge
-        if: steps.pr.outputs.pull-request-number
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Enabling auto-merge for PR #${{ steps.pr.outputs.pull-request-number }}..."
-          gh pr merge "${{ steps.pr.outputs.pull-request-number }}" \
-            --auto --squash \
-            --subject "chore(figma): auto-sync variables from Figma webhook" || \
-          echo "::warning::Auto-merge not available — enable branch protection + require status checks to use auto-merge. PR was created successfully."
-
       - name: No changes summary
-        if: steps.diff.outputs.has_changes == 'false'
-        run: echo "✅ Pipeline ran successfully. Figma tokens already match code — no PR needed."
+        if: steps.push.outputs.has_changes == 'false'
+        run: echo "✅ Pipeline ran successfully. Figma tokens already match code — no push needed."
 
       # ── Artifacts ──────────────────────────────────────────────
       - name: Upload sync artifacts
