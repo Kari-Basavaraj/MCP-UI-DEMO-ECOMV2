@@ -129,7 +129,7 @@ jobs:
       - name: Commit and push changes
         id: push
         env:
-          GH_PAT: ${{ secrets.GITHUB_DISPATCH_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
