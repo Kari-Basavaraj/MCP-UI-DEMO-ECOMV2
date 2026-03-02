@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-02T09:10:56.514Z",
+  "generatedAt": "2026-03-02T09:23:03.471Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -161,13 +161,6 @@
       "collectionName": "Size",
       "isDefault": true
     },
-    "28:2": {
-      "modeId": "28:2",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
-      "isDefault": true
-    },
     "58:0": {
       "modeId": "58:0",
       "modeName": "Mode 1",
@@ -208,6 +201,13 @@
       "modeName": "Value",
       "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
       "collectionName": "Typography",
+      "isDefault": true
+    },
+    "28:2": {
+      "modeId": "28:2",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
       "isDefault": true
     }
   },
@@ -325,9 +325,6 @@
       "--sds-size-space-negative-600": "-24px",
       "--sds-size-stroke-border": "1px",
       "--sds-size-stroke-focus-ring": "2px"
-    },
-    "28:2": {
-      "--sds-color-black-100": "#000000"
     },
     "58:0": {
       "--sds-typo-body-font-family": "Inter",
@@ -751,6 +748,9 @@
       "--sds-typo-leading-leading-tight": "20px",
       "--sds-typo-size-text-sm": "14px",
       "--sds-typo-weight-font-normal": "400px"
+    },
+    "28:2": {
+      "--sds-color-black-100": "#000000"
     }
   },
   "variables": [
@@ -1821,24 +1821,6 @@
       }
     },
     {
-      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
-      "figmaName": "black/100",
-      "cssVar": "--sds-color-black-100",
-      "resolvedType": "COLOR",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
-      "modes": {
-        "28:2": {
-          "value": "#000000",
-          "resolvedType": "COLOR",
-          "aliasChain": [
-            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:9:11234",
       "figmaName": "Black/100",
       "cssVar": "--sds-color-black-100",
@@ -1851,6 +1833,24 @@
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:9:11234"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+      "figmaName": "black/100",
+      "cssVar": "--sds-color-black-100",
+      "resolvedType": "COLOR",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
+      "modes": {
+        "28:2": {
+          "value": "#000000",
+          "resolvedType": "COLOR",
+          "aliasChain": [
+            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
           ],
           "reason": "resolved"
         }
@@ -8550,12 +8550,12 @@
       "9:5": 5,
       "9:6": 5,
       "9:7": 52,
-      "28:2": 1,
       "58:0": 35,
       "3919:21": 137,
       "3919:22": 137,
       "3919:19": 100,
-      "7:3": 4
+      "7:3": 4,
+      "28:2": 1
     }
   }
 }
