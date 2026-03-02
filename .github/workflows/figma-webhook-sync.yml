@@ -123,11 +123,15 @@ jobs:
         run: npm run figma:verify
 
       # ── Commit & push directly to main ─────────────────────────
+      # Uses PAT (not GITHUB_TOKEN) so the push triggers Vercel deploy
       - name: Commit and push changes
         id: push
+        env:
+          GH_PAT: ${{ secrets.GITHUB_DISPATCH_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           git add -A
           CHANGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
           echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
@@ -148,7 +152,7 @@ jobs:
               -m "Request ID: ${RID}" \
               -m "Pipeline: pull > normalize > generate > sync > build > verify"
             git push origin main
-            echo "✅ Pushed token changes directly to main — Vercel will auto-deploy."
+            echo "Pushed token changes directly to main — Vercel will auto-deploy."
           fi
 
       - name: No changes summary
