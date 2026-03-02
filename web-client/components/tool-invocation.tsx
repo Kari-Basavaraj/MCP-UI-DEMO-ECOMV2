@@ -452,7 +452,7 @@ export const ToolInvocation = memo(function ToolInvocation({
     const uiResources = (result as any)?._uiResources as Array<{ uri: string; mimeType: string }> | undefined;
     const mcpServerUrl = (result as any)?._mcpServerUrl as string | undefined;
 
-    if (uiResources && uiResources.length > 0 && mcpServerUrl) {
+    if (uiResources && uiResources.length > 0 && mcpServerUrl !== undefined) {
       // Dedup: skip if we already fetched these exact URIs
       const uriKey = uiResources.map(r => r.uri).sort().join("|");
       if (fetchedUrisRef.current === uriKey) return;
