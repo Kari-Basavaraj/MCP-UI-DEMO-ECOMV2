@@ -4,7 +4,7 @@
   "private": true,
   "description": "MCP-UI based e-commerce application",
   "scripts": {
-    "dev:start": "npx concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:start": "npx concurrently -n server,client,webhook -c blue,green,magenta \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:webhook\"",
     "dev": "bash ./scripts/dev-preflight.sh && npm run dev:start",
     "dev:clean": "npm run dev",
     "dev:health": "bash ./scripts/dev-health.sh",
@@ -30,7 +30,9 @@
     "figma:sync:full": "node scripts/figma-sync-full.mjs",
     "webhook:start": "node scripts/figma-webhook-receiver.mjs",
     "webhook:manage": "node scripts/figma-webhook-manage.mjs",
-    "webhook:test": "node scripts/figma-webhook-manage.mjs test"
+    "webhook:test": "node scripts/figma-webhook-manage.mjs test",
+    "dev:webhook": "node scripts/figma-webhook-receiver.mjs",
+    "figma:sync:local": "npm run figma:pull:variables && npm run figma:normalize:variables && npm run figma:generate:tokens && npm run tokens:sync && npm --prefix mcp-server run build"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

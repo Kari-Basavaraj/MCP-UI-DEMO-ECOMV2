@@ -47,10 +47,26 @@ interface MCPContextType {
 
 const MCPContext = createContext<MCPContextType | undefined>(undefined);
 
+// Environment-aware default MCP server URL:
+//   - Local dev (NEXT_PUBLIC_MCP_URL or localhost:8787)
+//   - Production  (same-origin — embedded API routes)
+function getDefaultMcpUrl(): string {
+  if (typeof window === 'undefined') return 'http://localhost:8787/sse';
+  // Explicit override via env var
+  const envUrl = process.env.NEXT_PUBLIC_MCP_URL;
+  if (envUrl) return envUrl;
+  // Production: use same-origin (empty path prefix → /api/mcp/*)
+  if (window.location.hostname !== 'localhost') {
+    return `${window.location.origin}/sse`;
+  }
+  // Local dev: standalone MCP server
+  return 'http://localhost:8787/sse';
+}
+
 const DEFAULT_SERVER: MCPServer = {
   id: 'ecommerce-local',
   name: 'Ecommerce MCP',
-  url: 'http://localhost:8787/sse',
+  url: getDefaultMcpUrl(),
   type: 'sse',
   status: 'disconnected',
 };
@@ -177,7 +193,20 @@ export function MCPProvider({ children }: { children: React.ReactNode }) {
       setMcpServers(prev => [...prev, DEFAULT_SERVER]);
       return; // Will re-run after state updates
     }
+
+    // Fix stale URL: if we're in production but the stored URL still
+    // points to localhost:8787, update it to same-origin.
     const defaultSrv = mcpServers.find(s => s.id === 'ecommerce-local');
+    if (defaultSrv) {
+      const correctUrl = getDefaultMcpUrl();
+      if (defaultSrv.url !== correctUrl) {
+        setMcpServers(prev =>
+          prev.map(s => s.id === 'ecommerce-local' ? { ...s, url: correctUrl, status: 'disconnected' as ServerStatus } : s)
+        );
+        return; // Will re-run after state updates
+      }
+    }
+
     if (defaultSrv && defaultSrv.status !== 'connected' && !activeRef.current[defaultSrv.id]) {
       setDidAutoConnect(true);
       startServer(defaultSrv.id).then(ok => {

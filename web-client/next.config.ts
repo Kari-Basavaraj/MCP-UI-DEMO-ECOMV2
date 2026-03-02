@@ -5,7 +5,7 @@ import type { NextConfig } from 'next';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ['@modelcontextprotocol/sdk'],
+  serverExternalPackages: ['@modelcontextprotocol/sdk', '@modelcontextprotocol/ext-apps'],
   distDir: process.env.NEXT_DIST_DIR || '.next',
   turbopack: {
     root: __dirname,

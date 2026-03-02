@@ -26,6 +26,7 @@ kill_listener() {
 
 kill_listener 3000
 kill_listener 8787
+kill_listener 4848
 
 find "${ROOT_DIR}/web-client" -maxdepth 1 -type d -name ".next.corrupt.*" -print0 2>/dev/null | while IFS= read -r -d '' dir; do
   echo "[dev-preflight] removing stale cache dir ${dir}"
