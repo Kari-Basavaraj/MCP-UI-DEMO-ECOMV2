@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-02T06:54:51.952Z",
+  "generatedAt": "2026-03-02T07:25:03.476Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -182,20 +182,6 @@
       "collectionName": "Color",
       "isDefault": false
     },
-    "28:2": {
-      "modeId": "28:2",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
-      "isDefault": true
-    },
-    "7:3": {
-      "modeId": "7:3",
-      "modeName": "Value",
-      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-      "collectionName": "Typography",
-      "isDefault": true
-    },
     "3012:0": {
       "modeId": "3012:0",
       "modeName": "Mode 1",
@@ -208,6 +194,20 @@
       "modeName": "Value",
       "collectionId": "VariableCollectionId:3919:36421",
       "collectionName": "Color Primitives",
+      "isDefault": true
+    },
+    "7:3": {
+      "modeId": "7:3",
+      "modeName": "Value",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
+      "isDefault": true
+    },
+    "28:2": {
+      "modeId": "28:2",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
       "isDefault": true
     }
   },
@@ -641,15 +641,6 @@
       "--sds-color-text-warning-secondary": "#e8b931",
       "--sds-color-text-warning-tertiary": "#bf6a02"
     },
-    "28:2": {
-      "--sds-color-black-100": "#000000"
-    },
-    "7:3": {
-      "--sds-typo-fonts-font-sans": "Geist",
-      "--sds-typo-leading-leading-tight": "20px",
-      "--sds-typo-size-text-sm": "14px",
-      "--sds-typo-weight-font-normal": "400px"
-    },
     "3919:19": {
       "--sds-color-black-100": "rgba(12, 12, 13, 0.05)",
       "--sds-color-black-1000": "#0c0c0d",
@@ -751,6 +742,15 @@
       "--sds-color-yellow-700": "#975102",
       "--sds-color-yellow-800": "#682d03",
       "--sds-color-yellow-900": "#522504"
+    },
+    "7:3": {
+      "--sds-typo-fonts-font-sans": "Geist",
+      "--sds-typo-leading-leading-tight": "20px",
+      "--sds-typo-size-text-sm": "14px",
+      "--sds-typo-weight-font-normal": "400px"
+    },
+    "28:2": {
+      "--sds-color-black-100": "#000000"
     }
   },
   "variables": [
@@ -1821,24 +1821,6 @@
       }
     },
     {
-      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
-      "figmaName": "black/100",
-      "cssVar": "--sds-color-black-100",
-      "resolvedType": "COLOR",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
-      "modes": {
-        "28:2": {
-          "value": "#000000",
-          "resolvedType": "COLOR",
-          "aliasChain": [
-            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:9:11234",
       "figmaName": "Black/100",
       "cssVar": "--sds-color-black-100",
@@ -1851,6 +1833,24 @@
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:9:11234"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+      "figmaName": "black/100",
+      "cssVar": "--sds-color-black-100",
+      "resolvedType": "COLOR",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
+      "modes": {
+        "28:2": {
+          "value": "#000000",
+          "resolvedType": "COLOR",
+          "aliasChain": [
+            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
           ],
           "reason": "resolved"
         }
@@ -8553,9 +8553,9 @@
       "58:0": 35,
       "3919:21": 137,
       "3919:22": 137,
-      "28:2": 1,
+      "3919:19": 100,
       "7:3": 4,
-      "3919:19": 100
+      "28:2": 1
     }
   }
 }
