@@ -152,8 +152,31 @@ jobs:
               -m "File key: ${FKEY}" \
               -m "Request ID: ${RID}" \
               -m "Pipeline: pull > normalize > generate > sync > build > verify"
+
             # Pull with rebase to handle any concurrent pushes
-            git pull --rebase origin main || true
+            if ! git pull --rebase origin main 2>&1; then
+              echo "::warning::Rebase conflict — checking if changes were already pushed by concurrent run"
+              git rebase --abort 2>/dev/null || true
+              git reset --hard HEAD~1 2>/dev/null || true
+              git fetch origin main
+              git reset --hard origin/main
+
+              # Re-run the exact same pipeline output check
+              git add -A
+              RECHECK=$(git diff --cached --name-only | wc -l | tr -d ' ')
+              if [ "$RECHECK" -eq 0 ]; then
+                echo "✅ Changes already on main from a concurrent run — nothing to push."
+                echo "has_changes=false" >> "$GITHUB_OUTPUT"
+                exit 0
+              else
+                echo "Token changes still differ after fetching origin — committing again"
+                git commit -m "chore(figma): auto-sync variables from webhook (retry)" \
+                  -m "Triggered by: ${TRIGGER}" \
+                  -m "File key: ${FKEY}" \
+                  -m "Request ID: ${RID}"
+              fi
+            fi
+
             git push origin main
             echo "Pushed token changes directly to main — Vercel will auto-deploy."
           fi

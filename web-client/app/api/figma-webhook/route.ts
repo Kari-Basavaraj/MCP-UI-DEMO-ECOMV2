@@ -104,6 +104,36 @@ export async function POST(req: Request) {
     });
   }
 
+  // ── Dedup: skip if a dispatch already fired in the last 60s ──
+  try {
+    const runsRes = await fetch(
+      `https://api.github.com/repos/${githubRepo}/actions/runs?event=repository_dispatch&per_page=5`,
+      {
+        headers: {
+          Authorization: `Bearer ${githubToken}`,
+          Accept: 'application/vnd.github+json',
+        },
+      },
+    );
+    if (runsRes.ok) {
+      const runsData = (await runsRes.json()) as { workflow_runs?: { created_at: string }[] };
+      const now = Date.now();
+      const recent = runsData.workflow_runs?.find(
+        (r) => now - new Date(r.created_at).getTime() < 60_000,
+      );
+      if (recent) {
+        console.log(`[${requestId}] ⏭ Skipped — dispatch already fired within 60s`);
+        return Response.json({
+          ok: true,
+          message: 'Skipped — a sync run was already dispatched within the last 60 seconds',
+          requestId,
+        });
+      }
+    }
+  } catch (dedupErr) {
+    console.warn(`[${requestId}] Dedup check failed, proceeding with dispatch:`, dedupErr);
+  }
+
   // ── Dispatch to GitHub Actions ────────────────────────────────
   try {
     const res = await fetch(
