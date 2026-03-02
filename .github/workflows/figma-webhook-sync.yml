@@ -157,6 +157,17 @@ jobs:
             echo "Pushed token changes directly to main — Vercel will auto-deploy."
           fi
 
+      - name: Trigger Vercel deploy
+        if: steps.push.outputs.has_changes == 'true'
+        run: |
+          echo "Triggering Vercel production deploy via deploy hook..."
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}")
+          if [ "$HTTP_CODE" -eq 200 ] || [ "$HTTP_CODE" -eq 201 ]; then
+            echo "✅ Vercel deploy triggered (HTTP $HTTP_CODE)"
+          else
+            echo "⚠️ Vercel deploy hook returned HTTP $HTTP_CODE — deploy may not have triggered"
+          fi
+
       - name: No changes summary
         if: steps.push.outputs.has_changes == 'false'
         run: echo "✅ Pipeline ran successfully. Figma tokens already match code — no push needed."
