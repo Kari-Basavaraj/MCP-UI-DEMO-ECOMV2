@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-02T03:13:27.189Z",
+  "generatedAt": "2026-03-02T03:27:48.371Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -92,17 +92,6 @@
       ]
     },
     {
-      "id": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-      "name": "Typography",
-      "defaultModeId": "7:3",
-      "modes": [
-        {
-          "modeId": "7:3",
-          "name": "Value"
-        }
-      ]
-    },
-    {
       "id": "VariableCollectionId:58:8567",
       "name": "Typography",
       "defaultModeId": "58:0",
@@ -110,6 +99,17 @@
         {
           "modeId": "58:0",
           "name": "Mode 1"
+        }
+      ]
+    },
+    {
+      "id": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "name": "Typography",
+      "defaultModeId": "7:3",
+      "modes": [
+        {
+          "modeId": "7:3",
+          "name": "Value"
         }
       ]
     },
@@ -132,6 +132,20 @@
       "collectionId": "VariableCollectionId:9:11179",
       "collectionName": "Typography Primitives",
       "isDefault": true
+    },
+    "3919:21": {
+      "modeId": "3919:21",
+      "modeName": "SDS Light",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "isDefault": true
+    },
+    "3919:22": {
+      "modeId": "3919:22",
+      "modeName": "SDS Dark",
+      "collectionId": "VariableCollectionId:3919:36422",
+      "collectionName": "Color",
+      "isDefault": false
     },
     "9:4": {
       "modeId": "9:4",
@@ -161,13 +175,6 @@
       "collectionName": "Size",
       "isDefault": true
     },
-    "7:3": {
-      "modeId": "7:3",
-      "modeName": "Value",
-      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-      "collectionName": "Typography",
-      "isDefault": true
-    },
     "58:0": {
       "modeId": "58:0",
       "modeName": "Mode 1",
@@ -182,25 +189,11 @@
       "collectionName": "MCP UI Widgets",
       "isDefault": true
     },
-    "3919:21": {
-      "modeId": "3919:21",
-      "modeName": "SDS Light",
-      "collectionId": "VariableCollectionId:3919:36422",
-      "collectionName": "Color",
-      "isDefault": true
-    },
-    "3919:22": {
-      "modeId": "3919:22",
-      "modeName": "SDS Dark",
-      "collectionId": "VariableCollectionId:3919:36422",
-      "collectionName": "Color",
-      "isDefault": false
-    },
-    "28:2": {
-      "modeId": "28:2",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
+    "7:3": {
+      "modeId": "7:3",
+      "modeName": "Value",
+      "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+      "collectionName": "Typography",
       "isDefault": true
     },
     "3919:19": {
@@ -208,6 +201,13 @@
       "modeName": "Value",
       "collectionId": "VariableCollectionId:3919:36421",
       "collectionName": "Color Primitives",
+      "isDefault": true
+    },
+    "28:2": {
+      "modeId": "28:2",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
       "isDefault": true
     }
   },
@@ -250,124 +250,6 @@
       "--sds-typo-weight-semibold-italic": "Semi Bold Italic",
       "--sds-typo-weight-thin": "100px",
       "--sds-typo-weight-thin-italic": "Thin Italic"
-    },
-    "9:4": {
-      "--sds-responsive-border-width": "1px",
-      "--sds-responsive-device": "desktop",
-      "--sds-responsive-device-width": "1200px",
-      "--sds-responsive-root-font-size": "16px",
-      "--sds-responsive-scale": "1px"
-    },
-    "9:5": {
-      "--sds-responsive-border-width": "1px",
-      "--sds-responsive-device": "mobile",
-      "--sds-responsive-device-width": "375px",
-      "--sds-responsive-root-font-size": "16px",
-      "--sds-responsive-scale": "1.25px"
-    },
-    "9:6": {
-      "--sds-responsive-border-width": "1px",
-      "--sds-responsive-device": "tablet",
-      "--sds-responsive-device-width": "768px",
-      "--sds-responsive-root-font-size": "16px",
-      "--sds-responsive-scale": "1px"
-    },
-    "9:7": {
-      "--sds-size-blur-100": "4px",
-      "--sds-size-depth-0": "0px",
-      "--sds-size-depth-025": "1px",
-      "--sds-size-depth-100": "4px",
-      "--sds-size-depth-1200": "48px",
-      "--sds-size-depth-200": "8px",
-      "--sds-size-depth-400": "16px",
-      "--sds-size-depth-800": "32px",
-      "--sds-size-depth-negative-025": "-1px",
-      "--sds-size-depth-negative-100": "-4px",
-      "--sds-size-depth-negative-1200": "-48px",
-      "--sds-size-depth-negative-200": "-8px",
-      "--sds-size-depth-negative-400": "-16px",
-      "--sds-size-depth-negative-800": "-32px",
-      "--sds-size-height-button-lg": "48px",
-      "--sds-size-height-button-md": "44px",
-      "--sds-size-height-button-sm": "36px",
-      "--sds-size-height-input": "48px",
-      "--sds-size-icon-large": "40px",
-      "--sds-size-icon-medium": "32px",
-      "--sds-size-icon-small": "24px",
-      "--sds-size-padding-lg": "16px",
-      "--sds-size-padding-sm": "8px",
-      "--sds-size-padding-xl": "24px",
-      "--sds-size-padding-xs": "4px",
-      "--sds-size-padding-xxl": "32px",
-      "--sds-size-radius-100": "4px",
-      "--sds-size-radius-200": "8px",
-      "--sds-size-radius-400": "16px",
-      "--sds-size-radius-full": "9999px",
-      "--sds-size-space-0": "0px",
-      "--sds-size-space-050": "2px",
-      "--sds-size-space-100": "4px",
-      "--sds-size-space-1200": "48px",
-      "--sds-size-space-150": "6px",
-      "--sds-size-space-1600": "64px",
-      "--sds-size-space-200": "8px",
-      "--sds-size-space-2400": "96px",
-      "--sds-size-space-250": "10px",
-      "--sds-size-space-300": "12px",
-      "--sds-size-space-400": "16px",
-      "--sds-size-space-4000": "160px",
-      "--sds-size-space-500": "20px",
-      "--sds-size-space-600": "24px",
-      "--sds-size-space-800": "32px",
-      "--sds-size-space-negative-100": "-4px",
-      "--sds-size-space-negative-200": "-8px",
-      "--sds-size-space-negative-300": "-12px",
-      "--sds-size-space-negative-400": "-16px",
-      "--sds-size-space-negative-600": "-24px",
-      "--sds-size-stroke-border": "1px",
-      "--sds-size-stroke-focus-ring": "2px"
-    },
-    "7:3": {
-      "--sds-typo-fonts-font-sans": "Geist",
-      "--sds-typo-leading-leading-tight": "20px",
-      "--sds-typo-size-text-sm": "14px",
-      "--sds-typo-weight-font-normal": "400px"
-    },
-    "58:0": {
-      "--sds-typo-body-font-family": "Inter",
-      "--sds-typo-body-font-style-italic": "Italic",
-      "--sds-typo-body-font-weight-regular": "400",
-      "--sds-typo-body-font-weight-strong": "600",
-      "--sds-typo-body-size-large": "20px",
-      "--sds-typo-body-size-medium": "16px",
-      "--sds-typo-body-size-small": "14px",
-      "--sds-typo-code-font-family": "Roboto Mono",
-      "--sds-typo-code-font-weight": "400",
-      "--sds-typo-code-size-base": "16px",
-      "--sds-typo-code-size-large": "20px",
-      "--sds-typo-code-size-small": "14px",
-      "--sds-typo-heading-font-family": "Inter",
-      "--sds-typo-heading-font-weight": "600",
-      "--sds-typo-heading-size-base": "24px",
-      "--sds-typo-heading-size-large": "32px",
-      "--sds-typo-heading-size-small": "20px",
-      "--sds-typo-subheading-font-family": "Inter",
-      "--sds-typo-subheading-font-weight": "400",
-      "--sds-typo-subheading-size-large": "24px",
-      "--sds-typo-subheading-size-medium": "20px",
-      "--sds-typo-subheading-size-small": "16px",
-      "--sds-typo-subtitle-font-family": "Inter",
-      "--sds-typo-subtitle-font-weight": "400",
-      "--sds-typo-subtitle-size-base": "32px",
-      "--sds-typo-subtitle-size-large": "40px",
-      "--sds-typo-subtitle-size-small": "24px",
-      "--sds-typo-title-hero-font-family": "Inter",
-      "--sds-typo-title-hero-font-weight": "700",
-      "--sds-typo-title-hero-size": "72px",
-      "--sds-typo-title-page-font-family": "Inter",
-      "--sds-typo-title-page-font-weight": "700",
-      "--sds-typo-title-page-size-base": "48px",
-      "--sds-typo-title-page-size-large": "64px",
-      "--sds-typo-title-page-size-small": "40px"
     },
     "3919:21": {
       "--sds-color-background-brand-default": "#0066ff",
@@ -647,8 +529,123 @@
       "--sds-color-text-warning-secondary": "#e8b931",
       "--sds-color-text-warning-tertiary": "#bf6a02"
     },
-    "28:2": {
-      "--sds-color-black-100": "#000000"
+    "9:4": {
+      "--sds-responsive-border-width": "1px",
+      "--sds-responsive-device": "desktop",
+      "--sds-responsive-device-width": "1200px",
+      "--sds-responsive-root-font-size": "16px",
+      "--sds-responsive-scale": "1px"
+    },
+    "9:5": {
+      "--sds-responsive-border-width": "1px",
+      "--sds-responsive-device": "mobile",
+      "--sds-responsive-device-width": "375px",
+      "--sds-responsive-root-font-size": "16px",
+      "--sds-responsive-scale": "1.25px"
+    },
+    "9:6": {
+      "--sds-responsive-border-width": "1px",
+      "--sds-responsive-device": "tablet",
+      "--sds-responsive-device-width": "768px",
+      "--sds-responsive-root-font-size": "16px",
+      "--sds-responsive-scale": "1px"
+    },
+    "9:7": {
+      "--sds-size-blur-100": "4px",
+      "--sds-size-depth-0": "0px",
+      "--sds-size-depth-025": "1px",
+      "--sds-size-depth-100": "4px",
+      "--sds-size-depth-1200": "48px",
+      "--sds-size-depth-200": "8px",
+      "--sds-size-depth-400": "16px",
+      "--sds-size-depth-800": "32px",
+      "--sds-size-depth-negative-025": "-1px",
+      "--sds-size-depth-negative-100": "-4px",
+      "--sds-size-depth-negative-1200": "-48px",
+      "--sds-size-depth-negative-200": "-8px",
+      "--sds-size-depth-negative-400": "-16px",
+      "--sds-size-depth-negative-800": "-32px",
+      "--sds-size-height-button-lg": "48px",
+      "--sds-size-height-button-md": "44px",
+      "--sds-size-height-button-sm": "36px",
+      "--sds-size-height-input": "48px",
+      "--sds-size-icon-large": "40px",
+      "--sds-size-icon-medium": "32px",
+      "--sds-size-icon-small": "24px",
+      "--sds-size-padding-lg": "16px",
+      "--sds-size-padding-sm": "8px",
+      "--sds-size-padding-xl": "24px",
+      "--sds-size-padding-xs": "4px",
+      "--sds-size-padding-xxl": "32px",
+      "--sds-size-radius-100": "4px",
+      "--sds-size-radius-200": "8px",
+      "--sds-size-radius-400": "16px",
+      "--sds-size-radius-full": "9999px",
+      "--sds-size-space-0": "0px",
+      "--sds-size-space-050": "2px",
+      "--sds-size-space-100": "4px",
+      "--sds-size-space-1200": "48px",
+      "--sds-size-space-150": "6px",
+      "--sds-size-space-1600": "64px",
+      "--sds-size-space-200": "8px",
+      "--sds-size-space-2400": "96px",
+      "--sds-size-space-250": "10px",
+      "--sds-size-space-300": "12px",
+      "--sds-size-space-400": "16px",
+      "--sds-size-space-4000": "160px",
+      "--sds-size-space-500": "20px",
+      "--sds-size-space-600": "24px",
+      "--sds-size-space-800": "32px",
+      "--sds-size-space-negative-100": "-4px",
+      "--sds-size-space-negative-200": "-8px",
+      "--sds-size-space-negative-300": "-12px",
+      "--sds-size-space-negative-400": "-16px",
+      "--sds-size-space-negative-600": "-24px",
+      "--sds-size-stroke-border": "1px",
+      "--sds-size-stroke-focus-ring": "2px"
+    },
+    "58:0": {
+      "--sds-typo-body-font-family": "Inter",
+      "--sds-typo-body-font-style-italic": "Italic",
+      "--sds-typo-body-font-weight-regular": "400",
+      "--sds-typo-body-font-weight-strong": "600",
+      "--sds-typo-body-size-large": "20px",
+      "--sds-typo-body-size-medium": "16px",
+      "--sds-typo-body-size-small": "14px",
+      "--sds-typo-code-font-family": "Roboto Mono",
+      "--sds-typo-code-font-weight": "400",
+      "--sds-typo-code-size-base": "16px",
+      "--sds-typo-code-size-large": "20px",
+      "--sds-typo-code-size-small": "14px",
+      "--sds-typo-heading-font-family": "Inter",
+      "--sds-typo-heading-font-weight": "600",
+      "--sds-typo-heading-size-base": "24px",
+      "--sds-typo-heading-size-large": "32px",
+      "--sds-typo-heading-size-small": "20px",
+      "--sds-typo-subheading-font-family": "Inter",
+      "--sds-typo-subheading-font-weight": "400",
+      "--sds-typo-subheading-size-large": "24px",
+      "--sds-typo-subheading-size-medium": "20px",
+      "--sds-typo-subheading-size-small": "16px",
+      "--sds-typo-subtitle-font-family": "Inter",
+      "--sds-typo-subtitle-font-weight": "400",
+      "--sds-typo-subtitle-size-base": "32px",
+      "--sds-typo-subtitle-size-large": "40px",
+      "--sds-typo-subtitle-size-small": "24px",
+      "--sds-typo-title-hero-font-family": "Inter",
+      "--sds-typo-title-hero-font-weight": "700",
+      "--sds-typo-title-hero-size": "72px",
+      "--sds-typo-title-page-font-family": "Inter",
+      "--sds-typo-title-page-font-weight": "700",
+      "--sds-typo-title-page-size-base": "48px",
+      "--sds-typo-title-page-size-large": "64px",
+      "--sds-typo-title-page-size-small": "40px"
+    },
+    "7:3": {
+      "--sds-typo-fonts-font-sans": "Geist",
+      "--sds-typo-leading-leading-tight": "20px",
+      "--sds-typo-size-text-sm": "14px",
+      "--sds-typo-weight-font-normal": "400px"
     },
     "3919:19": {
       "--sds-color-black-100": "rgba(12, 12, 13, 0.05)",
@@ -751,6 +748,9 @@
       "--sds-color-yellow-700": "#975102",
       "--sds-color-yellow-800": "#682d03",
       "--sds-color-yellow-900": "#522504"
+    },
+    "28:2": {
+      "--sds-color-black-100": "#000000"
     }
   },
   "variables": [
@@ -1821,24 +1821,6 @@
       }
     },
     {
-      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
-      "figmaName": "black/100",
-      "cssVar": "--sds-color-black-100",
-      "resolvedType": "COLOR",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
-      "modes": {
-        "28:2": {
-          "value": "#000000",
-          "resolvedType": "COLOR",
-          "aliasChain": [
-            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:9:11234",
       "figmaName": "Black/100",
       "cssVar": "--sds-color-black-100",
@@ -1851,6 +1833,24 @@
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:9:11234"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+      "figmaName": "black/100",
+      "cssVar": "--sds-color-black-100",
+      "resolvedType": "COLOR",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
+      "modes": {
+        "28:2": {
+          "value": "#000000",
+          "resolvedType": "COLOR",
+          "aliasChain": [
+            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
           ],
           "reason": "resolved"
         }
@@ -8546,16 +8546,16 @@
     "modeCount": 12,
     "tokenCountByMode": {
       "9:2": 31,
+      "3919:21": 137,
+      "3919:22": 137,
       "9:4": 5,
       "9:5": 5,
       "9:6": 5,
       "9:7": 52,
-      "7:3": 4,
       "58:0": 35,
-      "3919:21": 137,
-      "3919:22": 137,
-      "28:2": 1,
-      "3919:19": 100
+      "7:3": 4,
+      "3919:19": 100,
+      "28:2": 1
     }
   }
 }
