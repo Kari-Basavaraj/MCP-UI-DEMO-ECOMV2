@@ -19,7 +19,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 0;
-  padding: var(--sds-size-padding-lg);
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
