@@ -15,6 +15,8 @@
       gap: 20px;
       padding: 24px;
       background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
       box-sizing: border-box;
       font-family: inherit;
     }
@@ -30,10 +32,10 @@
       color: var(--sds-color-text-default-secondary);
     }
 
-    .wl-grid { display:flex; gap:16px; flex-wrap:wrap; }
+    .wl-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:16px; }
 
     .wl-item {
-      width: 176px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       background: var(--sds-color-background-default-default);
@@ -44,8 +46,8 @@
 
     .wl-item__img-wrap {
       position: relative;
-      width: 176px;
-      height: 180px;
+      width: 100%;
+      aspect-ratio: 1;
       background: var(--sds-color-background-default-secondary);
       overflow: hidden;
     }
@@ -85,7 +87,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 176px;
+      width: 100%;
       height: 36px;
       border: none;
       background: transparent;

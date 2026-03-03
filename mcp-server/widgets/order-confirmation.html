@@ -15,6 +15,8 @@
       gap: 20px;
       padding: 24px;
       background: var(--sds-color-background-default-default);
+      border: 1px solid var(--sds-color-border-default-default);
+      border-radius: 16px;
       box-sizing: border-box;
       font-family: inherit;
     }
@@ -118,6 +120,18 @@
       box-sizing: border-box;
     }
     .oc-continue-btn:hover { background:var(--sds-color-background-default-secondary); }
+
+    /* Responsive */
+    .oc-detail-value { text-align:right; word-break:break-word; }
+    .oc-item__name { word-break:break-word; white-space:normal; overflow:hidden; text-overflow:ellipsis; }
+    @media (max-width: 400px) {
+      .oc-card { padding: 16px; gap: 14px; }
+      .oc-title { font-size: 20px; }
+      .oc-detail-row { flex-wrap: wrap; gap: 2px; }
+      .oc-detail-value { text-align: right; }
+      .oc-total__value { font-size: 20px; }
+      .oc-continue-btn { min-width: auto; width: 100%; }
+    }
   </style>
 </head>
 <body>
