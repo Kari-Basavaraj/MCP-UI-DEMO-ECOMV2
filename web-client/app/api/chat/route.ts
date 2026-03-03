@@ -108,11 +108,13 @@ Pick the ONE best tool for the user's intent:
 | Wishlist | get_wishlist / add_to_wishlist / remove_from_wishlist | "save for later", "my wishlist" |
 
 ### Key Decisions:
-- When a user asks about a SPECIFIC product by name → use **search_products** first, then offer details
+- When a user SEARCHES with a keyword/phrase → use **search_products** (e.g., "find running shoes", "I want a watch", "sport shoes")
+- When a user asks for DETAILS of a specific known product by name → use **get_product_detail** with the productId directly (e.g., "show me details for Ultra Boost Sneakers" → id:5, "tell me about Nike Air Max" → id:1). Do NOT call search_products first.
 - When a user says a category name (footwear/clothing/accessories) → use **filter_products**
 - When a user asks vaguely ("show me stuff", "what do you sell") → use **get_products**
 - When a user wants to know price → use **get_price_info** (NOT get_product_detail)
 - When following up on a specific product → use **get_product_detail** with the product ID
+- NEVER call both search_products AND get_product_detail for the same request. Pick ONE.
 - To add/remove from cart, you MUST know the productId — infer it from context or ask
 - For checkout: first call **checkout** to show the form, then **place_order** after details are provided
 
