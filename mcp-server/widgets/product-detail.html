@@ -6,6 +6,8 @@
   <title>Product Detail – MCP Ecommerce</title>
   <link rel="stylesheet" href="/src/widgets/shared.css" />
   <style>
+    /* Override body padding for edge-to-edge card layout */
+    body { padding: 0; }
 
     .pd-card {
       max-width: 100%;
@@ -29,8 +31,7 @@
 
     /* Image half */
     .pd-image {
-      flex: 0 0 42%;
-      max-width: 42%;
+      flex: 1 1 50%;
       min-height: 350px;
       position: relative;
       background: var(--sds-color-background-default-secondary);
@@ -125,15 +126,19 @@
     .pd-qty-btn:hover { background:var(--sds-color-background-default-secondary-hover); }
     .pd-qty-value { flex:1; text-align:center; font-size:16px; font-weight:600; color: var(--sds-color-text-default-default); }
 
+    /* Quantity */
+    .pd-qty { display: flex; flex-direction: column; gap: 8px; }
+    .pd-qty__label { font-size: 14px; font-weight: 600; color: var(--sds-color-text-default-secondary); }
+
     /* Actions */
     .pd-actions { display:flex; gap:12px; padding-top:8px; }
     .pd-add-cart {
       flex: 1;
-      height: 40px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px;
+      padding: 12px 16px;
       background: var(--sds-color-background-brand-default);
       color: var(--sds-color-text-brand-on-brand);
       border: none;
@@ -148,11 +153,11 @@
     .pd-add-cart:hover { opacity:0.9; }
     .pd-add-wishlist {
       min-width: 104px;
-      height: 40px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px;
+      padding: 12px 16px;
       border: 1px solid var(--sds-color-border-default-default);
       border-radius: 8px;
       background: transparent;
@@ -193,10 +198,13 @@
         </div>
       </div>
 
-      <div class="pd-qty-controls">
-        <button class="pd-qty-btn" data-action="decrease-qty">−</button>
-        <span class="pd-qty-value" id="qty-display">1</span>
-        <button class="pd-qty-btn" data-action="increase-qty">+</button>
+      <div class="pd-qty">
+        <span class="pd-qty__label">Quantity</span>
+        <div class="pd-qty-controls">
+          <button class="pd-qty-btn" data-action="decrease-qty">−</button>
+          <span class="pd-qty-value" id="qty-display">1</span>
+          <button class="pd-qty-btn" data-action="increase-qty">+</button>
+        </div>
       </div>
 
       <div class="pd-actions">

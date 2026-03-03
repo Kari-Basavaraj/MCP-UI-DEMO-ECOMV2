@@ -32,10 +32,17 @@
       color: var(--sds-color-text-default-secondary);
     }
 
-    .wl-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:16px; }
+    .wl-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
 
     .wl-item {
-      width: 100%;
+      width: 200px;
+      max-width: 100%;
+      flex: 0 0 200px;
       display: flex;
       flex-direction: column;
       background: var(--sds-color-background-default-default);

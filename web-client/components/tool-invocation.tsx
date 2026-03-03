@@ -638,7 +638,7 @@ export const ToolInvocation = memo(function ToolInvocation({
         resource={resourceData as any}
         htmlProps={{
           style: resourceStyle,
-          autoResizeIframe: true,
+          autoResizeIframe: { height: true },
         }}
         onUIAction={handleUiAction}
       />

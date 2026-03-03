@@ -17,6 +17,7 @@ body {
   width: 100%;
   min-height: 0;
   padding: var(--sds-size-padding-lg);
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

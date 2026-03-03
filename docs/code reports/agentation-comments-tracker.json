@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-02-28T15:15:52.892Z",
+  "updatedAt": "2026-03-03T08:06:29.458Z",
   "sessions": {
     "mm61a5x1-yvw0yl": {
       "id": "mm61a5x1-yvw0yl",
@@ -15,6 +15,16 @@
         "mm67a4v0-cxf0re",
         "mm67btx5-q7lo9z",
         "mm67cswy-z9dvin"
+      ]
+    },
+    "unknown": {
+      "id": "unknown",
+      "url": "",
+      "createdAt": "2026-03-03T08:03:13.408Z",
+      "updatedAt": "2026-03-03T08:03:38.606Z",
+      "commentIds": [
+        "1772524993399",
+        "1772525018593"
       ]
     }
   },
@@ -539,14 +549,96 @@
       },
       "resolvedAt": "2026-02-28T15:15:52.892Z",
       "resolvedBy": "codex"
+    },
+    "1772524993399": {
+      "id": "1772524993399",
+      "createdAt": "2026-03-03T08:03:13.399Z",
+      "history": [
+        {
+          "at": "2026-03-03T08:03:13.408Z",
+          "event": "annotation.add",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-03-03T08:06:29.458Z",
+          "event": "annotations.clear",
+          "status": "dismissed",
+          "note": "cleared from agentation"
+        }
+      ],
+      "sessionId": "unknown",
+      "url": "",
+      "comment": "see the padding right side?",
+      "element": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> rounded 2xl",
+      "elementPath": ".flex > .flex > .mb-2 > .rounded-2xl",
+      "fullPath": "body.antialiased > div.flex > main.flex-1 > div.h-full > div.h-full > div.flex-1 > div.h-full > div.max-w-lg > div.w-full > div.flex > div.flex > div.mb-2 > div.rounded-2xl",
+      "cssClasses": "rounded-2xl, border, border-border/40, bg-card, shadow-md, overflow-hidden, animate-widget-appear",
+      "reactComponents": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772524993399,
+      "boundingBox": {
+        "x": 613,
+        "y": 89,
+        "width": 688,
+        "height": 576
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-03-03T08:06:29.458Z",
+      "status": "dismissed",
+      "dismissedAt": "2026-03-03T08:06:29.457Z"
+    },
+    "1772525018593": {
+      "id": "1772525018593",
+      "createdAt": "2026-03-03T08:03:38.593Z",
+      "history": [
+        {
+          "at": "2026-03-03T08:03:38.606Z",
+          "event": "annotation.add",
+          "status": "pending",
+          "note": "upserted from annotation payload"
+        },
+        {
+          "at": "2026-03-03T08:06:29.458Z",
+          "event": "annotations.clear",
+          "status": "dismissed",
+          "note": "cleared from agentation"
+        }
+      ],
+      "sessionId": "unknown",
+      "url": "",
+      "comment": "see the white space right side?",
+      "element": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> rounded 2xl",
+      "elementPath": ".flex > .flex > .mb-2 > .rounded-2xl",
+      "fullPath": "body.antialiased > div.flex > main.flex-1 > div.h-full > div.h-full > div.flex-1 > div.h-full > div.max-w-lg > div.w-full > div.flex > div.flex > div.mb-2 > div.rounded-2xl",
+      "cssClasses": "rounded-2xl, border, border-border/40, bg-card, shadow-md, overflow-hidden, animate-widget-appear",
+      "reactComponents": "<SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation>",
+      "selectedText": "",
+      "intent": null,
+      "severity": null,
+      "timestamp": 1772525018593,
+      "boundingBox": {
+        "x": 613,
+        "y": 89,
+        "width": 688,
+        "height": 576
+      },
+      "isFixed": false,
+      "isMultiSelect": false,
+      "updatedAt": "2026-03-03T08:06:29.458Z",
+      "status": "dismissed",
+      "dismissedAt": "2026-03-03T08:06:29.458Z"
     }
   },
   "submissions": [],
   "stats": {
-    "total": 7,
+    "total": 9,
     "pending": 0,
     "acknowledged": 0,
     "resolved": 7,
-    "dismissed": 0
+    "dismissed": 2
   }
 }

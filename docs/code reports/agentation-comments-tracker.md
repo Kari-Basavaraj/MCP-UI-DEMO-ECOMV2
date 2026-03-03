@@ -1,14 +1,14 @@
 # Agentation Comments Tracker
 
-Last updated: 2026-02-28T15:15:52.892Z
+Last updated: 2026-03-03T08:06:29.458Z
 
 ## Summary
 
-- Total: 7
+- Total: 9
 - Pending: 0
 - Acknowledged: 0
 - Resolved: 7
-- Dismissed: 0
+- Dismissed: 2
 
 ## Comments
 
@@ -21,4 +21,6 @@ Last updated: 2026-02-28T15:15:52.892Z
 | `mm66you7-epzau5` | resolved | for filters view port is not auto resizing | <SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> | .flex > .flex > .mb-2 > .rounded-2xl | 2026-02-28T15:15:52.811Z |
 | `mm66v787-3uvk88` | resolved | by default dark mode is enabled, light mode dark mode switch is not fucntioniong pls fix the fucntionality | <SegmentViewNode> <SegmentViewNode> <Sidebar> | .flex > .h-dvh > .border-t > .flex | 2026-02-28T15:15:52.792Z |
 | `mm61qy6e-y6egax` | resolved | logo should adopt to dark and light modes | <SegmentViewNode> <Chat> <Textarea> <ProviderBadge> | .flex > .relative > .flex > .inline-flex | 2026-02-28T15:15:52.765Z |
+| `1772524993399` | dismissed | see the padding right side? | <SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> | .flex > .flex > .mb-2 > .rounded-2xl | 2026-03-03T08:06:29.458Z |
+| `1772525018593` | dismissed | see the white space right side? | <SegmentViewNode> <Chat> <Messages> <PureMessage> <PureMessage> <ToolInvocation> | .flex > .flex > .mb-2 > .rounded-2xl | 2026-03-03T08:06:29.458Z |
 
