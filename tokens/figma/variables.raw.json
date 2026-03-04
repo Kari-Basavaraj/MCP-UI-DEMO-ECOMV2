@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-04T10:44:23.986Z",
+  "fetchedAt": "2026-03-04T11:03:45.317Z",
   "request": {
     "status": 200,
     "url": "https://api.figma.com/v1/files/dbPjFeLfAFp8Sz9YGPs0CZ/variables/local"
@@ -87,6 +87,24 @@
             "VariableID:231:21547"
           ]
         },
+        "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526": {
+          "defaultModeId": "28:2",
+          "id": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+          "name": "Colors",
+          "remote": true,
+          "modes": [
+            {
+              "modeId": "28:2",
+              "name": "Mode 1"
+            }
+          ],
+          "key": "b1dc1db082f877042570b6d33f5c5b8c3292d1fb",
+          "hiddenFromPublishing": true,
+          "isExtension": false,
+          "variableIds": [
+            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
+          ]
+        },
         "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243": {
           "defaultModeId": "9:7",
           "id": "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243",
@@ -103,58 +121,6 @@
           "isExtension": false,
           "variableIds": [
             "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259"
-          ]
-        },
-        "VariableCollectionId:58:8567": {
-          "defaultModeId": "58:0",
-          "id": "VariableCollectionId:58:8567",
-          "name": "Typography",
-          "remote": false,
-          "modes": [
-            {
-              "modeId": "58:0",
-              "name": "Mode 1"
-            }
-          ],
-          "key": "7c92fb4fb4813499affa777337d7b5212f572067",
-          "hiddenFromPublishing": false,
-          "isExtension": false,
-          "variableIds": [
-            "VariableID:66:10188",
-            "VariableID:66:10189",
-            "VariableID:66:10190",
-            "VariableID:58:8569",
-            "VariableID:58:8574",
-            "VariableID:66:10197",
-            "VariableID:66:10198",
-            "VariableID:58:8572",
-            "VariableID:66:10176",
-            "VariableID:66:10210",
-            "VariableID:66:10177",
-            "VariableID:66:10209",
-            "VariableID:66:10178",
-            "VariableID:66:10185",
-            "VariableID:66:10212",
-            "VariableID:66:10186",
-            "VariableID:66:10211",
-            "VariableID:66:10187",
-            "VariableID:2103:22306",
-            "VariableID:2103:22307",
-            "VariableID:2103:22308",
-            "VariableID:2103:22309",
-            "VariableID:2103:22310",
-            "VariableID:66:10179",
-            "VariableID:66:10216",
-            "VariableID:66:10180",
-            "VariableID:66:10215",
-            "VariableID:66:10181",
-            "VariableID:66:14844",
-            "VariableID:66:14846",
-            "VariableID:66:10182",
-            "VariableID:66:10218",
-            "VariableID:66:10183",
-            "VariableID:66:10217",
-            "VariableID:66:10184"
           ]
         },
         "VariableCollectionId:9:11257": {
@@ -226,6 +192,74 @@
             "VariableID:3034:9015",
             "VariableID:3038:5603"
           ]
+        },
+        "VariableCollectionId:58:8567": {
+          "defaultModeId": "58:0",
+          "id": "VariableCollectionId:58:8567",
+          "name": "Typography",
+          "remote": false,
+          "modes": [
+            {
+              "modeId": "58:0",
+              "name": "Mode 1"
+            }
+          ],
+          "key": "7c92fb4fb4813499affa777337d7b5212f572067",
+          "hiddenFromPublishing": false,
+          "isExtension": false,
+          "variableIds": [
+            "VariableID:66:10188",
+            "VariableID:66:10189",
+            "VariableID:66:10190",
+            "VariableID:58:8569",
+            "VariableID:58:8574",
+            "VariableID:66:10197",
+            "VariableID:66:10198",
+            "VariableID:58:8572",
+            "VariableID:66:10176",
+            "VariableID:66:10210",
+            "VariableID:66:10177",
+            "VariableID:66:10209",
+            "VariableID:66:10178",
+            "VariableID:66:10185",
+            "VariableID:66:10212",
+            "VariableID:66:10186",
+            "VariableID:66:10211",
+            "VariableID:66:10187",
+            "VariableID:2103:22306",
+            "VariableID:2103:22307",
+            "VariableID:2103:22308",
+            "VariableID:2103:22309",
+            "VariableID:2103:22310",
+            "VariableID:66:10179",
+            "VariableID:66:10216",
+            "VariableID:66:10180",
+            "VariableID:66:10215",
+            "VariableID:66:10181",
+            "VariableID:66:14844",
+            "VariableID:66:14846",
+            "VariableID:66:10182",
+            "VariableID:66:10218",
+            "VariableID:66:10183",
+            "VariableID:66:10217",
+            "VariableID:66:10184"
+          ]
+        },
+        "VariableCollectionId:3012:1204": {
+          "defaultModeId": "3012:0",
+          "id": "VariableCollectionId:3012:1204",
+          "name": "MCP UI Widgets",
+          "remote": false,
+          "modes": [
+            {
+              "modeId": "3012:0",
+              "name": "Mode 1"
+            }
+          ],
+          "key": "4192696f563fd3c1a2f84399ffa7a7ed66d96c94",
+          "hiddenFromPublishing": false,
+          "isExtension": false,
+          "variableIds": []
         },
         "VariableCollectionId:3919:36422": {
           "defaultModeId": "3919:21",
@@ -385,22 +419,6 @@
             "VariableID:3919:36533"
           ]
         },
-        "VariableCollectionId:3012:1204": {
-          "defaultModeId": "3012:0",
-          "id": "VariableCollectionId:3012:1204",
-          "name": "MCP UI Widgets",
-          "remote": false,
-          "modes": [
-            {
-              "modeId": "3012:0",
-              "name": "Mode 1"
-            }
-          ],
-          "key": "4192696f563fd3c1a2f84399ffa7a7ed66d96c94",
-          "hiddenFromPublishing": false,
-          "isExtension": false,
-          "variableIds": []
-        },
         "VariableCollectionId:3919:36421": {
           "defaultModeId": "3919:19",
           "id": "VariableCollectionId:3919:36421",
@@ -537,24 +555,6 @@
             "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
             "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
             "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310"
-          ]
-        },
-        "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526": {
-          "defaultModeId": "28:2",
-          "id": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-          "name": "Colors",
-          "remote": true,
-          "modes": [
-            {
-              "modeId": "28:2",
-              "name": "Mode 1"
-            }
-          ],
-          "key": "b1dc1db082f877042570b6d33f5c5b8c3292d1fb",
-          "hiddenFromPublishing": true,
-          "isExtension": false,
-          "variableIds": [
-            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
           ]
         }
       },
@@ -1236,6 +1236,28 @@
             "WEB": "var(--sds-responsive-scale)"
           }
         },
+        "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528": {
+          "name": "black/100",
+          "id": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+          "remote": true,
+          "key": "18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68",
+          "variableCollectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+          "resolvedType": "COLOR",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "28:2": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
         "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259": {
           "name": "Stroke/Border",
           "id": "VariableID:394d05bc08ab0cf40ac4b4130446b8141106372e/365:259",
@@ -1253,671 +1275,6 @@
           ],
           "codeSyntax": {
             "WEB": "var(--sds-size-stroke-border)"
-          }
-        },
-        "VariableID:66:10188": {
-          "name": "Title Hero/Font Family",
-          "id": "VariableID:66:10188",
-          "remote": false,
-          "key": "b96164c627b9c2467a650fc1c4028ac82fe22443",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-hero-font-family)"
-          }
-        },
-        "VariableID:66:10189": {
-          "name": "Title Hero/Size",
-          "id": "VariableID:66:10189",
-          "remote": false,
-          "key": "630ae4900c349b149f94e3b0c758d5b105a4f48e",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 72
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-hero-size)"
-          }
-        },
-        "VariableID:66:10190": {
-          "name": "Title Hero/Font Weight",
-          "id": "VariableID:66:10190",
-          "remote": false,
-          "key": "3958ff3398ff7c0d7ac42a1fe2daf299da263623",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 700
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-hero-font-weight)"
-          }
-        },
-        "VariableID:58:8569": {
-          "name": "Title Page/Font Family",
-          "id": "VariableID:58:8569",
-          "remote": false,
-          "key": "01b6e345896d175042b15f0d1a2dc3f5d20ffc25",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-page-font-family)"
-          }
-        },
-        "VariableID:58:8574": {
-          "name": "Title Page/Size Small",
-          "id": "VariableID:58:8574",
-          "remote": false,
-          "key": "dc8db9c8cb44b120842c34a95003b3a45b651a95",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 40
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-page-size-small)"
-          }
-        },
-        "VariableID:66:10197": {
-          "name": "Title Page/Size Base",
-          "id": "VariableID:66:10197",
-          "remote": false,
-          "key": "f1685860301a031e8b4a34597e2b87ef6ec612a1",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 48
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-page-size-base)"
-          }
-        },
-        "VariableID:66:10198": {
-          "name": "Title Page/Size Large",
-          "id": "VariableID:66:10198",
-          "remote": false,
-          "key": "6fcf6ed4645a9e2f8329c9e9dfe257c8a943ab7e",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 64
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-page-size-large)"
-          }
-        },
-        "VariableID:58:8572": {
-          "name": "Title Page/Font Weight",
-          "id": "VariableID:58:8572",
-          "remote": false,
-          "key": "3ceb23f8b5a87df0b99fea50fd518e05316fb634",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 700
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-title-page-font-weight)"
-          }
-        },
-        "VariableID:66:10176": {
-          "name": "Subtitle/Font Family",
-          "id": "VariableID:66:10176",
-          "remote": false,
-          "key": "76495ba9e0e0d93ad807547edc58ea73620c24e7",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subtitle-font-family)"
-          }
-        },
-        "VariableID:66:10210": {
-          "name": "Subtitle/Size Small",
-          "id": "VariableID:66:10210",
-          "remote": false,
-          "key": "683bac55f85da2e268d8f8dce5e5d44366677f70",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 24
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subtitle-size-small)"
-          }
-        },
-        "VariableID:66:10177": {
-          "name": "Subtitle/Size Base",
-          "id": "VariableID:66:10177",
-          "remote": false,
-          "key": "e9652fe06fed19aee8be1a306406cca652a641cd",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 32
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subtitle-size-base)"
-          }
-        },
-        "VariableID:66:10209": {
-          "name": "Subtitle/Size Large",
-          "id": "VariableID:66:10209",
-          "remote": false,
-          "key": "da83d80361a3336204bf116e970832d210fcdbad",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 40
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subtitle-size-large)"
-          }
-        },
-        "VariableID:66:10178": {
-          "name": "Subtitle/Font Weight",
-          "id": "VariableID:66:10178",
-          "remote": false,
-          "key": "eceb26b04670d45b5b75ec567a8e669ef9b49a1e",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 400
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subtitle-font-weight)"
-          }
-        },
-        "VariableID:66:10185": {
-          "name": "Heading/Font Family",
-          "id": "VariableID:66:10185",
-          "remote": false,
-          "key": "f5a85a2f023cb850b04fe6882432f21f2204e5e7",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-heading-font-family)"
-          }
-        },
-        "VariableID:66:10212": {
-          "name": "Heading/Size Small",
-          "id": "VariableID:66:10212",
-          "remote": false,
-          "key": "636b50a5117577d858c55f26aa2865392c5a27fa",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 20
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-heading-size-small)"
-          }
-        },
-        "VariableID:66:10186": {
-          "name": "Heading/Size Base",
-          "id": "VariableID:66:10186",
-          "remote": false,
-          "key": "a10c3cc00e04903feef7dcb949576cf5b2947475",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 24
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-heading-size-base)"
-          }
-        },
-        "VariableID:66:10211": {
-          "name": "Heading/Size Large",
-          "id": "VariableID:66:10211",
-          "remote": false,
-          "key": "a8130d5e16872c7266218133e4c7d8400d3f430b",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 32
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-heading-size-large)"
-          }
-        },
-        "VariableID:66:10187": {
-          "name": "Heading/Font Weight",
-          "id": "VariableID:66:10187",
-          "remote": false,
-          "key": "325863a0885671865e816dd51709b2bbb959485a",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 600
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-heading-font-weight)"
-          }
-        },
-        "VariableID:2103:22306": {
-          "name": "Subheading/Font Family",
-          "id": "VariableID:2103:22306",
-          "remote": false,
-          "key": "4f808e2212f523568c1a8228ec22a92f439d99a6",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subheading-font-family)"
-          }
-        },
-        "VariableID:2103:22307": {
-          "name": "Subheading/Size Small",
-          "id": "VariableID:2103:22307",
-          "remote": false,
-          "key": "ff00fcb0dcc1dad4d4bd80e10342ab4d1481e0e2",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 16
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subheading-size-small)"
-          }
-        },
-        "VariableID:2103:22308": {
-          "name": "Subheading/Size Medium",
-          "id": "VariableID:2103:22308",
-          "remote": false,
-          "key": "76eaa5d6ed5c52fac5cb9e0675b1e9cf730db9a9",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 20
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subheading-size-medium)"
-          }
-        },
-        "VariableID:2103:22309": {
-          "name": "Subheading/Size Large",
-          "id": "VariableID:2103:22309",
-          "remote": false,
-          "key": "1f2bdc31c92beda778ec9e7806c78c32a9adb9d6",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 24
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subheading-size-large)"
-          }
-        },
-        "VariableID:2103:22310": {
-          "name": "Subheading/Font Weight",
-          "id": "VariableID:2103:22310",
-          "remote": false,
-          "key": "07f512f7963bdcfd599b912856c75a72fce07a39",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 400
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-subheading-font-weight)"
-          }
-        },
-        "VariableID:66:10179": {
-          "name": "Body/Font Family",
-          "id": "VariableID:66:10179",
-          "remote": false,
-          "key": "2a5e8dcfc8051c20ce777772e9186ae9bab92423",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Inter"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-font-family)"
-          }
-        },
-        "VariableID:66:10216": {
-          "name": "Body/Size Small",
-          "id": "VariableID:66:10216",
-          "remote": false,
-          "key": "6befa81e1835665fb5ed9f194950ab7aeb157e3b",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 14
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-size-small)"
-          }
-        },
-        "VariableID:66:10180": {
-          "name": "Body/Size Medium",
-          "id": "VariableID:66:10180",
-          "remote": false,
-          "key": "400926491988f723b97bd251f94455ae885df446",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 16
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-size-medium)"
-          }
-        },
-        "VariableID:66:10215": {
-          "name": "Body/Size Large",
-          "id": "VariableID:66:10215",
-          "remote": false,
-          "key": "bc789ca3b963e3f013c93872b1b20082c9b5f7c3",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 20
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-size-large)"
-          }
-        },
-        "VariableID:66:10181": {
-          "name": "Body/Font Weight Regular",
-          "id": "VariableID:66:10181",
-          "remote": false,
-          "key": "bbed94a8154d1d07635de3acfeccce8b38fb7f4b",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 400
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-font-weight-regular)"
-          }
-        },
-        "VariableID:66:14844": {
-          "name": "Body/Font Weight Strong",
-          "id": "VariableID:66:14844",
-          "remote": false,
-          "key": "6b0c8a0627f29334b7e6b03daa91a5e44a900368",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 600
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-font-weight-strong)"
-          }
-        },
-        "VariableID:66:14846": {
-          "name": "Body/Font Style Italic",
-          "id": "VariableID:66:14846",
-          "remote": false,
-          "key": "32cca7ea65f8d986e4c4aac9967b7e5fb9d015bd",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Italic"
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-body-font-style-italic)"
-          }
-        },
-        "VariableID:66:10182": {
-          "name": "Code/Font Family",
-          "id": "VariableID:66:10182",
-          "remote": false,
-          "key": "edccd053a331d7eb1a9e3a7d77da6b1233e1cfb7",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "STRING",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": "Roboto Mono"
-          },
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-code-font-family)"
-          }
-        },
-        "VariableID:66:10218": {
-          "name": "Code/Size Small",
-          "id": "VariableID:66:10218",
-          "remote": false,
-          "key": "dd06603e096ba74bf291449121d2808cb7d6a5f0",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 14
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-code-size-small)"
-          }
-        },
-        "VariableID:66:10183": {
-          "name": "Code/Size Base",
-          "id": "VariableID:66:10183",
-          "remote": false,
-          "key": "6299356264ac937975a66d3fdeeee787a95a56b1",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 16
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-code-size-base)"
-          }
-        },
-        "VariableID:66:10217": {
-          "name": "Code/Size Large",
-          "id": "VariableID:66:10217",
-          "remote": false,
-          "key": "ad762c97d88ba0d70ea33f1101c9a554d2e561e6",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 20
-          },
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-code-size-large)"
-          }
-        },
-        "VariableID:66:10184": {
-          "name": "Code/Font Weight",
-          "id": "VariableID:66:10184",
-          "remote": false,
-          "key": "6df8c922e8d2088334366ef33d067382819000cb",
-          "variableCollectionId": "VariableCollectionId:58:8567",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": false,
-          "valuesByMode": {
-            "58:0": 400
-          },
-          "scopes": [
-            "FONT_STYLE"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--sds-typography-code-font-weight)"
           }
         },
         "VariableID:364:11151": {
@@ -2924,6 +2281,671 @@
           ],
           "codeSyntax": {}
         },
+        "VariableID:66:10188": {
+          "name": "Title Hero/Font Family",
+          "id": "VariableID:66:10188",
+          "remote": false,
+          "key": "b96164c627b9c2467a650fc1c4028ac82fe22443",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-hero-font-family)"
+          }
+        },
+        "VariableID:66:10189": {
+          "name": "Title Hero/Size",
+          "id": "VariableID:66:10189",
+          "remote": false,
+          "key": "630ae4900c349b149f94e3b0c758d5b105a4f48e",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 72
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-hero-size)"
+          }
+        },
+        "VariableID:66:10190": {
+          "name": "Title Hero/Font Weight",
+          "id": "VariableID:66:10190",
+          "remote": false,
+          "key": "3958ff3398ff7c0d7ac42a1fe2daf299da263623",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 700
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-hero-font-weight)"
+          }
+        },
+        "VariableID:58:8569": {
+          "name": "Title Page/Font Family",
+          "id": "VariableID:58:8569",
+          "remote": false,
+          "key": "01b6e345896d175042b15f0d1a2dc3f5d20ffc25",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-page-font-family)"
+          }
+        },
+        "VariableID:58:8574": {
+          "name": "Title Page/Size Small",
+          "id": "VariableID:58:8574",
+          "remote": false,
+          "key": "dc8db9c8cb44b120842c34a95003b3a45b651a95",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 40
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-page-size-small)"
+          }
+        },
+        "VariableID:66:10197": {
+          "name": "Title Page/Size Base",
+          "id": "VariableID:66:10197",
+          "remote": false,
+          "key": "f1685860301a031e8b4a34597e2b87ef6ec612a1",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 48
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-page-size-base)"
+          }
+        },
+        "VariableID:66:10198": {
+          "name": "Title Page/Size Large",
+          "id": "VariableID:66:10198",
+          "remote": false,
+          "key": "6fcf6ed4645a9e2f8329c9e9dfe257c8a943ab7e",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 64
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-page-size-large)"
+          }
+        },
+        "VariableID:58:8572": {
+          "name": "Title Page/Font Weight",
+          "id": "VariableID:58:8572",
+          "remote": false,
+          "key": "3ceb23f8b5a87df0b99fea50fd518e05316fb634",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 700
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-title-page-font-weight)"
+          }
+        },
+        "VariableID:66:10176": {
+          "name": "Subtitle/Font Family",
+          "id": "VariableID:66:10176",
+          "remote": false,
+          "key": "76495ba9e0e0d93ad807547edc58ea73620c24e7",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subtitle-font-family)"
+          }
+        },
+        "VariableID:66:10210": {
+          "name": "Subtitle/Size Small",
+          "id": "VariableID:66:10210",
+          "remote": false,
+          "key": "683bac55f85da2e268d8f8dce5e5d44366677f70",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 24
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subtitle-size-small)"
+          }
+        },
+        "VariableID:66:10177": {
+          "name": "Subtitle/Size Base",
+          "id": "VariableID:66:10177",
+          "remote": false,
+          "key": "e9652fe06fed19aee8be1a306406cca652a641cd",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 32
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subtitle-size-base)"
+          }
+        },
+        "VariableID:66:10209": {
+          "name": "Subtitle/Size Large",
+          "id": "VariableID:66:10209",
+          "remote": false,
+          "key": "da83d80361a3336204bf116e970832d210fcdbad",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 40
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subtitle-size-large)"
+          }
+        },
+        "VariableID:66:10178": {
+          "name": "Subtitle/Font Weight",
+          "id": "VariableID:66:10178",
+          "remote": false,
+          "key": "eceb26b04670d45b5b75ec567a8e669ef9b49a1e",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 400
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subtitle-font-weight)"
+          }
+        },
+        "VariableID:66:10185": {
+          "name": "Heading/Font Family",
+          "id": "VariableID:66:10185",
+          "remote": false,
+          "key": "f5a85a2f023cb850b04fe6882432f21f2204e5e7",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-heading-font-family)"
+          }
+        },
+        "VariableID:66:10212": {
+          "name": "Heading/Size Small",
+          "id": "VariableID:66:10212",
+          "remote": false,
+          "key": "636b50a5117577d858c55f26aa2865392c5a27fa",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 20
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-heading-size-small)"
+          }
+        },
+        "VariableID:66:10186": {
+          "name": "Heading/Size Base",
+          "id": "VariableID:66:10186",
+          "remote": false,
+          "key": "a10c3cc00e04903feef7dcb949576cf5b2947475",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 24
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-heading-size-base)"
+          }
+        },
+        "VariableID:66:10211": {
+          "name": "Heading/Size Large",
+          "id": "VariableID:66:10211",
+          "remote": false,
+          "key": "a8130d5e16872c7266218133e4c7d8400d3f430b",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 32
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-heading-size-large)"
+          }
+        },
+        "VariableID:66:10187": {
+          "name": "Heading/Font Weight",
+          "id": "VariableID:66:10187",
+          "remote": false,
+          "key": "325863a0885671865e816dd51709b2bbb959485a",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 600
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-heading-font-weight)"
+          }
+        },
+        "VariableID:2103:22306": {
+          "name": "Subheading/Font Family",
+          "id": "VariableID:2103:22306",
+          "remote": false,
+          "key": "4f808e2212f523568c1a8228ec22a92f439d99a6",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subheading-font-family)"
+          }
+        },
+        "VariableID:2103:22307": {
+          "name": "Subheading/Size Small",
+          "id": "VariableID:2103:22307",
+          "remote": false,
+          "key": "ff00fcb0dcc1dad4d4bd80e10342ab4d1481e0e2",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 16
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subheading-size-small)"
+          }
+        },
+        "VariableID:2103:22308": {
+          "name": "Subheading/Size Medium",
+          "id": "VariableID:2103:22308",
+          "remote": false,
+          "key": "76eaa5d6ed5c52fac5cb9e0675b1e9cf730db9a9",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 20
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subheading-size-medium)"
+          }
+        },
+        "VariableID:2103:22309": {
+          "name": "Subheading/Size Large",
+          "id": "VariableID:2103:22309",
+          "remote": false,
+          "key": "1f2bdc31c92beda778ec9e7806c78c32a9adb9d6",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 24
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subheading-size-large)"
+          }
+        },
+        "VariableID:2103:22310": {
+          "name": "Subheading/Font Weight",
+          "id": "VariableID:2103:22310",
+          "remote": false,
+          "key": "07f512f7963bdcfd599b912856c75a72fce07a39",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 400
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-subheading-font-weight)"
+          }
+        },
+        "VariableID:66:10179": {
+          "name": "Body/Font Family",
+          "id": "VariableID:66:10179",
+          "remote": false,
+          "key": "2a5e8dcfc8051c20ce777772e9186ae9bab92423",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Inter"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-font-family)"
+          }
+        },
+        "VariableID:66:10216": {
+          "name": "Body/Size Small",
+          "id": "VariableID:66:10216",
+          "remote": false,
+          "key": "6befa81e1835665fb5ed9f194950ab7aeb157e3b",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 14
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-size-small)"
+          }
+        },
+        "VariableID:66:10180": {
+          "name": "Body/Size Medium",
+          "id": "VariableID:66:10180",
+          "remote": false,
+          "key": "400926491988f723b97bd251f94455ae885df446",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 16
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-size-medium)"
+          }
+        },
+        "VariableID:66:10215": {
+          "name": "Body/Size Large",
+          "id": "VariableID:66:10215",
+          "remote": false,
+          "key": "bc789ca3b963e3f013c93872b1b20082c9b5f7c3",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 20
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-size-large)"
+          }
+        },
+        "VariableID:66:10181": {
+          "name": "Body/Font Weight Regular",
+          "id": "VariableID:66:10181",
+          "remote": false,
+          "key": "bbed94a8154d1d07635de3acfeccce8b38fb7f4b",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 400
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-font-weight-regular)"
+          }
+        },
+        "VariableID:66:14844": {
+          "name": "Body/Font Weight Strong",
+          "id": "VariableID:66:14844",
+          "remote": false,
+          "key": "6b0c8a0627f29334b7e6b03daa91a5e44a900368",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 600
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-font-weight-strong)"
+          }
+        },
+        "VariableID:66:14846": {
+          "name": "Body/Font Style Italic",
+          "id": "VariableID:66:14846",
+          "remote": false,
+          "key": "32cca7ea65f8d986e4c4aac9967b7e5fb9d015bd",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Italic"
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-body-font-style-italic)"
+          }
+        },
+        "VariableID:66:10182": {
+          "name": "Code/Font Family",
+          "id": "VariableID:66:10182",
+          "remote": false,
+          "key": "edccd053a331d7eb1a9e3a7d77da6b1233e1cfb7",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "STRING",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": "Roboto Mono"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-code-font-family)"
+          }
+        },
+        "VariableID:66:10218": {
+          "name": "Code/Size Small",
+          "id": "VariableID:66:10218",
+          "remote": false,
+          "key": "dd06603e096ba74bf291449121d2808cb7d6a5f0",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 14
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-code-size-small)"
+          }
+        },
+        "VariableID:66:10183": {
+          "name": "Code/Size Base",
+          "id": "VariableID:66:10183",
+          "remote": false,
+          "key": "6299356264ac937975a66d3fdeeee787a95a56b1",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 16
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-code-size-base)"
+          }
+        },
+        "VariableID:66:10217": {
+          "name": "Code/Size Large",
+          "id": "VariableID:66:10217",
+          "remote": false,
+          "key": "ad762c97d88ba0d70ea33f1101c9a554d2e561e6",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 20
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-code-size-large)"
+          }
+        },
+        "VariableID:66:10184": {
+          "name": "Code/Font Weight",
+          "id": "VariableID:66:10184",
+          "remote": false,
+          "key": "6df8c922e8d2088334366ef33d067382819000cb",
+          "variableCollectionId": "VariableCollectionId:58:8567",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": false,
+          "valuesByMode": {
+            "58:0": 400
+          },
+          "scopes": [
+            "FONT_STYLE"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--sds-typography-code-font-weight)"
+          }
+        },
         "VariableID:3919:36423": {
           "name": "Background/Default/Default",
           "id": "VariableID:3919:36423",
@@ -3319,9 +3341,9 @@
           "hiddenFromPublishing": false,
           "valuesByMode": {
             "3919:21": {
-              "r": 0.5600000023841858,
-              "g": 0.2800000011920929,
-              "b": 0.9599999785423279,
+              "r": 0.1725490242242813,
+              "g": 0.1725490242242813,
+              "b": 0.1725490242242813,
               "a": 1
             },
             "3919:22": {
@@ -9416,28 +9438,6 @@
           "hiddenFromPublishing": true,
           "valuesByMode": {
             "7:3": 20
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528": {
-          "name": "black/100",
-          "id": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
-          "remote": true,
-          "key": "18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68",
-          "variableCollectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-          "resolvedType": "COLOR",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "28:2": {
-              "r": 0,
-              "g": 0,
-              "b": 0,
-              "a": 1
-            }
           },
           "scopes": [
             "ALL_SCOPES"

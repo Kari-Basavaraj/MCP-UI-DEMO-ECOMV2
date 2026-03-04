@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-04T10:44:24.199Z",
+  "generatedAt": "2026-03-04T11:03:45.535Z",
   "fileKey": "dbPjFeLfAFp8Sz9YGPs0CZ",
   "collections": [
     {
@@ -154,6 +154,13 @@
       "collectionName": "Responsive",
       "isDefault": false
     },
+    "28:2": {
+      "modeId": "28:2",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+      "collectionName": "Colors",
+      "isDefault": true
+    },
     "9:7": {
       "modeId": "9:7",
       "modeName": "Default",
@@ -166,6 +173,13 @@
       "modeName": "Mode 1",
       "collectionId": "VariableCollectionId:58:8567",
       "collectionName": "Typography",
+      "isDefault": true
+    },
+    "3012:0": {
+      "modeId": "3012:0",
+      "modeName": "Mode 1",
+      "collectionId": "VariableCollectionId:3012:1204",
+      "collectionName": "MCP UI Widgets",
       "isDefault": true
     },
     "3919:21": {
@@ -182,13 +196,6 @@
       "collectionName": "Color",
       "isDefault": false
     },
-    "3012:0": {
-      "modeId": "3012:0",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:3012:1204",
-      "collectionName": "MCP UI Widgets",
-      "isDefault": true
-    },
     "3919:19": {
       "modeId": "3919:19",
       "modeName": "Value",
@@ -201,13 +208,6 @@
       "modeName": "Value",
       "collectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
       "collectionName": "Typography",
-      "isDefault": true
-    },
-    "28:2": {
-      "modeId": "28:2",
-      "modeName": "Mode 1",
-      "collectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-      "collectionName": "Colors",
       "isDefault": true
     }
   },
@@ -271,6 +271,9 @@
       "--sds-responsive-device-width": "768px",
       "--sds-responsive-root-font-size": "16px",
       "--sds-responsive-scale": "1px"
+    },
+    "28:2": {
+      "--sds-color-black-100": "#000000"
     },
     "9:7": {
       "--sds-size-blur-100": "4px",
@@ -364,7 +367,7 @@
       "--sds-typo-title-page-size-small": "40px"
     },
     "3919:21": {
-      "--sds-color-background-brand-default": "#8f47f5",
+      "--sds-color-background-brand-default": "#2c2c2c",
       "--sds-color-background-brand-hover": "#1e1e1e",
       "--sds-color-background-brand-secondary": "#e6e6e6",
       "--sds-color-background-brand-secondary-hover": "#d9d9d9",
@@ -748,9 +751,6 @@
       "--sds-typo-leading-leading-tight": "20px",
       "--sds-typo-size-text-sm": "14px",
       "--sds-typo-weight-font-normal": "400px"
-    },
-    "28:2": {
-      "--sds-color-black-100": "#000000"
     }
   },
   "variables": [
@@ -763,7 +763,7 @@
       "collectionName": "Color",
       "modes": {
         "3919:21": {
-          "value": "#8f47f5",
+          "value": "#2c2c2c",
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:3919:36428"
@@ -1821,24 +1821,6 @@
       }
     },
     {
-      "variableId": "VariableID:9:11234",
-      "figmaName": "Black/100",
-      "cssVar": "--sds-color-black-100",
-      "resolvedType": "COLOR",
-      "collectionId": "VariableCollectionId:3919:36421",
-      "collectionName": "Color Primitives",
-      "modes": {
-        "3919:19": {
-          "value": "rgba(12, 12, 13, 0.05)",
-          "resolvedType": "COLOR",
-          "aliasChain": [
-            "VariableID:9:11234"
-          ],
-          "reason": "resolved"
-        }
-      }
-    },
-    {
       "variableId": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
       "figmaName": "black/100",
       "cssVar": "--sds-color-black-100",
@@ -1851,6 +1833,24 @@
           "resolvedType": "COLOR",
           "aliasChain": [
             "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
+          ],
+          "reason": "resolved"
+        }
+      }
+    },
+    {
+      "variableId": "VariableID:9:11234",
+      "figmaName": "Black/100",
+      "cssVar": "--sds-color-black-100",
+      "resolvedType": "COLOR",
+      "collectionId": "VariableCollectionId:3919:36421",
+      "collectionName": "Color Primitives",
+      "modes": {
+        "3919:19": {
+          "value": "rgba(12, 12, 13, 0.05)",
+          "resolvedType": "COLOR",
+          "aliasChain": [
+            "VariableID:9:11234"
           ],
           "reason": "resolved"
         }
@@ -8549,13 +8549,13 @@
       "9:4": 5,
       "9:5": 5,
       "9:6": 5,
+      "28:2": 1,
       "9:7": 52,
       "58:0": 35,
       "3919:21": 137,
       "3919:22": 137,
       "3919:19": 100,
-      "7:3": 4,
-      "28:2": 1
+      "7:3": 4
     }
   }
 }
