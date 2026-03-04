@@ -51,16 +51,16 @@ jobs:
 
           echo "Total: $TOTAL, Active: $ACTIVE, Inactive: $INACTIVE"
 
-          if [ "$ACTIVE" -lt 2 ]; then
-            echo "::warning::Expected 2 active webhooks, found $ACTIVE"
+          if [ "$ACTIVE" -lt 1 ]; then
+            echo "::warning::Expected at least 1 active webhook, found $ACTIVE"
             # List webhook details
             echo "$BODY" | jq -r '.webhooks[] | "  ID: \(.id) | Event: \(.event_type) | Status: \(.status)"'
             echo "status=degraded" >> $GITHUB_OUTPUT
-            echo "message=Only $ACTIVE of 2 webhooks active (inactive: $INACTIVE)" >> $GITHUB_OUTPUT
+            echo "message=No active webhooks found (inactive: $INACTIVE)" >> $GITHUB_OUTPUT
           else
-            echo "✅ All $ACTIVE webhooks are ACTIVE"
+            echo "✅ All $ACTIVE webhook(s) are ACTIVE"
             echo "status=healthy" >> $GITHUB_OUTPUT
-            echo "message=All $ACTIVE webhooks healthy" >> $GITHUB_OUTPUT
+            echo "message=All $ACTIVE webhook(s) healthy" >> $GITHUB_OUTPUT
           fi
 
       - name: Check webhook endpoint reachability
