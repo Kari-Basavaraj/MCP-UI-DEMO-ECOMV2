@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-04T11:03:45.317Z",
+  "fetchedAt": "2026-03-06T03:47:02.932Z",
   "request": {
     "status": 200,
     "url": "https://api.figma.com/v1/files/dbPjFeLfAFp8Sz9YGPs0CZ/variables/local"
@@ -87,22 +87,25 @@
             "VariableID:231:21547"
           ]
         },
-        "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526": {
-          "defaultModeId": "28:2",
-          "id": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-          "name": "Colors",
+        "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341": {
+          "defaultModeId": "7:3",
+          "id": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "name": "Typography",
           "remote": true,
           "modes": [
             {
-              "modeId": "28:2",
-              "name": "Mode 1"
+              "modeId": "7:3",
+              "name": "Value"
             }
           ],
-          "key": "b1dc1db082f877042570b6d33f5c5b8c3292d1fb",
+          "key": "aac9fe8a555f693a158f5153db142e4afaa06e41",
           "hiddenFromPublishing": true,
           "isExtension": false,
           "variableIds": [
-            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
+            "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
+            "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
+            "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
+            "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310"
           ]
         },
         "VariableCollectionId:ddf73292379387a92da82f20b70e3a84062cdbac/348:243": {
@@ -536,25 +539,22 @@
             "VariableID:4317:10400"
           ]
         },
-        "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341": {
-          "defaultModeId": "7:3",
-          "id": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "name": "Typography",
+        "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526": {
+          "defaultModeId": "28:2",
+          "id": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+          "name": "Colors",
           "remote": true,
           "modes": [
             {
-              "modeId": "7:3",
-              "name": "Value"
+              "modeId": "28:2",
+              "name": "Mode 1"
             }
           ],
-          "key": "aac9fe8a555f693a158f5153db142e4afaa06e41",
+          "key": "b1dc1db082f877042570b6d33f5c5b8c3292d1fb",
           "hiddenFromPublishing": true,
           "isExtension": false,
           "variableIds": [
-            "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
-            "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
-            "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
-            "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310"
+            "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528"
           ]
         }
       },
@@ -1236,22 +1236,68 @@
             "WEB": "var(--sds-responsive-scale)"
           }
         },
-        "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528": {
-          "name": "black/100",
-          "id": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
+        "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338": {
+          "name": "Fonts/Font Sans",
+          "id": "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
           "remote": true,
-          "key": "18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68",
-          "variableCollectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
-          "resolvedType": "COLOR",
+          "key": "520df334cab4a661754635dfd314a82392808da1",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "STRING",
           "description": "",
           "hiddenFromPublishing": true,
           "valuesByMode": {
-            "28:2": {
-              "r": 0,
-              "g": 0,
-              "b": 0,
-              "a": 1
-            }
+            "7:3": "Geist"
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
+        "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322": {
+          "name": "Size/Text Sm",
+          "id": "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
+          "remote": true,
+          "key": "18d32dc5bcd2b6371ce62be80d6e873cfed5403d",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": 14
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
+        "VariableID:d95ac742478162f2066908d221df13b199407521/117:326": {
+          "name": "Weight/Font Normal",
+          "id": "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
+          "remote": true,
+          "key": "d95ac742478162f2066908d221df13b199407521",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": 400
+          },
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        },
+        "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310": {
+          "name": "Leading/Leading Tight",
+          "id": "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310",
+          "remote": true,
+          "key": "f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e",
+          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
+          "resolvedType": "FLOAT",
+          "description": "",
+          "hiddenFromPublishing": true,
+          "valuesByMode": {
+            "7:3": 20
           },
           "scopes": [
             "ALL_SCOPES"
@@ -3341,9 +3387,9 @@
           "hiddenFromPublishing": false,
           "valuesByMode": {
             "3919:21": {
-              "r": 0.1725490242242813,
-              "g": 0.1725490242242813,
-              "b": 0.1725490242242813,
+              "r": 0.5600000023841858,
+              "g": 0.2800000011920929,
+              "b": 0.9599999785423279,
               "a": 1
             },
             "3919:22": {
@@ -9376,68 +9422,22 @@
             "WEB": "var(--sds-color-pink-1000)"
           }
         },
-        "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338": {
-          "name": "Fonts/Font Sans",
-          "id": "VariableID:520df334cab4a661754635dfd314a82392808da1/117:338",
+        "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528": {
+          "name": "black/100",
+          "id": "VariableID:18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68/28:34528",
           "remote": true,
-          "key": "520df334cab4a661754635dfd314a82392808da1",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "STRING",
+          "key": "18d126e27fdb6e0aec35f9d3ce16f7eb9dbb6d68",
+          "variableCollectionId": "VariableCollectionId:b1dc1db082f877042570b6d33f5c5b8c3292d1fb/28:34526",
+          "resolvedType": "COLOR",
           "description": "",
           "hiddenFromPublishing": true,
           "valuesByMode": {
-            "7:3": "Geist"
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322": {
-          "name": "Size/Text Sm",
-          "id": "VariableID:18d32dc5bcd2b6371ce62be80d6e873cfed5403d/117:322",
-          "remote": true,
-          "key": "18d32dc5bcd2b6371ce62be80d6e873cfed5403d",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": 14
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:d95ac742478162f2066908d221df13b199407521/117:326": {
-          "name": "Weight/Font Normal",
-          "id": "VariableID:d95ac742478162f2066908d221df13b199407521/117:326",
-          "remote": true,
-          "key": "d95ac742478162f2066908d221df13b199407521",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": 400
-          },
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        },
-        "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310": {
-          "name": "Leading/Leading Tight",
-          "id": "VariableID:f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e/117:310",
-          "remote": true,
-          "key": "f0035b8bc9dd9c4e675f6c7859fcdb34378c0d6e",
-          "variableCollectionId": "VariableCollectionId:aac9fe8a555f693a158f5153db142e4afaa06e41/117:341",
-          "resolvedType": "FLOAT",
-          "description": "",
-          "hiddenFromPublishing": true,
-          "valuesByMode": {
-            "7:3": 20
+            "28:2": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
           },
           "scopes": [
             "ALL_SCOPES"
